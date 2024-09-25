@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class haubeo extends Application {
+public class haubeo extends Application
+{
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(org.example.quanlithuvien.HelloApplication.class.getResource("hello-view.fxml"));
