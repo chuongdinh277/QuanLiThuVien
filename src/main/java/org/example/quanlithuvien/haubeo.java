@@ -10,9 +10,8 @@ import java.io.IOException;
 public class haubeo extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(haubeo.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(haubeo.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 560, 402);
         stage.setScene(scene);
         stage.show();
     }

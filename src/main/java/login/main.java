@@ -1,21 +1,22 @@
 package login;
 
-
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class haubeo extends Application
-{
+public class main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(org.example.quanlithuvien.HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root, 560, 402));
         stage.show();
     }
 
