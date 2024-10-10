@@ -6,10 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/login/haubeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/login/sigin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logout/logout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logout/logout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/logo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/login/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/login/main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/login/sigin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logout/logout.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/login/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/quanlithuvien/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +32,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="package-info" />
+        <option value="Python Script" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -35,10 +49,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2mXyFn4NaoBS1jqeZSf8DbZF7jS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -47,42 +61,49 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.BookSearchApp.executor": "Run",
+    "Application.DatabaseConnection.executor": "Run",
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.haubeo.executor": "Run",
     "Application.main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-22",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Library_Management_System"
+    "last_opened_file_path": "D:/QuanLiThuVien/src/main/java/APIGoogle",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15039062",
+    "project.structure.side.proportion": "0.33011582"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\QuanLiThuVien\src\main\java\APIGoogle" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\QuanLiThuVien\src\main\resources" />
+      <recent name="D:\QuanLiThuVien\src\main\java" />
+      <recent name="D:\QuanLiThuVien\src" />
+      <recent name="D:\QuanLiThuVien\src\main" />
+      <recent name="D:\QuanLiThuVien\src\main\java\controllers" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
       <recent name="org.example.quanlithuvien" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main.Main" />
-      <module name="QuanLiThuVien" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

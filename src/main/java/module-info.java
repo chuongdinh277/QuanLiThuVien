@@ -1,17 +1,19 @@
-module org.example.quanlithuvien {
+module org.example.src {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
+    requires java.desktop;
+    requires com.google.gson;
     requires java.sql;
-    //requires mysql.connection.java;
+    requires java.net.http;
 
+    opens controllers to javafx.fxml;
+    exports controllers;
 
-    opens org.example.quanlithuvien to javafx.fxml;
-    exports org.example.quanlithuvien;
+    opens APIGoogle;
+    exports APIGoogle;
 
-    opens login to javafx.fxml;
-    exports login;
-
+    opens Document;
+    exports Document;
 
 
 }
