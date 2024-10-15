@@ -4,6 +4,7 @@ import Document.Book;
 import javafx.scene.control.Alert;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,6 +16,7 @@ import java.text.Normalizer;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 public class GoogleBooksAPI {
     private static final String API_KEY = "AIzaSyAfMWFgDwsKdnNoqNIUMhjJH0kkoMpOQfI"; // Thay bằng API Key của bạn
@@ -46,10 +48,11 @@ public class GoogleBooksAPI {
                     .uri(URI.create(urlString))
                     .GET()
                     .header("Accept", "application/json")
+                    .header("Accept-Encoding", "gzip")
                     .build();
 
             // Gửi yêu cầu không đồng bộ và xử lý phản hồi
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
 
             // Kiểm tra mã trạng thái HTTP
             if (response.statusCode() != 200) {
@@ -58,8 +61,22 @@ public class GoogleBooksAPI {
                 return null;
             }
 
+            InputStream responseStream = response.body();
+            InputStreamReader reader ;
+            if("gzip".equals(response.headers().firstValue("Content-Encoding").orElse(""))) {
+                reader = new InputStreamReader(new GZIPInputStream(responseStream),StandardCharsets.UTF_8);
+            } else {
+                reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
+            }
             // Chuẩn hóa văn bản sau khi nhận về
-            String normalizedOutput = Normalizer.normalize(response.body(), Normalizer.Form.NFC);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                String line ;
+                while((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+            }
+            String normalizedOutput = Normalizer.normalize(stringBuilder.toString(), Normalizer.Form.NFC);
 
             // Xử lý dữ liệu JSON ở đây hoặc trả về chuỗi kết quả thô
             return normalizedOutput;
@@ -86,6 +103,59 @@ public class GoogleBooksAPI {
         }
     }
 
+    public static String searchBookByTitleAndAuthor(String title, String author) {
+
+        try {
+            String encodedTitle = URLEncoder.encode(title, "UTF-8");
+            String encodedAuthor = URLEncoder.encode(author, "UTF-8");
+            String urlString = BASE_URL + "?q=" + encodedTitle + "+inauthor:" + encodedAuthor + "&maxResults=1&fields=items(volumeInfo(title,authors,categories,imageLinks))&key=" + API_KEY;
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(urlString))
+                    .GET()
+                    .header("Accept", "application/json")
+                    .header("Accept-Encoding", "gzip") // Thêm tiêu đề nén
+                    .build();
+
+            // Gửi yêu cầu không đồng bộ và xử lý phản hồi
+            HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+
+            // Kiểm tra mã trạng thái HTTP
+            if (response.statusCode() != 200) {
+                int responseCode = response.statusCode();
+                handleError(responseCode);
+                return null;
+            }
+
+            // Giải nén phản hồi nếu được nén
+            InputStream responseStream = response.body();
+            InputStreamReader reader;
+            if ("gzip".equals(response.headers().firstValue("Content-Encoding").orElse(""))) {
+                // Nếu phản hồi được nén gzip, giải nén
+                reader = new InputStreamReader(new GZIPInputStream(responseStream), StandardCharsets.UTF_8);
+            } else {
+                // Nếu không nén, đọc trực tiếp
+                reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
+            }
+
+            // Đọc dữ liệu từ phản hồi
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+            }
+
+            // Chuẩn hóa văn bản sau khi nhận về
+            String normalizedOutput = Normalizer.normalize(stringBuilder.toString(), Normalizer.Form.NFC);
+            return normalizedOutput;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showErrorDialog("An error occurred while searching for the book: " + e.getMessage());
+        }
+        return null;
+    }
     // Hiển thị hộp thoại lỗi
     public static void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

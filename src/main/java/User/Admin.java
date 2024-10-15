@@ -1,6 +1,5 @@
 package User;
 
-import Database.DatabaseConnection;
 import Document.Book;
 import Document.BookDAO;
 import Review.ReviewDAO;

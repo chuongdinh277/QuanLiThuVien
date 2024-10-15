@@ -25,7 +25,7 @@
                 <TextField fx:id="usernameFieldlogin" layoutX="68.0" layoutY="151.0" prefHeight="40.0" prefWidth="320.0" promptText="Tên đăng nhập" style="-fx-background-radius: 10; -fx-background-color: #ecf8ea;" />
                 <PasswordField fx:id="passwordHiddenlogin" layoutX="68.0" layoutY="210.0" prefHeight="40.0" prefWidth="320.0" promptText="Mật khẩu" style="-fx-background-radius: 10; -fx-background-color: #ecf8ea;" styleClass="passwordHidder" />
                 <CheckBox fx:id="checkBox" layoutX="356.0" layoutY="221.0" mnemonicParsing="false" />
-                <Button fx:id="signUpButton" layoutX="158.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="140.0" style="-fx-background-radius: 20; -fx-background-color: #0db8a8;" text="Đăng nhập" textFill="WHITE">
+                <Button fx:id="loginButton" layoutX="158.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="140.0" style="-fx-background-radius: 20; -fx-background-color: #0db8a8;" text="Đăng nhập" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
                     </font>

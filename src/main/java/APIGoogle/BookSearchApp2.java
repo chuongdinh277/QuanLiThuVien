@@ -1,6 +1,7 @@
 package APIGoogle;
 
-
+import APIGoogle.BookParser;
+import APIGoogle.GoogleBooksAPI;
 import Document.Book;
 import Document.BookDAO;
 import javafx.application.Application;
@@ -15,73 +16,81 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.net.HttpURLConnection;
 import java.net.http.HttpClient;
 import java.sql.SQLException;
 import java.text.Normalizer;
 
-public class BookSearchApp extends Application {
+public class BookSearchApp2 extends Application {
     private static final HttpClient httpClient = GoogleBooksAPI.getHttpClient();
-    public static Book books;
+    private Book result ;
+
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Tìm kiếm sách bằng ISBN");
+        primaryStage.setTitle("Tìm kiếm sách bằng ISBN Title AND Author");
 
+        HBox hBox = new HBox(20);
         // Tạo form
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(8);
-        grid.setHgap(10);
+        grid.setVgap(9);
+        grid.setHgap(11);
 
         // Tạo các thành phần trong form
-        Label isbnLabel = new Label("ISBN:");
-        GridPane.setConstraints(isbnLabel, 0, 0);
+        Label authorLabel = new Label("Tác giả:");
+        GridPane.setConstraints(authorLabel, 0, 0);
 
-        TextField isbnInput = new TextField();
-        GridPane.setConstraints(isbnInput, 1, 0);
+        TextField authorInputSearch = new TextField();
+        GridPane.setConstraints(authorInputSearch, 1, 0);
+
+        Label titleLabelSearch = new Label("Tiêu đề:");
+        GridPane.setConstraints(titleLabelSearch, 0, 1);
+
+        TextField titleInputSearch = new TextField();
+        GridPane.setConstraints(titleInputSearch, 1, 1);
 
         Button searchButton = new Button("Tìm kiếm");
-        GridPane.setConstraints(searchButton, 1, 1);
+        GridPane.setConstraints(searchButton, 1, 2);
 
         Label titleLabel = new Label("Tiêu đề:");
-        GridPane.setConstraints(titleLabel, 0, 2);
+        GridPane.setConstraints(titleLabel, 0, 3);
         TextField titleInput = new TextField();
-        GridPane.setConstraints(titleInput, 1, 2);
-        titleInput.setEditable(false); // Không cho phép chỉnh sửa tiêu đề
+        GridPane.setConstraints(titleInput, 1, 3);
+        titleInput.setEditable(false);
 
-        Label authorLabel = new Label("Tác giả:");
-        GridPane.setConstraints(authorLabel, 0, 3);
+        Label authorLabelResult = new Label("Tác giả:");
+        GridPane.setConstraints(authorLabelResult, 0, 4);
         TextField authorInput = new TextField();
-        GridPane.setConstraints(authorInput, 1, 3);
-        authorInput.setEditable(false); // Không cho phép chỉnh sửa tác giả
+        GridPane.setConstraints(authorInput, 1, 4);
+        authorInput.setEditable(false);
 
         Label categoryLabel = new Label("Thể loại:");
-        GridPane.setConstraints(categoryLabel, 0, 4);
+        GridPane.setConstraints(categoryLabel, 0, 5);
         TextField categoryInput = new TextField();
-        GridPane.setConstraints(categoryInput, 1, 4);
-        categoryInput.setEditable(false); // Không cho phép chỉnh sửa thể loại
+        GridPane.setConstraints(categoryInput, 1, 5);
+        categoryInput.setEditable(false);
 
         Label descriptionLabel = new Label("Mô tả:");
-        GridPane.setConstraints(descriptionLabel, 0, 5);
+        GridPane.setConstraints(descriptionLabel, 0, 6);
         TextField descriptionInput = new TextField();
-        GridPane.setConstraints(descriptionInput, 1, 5);
-        descriptionInput.setEditable(false); // Không cho phép chỉnh sửa mô tả
+        GridPane.setConstraints(descriptionInput, 1, 6);
+        descriptionInput.setEditable(false);
 
         Label quantityLabel = new Label("Số lượng:");
-        GridPane.setConstraints(quantityLabel, 0, 6);
-        TextField quantityInput = new TextField("1"); // Đặt giá trị mặc định là 1
-        GridPane.setConstraints(quantityInput, 1, 6);
+        GridPane.setConstraints(quantityLabel, 0, 7);
+        TextField quantityInput = new TextField("1");
+        GridPane.setConstraints(quantityInput, 1, 7);
 
         Label imageLabel = new Label("Hình ảnh:");
-        GridPane.setConstraints(imageLabel, 0, 7);
+        GridPane.setConstraints(imageLabel, 0, 8);
         ImageView imageView = new ImageView();
         imageView.setFitWidth(100);
         imageView.setFitHeight(150);
-        GridPane.setConstraints(imageView, 1, 7);
+        GridPane.setConstraints(imageView, 1, 8);
 
         // Thiết lập phông chữ hỗ trợ tiếng Việt
         titleInput.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 12));
@@ -90,50 +99,50 @@ public class BookSearchApp extends Application {
         descriptionInput.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 12));
 
         // Thêm tất cả vào grid
-        grid.getChildren().addAll(isbnLabel, isbnInput, searchButton, titleLabel, titleInput, authorLabel, authorInput,
-                categoryLabel, categoryInput, descriptionLabel, descriptionInput, quantityLabel, quantityInput, imageLabel, imageView);
+        grid.getChildren().addAll(authorLabel, authorInputSearch, titleLabelSearch, titleInputSearch, searchButton,
+                titleLabel, titleInput, authorLabelResult, authorInput, categoryLabel, categoryInput,
+                descriptionLabel, descriptionInput, quantityLabel, quantityInput, imageLabel, imageView);
 
+        Button addBookButton = new Button("ADD BOOK");
+        addBookButton.setDisable(true);
+        hBox.getChildren().addAll(grid, addBookButton);
         // Khi bấm nút tìm kiếm
         searchButton.setOnAction(e -> {
-            String isbn = isbnInput.getText().trim();
-            if (!isbn.isEmpty()) {
+            String title = titleInputSearch.getText().trim();
+            String author = authorInputSearch.getText().trim();
+            if (!title.isEmpty() && !author.isEmpty()) {
                 // Thực hiện tìm kiếm trong background thread
                 Task<Book> task = new Task<>() {
                     @Override
                     protected Book call() {
-                        String jsonResponse = GoogleBooksAPI.searchBooksByTitle(isbn);
+                        String jsonResponse = GoogleBooksAPI.searchBookByTitleAndAuthor(title, author);
                         return BookParser.parseBookInfo(jsonResponse);
                     }
 
                     @Override
                     protected void succeeded() {
                         Book book = getValue();
-
                         if (book != null) {
-                            //books = book;
-//                            try {BookDAO.addBook(book);}
-//                            catch (Exception e){
-//                                BookSearchApp.showAlberDialog("Thêm sách không thành công");
-//                            }
-
+                            result = book;
                             Platform.runLater(() -> {
                                 titleInput.setText(Normalizer.normalize(book.getTitle(), Normalizer.Form.NFC));
                                 authorInput.setText(Normalizer.normalize(book.getAuthor(), Normalizer.Form.NFC));
                                 categoryInput.setText(Normalizer.normalize(book.getCategory(), Normalizer.Form.NFC));
                                 descriptionInput.setText(Normalizer.normalize(book.getDescription(), Normalizer.Form.NFC));
                                 if (book.getImagePath().equals("No image available")) {
-                                    BookSearchApp.showAlberDialog("Không tìm thấy ảnh của sách với ISBN: " + isbn);
+                                    APIGoogle.BookSearchApp.showAlberDialog("Không tìm thấy ảnh của sách . " );
                                     book.setImagePath(null);
                                     imageView.setImage(null);
 
                                 } else {
                                     imageView.setImage(new Image(book.getImagePath()));
                                 }
-                                quantityInput.setText("1");
+                                quantityInput.setText("1");// Gán giá trị mặc định cho số lượng
+                                addBookButton.setDisable(false);
                             });
                         } else {
                             Platform.runLater(() -> {
-                                BookSearchApp.showAlberDialog("Không tìm thấy sách.");
+                                APIGoogle.BookSearchApp.showAlberDialog("Không tìm thấy sách.");
                                 // Xử lý khi không tìm thấy sách
                                 titleInput.setText("Không tìm thấy sách.");
                                 authorInput.clear();
@@ -148,7 +157,7 @@ public class BookSearchApp extends Application {
                     @Override
                     protected void failed() {
                         Platform.runLater(() -> {
-                            BookSearchApp.showAlberDialog("Lỗi khi tìm kiếm sách.");
+                            APIGoogle.BookSearchApp.showAlberDialog("Lỗi khi tìm kiếm sách.");
                             // Xử lý lỗi khi lấy dữ liệu từ API
                             titleInput.setText("Lỗi khi lấy dữ liệu.");
                             authorInput.clear();
@@ -163,8 +172,27 @@ public class BookSearchApp extends Application {
                 new Thread(task).start();
             }
         });
+        addBookButton.setOnAction(e -> {
+            String title = titleInput.getText().trim();
+            String author = authorInput.getText().trim();
+            String category = categoryInput.getText().trim();
+            String description = descriptionInput.getText().trim();
+            int quantity = Integer.parseInt(quantityInput.getText());
+            String imagePath = result.getImagePath();
+            try {
+                boolean check =  BookDAO.addBook(new Book(title, author, category, quantity,description, imagePath));
+                if (check) {
+                    showAlberDialog("Thêm thành công");
+                } else {
+                    showAlberDialog("Thêm thất bại");
+                }
+                addBookButton.setDisable(true);
+            } catch (SQLException ex) {
+                showErrorDialog("Error", ex.getMessage());
+            }
 
-        Scene scene = new Scene(grid, 400, 400);
+        });
+        Scene scene = new Scene(hBox, 400, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -172,6 +200,13 @@ public class BookSearchApp extends Application {
     public static void showAlberDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    public static void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

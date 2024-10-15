@@ -19,4 +19,8 @@ public class currentUser {
     public static void setRole(String role) {
         currentUser.role = role;
     }
+    public static void logout () {
+        currentUser.setUsername(null);
+        currentUser.setRole(null);
+    }
 }

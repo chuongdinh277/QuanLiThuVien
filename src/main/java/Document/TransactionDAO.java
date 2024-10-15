@@ -14,6 +14,7 @@ import static Database.DatabaseConnection.getConnection;
 
 public class TransactionDAO {
 
+    //kiểm tra xem sách có đang được mượn ko 0
     private static boolean isBookBorrowed(Book book) throws SQLException {
         String sql = "SELECT COUNT(*) FROM transactions WHERE title = ? AND author = ? AND return_date IS NULL";
         try (Connection connection = getConnection();

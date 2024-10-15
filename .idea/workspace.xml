@@ -6,23 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/logo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/login/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/login/main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/login/sigin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logout/logout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/quanlithuvien/haubeo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/login/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/quanlithuvien/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/GoogleBooksAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/GoogleBooksAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/currentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/currentUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/userMenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/logo-uet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/logo-uet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/home.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userMenu.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,9 +62,11 @@
   "keyToString": {
     "Application.App.executor": "Run",
     "Application.BookSearchApp.executor": "Run",
+    "Application.BookSearchApp2.executor": "Run",
     "Application.DatabaseConnection.executor": "Run",
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
     "Application.haubeo.executor": "Run",
     "Application.main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
@@ -78,8 +79,8 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-22",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/QuanLiThuVien/src/main/java/APIGoogle",
-    "project.structure.last.edited": "Libraries",
+    "last_opened_file_path": "D:/QuanLiThuVien",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15039062",
     "project.structure.side.proportion": "0.33011582"
   },
@@ -105,6 +106,15 @@
       <recent name="org.example.quanlithuvien" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controllers.App" />
+      <module name="QuanLiThuVien" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -115,5 +125,16 @@
       <updated>1727237113954</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

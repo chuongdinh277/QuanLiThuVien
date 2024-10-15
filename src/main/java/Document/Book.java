@@ -2,6 +2,7 @@ package Document;
 
 
 public class Book {
+    public Object Integer;
     private int id;
     private String title;// tên sách
     private String author;//tác giả
@@ -63,6 +64,12 @@ public class Book {
         this.imagePath = imagePath;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
     public String getImagePath() {
         return imagePath;
     }
@@ -84,4 +91,5 @@ public class Book {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 }

@@ -1,28 +1,31 @@
 package controllers;
 
-import APIGoogle.GoogleBooksAPI; // Đảm bảo bạn đã import GoogleBooksAPI
-import BookRating.BookRating;
-import BookRating.BookRatingDAO;
+import User.*;
+import Document.Book; // Import lớp Book
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import User.currentUser; // Giả định rằng bạn đã có lớp User có biến currentUser
-
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import Database.DatabaseConnection;
+import javafx.stage.Stage;
 
 public class MenuController {
     @FXML
@@ -31,69 +34,55 @@ public class MenuController {
     private Label role;
     @FXML
     private HBox loveBooksHBox;
+    @FXML
+    private VBox menuVBox;
+    @FXML
+    private Button menuButton;
+    @FXML
+    private Label homeLabel, systemLabel;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private ImageView logo;
 
     public void initialize() {
         // Hiển thị tên người dùng và vai trò
-        name.setText(currentUser.getUsername());
-        role.setText(currentUser.getRole());
+       // name.setText(currentUser.getUsername());
+       // role.setText(currentUser.getRole());
 
-        // Gọi hàm để hiển thị sách theo thể loại
+
+    }
+
+    @FXML
+    private void loadHomeview() {
         try {
-            displayBooksByCategory();
-        } catch (SQLException e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
+            Parent root = loader.load();
+            borderPane.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace(); // In ra lỗi chi tiết
+            System.out.println("Error loading home.fxml: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void bookStoreLoad() {
+        try {
+            // Tải file FXML vào root
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/timsach.fxml"));
+            Parent root = loader.load();
+
+            // Đặt root vào center của BorderPane hiện tại
+            borderPane.setCenter(root);
+
+            // Bạn có thể in ra thông báo để xác nhận việc tải thành công
+            System.out.println("Loaded timsach.fxml into center of BorderPane.");
+        } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading timsach.fxml: " + e.getMessage());
         }
     }
 
-    public void displayBooksByCategory() throws SQLException {
-        // Gọi phương thức tìm sách từ API và hiển thị trong loveBooksHBox
-        searchAndDisplayBooks("Love Book");
-    }
 
-    private void searchAndDisplayBooks(String query) {
-        loveBooksHBox.getChildren().clear(); // Xóa danh sách cũ trong HBox
-        String jsonResponse = GoogleBooksAPI.searchBooksByTitle(query); // Gọi API để tìm sách
 
-        if (jsonResponse != null) {
-            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
-            JsonArray items = jsonObject.getAsJsonArray("items");
 
-            if (items != null && items.size() > 0) {
-                for (int i = 0; i < items.size(); i++) {
-                    JsonObject book = items.get(i).getAsJsonObject();
-                    JsonObject volumeInfo = book.getAsJsonObject("volumeInfo");
-
-                    String title = volumeInfo.get("title").getAsString();
-                    String author = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown Author";
-                    String imagePath = volumeInfo.has("imageLinks") ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : "default_image_url"; // Đặt URL mặc định nếu không có
-
-                    BookRating bookRating = new BookRating(title, author, "Love Book", 0, "", imagePath, 0.0);
-                    VBox vBox = createBookVBox(bookRating);
-                    loveBooksHBox.getChildren().add(vBox);
-                }
-            } else {
-                System.out.println("No love books found.");
-            }
-        }
-    }
-
-    private VBox createBookVBox(BookRating book) {
-        VBox vBox = new VBox();
-        ImageView imageView = new ImageView();
-
-        // Tạo đối tượng Image từ đường dẫn ảnh
-        Image image = new Image(book.getImagePath());
-        imageView.setImage(image);
-
-        // Thiết lập kích thước cho ImageView
-        imageView.setFitHeight(150);
-        imageView.setFitWidth(100);
-
-        // Thêm các thành phần vào VBox
-        Text titleText = new Text(book.getTitle());
-        Text authorText = new Text(book.getAuthor());
-
-        vBox.getChildren().addAll(imageView, titleText, authorText);
-        return vBox;
-    }
 }

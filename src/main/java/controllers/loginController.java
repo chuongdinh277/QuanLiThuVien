@@ -37,35 +37,19 @@ public class loginController implements Initializable {
     private Button signUpButton;
 
     @FXML
+    private Button loginButton;
+    @FXML
     private Button registerButton;
     @FXML
     private ChoiceBox<String> myChoiceBox;
 
     @FXML
     private Button loginReturn;
-    @FXML
-    private Button loginButton;
-    @FXML
-    public void LoginButtonOnAction(ActionEvent event) {
-        try {
-            // Tải file FXML của hello-view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
-            Parent root = loader.load();
-
-            // Lấy stage hiện tại
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root)); // Đặt scene mới
-            stage.show(); // Hiển thị scene mới
-        } catch (Exception e) {
-            e.printStackTrace(); // In ra lỗi nếu có
-        }
-    }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().add("Admin");
-        myChoiceBox.getItems().add("user");
+        myChoiceBox.getItems().add("User");
     }
 
     // Xử lí đăng kí tài khoản
@@ -143,13 +127,24 @@ public class loginController implements Initializable {
             currentUser.setRole(role); // Nếu có lớp lưu trữ vai trò
 
             // Chuyển đến trang chính
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
-            Parent root = loader.load();
 
-            // Hiển thị scene mới
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            if(role.equals("Admin")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 1300, 700);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
+            else if(role.equals("User")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 1300, 700);
+                // Hiển thị scene mới
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
 
         } catch (SQLException e) {
             showAlert("Error", "Đăng nhập thất bại: " + e.getMessage());

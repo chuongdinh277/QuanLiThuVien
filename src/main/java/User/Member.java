@@ -259,19 +259,6 @@ public class Member extends User{
         }
     }
 
-    @Override
-    public void login() {
-        try {
-            String result = this.login(this.getUserName(), this.getPassword());
-            if (result.equals("Login successful")) {
-                this.showAlberDialog(this.getRole() + " " + this.getUserName() + " " + "Đăng nhập thành công");
-            } else {
-                this.showAlberDialog(result);
-            }
-        } catch (SQLException e) {
-            this.showErrorDialog("Error", e.getMessage());
-        }
-    }
 
 
 
@@ -337,7 +324,15 @@ public class Member extends User{
         return null;
     }
 
-
+    public List<Book> viewAllBooks() throws SQLException {
+        try {
+            List<Book> books = BookDAO.getAvailableBooks();
+            return books;
+        } catch (Exception e) {
+            this.showErrorDialog("Error", e.getMessage());
+        }
+        return null;
+    }
 
 
 

@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <BorderPane prefHeight="1400.0" prefWidth="4000.0">
+            <BorderPane fx:id="borderPane" prefHeight="1400.0" prefWidth="4000.0">
                <top>
-                  <AnchorPane prefHeight="95.0" prefWidth="1500.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="76.0" prefWidth="4002.0" style="-fx-background-color: #0db8a8;" BorderPane.alignment="CENTER">
                      <children>
-                        <Label layoutX="80.0" layoutY="20.0" text="HỆ THỐNG THƯ VIỆN ĐIỆN TỬ" />
-                        <Label layoutX="76.0" layoutY="48.0" text="TRƯỜNG ĐẠI HỌC CÔNG NGHỆ" />
+                        <Label layoutX="34.0" layoutY="15.0" style="-fx-text-fill: black; -fx-font-weight: bold;" text="HỆ THỐNG THƯ VIỆN ĐIỆN TỬ" />
+                        <Label layoutX="31.0" layoutY="42.0" style="-fx-font-weight: bold; -fx-text-fill: black;" text="TRƯỜNG ĐẠI HỌC CÔNG NGHỆ" />
                         <Label fx:id="name" layoutX="902.0" layoutY="19.0" prefHeight="18.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 16;" text="name">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
                         <Label fx:id="role" layoutX="902.0" layoutY="47.0" prefHeight="18.0" prefWidth="142.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: black; -fx-font-size: 16;" text="role" />
-                        <HBox layoutX="477.0" layoutY="24.0" prefHeight="27.0" prefWidth="241.0" style="-fx-background-color: white;">
+                        <HBox layoutX="373.0" layoutY="24.0" prefHeight="27.0" prefWidth="241.0" style="-fx-background-color: white;">
                            <children>
                               <TextField prefHeight="22.0" prefWidth="202.0" promptText="Tìm kiếm" style="-fx-background-color: white; -fx-border-color: white;" />
                            </children>
@@ -36,63 +37,97 @@
                      </children>
                   </AnchorPane>
                </top>
-               <left>
-                  <AnchorPane prefHeight="500.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <ListView layoutX="21.0" layoutY="50.0" prefHeight="340.0" prefWidth="250.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #808080;" AnchorPane.leftAnchor="21.0" />
-                        <Label layoutX="22.0" layoutY="50.0" prefHeight="50.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-background-color: #ADD8E6; -fx-font-weight: bold; -fx-alignment: center; -fx-border-color: #A9A9A9;" text="THƯ MỤC">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <MenuButton layoutX="24.0" layoutY="165.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: white; -fx-border-color: white;" text="Sách điện tử">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </MenuButton>
-                        <MenuButton layoutX="24.0" layoutY="109.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: white; -fx-border-color: white;" text="Sách">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </MenuButton>
-                        <MenuButton layoutX="24.0" layoutY="221.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: white; -fx-border-color: white;" text="Sách nói">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </MenuButton>
-                        <MenuButton layoutX="24.0" layoutY="277.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: white; -fx-border-color: white;" text="Báo, Tạp chí, Bản đồ">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </MenuButton>
-                        <MenuButton layoutX="25.0" layoutY="333.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: white; -fx-border-color: white;" text="Video">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </MenuButton>
-                        <ListView layoutX="25.0" layoutY="412.0" prefHeight="214.0" prefWidth="250.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #808080;" />
-                        <Label layoutX="25.0" layoutY="412.0" prefHeight="50.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-background-color: #ADD8E6; -fx-font-weight: bold; -fx-alignment: center; -fx-border-color: #A9A9A9;" text="TIỆN ÍCH">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="28.0" layoutY="470.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: White; -fx-border-color: white;" text="Giới thiệu" />
-                        <Button layoutX="28.0" layoutY="522.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: White; -fx-border-color: white;" text="Tin tức" />
-                        <Button layoutX="28.0" layoutY="574.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="243.0" style="-fx-font-size: 15; -fx-background-color: White; -fx-border-color: white;" text="Hướng dẫn" />
-                     </children>
-                  </AnchorPane>
-               </left>
                <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <left>
+                  <AnchorPane prefHeight="1303.0" prefWidth="68.0" style="-fx-background-color: #0db8a8;" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox fx:id="loveBooksHBox" layoutX="8.0" layoutY="145.0" prefHeight="200.0" prefWidth="1085.0">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-               </center></BorderPane>
+                        <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="253.0" spacing="10" style="-fx-background-color: #0db8a8;">
+                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                              <children>
+                                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/logoUET.png" />
+                                    </image>
+                                 </ImageView>
+                              </children>
+                           </AnchorPane>
+
+                           <!-- Menu items with both icon and text -->
+                           <HBox fx:id="homeMenu1">
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/home.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#loadHomeview" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Trang chủ">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="30.0" top="30.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox fx:id="homeMenu2">
+                              <children>
+                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/settings.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Button fx:id="systemButton" mnemonicParsing="false" onAction="#bookStoreLoad" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Quản lý kho sách" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="30.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox fx:id="homeMenu3">
+                              <children>
+                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/list.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Button fx:id="borrowButton" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Quản lí mượn sách" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="30.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox fx:id="homeMenu4">
+                              <children>
+                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/address-book.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Button fx:id="userButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Quản lí người mượn" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="30.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox fx:id="homeMenu5">
+                              <children>
+                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/exchange-alt.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Button fx:id="returnButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Quản lí trả sách" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets left="30.0" />
+                              </VBox.margin>
+                           </HBox>
+
+                           <!-- Add other menu items similarly -->
+                        </VBox>
+
+                     </children></AnchorPane>
+               </left></BorderPane>
          </children></AnchorPane>
   </content>
 </ScrollPane>
