@@ -5,7 +5,7 @@
     -fx-background-color: #2E8B57; /* Màu nền của menu */
     -fx-padding: 10px; /* Khoảng cách padding bên trong menu */
     -fx-pref-width: 200px; /* Chiều rộng khi menu mở */
-    -fx-transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+    -fx-transition: all 0.3s e   ase; /* Hiệu ứng chuyển động */
 }
 
 /* Khi menu đóng */

@@ -11,20 +11,32 @@ public class Book {
     private String description;
     private String imagePath;// miêu tả
     private double average_rating;
-
-    public Book(String title, String author, String category, int quantity, String description, String imagePath) {
+    private String publisher;
+    private String section;
+    public Book(String title, String author, String category, int quantity, String description, String publisher, String section, String imagePath) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.quantity = quantity;
         this.description = description;
         this.imagePath = imagePath;
+        this.publisher = publisher;
+        this.section = section;
     }
 
     public String getTitle() {
         return title;
     }
-
+    public String getPublisher() {
+        return publisher;
+    }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+    public String getSection() {
+        return section;
+    }
+    public void setSection(String section) {this.section = section;}
     public String getAuthor() {
         return author;
     }
@@ -80,16 +92,16 @@ public class Book {
         this.average_rating = rate;
     }
 
-    @Override
-    public String toString() {
-        return "Document{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", categoryl='" + category + '\'' +
-                ", quantity=" + quantity +
-                ", description='" + description + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Document{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", author='" + author + '\'' +
+//                ", categoryl='" + category + '\'' +
+//                ", quantity=" + quantity +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
 
 }

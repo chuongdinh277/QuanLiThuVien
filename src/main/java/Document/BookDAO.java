@@ -11,44 +11,49 @@ import static Database.DatabaseConnection.getConnection;
 
 public class BookDAO {
     public static boolean addBook(Book book) throws SQLException {
-        String checkSql = "SELECT 1 FROM books WHERE title = ? AND author = ? AND category = ? AND description = ?";
+        String checkSql = "SELECT 1 FROM books WHERE title = ? AND author = ? AND category = ? AND description = ? AND publisher = ? AND section = ?";
 
-        // Câu lệnh cập nhật số lượng nếu sách đã tồn tại
-        String updateSql = "UPDATE books SET quantity = quantity + ? WHERE title = ? AND author = ? AND category = ? AND description = ? AND imagePath = ?";
+        String updateSql = "UPDATE books SET quantity = quantity + ? WHERE title = ? AND author = ? AND category = ? AND description = ? AND imagePath = ? AND publisher = ? AND section = ?";
 
-        // Câu lệnh thêm mới sách nếu sách chưa tồn tại
-        String insertSql = "INSERT INTO books (title, author, category, quantity, description,imagePath) VALUES (?, ?, ?, ?, ?,?)";
+        String insertSql = "INSERT INTO books (title, author, category, quantity, description, imagePath, publisher, section) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
 
             try (PreparedStatement checkStatement = connection.prepareStatement(checkSql);
                  PreparedStatement updateStatement = connection.prepareStatement(updateSql);
                  PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+
                 checkStatement.setString(1, book.getTitle());
                 checkStatement.setString(2, book.getAuthor());
                 checkStatement.setString(3, book.getCategory());
                 checkStatement.setString(4, book.getDescription());
+                checkStatement.setString(5, book.getPublisher());
+                checkStatement.setString(6, book.getSection());
 
                 ResultSet resultSet = checkStatement.executeQuery();
-                if(resultSet.next()) {
-                    updateStatement.setInt(1, book.getQuantity());  // Cộng thêm số lượng
+                if (resultSet.next()) {
+                    updateStatement.setInt(1, book.getQuantity());
                     updateStatement.setString(2, book.getTitle());
                     updateStatement.setString(3, book.getAuthor());
                     updateStatement.setString(4, book.getCategory());
                     updateStatement.setString(5, book.getDescription());
                     updateStatement.setString(6, book.getImagePath());
+                    updateStatement.setString(7, book.getPublisher());
+                    updateStatement.setString(8, book.getSection());
 
                     int rowsAffected = updateStatement.executeUpdate();
-                    connection.commit();// Cam kết giao dịch
+                    connection.commit();
                     return rowsAffected > 0;
                 } else {
-                    // Nếu sách chưa tồn tại, thêm mới sách vào cơ sở dữ liệu
                     insertStatement.setString(1, book.getTitle());
                     insertStatement.setString(2, book.getAuthor());
                     insertStatement.setString(3, book.getCategory());
                     insertStatement.setInt(4, book.getQuantity());
                     insertStatement.setString(5, book.getDescription());
                     insertStatement.setString(6, book.getImagePath());
+                    insertStatement.setString(7, book.getPublisher());
+                    insertStatement.setString(8, book.getSection());
 
                     int rowsAffected = insertStatement.executeUpdate();
                     connection.commit();
@@ -56,12 +61,15 @@ public class BookDAO {
                 }
             } catch (SQLException e) {
                 connection.rollback();
+                System.err.println("Error during database operation: " + e.getMessage());
                 throw e;
             }
         } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
             throw e;
         }
     }
+
     public static boolean deleteBookByTitle(String title) throws SQLException {
         String sql = "DELETE FROM books WHERE title =?";
         try (Connection connection = getConnection();
@@ -81,6 +89,8 @@ public class BookDAO {
             statement.setString(2, book.getAuthor());
             statement.setString(3, book.getCategory());
             statement.setString(4, book.getDescription());
+            statement.setString(5,book.getPublisher());
+            statement.setString(6,book.getSection());
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -88,7 +98,7 @@ public class BookDAO {
         }
     }
     public static boolean updateBook(Book book) throws SQLException {
-        String sql = "UPDATE books SET title=?, author=?, category=?, quantity=?, description=?, imagePath=? WHERE title=?";
+        String sql = "UPDATE books SET title=?, author=?, category=?, quantity=?, description=?,imagePath=?, publisher=?, section=?,  WHERE title=?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, book.getTitle());
@@ -96,8 +106,10 @@ public class BookDAO {
             statement.setString(3, book.getCategory());
             statement.setInt(4, book.getQuantity());
             statement.setString(5, book.getDescription());
-            statement.setString(6, book.getImagePath());
-            statement.setString(7, book.getTitle());
+            statement.setString(6, book.getPublisher());
+            statement.setString(7, book.getSection());
+            statement.setString(8, book.getImagePath());
+            statement.setString(9, book.getTitle());
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -135,6 +147,8 @@ public class BookDAO {
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
                         resultSet.getString("imagePath"));
             }
         } catch (SQLException e) {
@@ -155,11 +169,13 @@ public class BookDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Book book = new Book( resultSet.getString("title"),
+                Book book = new Book(resultSet.getString("title"),
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
                         resultSet.getString("imagePath"));
                 books.add(book);
             }
@@ -184,6 +200,8 @@ public class BookDAO {
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
                         resultSet.getString("imagePath"));
                 books.add(book);
             }
@@ -208,6 +226,8 @@ public class BookDAO {
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
                         resultSet.getString("imagePath"));
                 books.add(book);
             }
@@ -250,6 +270,8 @@ public class BookDAO {
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
                         resultSet.getString("imagePath"));
                 books.add(book);
             }
@@ -271,7 +293,9 @@ public class BookDAO {
                 int quantity = resultSet.getInt("quantity");
                 String description = resultSet.getString("description");
                 String imagePath = resultSet.getString("imagePath");
-                books.add(new Book(title, author, categoryl, quantity, description,imagePath));
+                String publisher = resultSet.getString("publisher");
+                String section = resultSet.getString("section");
+                books.add(new Book(title, author, categoryl, quantity, description, publisher,section,imagePath));
             }
         } catch (Exception e) {
             throw e;

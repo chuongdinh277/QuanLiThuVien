@@ -1,33 +1,17 @@
 package controllers;
 
-import User.*;
-import Document.Book; // Import lớp Book
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import User.currentUser; // Giả định rằng bạn đã có lớp User có biến currentUser
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import Database.DatabaseConnection;
-import javafx.stage.Stage;
 
-public class MenuController {
+public class MenuController_Admin {
     @FXML
     private Label name;
     @FXML

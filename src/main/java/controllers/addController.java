@@ -35,6 +35,12 @@ public class addController {
 
     @FXML
     private TextField quantity_book;
+
+    @FXML
+    private TextField bookPublisher;
+
+    @FXML
+    private TextField bookSection;
     @FXML
     private void apiSearch_Button() {
 
@@ -72,6 +78,8 @@ public class addController {
             String author = authorSearch_1.getText();
             String category = categorySearch_1.getText();
             String quantity = quantity_book.getText();
+            String publisher = bookPublisher.getText();
+            String section = bookSection.getText();
             int quantity_Book = Integer.parseInt(quantity);
 
             String imagePath;
@@ -80,7 +88,7 @@ public class addController {
             } else {
                 imagePath = null;
             }
-            Book book = new Book(title, author, category, quantity_Book ,"description", imagePath);
+            Book book = new Book(title, author, category, quantity_Book ,"description", publisher, section, imagePath);
 
             try {
                 BookDAO.addBook(book);

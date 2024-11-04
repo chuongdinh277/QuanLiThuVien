@@ -41,7 +41,7 @@ public class BookParser {
                     "No image available";
 
             // Tạo đối tượng Book
-            Book book = new Book(title, author, category, 1, description, imagePath);
+            Book book = new Book(title, author, category, 1, description," ", "",imagePath);
             // Lưu vào cache
             cache.put(jsonResponse, book);
             return book; // Trả về đối tượng Book
