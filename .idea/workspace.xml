@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/students.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/addController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/addController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/homeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/homeController_Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/currentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/currentUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/addController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/addBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/homeController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/homeController_Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/timsach.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/timsach.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +29,8 @@
       <list>
         <option value="package-info" />
         <option value="Python Script" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,7 +75,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-22",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JavaFX-Library-Management-Information-System",
+    "last_opened_file_path": "D:/QuanLiThuVien",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15039062",
     "project.structure.side.proportion": "0.33011582"

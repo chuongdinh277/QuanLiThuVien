@@ -21,10 +21,41 @@ public class User {
     private String userName;
     private String password;
     private String role;
-    public User(String userName, String password,String role) {
+    private String fullName;
+    private String email;
+    private String number;
+
+    public User(String userName, String password, String role, String fullName, String email, String studentID) {
         this.userName = userName;
         this.password = password;
         this.role = role;
+        this.fullName = fullName;
+        this.email = email;
+        this.number = studentID;
+    }
+
+    // Getter và setter cho fullName
+    public String getFullName() {
+        return fullName;
+    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    // Getter và setter cho email
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Getter và setter cho studentID
+    public String getNumber() {
+        return number;
+    }
+    public void setNumber(String number) {
+        this.number = number;
     }
     public String getUserName() {
         return userName;
@@ -64,22 +95,26 @@ public class User {
         return false;
     }
 
-    private boolean registerUser(String userName, String password, String role) throws SQLException {
-        String sql = "INSERT INTO users (username, password, role) VALUES (?,?,?)";
+    private boolean registerUser(String userName, String password, String role, String fullName, String email, String number) throws SQLException {
+        String sql = "INSERT INTO users (username, password, role, fullName, email, number) VALUES (?,?,?,?,?,?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, userName);
             statement.setString(2, password);
             statement.setString(3, role);
+            statement.setString(4, fullName);
+            statement.setString(5, email);
+            statement.setString(6, number);
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
             throw e;
         }
     }
+
     public void register() throws SQLException {
         try {
-            boolean check = registerUser(this.getUserName(), this.getPassword(), this.getRole());
+            boolean check = registerUser(this.getUserName(), this.getPassword(), this.getRole(), this.getFullName(), this.getEmail(), this.getNumber());
             if (check) {
                 this.showAlberDialog(this.getUserName() + " " + "Đăng ký thành công");
             } else {
@@ -89,6 +124,7 @@ public class User {
             this.showErrorDialog("Error", e.getMessage());
         }
     }
+
     private boolean updatePassword(User user,String newPassword) throws SQLException {
         System.out.println(user.getPassword() + " " + newPassword);
         if(user.getPassword().equals(newPassword)) {
@@ -142,7 +178,15 @@ public class User {
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                users.add(new User(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("role")));
+                // Update the constructor call to include all parameters
+                users.add(new User(
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("role"),
+                        resultSet.getString("fullName"),  // Add fullName
+                        resultSet.getString("email"),     // Add email
+                        resultSet.getString("number")  // Add studentID
+                ));
             }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -153,6 +197,7 @@ public class User {
         }
         return users;
     }
+
 
     private String login(String username, String password) throws SQLException {
         String checkUsernameSQL = "SELECT * FROM users WHERE username = ?";
@@ -183,20 +228,24 @@ public class User {
             throw e;
         }
     }
+    public static String getRoleUser(String username, String password) throws SQLException {
+        String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
 
-
-    public void login() {
-        try {
-            String isLogin = this.login(this.getUserName(), this.getPassword());
-            if (isLogin.equals("Login successful")) {
-                this.showAlberDialog(this.getUserName() + " " + "Đăng nhập thành công");
+            if (resultSet.next()) {
+                return resultSet.getString("role"); // Trả về vai trò của người dùng
             } else {
-                this.showAlberDialog(isLogin);
+                return "Incorrect username or password"; // Tên đăng nhập hoặc mật khẩu không đúng
             }
-        } catch (SQLException e) {
-            this.showErrorDialog("Error", e.getMessage());
+        } catch (Exception e) {
+            throw e;
         }
     }
+
 
     public void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

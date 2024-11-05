@@ -65,6 +65,17 @@ public class MenuController_Admin {
             System.out.println("Error loading timsach.fxml: " + e.getMessage());
         }
     }
+    @FXML
+    private void userButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/students.fxml"));
+            Parent root = loader.load();
+            borderPane.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace(); // In ra lỗi chi tiết
+            System.out.println("Error loading home.fxml: " + e.getMessage());
+        }
+    }
 
 
 

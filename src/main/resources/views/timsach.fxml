@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="546.0" prefWidth="700.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.addController">
+<AnchorPane prefHeight="546.0" prefWidth="700.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.addBook">
    <children>
       <TextField fx:id="titleSearch" layoutX="216.0" layoutY="74.0" prefHeight="30.0" prefWidth="250.0" promptText="Nhập tiêu đề" />
       <TextField fx:id="authorSearch" layoutX="216.0" layoutY="126.0" prefHeight="30.0" prefWidth="250.0" promptText="Nhập tên tác giả" />

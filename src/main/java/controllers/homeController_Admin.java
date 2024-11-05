@@ -70,7 +70,7 @@ public class homeController_Admin {
 
         loadBooks();
     }
-    private void loadBooks() {
+    public void loadBooks() {
         ObservableList<Book> booksList = FXCollections.observableArrayList();
 
         try {
@@ -95,6 +95,9 @@ public class homeController_Admin {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/timsach.fxml"));
             Parent root = fxmlLoader.load();
+
+            addBook controller = fxmlLoader.getController();
+            controller.setHomeController(this);
 
             Stage stage = new Stage();
             stage.setTitle("Add Book");

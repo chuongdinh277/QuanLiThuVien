@@ -1,8 +1,5 @@
 package controllers;
 
-import User.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import Document.*;
 import javafx.fxml.FXML;
@@ -11,10 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import APIGoogle.*;
 import Document.BookDAO;
-import java.sql.Connection;
-import static Document.BookDAO.addBook;
 
-public class addController {
+public class addBook {
 
     @FXML
     private TextField titleSearch;
@@ -41,6 +36,12 @@ public class addController {
 
     @FXML
     private TextField bookSection;
+
+    private homeController_Admin homeController;
+
+    public void setHomeController(homeController_Admin homeController) {
+        this.homeController = homeController;
+    }
     @FXML
     private void apiSearch_Button() {
 
@@ -93,6 +94,11 @@ public class addController {
             try {
                 BookDAO.addBook(book);
                 System.out.println("thêm sách thành công");
+
+                if(homeController != null) {
+                    homeController.loadBooks();
+                }
+                clearInputFields();
             }
             catch (SQLException ex) {
                 System.out.println("thêm sách không thành công");
@@ -101,7 +107,14 @@ public class addController {
         });
     }
 
-
-
+    private void clearInputFields() {
+        titleSearch_1.clear();
+        authorSearch_1.clear();
+        categorySearch_1.clear();
+        quantity_book.clear();
+        bookPublisher.clear();
+        bookSection.clear();
+        showImage.setImage(null);
+    }
 
 }

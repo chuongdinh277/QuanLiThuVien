@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 import User.Admin;
 import User.User;
 import User.currentUser;
-
+import User.Member;
 public class loginController implements Initializable {
     @FXML
     private TextField usernameField;
@@ -45,11 +45,17 @@ public class loginController implements Initializable {
 
     @FXML
     private Button loginReturn;
+    @FXML
+    private TextField fullNameField;
+    @FXML
+    private TextField numberField;
+    @FXML
+    private TextField emailField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        myChoiceBox.getItems().add("Admin");
-        myChoiceBox.getItems().add("User");
+        myChoiceBox.getItems().add("admin");
+        myChoiceBox.getItems().add("user");
     }
 
     // Xử lí đăng kí tài khoản
@@ -58,8 +64,12 @@ public class loginController implements Initializable {
         String username = usernameField.getText();
         String password = passwordHidden.getText();
         String passwordConfirm = PasswordHiddenRL.getText();
+        String number = numberField.getText();
+        String email = emailField.getText();
+        String fullName = fullNameField.getText();
         String role = myChoiceBox.getValue();
-        if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty()) {
+        if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty() || number.isEmpty()
+         || email.isEmpty() || fullName.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("lỗi đăng kí");
                 alert.setHeaderText("Vui lòng điền đầy đủ thông tin");
@@ -75,7 +85,7 @@ public class loginController implements Initializable {
             return;
         }
 
-        User newUser = new User(username, password, role);
+        User newUser = new User(username, password, role, fullName, email, number);
 
         try {
             if (newUser.isUsernameTaken(username)) {
@@ -88,7 +98,7 @@ public class loginController implements Initializable {
                 // Tiến hành đăng ký
                 newUser.register();
                 // Chuyển đến trang khác nếu đăng ký thành công
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -110,48 +120,47 @@ public class loginController implements Initializable {
     public void handleLogin(ActionEvent event) {
         String username = usernameFieldlogin.getText();
         String password = passwordHiddenlogin.getText();
-        String role = myChoiceBox.getValue();
 
-        // Kiểm tra thông tin người dùng
-        User user = new User(username, password, role);
         try {
-            // Kiểm tra tên đăng nhập và mật khẩu
-            if (!user.isUsernameTaken(username)) {
-                showAlert("Error", "Tài khoản không tồn tại. Vui lòng kiểm tra lại tên đăng nhập.");
-                return;
+            // Gọi phương thức login từ lớp User
+            String role = User.getRoleUser(username, password); // Gọi phương thức login và nhận lại vai trò
+            String rolecheck = myChoiceBox.getValue();
+            // Kiểm tra vai trò
+            if(rolecheck.equals(role)) {
+                if ("admin".equals(role)) {
+                    currentUser.setUsername(username);
+                    currentUser.setRole(role);
+                    // Chuyển đến trang Admin
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root, 1500, 900));
+                    stage.show();
+                } else if ("user".equals(role)) {
+                    currentUser.setUsername(username);
+                    currentUser.setRole(role);
+                    // Chuyển đến trang Member
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root, 1500, 700));
+                    stage.show();
+                } else {
+                    // Thông báo lỗi nếu không phải Admin hoặc Member
+                    showAlert("Error", "Đăng nhập thất bại: " + role);
+                }
             }
-
-            user.login();
-            // Lưu thông tin người dùng vào CurrentUser (nếu bạn đã tạo lớp này)
-            currentUser.setUsername(username);
-            currentUser.setRole(role); // Nếu có lớp lưu trữ vai trò
-
-            // Chuyển đến trang chính
-
-            if(role.equals("Admin")) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 1300, 700);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+            else {
+                showAlert("Error", "Đăng nhập thất bại: " + role);
             }
-            else if(role.equals("User")){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root, 1300, 700);
-                // Hiển thị scene mới
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            }
-
         } catch (SQLException e) {
             showAlert("Error", "Đăng nhập thất bại: " + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 
     private void showAlert(String title, String message) {
