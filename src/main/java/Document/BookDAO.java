@@ -12,10 +12,8 @@ import static Database.DatabaseConnection.getConnection;
 public class BookDAO {
     public static boolean addBook(Book book) throws SQLException {
         String checkSql = "SELECT 1 FROM books WHERE title = ? AND author = ? AND category = ? AND description = ? AND publisher = ? AND section = ?";
-
-        String updateSql = "UPDATE books SET quantity = quantity + ? WHERE title = ? AND author = ? AND category = ? AND description = ? AND imagePath = ? AND publisher = ? AND section = ?";
-
-        String insertSql = "INSERT INTO books (title, author, category, quantity, description, imagePath, publisher, section) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String updateSql = "UPDATE books SET quantity = quantity + ?, isbn = ? WHERE title = ? AND author = ? AND category = ? AND description = ? AND imagePath = ? AND publisher = ? AND section = ?";
+        String insertSql = "INSERT INTO books (title, author, category, quantity, remaining_book, description, imagePath, publisher, section, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
@@ -33,27 +31,32 @@ public class BookDAO {
 
                 ResultSet resultSet = checkStatement.executeQuery();
                 if (resultSet.next()) {
-                    updateStatement.setInt(1, book.getQuantity());
-                    updateStatement.setString(2, book.getTitle());
-                    updateStatement.setString(3, book.getAuthor());
-                    updateStatement.setString(4, book.getCategory());
-                    updateStatement.setString(5, book.getDescription());
-                    updateStatement.setString(6, book.getImagePath());
-                    updateStatement.setString(7, book.getPublisher());
-                    updateStatement.setString(8, book.getSection());
+                    // Nếu sách đã có trong cơ sở dữ liệu, cập nhật số lượng và ISBN
+                    updateStatement.setInt(1, book.getRemainingBook());
+                    updateStatement.setString(2, book.getISBN()); // Cập nhật ISBN
+                    updateStatement.setString(3, book.getTitle());
+                    updateStatement.setString(4, book.getAuthor());
+                    updateStatement.setString(5, book.getCategory());
+                    updateStatement.setString(6, book.getDescription());
+                    updateStatement.setString(7, book.getImagePath());
+                    updateStatement.setString(8, book.getPublisher());
+                    updateStatement.setString(9, book.getSection());
 
                     int rowsAffected = updateStatement.executeUpdate();
                     connection.commit();
                     return rowsAffected > 0;
                 } else {
+                    // Nếu sách chưa có, thêm mới vào cơ sở dữ liệu
                     insertStatement.setString(1, book.getTitle());
                     insertStatement.setString(2, book.getAuthor());
                     insertStatement.setString(3, book.getCategory());
                     insertStatement.setInt(4, book.getQuantity());
-                    insertStatement.setString(5, book.getDescription());
-                    insertStatement.setString(6, book.getImagePath());
-                    insertStatement.setString(7, book.getPublisher());
-                    insertStatement.setString(8, book.getSection());
+                    insertStatement.setInt(5, book.getQuantity()); // Giả sử remaining_book bằng quantity
+                    insertStatement.setString(6, book.getDescription());
+                    insertStatement.setString(7, book.getImagePath());
+                    insertStatement.setString(8, book.getPublisher());
+                    insertStatement.setString(9, book.getSection());
+                    insertStatement.setString(10, book.getISBN()); // Thêm ISBN vào câu lệnh insert
 
                     int rowsAffected = insertStatement.executeUpdate();
                     connection.commit();
@@ -82,55 +85,66 @@ public class BookDAO {
         }
     }
     public static boolean deleteBook(Book book) throws SQLException {
-        String sql = "DELETE FROM books WHERE title = ? AND author = ? AND category = ? AND description = ?";
+        // Câu lệnh DELETE chỉ cần ISBN hoặc ID để xác định cuốn sách
+        String sql = "DELETE FROM books WHERE isbn = ?"; // Hoặc sử dụng `id` nếu bạn có trường ID
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-            statement.setString(3, book.getCategory());
-            statement.setString(4, book.getDescription());
-            statement.setString(5,book.getPublisher());
-            statement.setString(6,book.getSection());
+            // Sử dụng ISBN (hoặc ID) để xác định cuốn sách cần xóa
+            statement.setString(1, book.getISBN()); // Hoặc dùng `book.getId()` nếu xóa theo ID
             int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
+            return rowsAffected > 0; // Nếu có ít nhất một hàng bị ảnh hưởng, trả về true
         } catch (SQLException e) {
-            throw e;
+            throw e; // Ném lại SQLException nếu có lỗi
         }
     }
     public static boolean updateBook(Book book) throws SQLException {
-        String sql = "UPDATE books SET title=?, author=?, category=?, quantity=?, description=?,imagePath=?, publisher=?, section=?,  WHERE title=?";
+        String sql = "UPDATE books SET title=?, author=?, category=?, description=?, publisher=?, section=?  ,imagePath=?, isbn=? WHERE imagePath=?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, book.getTitle());
             statement.setString(2, book.getAuthor());
             statement.setString(3, book.getCategory());
-            statement.setInt(4, book.getQuantity());
-            statement.setString(5, book.getDescription());
-            statement.setString(6, book.getPublisher());
-            statement.setString(7, book.getSection());
-            statement.setString(8, book.getImagePath());
-            statement.setString(9, book.getTitle());
+           // statement.setInt(4, book.getQuantity());
+            //statement.setInt(4,book.getRemainingBook());
+            statement.setString(4, book.getDescription());
+            statement.setString(5, book.getPublisher());
+            statement.setString(6, book.getSection());
+            statement.setString(7, book.getImagePath());
+            statement.setString(8, book.getISBN());
+            statement.setString(9,book.getImagePath());
+
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
             throw e;
         }
     }
-    public static boolean updateQuantity(Book book, int newQuantity) throws SQLException {
-        String sql = "UPDATE books SET quantity=? WHERE title=?";
+    public static boolean updateQuantity(Book book, int additionalQuantity) throws SQLException {
+        String sql = "UPDATE books SET quantity = ?, remaining_book =? WHERE isbn = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, newQuantity);
-            statement.setString(2, book.getTitle());
+            Book current = book;
+            int newQuantity =  additionalQuantity - book.getQuantity();
+            int newRemainingBook = Math.min(additionalQuantity, book.getRemainingBook() + newQuantity);
+            System.out.println(newRemainingBook);
+            statement.setInt(1, additionalQuantity);
+            statement.setInt(2, newRemainingBook);
+            statement.setString(3, book.getISBN());
+
             int rowsAffected = statement.executeUpdate();
-            if(rowsAffected > 0) {
-                book.setQuantity(newQuantity);
+            if (rowsAffected > 0) {
+                // Cập nhật lại giá trị quantity và remaining_book trong đối tượng Book
+                book.setQuantity(additionalQuantity);
+                book.setRemainingBook(newRemainingBook);
             }
             return rowsAffected > 0;
         } catch (SQLException e) {
             throw e;
         }
     }
+
+
+
     public static Book searchBooksExact(String title, String author) throws SQLException {
         String query = "SELECT * FROM books WHERE title = ? AND author = ?";
         Book books = null; ;
@@ -146,10 +160,12 @@ public class BookDAO {
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),
-                        resultSet.getString("imagePath"));
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN"));
             }
         } catch (SQLException e) {
             throw e;
@@ -173,10 +189,12 @@ public class BookDAO {
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),
-                        resultSet.getString("imagePath"));
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -199,10 +217,12 @@ public class BookDAO {
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),
-                        resultSet.getString("imagePath"));
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -225,10 +245,12 @@ public class BookDAO {
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),
-                        resultSet.getString("imagePath"));
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -269,10 +291,12 @@ public class BookDAO {
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),
-                        resultSet.getString("imagePath"));
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -291,11 +315,13 @@ public class BookDAO {
                 String author = resultSet.getString("author");
                 String categoryl = resultSet.getString("category");
                 int quantity = resultSet.getInt("quantity");
+                int remaining_book = resultSet.getInt("remaining_book");
                 String description = resultSet.getString("description");
                 String imagePath = resultSet.getString("imagePath");
                 String publisher = resultSet.getString("publisher");
                 String section = resultSet.getString("section");
-                books.add(new Book(title, author, categoryl, quantity, description, publisher,section,imagePath));
+                String ISBN = resultSet.getString("ISBN");
+                books.add(new Book(title, author, categoryl, quantity,remaining_book, description, publisher,section,imagePath,ISBN));
             }
         } catch (Exception e) {
             throw e;

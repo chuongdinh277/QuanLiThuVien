@@ -25,9 +25,13 @@ public class MenuController_Admin {
     @FXML
     private Label homeLabel, systemLabel;
     @FXML
-    private BorderPane borderPane;
+    private BorderPane borderPane_admin;
+    private Parent homeView;
     @FXML
     private ImageView logo;
+    public BorderPane getBorderPane() {
+        return borderPane_admin;
+    }
 
     public void initialize() {
         // Hiển thị tên người dùng và vai trò
@@ -41,8 +45,11 @@ public class MenuController_Admin {
     private void loadHomeview() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
-            Parent root = loader.load();
-            borderPane.setCenter(root);
+            homeView = loader.load();
+          //  Parent root = loader.load();
+            homeController_Admin homeController = loader.getController();
+            homeController.setMenuController(this);
+            borderPane_admin.setCenter(homeView);
         } catch (IOException e) {
             e.printStackTrace(); // In ra lỗi chi tiết
             System.out.println("Error loading home.fxml: " + e.getMessage());
@@ -56,7 +63,7 @@ public class MenuController_Admin {
             Parent root = loader.load();
 
             // Đặt root vào center của BorderPane hiện tại
-            borderPane.setCenter(root);
+            borderPane_admin.setCenter(root);
 
             // Bạn có thể in ra thông báo để xác nhận việc tải thành công
             System.out.println("Loaded timsach.fxml into center of BorderPane.");
@@ -70,14 +77,24 @@ public class MenuController_Admin {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/students.fxml"));
             Parent root = loader.load();
-            borderPane.setCenter(root);
+            borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace(); // In ra lỗi chi tiết
             System.out.println("Error loading home.fxml: " + e.getMessage());
         }
     }
 
-
+    public void showHome() {
+        try {
+            // Tải giao diện chính (ví dụ home.fxml) vào BorderPane
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
+            Parent root = loader.load();
+            borderPane_admin.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page: " + e.getMessage());
+        }
+    }
 
 
 }

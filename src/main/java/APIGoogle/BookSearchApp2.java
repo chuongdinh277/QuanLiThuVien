@@ -177,10 +177,11 @@ public class BookSearchApp2 extends Application {
             String author = authorInput.getText().trim();
             String category = categoryInput.getText().trim();
             String description = descriptionInput.getText().trim();
+
             int quantity = Integer.parseInt(quantityInput.getText());
             String imagePath = result.getImagePath();
             try {
-                boolean check =  BookDAO.addBook(new Book(title, author, category, quantity,description,"","", imagePath));
+                boolean check =  BookDAO.addBook(new Book(title, author, category, quantity,quantity,description,"","", imagePath,""));
                 if (check) {
                     showAlberDialog("Thêm thành công");
                 } else {

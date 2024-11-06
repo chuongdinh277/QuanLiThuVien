@@ -39,10 +39,21 @@ public class BookParser {
             String imagePath = volumeInfo.has("imageLinks") && volumeInfo.getAsJsonObject("imageLinks").has("thumbnail") ?
                     volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() :
                     "No image available";
-
+            String isbn = "No ISBN available"; // Default value nếu không tìm thấy ISBN
+            if (volumeInfo.has("industryIdentifiers")) {
+                for (var identifier : volumeInfo.getAsJsonArray("industryIdentifiers")) {
+                    JsonObject idObject = identifier.getAsJsonObject();
+                    String type = idObject.get("type").getAsString();
+                    if ("ISBN_13".equals(type) || "ISBN_10".equals(type)) {
+                        isbn = idObject.get("identifier").getAsString();
+                        break;
+                    }
+                }
+            }
             // Tạo đối tượng Book
-            Book book = new Book(title, author, category, 1, description," ", "",imagePath);
+            Book book = new Book(title, author, category, 1,1, description," ", "",imagePath,isbn);
             // Lưu vào cache
+
             cache.put(jsonResponse, book);
             return book; // Trả về đối tượng Book
         }

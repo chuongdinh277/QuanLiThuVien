@@ -40,11 +40,11 @@
             <TextField fx:id="authorSearch_1" layoutX="135.0" layoutY="42.0" prefHeight="26.0" prefWidth="218.0" />
             <TextField fx:id="categorySearch_1" layoutX="135.0" layoutY="72.0" prefHeight="26.0" prefWidth="218.0" />
             <TextField fx:id="quantity_book" layoutX="135.0" layoutY="132.0" prefHeight="26.0" prefWidth="86.0" />
-            <Text layoutX="44.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIêu đề :" />
-            <Text layoutX="45.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tác giả :" />
-            <Text layoutX="43.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thể loại :" />
-            <Text layoutX="38.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Số lượng :" />
-            <Text layoutX="41.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher" />
+            <Text layoutX="63.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIêu đề :" />
+            <Text layoutX="64.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tác giả :" />
+            <Text layoutX="62.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thể loại :" />
+            <Text layoutX="59.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Số lượng :" />
+            <Text layoutX="61.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher" />
             <TextField fx:id="bookPublisher" layoutX="135.0" layoutY="102.0" prefHeight="26.0" prefWidth="218.0" />
             <Text layoutX="41.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book section" />
             <TextField fx:id="bookSection" layoutX="135.0" layoutY="163.0" prefHeight="26.0" prefWidth="218.0" />
@@ -57,5 +57,7 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Text layoutX="109.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN :" />
+      <TextField fx:id="ISBNtextField" layoutX="172.0" layoutY="246.0" prefHeight="26.0" prefWidth="218.0" />
    </children>
 </AnchorPane>

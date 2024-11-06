@@ -108,7 +108,8 @@ public class GoogleBooksAPI {
         try {
             String encodedTitle = URLEncoder.encode(title, "UTF-8");
             String encodedAuthor = URLEncoder.encode(author, "UTF-8");
-            String urlString = BASE_URL + "?q=" + encodedTitle + "+inauthor:" + encodedAuthor + "&maxResults=1&fields=items(volumeInfo(title,authors,categories,imageLinks))&key=" + API_KEY;
+            String urlString = BASE_URL + "?q=" + encodedTitle + "+inauthor:" + encodedAuthor + "&maxResults=1&fields=items(volumeInfo(title,authors,categories,imageLinks,industryIdentifiers))&key=" + API_KEY;
+
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(urlString))
                     .GET()

@@ -134,8 +134,9 @@ public class loginController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/hello-view.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root, 1500, 900));
+                    stage.setScene(new Scene(root, 1300, 800));
                     stage.show();
+                    stage.centerOnScreen();
                 } else if ("user".equals(role)) {
                     currentUser.setUsername(username);
                     currentUser.setRole(role);

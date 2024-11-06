@@ -13,17 +13,32 @@ public class Book {
     private double average_rating;
     private String publisher;
     private String section;
-    public Book(String title, String author, String category, int quantity, String description, String publisher, String section, String imagePath) {
+    private int remainingBook;
+    private String ISBN;
+    public Book(String title, String author, String category, int quantity, int remainingBook, String description, String publisher, String section, String imagePath, String ISBN) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.quantity = quantity;
+        this.remainingBook = remainingBook;
         this.description = description;
         this.imagePath = imagePath;
         this.publisher = publisher;
         this.section = section;
+        this.ISBN = ISBN;
     }
-
+    public String getISBN() {
+        return ISBN;
+    }
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+    public int getRemainingBook() {
+        return remainingBook;
+    }
+    public void setRemainingBook(int remainingBook) {
+        this.remainingBook = remainingBook;
+    }
     public String getTitle() {
         return title;
     }

@@ -15,14 +15,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+
+//import static controllers.MenuController_Admin.borderPane_admin;
+
+
 public class homeController_Admin {
 
+    @FXML
+    private BorderPane borderPane_book;
     @FXML
     private TableView<Book> bookTable; // Khai báo TableView
     @FXML
@@ -40,35 +47,43 @@ public class homeController_Admin {
     @FXML
     private TableColumn<Book, String> bookSection; // cột chủ đề;
     @FXML
+    private TableColumn<Book, Integer> remainingBook;
+    @FXML
+    private TableColumn<Book, String> bookAvailability;
+    @FXML
+    private TableColumn<Book, String> ISBNbook;
+    @FXML
     private Button addBook_Admin;
-
+    private static MenuController_Admin menuController;
+    public void setMenuController(MenuController_Admin menuController) {
+        this.menuController = menuController;
+    }
     @FXML
     private void initialize() {
 
-        bookID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        //bookID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        ISBNbook.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getISBN()));
         bookTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         bookAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         bookPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         bookQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+        remainingBook.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRemainingBook()).asObject());
         bookSection.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSection()));
-
-        bookAction.setCellValueFactory(cellData -> {
-            HBox hBox = new HBox();
-            Button buttoncheck = new Button("Xem");
-            Button buttonupdate = new Button("update");
-            buttoncheck.setOnAction(event -> {
-                // Xử lý hành động khi nhấn nút
-                //System.out.println("Đã nhấn nút xem cho sách: " + cellData.getValue().getTitle());
-            });
-            buttonupdate.setOnAction(event -> {
-
-            });
-            hBox.getChildren().addAll(buttoncheck, buttonupdate);
-            return new SimpleObjectProperty<>(hBox);
-           // return new SimpleObjectProperty<>(buttonupdate);
+        bookAvailability.setCellValueFactory(cellData -> {
+            int remaining = cellData.getValue().getRemainingBook();
+            String availability = (remaining == 0) ? "Not available" : "Available";
+            return new SimpleStringProperty(availability);
         });
-
         loadBooks();
+
+        bookTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Book selectBook = bookTable.getSelectionModel().getSelectedItem();
+                if(selectBook != null) {
+                    openBookDetails(selectBook);
+                }
+            }
+        });
     }
     public void loadBooks() {
         ObservableList<Book> booksList = FXCollections.observableArrayList();
@@ -107,5 +122,23 @@ public class homeController_Admin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void openBookDetails(Book book) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/bookDetails.fxml"));
+            Parent bookDetailsRoot = fxmlLoader.load();
+           bookDetailCotroller controller = fxmlLoader.getController();
+           controller.setMenuController(menuController);
+           controller.setBook(book);
+            //bookDetailCotroller controller = fxmlLoader.getController();
+            //controller.setBook(book);
+            //BorderPane borderPane = menuController.getBorderPane();
+            //borderPane.setCenter(bookDetailsRoot);
+            borderPane_book.setCenter(bookDetailsRoot);
+        } catch (IOException e) {
+
+        }
+
     }
 }

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.students">
+<BorderPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.students">
     <top>
         <VBox prefHeight="123.0" prefWidth="1000.0">
             <children>
@@ -121,12 +121,12 @@
         </VBox>
     </top>
     <center>
-        <TableView fx:id="studentTable" prefHeight="402.0" prefWidth="788.0" tableMenuButtonVisible="true">
+        <TableView fx:id="studentTable" prefHeight="500.0" prefWidth="700.0" tableMenuButtonVisible="true">
             <columns>
-                <TableColumn fx:id="studentID" prefWidth="86.39999085664749" text="Student ID" />
-                <TableColumn fx:id="studentName" prefWidth="219.19996643066406" text="Student Name" />
-                <TableColumn fx:id="studentNumber" prefWidth="184.00006103515625" text="Student Number" />
-                <TableColumn fx:id="studentEmail" prefWidth="331.2000732421875" text="Student Email Address" />
+                <TableColumn fx:id="studentID" text="Student ID" />
+                <TableColumn fx:id="studentName" prefWidth="195.99998474121094" text="Student Name" />
+                <TableColumn fx:id="studentNumber" prefWidth="122.4000244140625" text="Student Number" />
+                <TableColumn fx:id="studentEmail" prefWidth="318.39996337890625" text="Student Email Address" />
             </columns>
             <contextMenu>
                 <ContextMenu>
@@ -141,7 +141,7 @@
         </TableView>
     </center>
     <bottom>
-        <HBox prefHeight="136.0" prefWidth="1200.0" spacing="5.0">
+        <HBox prefHeight="68.0" prefWidth="1100.0" spacing="5.0">
             <children>
                 <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -156,7 +156,7 @@
         </HBox>
     </bottom>
    <right>
-      <AnchorPane prefHeight="402.0" prefWidth="364.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="426.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="23.0" layoutY="14.0" style="-fx-text-fill: #2b579a;" text="Student Information">
                <font>
