@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="480.0" prefWidth="600.0" style="-fx-background-color: #0db8a8;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.updateStudentController">
+   <children>
+      <Label layoutX="182.0" layoutY="49.0" prefHeight="18.0" prefWidth="266.0" style="-fx-text-fill: #2b579a; -fx-font-size: 30; -fx-font-weight: bold;" text="Update Student" />
+      <Text layoutX="109.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="MSSV :" />
+      <TextField fx:id="MSSVupdate" layoutX="182.0" layoutY="124.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+      <Text layoutX="109.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Name :" />
+      <Text layoutX="31.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Number Phone :" />
+      <TextField fx:id="NameofStudent" layoutX="182.0" layoutY="168.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+      <TextField fx:id="NumberOfstudent" layoutX="182.0" layoutY="215.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+      <Text layoutX="111.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Email :" />
+      <TextField fx:id="emailOfstudent" layoutX="182.0" layoutY="257.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+      <Button fx:id="UpdateButton" layoutX="209.0" layoutY="415.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="26.0" prefWidth="154.0" style="-fx-background-radius: 5;" text="Update" />
+      <Text layoutX="71.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="UserName :" />
+      <TextField fx:id="usernameStudent" layoutX="182.0" layoutY="297.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+      <Text layoutX="71.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Password :" />
+      <TextField fx:id="PasswordStudent" layoutX="182.0" layoutY="337.0" prefHeight="39.0" prefWidth="290.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+   </children>
+</AnchorPane>

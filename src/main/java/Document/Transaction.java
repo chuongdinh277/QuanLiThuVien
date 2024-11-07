@@ -10,16 +10,38 @@ public class Transaction {
     private String imagePath;
     private Date borrow_Date;
     private Date return_Date;
-    public Transaction( String username, String title, String author,
-                        String imagePath, Date borrow_Date, Date return_Date) {
+    private String isbn;
+    private int quantity;
+    public Transaction( int id, String isbn, String username, String title, String author,
+                        String imagePath, Date borrow_Date, Date return_Date, int quantity) {
+        this.id = id;
+        this.isbn = isbn;
         this.username = username;
         this.title = title;
         this.author = author;
         this.imagePath = imagePath;
         this.borrow_Date = borrow_Date;
         this.return_Date = return_Date;
+        this.quantity = quantity;
     }
-
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    public int getId() {
+        return id;
+    }
+    public String getIsbn() {
+        return isbn;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getUsername() {
         return username;
     }

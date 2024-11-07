@@ -32,7 +32,8 @@ public class MenuController_Admin {
     public BorderPane getBorderPane() {
         return borderPane_admin;
     }
-
+    @FXML
+    private Button issueBook;
     public void initialize() {
         // Hiển thị tên người dùng và vai trò
        // name.setText(currentUser.getUsername());
@@ -96,5 +97,26 @@ public class MenuController_Admin {
         }
     }
 
-
+    @FXML
+    private void loadIssueBook() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/issueBook.fxml"));
+            Parent root = loader.load();
+            borderPane_admin.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void loadAllIssueBook() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/allIssueBook.fxml"));
+            Parent root = loader.load();
+            borderPane_admin.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page: " + e.getMessage());
+        }
+    }
 }

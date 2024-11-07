@@ -51,7 +51,8 @@ public class loginController implements Initializable {
     private TextField numberField;
     @FXML
     private TextField emailField;
-
+    @FXML
+    private TextField MSSVTextfield;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().add("admin");
@@ -68,53 +69,65 @@ public class loginController implements Initializable {
         String email = emailField.getText();
         String fullName = fullNameField.getText();
         String role = myChoiceBox.getValue();
+        String mssv = MSSVTextfield.getText();  // Lấy giá trị MSSV từ TextField
+
+        // Kiểm tra xem các trường bắt buộc có được điền đầy đủ không
         if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty() || number.isEmpty()
-         || email.isEmpty() || fullName.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("lỗi đăng kí");
-                alert.setHeaderText("Vui lòng điền đầy đủ thông tin");
-                alert.showAndWait();
-                return;
+                || email.isEmpty() || fullName.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi đăng kí");
+            alert.setHeaderText("Vui lòng điền đầy đủ thông tin");
+            alert.showAndWait();
+            return;
         }
 
+        // Kiểm tra mật khẩu nhập lại có khớp không
         if(!passwordConfirm.equals(password)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("lỗi đăng kí");
+            alert.setTitle("Lỗi đăng kí");
             alert.setHeaderText("Mật khẩu nhập lại không đúng");
             alert.showAndWait();
             return;
         }
 
-        User newUser = new User(username, password, role, fullName, email, number);
+        // Kiểm tra nếu là user thì MSSV phải được điền đầy đủ
+        if ("user".equals(role) && (mssv == null || mssv.isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi đăng kí");
+            alert.setHeaderText("MSSV là bắt buộc đối với người dùng");
+            alert.showAndWait();
+            return;
+        }
+        User newUser;
 
+        if("user".equals(role)) {newUser = new User(Integer.parseInt(mssv), username, password, role, fullName, email, number);}
+        else {newUser = new User(0,username,password,role,fullName,email,number);}
         try {
+
             if (newUser.isUsernameTaken(username)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
+                alert.setTitle("Lỗi");
                 alert.setHeaderText("Tên tài khoản đã tồn tại");
                 alert.setContentText("Vui lòng chọn tên tài khoản khác");
                 alert.showAndWait();
             } else {
-                // Tiến hành đăng ký
                 newUser.register();
-                // Chuyển đến trang khác nếu đăng ký thành công
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-            // Hiển thị thông báo lỗi
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
+            alert.setTitle("Lỗi");
             alert.setHeaderText("Đăng ký thất bại");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
     }
+
     //xử lí đăng nhập tài khoản
 
     public void handleLogin(ActionEvent event) {
@@ -138,13 +151,15 @@ public class loginController implements Initializable {
                     stage.show();
                     stage.centerOnScreen();
                 } else if ("user".equals(role)) {
+                    int mssv = User.getStudentIdByusername(username);
                     currentUser.setUsername(username);
                     currentUser.setRole(role);
+                    currentUser.setID(mssv);
                     // Chuyển đến trang Member
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root, 1500, 700));
+                    stage.setScene(new Scene(root, 1300, 800));
                     stage.show();
                 } else {
                     // Thông báo lỗi nếu không phải Admin hoặc Member

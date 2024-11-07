@@ -16,7 +16,7 @@
          <children>
             <BorderPane fx:id="borderPane_admin" prefHeight="800.0" prefWidth="1300.0">
                <left>
-                  <AnchorPane style="-fx-background-color: #0db8a8;">
+                  <AnchorPane prefHeight="800.0" prefWidth="205.0" style="-fx-background-color: #0db8a8;">
                      <children>
                         <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="200.0" spacing="10" style="-fx-background-color: #0db8a8;">
                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -38,7 +38,7 @@
                                  <Button fx:id="systemButton" mnemonicParsing="false" onAction="#bookStoreLoad" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Home" />
                               </children>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="30.0" />
+                                 <Insets bottom="20.0" left="30.0" />
                               </VBox.margin>
                            </HBox>
 
@@ -55,20 +55,20 @@
                                  </HBox.margin>
                               </Button>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="30.0" />
+                                 <Insets bottom="20.0" left="30.0" />
                               </VBox.margin>
                            </HBox>
                            <HBox fx:id="homeMenu3">
                               <children>
                                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                       <Image url="@../image/list.png" />
+                                       <Image url="@../image/books.png" />
                                     </image>
                                  </ImageView>
-                                 <Button fx:id="borrowButton" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Issue book" />
+                                 <Button fx:id="issueBook" mnemonicParsing="false" onAction="#loadIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Issue book" />
                               </children>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="30.0" />
+                                 <Insets bottom="20.0" left="30.0" />
                               </VBox.margin>
                            </HBox>
                            <HBox fx:id="homeMenu4">
@@ -81,7 +81,20 @@
                                  <Button mnemonicParsing="false" onAction="#userButton" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Students" />
                               </children>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="30.0" />
+                                 <Insets bottom="20.0" left="30.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <HBox fx:id="homeMenu31">
+                              <children>
+                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/list.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Button fx:id="issueBook1" mnemonicParsing="false" onAction="#loadAllIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="All Issue Book" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="20.0" left="30.0" />
                               </VBox.margin>
                            </HBox>
                            <HBox fx:id="homeMenu5">
@@ -94,7 +107,7 @@
                                  <Button fx:id="returnButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Return book" />
                               </children>
                               <VBox.margin>
-                                 <Insets left="30.0" />
+                                 <Insets bottom="20.0" left="30.0" />
                               </VBox.margin>
                            </HBox>
                            <HBox fx:id="homeMenu21">
@@ -104,10 +117,10 @@
                                        <Image url="@../image/settings.png" />
                                     </image>
                                  </ImageView>
-                                 <Button fx:id="systemButton1" mnemonicParsing="false" onAction="#bookStoreLoad" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Settings" />
+                                 <Button fx:id="systemButton1" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Settings" />
                               </children>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="30.0" />
+                                 <Insets left="30.0" />
                               </VBox.margin>
                            </HBox>
 

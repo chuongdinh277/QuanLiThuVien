@@ -90,10 +90,10 @@ public class borrowBook {
         ObservableList<Book> bookList = FXCollections.observableArrayList();
 
         try {
-            Member member = new Member(currentUser.getUsername(), currentUser.getRole());
+            Member member = new Member(currentUser.getID(),currentUser.getUsername(), currentUser.getRole());
             List<Book> bookLists = member.viewAllBooks();
             if (bookLists != null) {
-                bookList.addAll(bookLists);
+                //bookList.addAll(bookLists);
                 bookLibraryList.setItems(bookList); // Gán danh sách sách vào bảng
             } else {
                 System.out.println("Không tìm thấy sách nào");

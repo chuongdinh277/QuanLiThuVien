@@ -340,5 +340,34 @@ public class BookDAO {
         }
         return true;
     }
+    public static Book getBookByISBN(String isbn) throws SQLException {
+        String query = "SELECT * FROM books WHERE isbn = ?";
+        Book book = null;
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, isbn);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                book = new Book(
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("category"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
+                        resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN")
+                );
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return book;
+    }
 
 }

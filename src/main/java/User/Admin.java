@@ -18,7 +18,7 @@ public class Admin extends User {
     private static final String ADMIN = "Admin";
 
     public Admin(String userName, String password) {
-        super(userName, password, ADMIN,"","","");
+        super(0,userName, password, ADMIN,"","","");
     }
 
     private boolean addUser(String username, String password, String role, String fullName, String email, String number) throws SQLException {
@@ -98,7 +98,7 @@ public class Admin extends User {
                 String fullName = resultSet.getString("fullName");
                 String email = resultSet.getString("email");
                 String number = resultSet.getString("number");
-                return new User(userName, password, role, fullName, email, number);
+                return new User(id,userName, password, role, fullName, email, number);
             }
             return null;
         } catch (SQLException e) {
@@ -155,6 +155,7 @@ public class Admin extends User {
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
@@ -162,7 +163,7 @@ public class Admin extends User {
                 String email = resultSet.getString("email");
                 String number = resultSet.getString("number");
 
-                User user = new User(username, password, role, fullName, email, number);
+                User user = new User(id,username, password, role, fullName, email, number);
                 if(user.getNumber() != null && user.getEmail()!=null && user.getFullName() !=null) users.add(user);
                 // In ra thông tin người dùng đã thêm vào danh sách
                 System.out.println("Added user: " + fullName + ", " + email + ", " + number);

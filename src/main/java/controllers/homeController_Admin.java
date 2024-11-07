@@ -54,6 +54,7 @@ public class homeController_Admin {
     private TableColumn<Book, String> ISBNbook;
     @FXML
     private Button addBook_Admin;
+
     private static MenuController_Admin menuController;
     public void setMenuController(MenuController_Admin menuController) {
         this.menuController = menuController;
@@ -141,4 +142,5 @@ public class homeController_Admin {
         }
 
     }
+
 }

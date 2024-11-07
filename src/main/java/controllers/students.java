@@ -9,10 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class students { // Thay đổi tên lớp để tuân thủ quy tắc đặt tên
@@ -75,5 +74,27 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
         studentOfname.setText(student.getFullName());
         studentOfnumber.setText(student.getNumber());
         studentOfemail.setText(student.getEmail());
+    }
+
+    @FXML
+    private void DeleteAction() {
+        User selectedStudent = studentTable.getSelectionModel().getSelectedItem();
+        if (selectedStudent!= null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Xác nhận xóa");
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn có chắc muốn xoá sinh viên này không");
+
+            if (alert.showAndWait().get() == ButtonType.OK) {
+                try {
+                    Admin admin = new Admin(currentUser.getUsername(), currentUser.getPassword());
+                    admin.removeUser(selectedStudent);
+                    studentTable.getItems().remove(selectedStudent);
+                   // admin.showAlberDialog("Xoá thành công");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

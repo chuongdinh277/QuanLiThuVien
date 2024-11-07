@@ -32,21 +32,22 @@
         <AnchorPane layoutX="480.0" layoutY="32.0" prefHeight="474.0" prefWidth="455.0">
             <children>
                 <TextField fx:id="usernameField" layoutX="68.0" layoutY="237.0" prefHeight="40.0" prefWidth="320.0" promptText="Tên đăng nhập" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" />
-                <ChoiceBox fx:id="myChoiceBox" layoutX="205.0" layoutY="404.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #ecf8ea;" />
+                <ChoiceBox fx:id="myChoiceBox" layoutX="205.0" layoutY="438.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #ecf8ea;" />
                 <Text fill="#0db8a8" layoutX="120.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo tài khoản">
                     <font>
                         <Font size="36.0" />
                     </font>
                 </Text>
-                <Text layoutX="87.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Đăng ký với vai trò" />
-            <PasswordField fx:id="passwordHidden" layoutX="68.0" layoutY="294.0" prefHeight="40.0" prefWidth="320.0" promptText="Mật khẩu" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" styleClass="passwordHidden" />
-            <PasswordField fx:id="PasswordHiddenRL" layoutX="68.0" layoutY="347.0" prefHeight="40.0" prefWidth="320.0" promptText="Nhập lại mật khẩu" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" styleClass="passwordHidden" />
+                <Text layoutX="78.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Đăng ký với vai trò" />
+            <PasswordField fx:id="passwordHidden" layoutX="68.0" layoutY="285.0" prefHeight="40.0" prefWidth="320.0" promptText="Mật khẩu" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" styleClass="passwordHidden" />
+            <PasswordField fx:id="PasswordHiddenRL" layoutX="68.0" layoutY="332.0" prefHeight="40.0" prefWidth="320.0" promptText="Nhập lại mật khẩu" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" styleClass="passwordHidden" />
             <TextField fx:id="fullNameField" layoutX="68.0" layoutY="71.0" prefHeight="40.0" prefWidth="320.0" promptText="Họ và tên" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" />
             <TextField fx:id="numberField" layoutX="68.0" layoutY="124.0" prefHeight="40.0" prefWidth="320.0" promptText="Số điện thoại" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" />
             <TextField fx:id="emailField" layoutX="68.0" layoutY="181.0" prefHeight="40.0" prefWidth="320.0" promptText="Email" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" />
+            <PasswordField fx:id="MSSVTextfield" layoutX="68.0" layoutY="385.0" prefHeight="40.0" prefWidth="320.0" promptText="MSSV" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" styleClass="passwordHidden" />
             </children>
         </AnchorPane>
-          <Button fx:id="registerButton" layoutX="631.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="45.0" prefWidth="140.0" style="-fx-background-radius: 20; -fx-background-color: #0db8a8;" text="Đăng ký" textFill="#fdfdfd">
+          <Button fx:id="registerButton" layoutX="631.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="45.0" prefWidth="140.0" style="-fx-background-radius: 20; -fx-background-color: #0db8a8;" text="Đăng ký" textFill="#fdfdfd">
               <font>
                   <Font size="20.0" />
               </font>

@@ -22,21 +22,10 @@
 
     public class Member extends User{
         private final static String MEMBER = "User";
-        public Member(String userName, String password) {
-            super(userName, password,MEMBER,"","","");
+        public Member(int id, String userName, String password) {
+            super(id, userName, password,MEMBER,"","","");
         }
-        public void borrowBook(Book borrowBook) throws SQLException {
-            try {
-                boolean isBorrow = TransactionDAO.borrowBook(this, borrowBook);
-                if (isBorrow) {
-                    this.showAlberDialog("Mượn sách thành công");
-                } else {
-                    this.showAlberDialog("Mượn sách thất bại");
-                }
-            } catch (SQLException e) {
-                this.showErrorDialog("Database connection error",e.getMessage());
-            }
-        };
+
         public void returnBook(Book returnBook) throws SQLException {
             try {
                 boolean isReturn = TransactionDAO.returnBook(this, returnBook);
@@ -229,37 +218,6 @@
                 }
             } catch (Exception e) {
                 this.showErrorDialog("Error", e.getMessage());
-            }
-        }
-
-
-        public static String login(String username, String password) throws SQLException {
-            String checkUsernameSQL = "SELECT * FROM users WHERE username = ?";
-            String checkPasswordSQL = "SELECT * FROM users WHERE username = ? AND password = ?";
-
-            try (Connection connection = DatabaseConnection.getConnection()) {
-                // Kiểm tra xem username có tồn tại không
-                try (PreparedStatement checkUsernameStmt = connection.prepareStatement(checkUsernameSQL)) {
-                    checkUsernameStmt.setString(1, username);
-                    ResultSet usernameResult = checkUsernameStmt.executeQuery();
-                    if (!usernameResult.next()) {
-                        return "Username not found"; // Tên đăng nhập không đúng
-                    }
-                }
-
-                // Kiểm tra xem mật khẩu có đúng không
-                try (PreparedStatement checkPasswordStmt = connection.prepareStatement(checkPasswordSQL)) {
-                    checkPasswordStmt.setString(1, username);
-                    checkPasswordStmt.setString(2, password);
-                    ResultSet passwordResult = checkPasswordStmt.executeQuery();
-                    if (passwordResult.next()) {
-                        return "Login successful"; // Đăng nhập thành công
-                    } else {
-                        return "Incorrect password"; // Mật khẩu sai
-                    }
-                }
-            } catch (Exception e) {
-                throw e;
             }
         }
 
