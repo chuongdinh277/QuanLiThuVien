@@ -61,7 +61,8 @@ public class addBook {
                 authorSearch_1.setText(book.getAuthor());
                 categorySearch_1.setText(book.getCategory());
                 ISBNtextField.setText(book.getISBN());
-
+                System.out.println("dương xấu trai");
+                System.out.println(book.getDescription());
                 if (book.getImagePath() != null) {
                     Image image = new Image(book.getImagePath());
                     showImage.setImage(image);

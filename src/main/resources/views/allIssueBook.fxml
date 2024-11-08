@@ -126,14 +126,15 @@
     <center>
         <TableView fx:id="transactionTable" prefHeight="480.0" prefWidth="1000.0" tableMenuButtonVisible="true">
             <columns>
-            <TableColumn fx:id="transactionIdColumn" prefWidth="67.99999696016312" text="ID" />
-                <TableColumn fx:id="isbnColumn" prefWidth="101.60000610351562" text="ISBN" />
+            <TableColumn fx:id="transactionIdColumn" prefWidth="53.60000306367874" text="ID" />
+                <TableColumn fx:id="isbnColumn" prefWidth="116.79998779296875" text="ISBN" />
                 <TableColumn fx:id="titleColumn" prefWidth="163.19996643066406" text="Book Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="162.4000244140625" text="Book Author" />
                 <TableColumn fx:id="studentNameColumn" prefWidth="175.19992065429688" text="Name Student" />
-                <TableColumn fx:id="quantityColumn" prefWidth="75.20001220703125" text="Quantity" />
-                <TableColumn fx:id="borrowDateColumn" prefWidth="154.39990234375" text="borrowed Time" />
-                <TableColumn fx:id="returnDateColumn" prefWidth="156.800048828125" text="Return Time" />
+            <TableColumn fx:id="StudentID" prefWidth="84.800048828125" text="Student ID" />
+                <TableColumn fx:id="quantityColumn" prefWidth="66.4000244140625" text="Quantity" />
+                <TableColumn fx:id="borrowDateColumn" prefWidth="128.0001220703125" text="borrowed Time" />
+                <TableColumn fx:id="returnDateColumn" prefWidth="183.9998779296875" text="Return Time" />
             </columns>
             <contextMenu>
                 <ContextMenu>

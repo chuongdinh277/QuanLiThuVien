@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
+import javafx.scene.image.ImageView;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,7 +26,10 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
     private TableColumn<User, String> studentNumber; // Cột số điện thoại
     @FXML
     private TableColumn<User, String> studentEmail; // Cột email
-
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private TextField searchIDstudent;
     @FXML
     private TextField studentOfemail; // Sửa tên biến theo quy tắc CamelCase
     @FXML
@@ -35,7 +38,10 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
     private TextField studentOfname;
     @FXML
     private TextField studentOfnumber;
-
+    @FXML
+    private TextField usernameStudent;
+    @FXML
+    private TextField passwordStudent;
     @FXML
     private void initialize() {
         // Kiểm tra nếu studentEmail không null
@@ -50,6 +56,11 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
                 }
             });
         loadStudents();
+                searchIDstudent.setOnAction(event -> searchStudentByID());
+        // Thêm sự kiện click vào ImageView để tìm kiếm sinh viên
+        //imageView.setOnM(event -> searchStudentByID());
+        imageView.setOnMouseClicked(event -> searchStudentByID());
+
     }
 
     private void loadStudents() { // Đổi tên phương thức cho thống nhất
@@ -74,6 +85,8 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
         studentOfname.setText(student.getFullName());
         studentOfnumber.setText(student.getNumber());
         studentOfemail.setText(student.getEmail());
+        usernameStudent.setText(student.getUserName());
+        passwordStudent.setText(student.getPassword());
     }
 
     @FXML
@@ -96,5 +109,57 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
                 }
             }
         }
+    }
+
+    @FXML
+    private void saveAction() {
+        User selectedStudent = studentTable.getSelectionModel().getSelectedItem();
+        if (selectedStudent != null) {
+            // Lấy thông tin từ các TextField
+            String fullName = studentOfname.getText();
+            String number = studentOfnumber.getText();
+            String email = studentOfemail.getText();
+            String username = usernameStudent.getText();
+            String password = passwordStudent.getText();
+            int newId = Integer.parseInt(studentOfid.getText());  // Lấy ID mới từ TextField
+
+            // Cập nhật thông tin người dùng
+            selectedStudent.setFullName(fullName);
+            selectedStudent.setNumber(number);
+            selectedStudent.setEmail(email);
+           // selectedStudent.setUserName(username);  // Cập nhật tên đăng nhập nếu cần
+            selectedStudent.setPassword(password);
+            selectedStudent.setId(newId);  // Cập nhật ID mới
+            try {
+                Admin admin = new Admin(currentUser.getUsername(), currentUser.getPassword());
+                boolean success = admin.updateUser(selectedStudent);  // Cập nhật thông tin người dùng
+                System.out.println("cập nhật thành co");
+                if (success) {
+                    // Cập nhật lại dữ liệu trong TableView
+                    studentTable.refresh();
+                    System.out.println("Cập nhật thành công");
+                } else {
+                    System.out.println("Cập nhật thất bại");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Lỗi khi cập nhật thông tin");
+            }
+        }
+    }
+
+    private void searchStudentByID() {
+            String studentIdText = searchIDstudent.getText().trim();
+            if (!studentIdText.isEmpty()) {
+                try {
+                    int studentId = Integer.parseInt(studentIdText);
+                    Admin admin = new Admin(currentUser.getUsername(), currentUser.getPassword());
+                    User student = admin.getUserById(studentId);
+                    showStudentDetails(student);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("Lỗi khi tìm kiếm sinh viên");
+                }
+            }
     }
 }

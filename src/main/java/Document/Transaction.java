@@ -12,8 +12,9 @@ public class Transaction {
     private Date return_Date;
     private String isbn;
     private int quantity;
+    private String mssv;
     public Transaction( int id, String isbn, String username, String title, String author,
-                        String imagePath, Date borrow_Date, Date return_Date, int quantity) {
+                        String imagePath, Date borrow_Date, Date return_Date, int quantity,String mssv) {
         this.id = id;
         this.isbn = isbn;
         this.username = username;
@@ -23,6 +24,13 @@ public class Transaction {
         this.borrow_Date = borrow_Date;
         this.return_Date = return_Date;
         this.quantity = quantity;
+        this.mssv = mssv;
+    }
+    public String getMssv() {
+        return mssv;
+    }
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
     }
     public int getQuantity() {
         return quantity;

@@ -39,7 +39,7 @@ public class TransactionDAO {
         String updateSql = "UPDATE books SET remaining_book = remaining_book - ? WHERE ISBN = ? AND remaining_book >= ?";
 
         // Câu lệnh SQL để thêm giao dịch vào `transactions`
-        String sql = "INSERT INTO transactions (username, title, author, ISBN, borrow_date, return_date, imagePath, quantity) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)";
+        String sql = "INSERT INTO transactions (username, title, author, ISBN, borrow_date, return_date, imagePath, quantity, mssv) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
 
         try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(updateSql);
@@ -64,7 +64,7 @@ public class TransactionDAO {
                 insertTransactionStatement.setDate(5, Date.valueOf(returnDate));  // Ngày trả
                 insertTransactionStatement.setString(6, book.getImagePath());
                 insertTransactionStatement.setInt(7, quantity);
-
+                insertTransactionStatement.setString(8, String.valueOf(user.getId()));
                 int transactionAdded = insertTransactionStatement.executeUpdate();
                 return transactionAdded > 0;
             }
@@ -120,7 +120,8 @@ public class TransactionDAO {
                         resultSet.getString("imagePath"),
                         resultSet.getDate("borrow_date"),
                         resultSet.getDate("return_date"),
-                        resultSet.getInt("quantity")
+                        resultSet.getInt("quantity"),
+                        resultSet.getString("mssv")  // added mssv column
                 ));
             }
         } catch (Exception e) {
@@ -145,7 +146,8 @@ public class TransactionDAO {
                         resultSet.getString("imagePath"),
                         resultSet.getDate("borrow_date"),
                         resultSet.getDate("return_date"),
-                        resultSet.getInt("quantity")
+                        resultSet.getInt("quantity"),
+                        resultSet.getString("mssv")  // added mssv column
                 ));
             }
         } catch (Exception e) {
@@ -180,4 +182,50 @@ public class TransactionDAO {
         }
         return result;
     }
+    public static List<Transaction> getTransactionsByStudentId(String studentId) throws SQLException {
+        List<Transaction> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM transactions WHERE mssv = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, studentId);  // Gán mssv vào câu truy vấn
+
+            ResultSet resultSet = statement.executeQuery();
+
+            // Duyệt qua các kết quả và thêm vào danh sách giao dịch
+            while (resultSet.next()) {
+                result.add(new Transaction(
+                        resultSet.getInt("transaction_id"),  // ID giao dịch
+                        resultSet.getString("isbn"),
+                        resultSet.getString("username"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("imagePath"),
+                        resultSet.getDate("borrow_date"),
+                        resultSet.getDate("return_date"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getString("mssv")
+                ));
+            }
+        } catch (SQLException e) {
+            throw e;  // Quản lý ngoại lệ
+        }
+
+        return result;  // Trả về danh sách giao dịch của sinh viên
+    }
+    public static boolean deleteTransaction(int transactionId) throws SQLException {
+        String sql = "DELETE FROM transactions WHERE transaction_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, transactionId);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+
 }

@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -86,7 +87,7 @@
                                                 <HBox prefHeight="26.0" prefWidth="564.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                                     <children>
 
-                                                        <TextField prefHeight="26.0" prefWidth="230.0" promptText="Search name" style="-fx-background-radius: 0;">
+                                                        <TextField fx:id="searchIDstudent" prefHeight="30.0" prefWidth="245.0" promptText="Search name" style="-fx-background-radius: 0;">
                                                             <HBox.margin>
                                                                 <Insets />
                                                             </HBox.margin>
@@ -94,7 +95,14 @@
                                                                 <Font size="12.1" />
                                                             </font>
                                                         </TextField>
-                                                        <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="505.0" HBox.hgrow="ALWAYS" />
+                                          <ImageView fx:id="imageView" fitHeight="30.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/search.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="-45.0" />
+                                             </HBox.margin>
+                                          </ImageView>
                                                     </children>
                                                     <VBox.margin>
                                                         <Insets bottom="6.0" />
@@ -163,20 +171,22 @@
                   <Font name="Segoe UI Semilight" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="studentOfname" layoutX="15.0" layoutY="145.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Name" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="145.0" />
-            <TextField fx:id="studentOfnumber" layoutX="15.0" layoutY="194.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Number" AnchorPane.leftAnchor="15.0" />
-            <TextField fx:id="studentOfid" layoutX="15.0" layoutY="96.0" prefHeight="36.0" prefWidth="320.0" promptText="Student ID" />
-            <TextField fx:id="studentOfemail" layoutX="15.0" layoutY="241.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Email Address" />
-            <Button layoutX="53.0" layoutY="324.0" mnemonicParsing="false" onAction="#DeleteAction" prefHeight="30.0" prefWidth="100.0" text="Delete">
+            <TextField fx:id="studentOfname" layoutX="32.0" layoutY="143.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Name" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="143.0" />
+            <TextField fx:id="studentOfnumber" layoutX="32.0" layoutY="194.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Number" AnchorPane.leftAnchor="32.0" />
+            <TextField fx:id="studentOfid" layoutX="32.0" layoutY="93.0" prefHeight="36.0" prefWidth="320.0" promptText="Student ID" />
+            <TextField fx:id="studentOfemail" layoutX="32.0" layoutY="243.0" prefHeight="36.0" prefWidth="320.0" promptText="Student Email Address" />
+            <Button layoutX="53.0" layoutY="398.0" mnemonicParsing="false" onAction="#DeleteAction" prefHeight="30.0" prefWidth="100.0" text="Delete">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="203.0" layoutY="324.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Save">
+            <Button layoutX="206.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="30.0" prefWidth="100.0" text="Save">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
+            <TextField fx:id="usernameStudent" layoutX="32.0" layoutY="292.0" prefHeight="36.0" prefWidth="320.0" promptText="Username" />
+            <TextField fx:id="passwordStudent" layoutX="32.0" layoutY="339.0" prefHeight="36.0" prefWidth="320.0" promptText="Password" />
          </children>
       </AnchorPane>
    </right>

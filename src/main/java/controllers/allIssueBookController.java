@@ -35,7 +35,8 @@ public class allIssueBookController {
     private TableColumn<Transaction, Date> borrowDateColumn; // Cột Ngày mượn
     @FXML
     private TableColumn<Transaction, Date> returnDateColumn; // Cột Ngày trả
-
+    @FXML
+    private TableColumn<Transaction, String> StudentID;
     @FXML
     private void initialize() {
         // Cài đặt các giá trị hiển thị cho các cột trong TableView
@@ -44,6 +45,7 @@ public class allIssueBookController {
         titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         authorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        StudentID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMssv()));
         quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
         borrowDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getBorrow_Date()));
         returnDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReturn_Date()));

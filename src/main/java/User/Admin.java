@@ -2,6 +2,8 @@ package User;
 
 import Document.Book;
 import Document.BookDAO;
+import Document.Transaction;
+import Document.TransactionDAO;
 import Review.ReviewDAO;
 
 import java.sql.Connection;
@@ -122,12 +124,11 @@ public class Admin extends User {
         }
     }
 
-    private boolean removeUser(String userName, String password) throws SQLException {
-        String sql = "DELETE FROM users WHERE username = ? AND password = ?";
+    private boolean removeUserById(int userId) throws SQLException {
+        String sql = "DELETE FROM users WHERE id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, userName);
-            statement.setString(2, password);
+            statement.setInt(1, userId);  // Sử dụng id để xóa người dùng
             int rowsDeleted = statement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {
@@ -135,9 +136,30 @@ public class Admin extends User {
         }
     }
 
+
     public void removeUser(User user) throws SQLException {
         try {
-            boolean check = removeUser(user.getUserName(), user.getPassword());
+            List<Transaction> transactions = TransactionDAO.getTransactionsByStudentId(String.valueOf(user.getId()));  // Lấy các giao dịch của sinh viên theo mã số sinh viên
+            if (!transactions.isEmpty()) {
+                StringBuilder borrowedBooksList = new StringBuilder("Sinh viên này còn đang mượn các sách sau:\n");
+                for (Transaction transaction : transactions) {
+                    borrowedBooksList.append("Sách: ").append(transaction.getTitle())
+                            .append(", Số lượng: ").append(transaction.getQuantity())
+                            .append("\n");
+                    Book book = BookDAO.getBookByISBN(transaction.getIsbn());
+
+                    // Cập nhật lại số lượng sách sau khi trả lại
+                    boolean updated = BookDAO.updateQuantity(book, book.getQuantity() + transaction.getQuantity());
+                    if (!updated) {
+                        this.showAlberDialog("Cập nhật sách không thành công: " + book.getTitle());
+                        return;
+                    }
+                    boolean transactionDeleted = TransactionDAO.deleteTransaction(transaction.getId());
+                }
+                // Hiển thị danh sách sách mượn trước khi xóa
+                this.showAlberDialog("Danh sách sách mượn:\n" + borrowedBooksList.toString());
+            }
+            boolean check = removeUserById(user.getId());
             if (check) {
                 this.showAlberDialog("Xóa thành công");
             } else {
@@ -260,6 +282,52 @@ public class Admin extends User {
 
     public void showErrorDialog(String title, String message) {
         super.showErrorDialog(title, message);
+    }
+
+    public boolean updateUser(User user) throws SQLException {
+        String sql = "UPDATE users SET fullName = ?, number = ?, email = ?, password = ?, id = ? WHERE username = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // Cập nhật các thông tin của người dùng
+            statement.setString(1, user.getFullName());
+            statement.setString(2, user.getNumber());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPassword());  // Cập nhật mật khẩu nếu cần
+            statement.setInt(5, user.getId());  // Cập nhật ID nếu cần thay đổi
+            statement.setString(6, user.getUserName());  // Sử dụng tên đăng nhập làm điều kiện WHERE
+
+            int rowsUpdated = statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw e;
+        }
+
+    }
+
+    public User getUserById(int studentId) throws SQLException {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, studentId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                String fullName = resultSet.getString("fullName");
+                String email = resultSet.getString("email");
+                String number = resultSet.getString("number");
+
+                User user = new User(id,username, password, role, fullName, email, number);
+                return user;
+            }
+        }
+        return null;  // Trả về null nếu không tìm thấy người dùng
     }
 
 }
