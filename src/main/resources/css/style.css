@@ -1,0 +1,62 @@
+/* styles.css */
+
+/* Thiết lập cho toàn bộ menu */
+#menuVBox {
+    -fx-background-color: #2E8B57; /* Màu nền của menu */
+    -fx-padding: 10px; /* Khoảng cách padding bên trong menu */
+    -fx-pref-width: 200px; /* Chiều rộng khi menu mở */
+    -fx-transition: all 0.3s e   ase; /* Hiệu ứng chuyển động */
+}
+
+/* Khi menu đóng */
+#menuVBox.collapsed {
+    -fx-pref-width: 50px; /* Chiều rộng khi menu đóng */
+}
+
+/* Style cho các Label khi menu đóng */
+#menuVBox.collapsed .menuLabel {
+    -fx-opacity: 0; /* Ẩn text khi đóng */
+    -fx-transition: opacity 0.3s ease; /* Hiệu ứng mờ dần */
+}
+
+/* Style cho Button (icon toggle menu) */
+#menuButton {
+    -fx-background-color: transparent; /* Nền trong suốt */
+    -fx-text-fill: white; /* Màu chữ/icon */
+    -fx-font-size: 18px; /* Kích thước icon */
+}
+
+/* Style cho các mục menu (Label và Icon) */
+.menuItem {
+    -fx-alignment: center-left;
+    -fx-padding: 5px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.hbox-hover:hover {
+    -fx-background-color: red;
+}
+.vbox-content:hover > * {
+    -fx-background-color: red;
+}
+
+
+.hbox-border {
+    -fx-border-color: #FFFFFF; /* Màu viền */
+    -fx-border-width: 15; /* Độ dày viền */
+    -fx-border-radius: 5; /* Bo tròn các góc (tuỳ chọn) */
+}
+
+.hbox-border {
+    -fx-background-color: #2E8B57; /* Màu nền */
+    -fx-background-radius: 15; /* Độ bo tròn nền */
+    -fx-padding: 10px; /* Khoảng cách padding bên trong HBox */
+}
+
+.transparent-label {
+    -fx-background-color: transparent; /* Thiết lập màu nền trong suốt */
+}
+
+
+

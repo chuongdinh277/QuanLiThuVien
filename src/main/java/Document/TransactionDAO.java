@@ -190,14 +190,13 @@ public class TransactionDAO {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, studentId);  // Gán mssv vào câu truy vấn
+            statement.setString(1, studentId);
 
             ResultSet resultSet = statement.executeQuery();
 
-            // Duyệt qua các kết quả và thêm vào danh sách giao dịch
             while (resultSet.next()) {
                 result.add(new Transaction(
-                        resultSet.getInt("transaction_id"),  // ID giao dịch
+                        resultSet.getInt("transaction_id"),
                         resultSet.getString("isbn"),
                         resultSet.getString("username"),
                         resultSet.getString("title"),

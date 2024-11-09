@@ -370,4 +370,39 @@ public class BookDAO {
         return book;
     }
 
+    public static boolean updateRemainingByISBN(String isbn, int additionalBooks) {
+        // Đầu tiên, lấy số lượng remaining_books hiện tại từ cơ sở dữ liệu theo ISBN
+        String selectSql = "SELECT remaining_book FROM books WHERE isbn = ?";
+
+        // Cập nhật số lượng remaining_books
+        String updateSql = "UPDATE books SET remaining_book = remaining_book + ? WHERE isbn = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+             PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+
+            // Lấy số lượng remaining_books hiện tại theo ISBN
+            selectStmt.setString(1, isbn);
+            ResultSet rs = selectStmt.executeQuery();
+            Book book = BookDAO.getBookByISBN(isbn);
+            if (rs.next()) {
+                int currentRemainingBooks = rs.getInt("remaining_book");
+
+                updateStmt.setInt(1, additionalBooks);  // Cộng thêm số sách vào remaining_books
+                updateStmt.setString(2, isbn);  // ISBN của sách
+
+                int rowsAffected = updateStmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    // Cập nhật lại giá trị quantity và remaining_book trong đối tượng Book
+                   // book.setQuantity(additionalQuantity);
+                    book.setRemainingBook(book.getRemainingBook() + additionalBooks);
+                    return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating remaining books: " + e.getMessage());
+        }
+        return false;
+    }
 }

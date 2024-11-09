@@ -119,4 +119,15 @@ public class MenuController_Admin {
             System.out.println("Error loading home page: " + e.getMessage());
         }
     }
+    @FXML
+    private void loadReturnBook() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/returnBook.fxml"));
+            Parent root = loader.load();
+            borderPane_admin.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page: " + e.getMessage());
+        }
+    }
 }

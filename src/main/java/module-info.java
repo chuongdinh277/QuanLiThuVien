@@ -14,6 +14,7 @@ module org.example.src {
 
     opens Document;
     exports Document;
-
+    exports cache;
+    opens cache;
 
 }

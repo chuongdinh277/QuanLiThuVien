@@ -38,7 +38,7 @@ public class addBook {
     private TextField bookSection;
     @FXML
     private TextField ISBNtextField;
-
+    private String description;
     private homeController_Admin homeController;
 
     public void setHomeController(homeController_Admin homeController) {
@@ -51,25 +51,33 @@ public class addBook {
             String author = authorSearch.getText();
 
             // Tìm kiếm sách qua API
-            String bookInfo = GoogleBooksAPI.searchBookByTitleAndAuthor(title, author);
+           try {
+               String bookInfo = GoogleBooksAPI.searchBookByTitleAndAuthor(title, author);
 
-            if (bookInfo != null) {
-                // Phân tích thông tin sách từ API và điền vào các trường trong form
-                Book book = BookParser.parseBookInfo(bookInfo);
 
-                titleSearch_1.setText(book.getTitle());
-                authorSearch_1.setText(book.getAuthor());
-                categorySearch_1.setText(book.getCategory());
-                ISBNtextField.setText(book.getISBN());
-                System.out.println("dương xấu trai");
-                System.out.println(book.getDescription());
-                if (book.getImagePath() != null) {
-                    Image image = new Image(book.getImagePath());
-                    showImage.setImage(image);
-                }
-            } else {
-                showErrorDialog("No book found for the given title and author.");
-            }
+               if (bookInfo != null) {
+                   // Phân tích thông tin sách từ API và điền vào các trường trong form
+                   Book book = BookParser.parseBookInfo(bookInfo);
+
+                   titleSearch_1.setText(book.getTitle());
+                   authorSearch_1.setText(book.getAuthor());
+                   categorySearch_1.setText(book.getCategory());
+                   ISBNtextField.setText(book.getISBN());
+                   if (book.getDescription() != null) description = book.getDescription();
+                   else description = "No description available";
+                   System.out.println("dương xấu trai");
+                   System.out.println(book.getDescription());
+                   if (book.getImagePath() != null) {
+                       Image image = new Image(book.getImagePath());
+                       showImage.setImage(image);
+                   }
+               } else {
+                   showErrorDialog("No book found for the given title and author.");
+               }
+           } catch (Exception ex) {
+               System.out.println("lỗi");
+               throw new RuntimeException(ex);
+           }
         });
     }
 
@@ -97,7 +105,7 @@ public class addBook {
             String imagePath = showImage.getImage() != null ? showImage.getImage().getUrl().toString() : null;
 
             // Tạo đối tượng sách và thêm vào cơ sở dữ liệu
-            Book book = new Book(title, author, category, quantity_Book, quantity_Book, "description", publisher, section, imagePath, ISBN);
+            Book book = new Book(title, author, category, quantity_Book, quantity_Book, description, publisher, section, imagePath, ISBN);
 
             try {
                 BookDAO.addBook(book); // Thêm sách vào cơ sở dữ liệu
