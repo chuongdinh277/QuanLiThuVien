@@ -90,7 +90,7 @@ public class borrowBook {
         ObservableList<Book> bookList = FXCollections.observableArrayList();
 
         try {
-            Member member = new Member(currentUser.getID(),currentUser.getUsername(), currentUser.getRole());
+            Member member = new Member(currentUser.getId(),currentUser.getUsername(), currentUser.getRole());
             List<Book> bookLists = member.viewAllBooks();
             if (bookLists != null) {
                 //bookList.addAll(bookLists);

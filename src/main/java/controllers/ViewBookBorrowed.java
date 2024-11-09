@@ -62,32 +62,38 @@ public class ViewBookBorrowed {
         isLoading = true;
         executorService.submit(() -> {
             try {
-                     //int id = User.getStudentIdByusername(currentUser.getUsername());
+                try {
+                    int id = User.getStudentIdByusername(currentUser.getUsername());
+                    List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));
 
-                List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(currentUser.getUsername());
+                    if (!borrowedBooks.isEmpty()) {
+                        int row = borrowedBookGrid.getChildren().size() / 6;
+                        int col = borrowedBookGrid.getChildren().size() % 6;
 
-                if (borrowedBooks != null && !borrowedBooks.isEmpty()) {
-                    int row = borrowedBookGrid.getChildren().size() / 6;
-                    int col = borrowedBookGrid.getChildren().size() % 6;
-
-                    for (Book book : borrowedBooks) {
-                        AnchorPane card = createCard(book);
-                        if (card != null) {
-                            int finalRow = row;
-                            int finalCol = col;
-                            javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
+                        for (Book book : borrowedBooks) {
+                            AnchorPane card = createCard(book);
+                            if (card != null) {
+                                int finalRow = row;
+                                int finalCol = col;
+                                javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
+                            }
+                            col++;
+                            if (col >= 6) {
+                                col = 0;
+                                row++;
+                            }
                         }
-                        col++;
-                        if (col >= 6) {
-                            col = 0;
-                            row++;
-                        }
+                    } else {
+                        System.out.println("Không tìm thấy sách nào đã mượn.");
+                        isAllBooksLoaded = true; // Đánh dấu rằng đã tải hết sách
                     }
-                } else {
-                    System.out.println("Không tìm thấy sách nào đã mượn.");
-                    isAllBooksLoaded = true; // Đánh dấu rằng đã tải hết sách
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("L��i khi lấy danh sách sách đã mượn");
                 }
-            } finally {
+
+            }
+            finally {
                 isLoading = false;
             }
         });

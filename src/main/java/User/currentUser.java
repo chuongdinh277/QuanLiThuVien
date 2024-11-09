@@ -1,10 +1,30 @@
 package User;
 
 public class currentUser {
+    private static int id;
     private static String username;
     private static String role;
     private static String password;
-    private static int id;
+    private static String email;
+    private static String fullName;
+    private static String number;
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static String getFullName() {
+        return fullName;
+    }
+
+    public static String getNumber() {
+        return number;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
     public static String getUsername() {
         return username;
     }
@@ -26,12 +46,23 @@ public class currentUser {
     public static void setPassword(String password) {
         currentUser.password = password;
     }
-    public static int getID() {
-        return id;
-    }
-    public static void setID(int id) {
+
+    public static void setId(int id) {
         currentUser.id = id;
     }
+
+    public static void setEmail(String email) {
+        currentUser.email = email;
+    }
+
+    public static void setFullName(String fullName) {
+        currentUser.fullName = fullName;
+    }
+
+    public static void setNumber(String number) {
+        currentUser.number = number;
+    }
+
     public static void logout () {
         currentUser.setUsername(null);
         currentUser.setRole(null);

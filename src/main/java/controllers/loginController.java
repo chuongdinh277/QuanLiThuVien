@@ -154,7 +154,7 @@ public class loginController implements Initializable {
                     int mssv = User.getStudentIdByusername(username);
                     currentUser.setUsername(username);
                     currentUser.setRole(role);
-                    currentUser.setID(mssv);
+                    currentUser.setId(mssv);
                     // Chuyển đến trang Member
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();

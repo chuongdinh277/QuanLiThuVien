@@ -2,6 +2,7 @@ package controllers;
 
 import Document.Book;
 import User.Member;
+import User.User;
 import User.currentUser;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -90,7 +91,8 @@ public class ViewBookInLibrary {
         isLoading = true;
         executorService.submit(() -> {
             try {
-                Member member = new Member(currentUser.getUsername(), currentUser.getRole());
+                int studentID = User.getStudentIdByusername(currentUser.getUsername());
+                Member member = new Member(studentID,currentUser.getUsername(), currentUser.getRole());
                 List<Book> bookList = member.viewBooksPaginated(booksLoaded, PAGE_SIZE);
                 if (bookList != null && !bookList.isEmpty()) {
                     int row = booksLoaded / 6;

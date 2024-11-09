@@ -1,6 +1,7 @@
 package controllers;
 
 import Document.Book;
+import Document.BookDAO;
 import User.currentUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,28 +69,34 @@ public class ViewBooksSearchResult {
         isLoading = true;
         executorService.submit(() -> {
             try {
-                List<Book> searchResults = TransactionDAO.getBookByTitle(searchQuery); // Fetch search results
+                //List<Book>
+                try {
+                    List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Fetch search results
 
-                if (searchResults != null && !searchResults.isEmpty()) {
-                    int row = searchResultGrid.getChildren().size() / 5; // Giả sử có 5 cột
-                    int col = searchResultGrid.getChildren().size() % 5;
 
-                    for (Book book : searchResults) {
-                        AnchorPane card = createCard(book);
-                        if (card != null) {
-                            int finalRow = row;
-                            int finalCol = col;
-                            javafx.application.Platform.runLater(() -> searchResultGrid.add(card, finalCol, finalRow));
+                    if (searchResults != null && !searchResults.isEmpty()) {
+                        int row = searchResultGrid.getChildren().size() / 5; // Giả sử có 5 cột
+                        int col = searchResultGrid.getChildren().size() % 5;
+
+                        for (Book book : searchResults) {
+                            AnchorPane card = createCard(book);
+                            if (card != null) {
+                                int finalRow = row;
+                                int finalCol = col;
+                                javafx.application.Platform.runLater(() -> searchResultGrid.add(card, finalCol, finalRow));
+                            }
+
+                            col++;
+                            if (col >= 5) { // Set the number of columns you want (5 in this case)
+                                col = 0;
+                                row++;
+                            }
                         }
-
-                        col++;
-                        if (col >= 5) { // Set the number of columns you want (5 in this case)
-                            col = 0;
-                            row++;
-                        }
+                    } else {
+                        System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
                     }
-                } else {
-                    System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             } finally {
                 isLoading = false;

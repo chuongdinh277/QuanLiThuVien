@@ -65,7 +65,7 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/logout.png" />
+                                    <Image url="@../image/exit.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="logout" mnemonicParsing="false" onAction="#logout_Button" prefHeight="38.0" prefWidth="106.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Đăng xuất" />

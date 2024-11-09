@@ -100,51 +100,5 @@ public class CardController {
         // Logic để xem chi tiết sách
     }
 
-    @FXML
-    private void onBorrowBook(ActionEvent event) {
-        if (currentBook != null) {
-            int userId = currentUser.getId(); // Giả sử bạn có phương thức lấy userId từ currentUser
-            String userName = currentUser.getUsername(); // Lấy tên người dùng từ currentUser
 
-            try {
-                User user = new User(userId, userName); // Tạo đối tượng User mới
-                boolean isBorrowed = TransactionDAO.borrowBook(user, currentBook, 1, 100);
-
-                if (isBorrowed) {
-                    System.out.println("Đã mượn sách: " + currentBook.getTitle());
-                } else {
-                    System.out.println("Không thể mượn sách: " + currentBook.getTitle() + " (có thể đang được mượn hoặc số lượng không đủ)");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi mượn sách: " + currentBook.getTitle());
-            }
-        } else {
-            System.out.println("Chưa chọn sách nào để mượn.");
-        }
-    }
-
-    @FXML
-    public void onReturnBook(ActionEvent event) {
-        if (currentBook != null) {
-            int userId = currentUser.getId(); // Assume you have a method to get userId from currentUser
-            String userName = currentUser.getUsername(); // Get the username from currentUser
-
-            try {
-                User user = new User(userId, userName); // Create a new User object
-                boolean isReturned = TransactionDAO.returnBook(user, currentBook);
-
-                if (isReturned) {
-                    System.out.println("Returned book: " + currentBook.getTitle());
-                } else {
-                    System.out.println("Unable to return book: " + currentBook.getTitle() + " (it may not be borrowed or already returned)");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Error returning book: " + currentBook.getTitle());
-            }
-        } else {
-            System.out.println("No book selected to return.");
-        }
-    }
 }

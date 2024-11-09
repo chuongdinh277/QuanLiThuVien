@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
+import javax.security.auth.callback.LanguageCallback;
 import java.sql.SQLException;
 
 public class UserSeeBookDetails {
@@ -41,20 +44,47 @@ public class UserSeeBookDetails {
     @FXML
     private Button viewCommentsButton;
 
-    @FXML
-    private Label bookPublisherLabel;
 
     @FXML
     private Label bookDescriptionLabel;
 
     @FXML
     private Book currentBook;
+    @FXML
+    private Label bookSectionLabel;
+    @FXML
+    private Label ISBNLabel;
+    @FXML
+    private Button viewBook;
+    @FXML
+    private Button commentBook;
+    @FXML
+    private Pane viewBookPane;
+    @FXML
+    private Pane commentPane;
+    @FXML
+    private TextField quantityLabel;
+    @FXML
+    private TextField numberOfday;
+    @FXML
+    private void showViewBook(ActionEvent event) {
+        viewBookPane.setVisible(true);
+        commentPane.setVisible(false);
+    }
+    @FXML
+    private void showCommentBook(ActionEvent event) {
+        viewBookPane.setVisible(false);
+        commentPane.setVisible(true);
+    }
 
     public void setBook(Book book) {
         this.currentBook = book;
         if (book != null) {
             bookTitleLabel.setText(book.getTitle());
             bookAuthorLabel.setText(book.getAuthor());
+            ISBNLabel.setText(book.getISBN());
+            bookSectionLabel.setText(book.getSection());
+
             System.out.println("duong1");
             if (book.getDescription() != null) {
                 System.out.println("duong2");
@@ -71,10 +101,11 @@ public class UserSeeBookDetails {
         if (currentBook != null) {
             int userId = currentUser.getId(); // Giả sử bạn có phương thức lấy userId từ currentUser
             String userName = currentUser.getUsername(); // Lấy tên người dùng từ currentUser
-
+            int quantity = Integer.parseInt(quantityLabel.getText());
+            int numberofdays = Integer.parseInt(numberOfday.getText());
             try {
-                User user = new User(userId, userName); // Tạo đối tượng User mới
-                boolean isBorrowed = TransactionDAO.borrowBook(user, currentBook, 1, 100);
+                User user = User.loadStudentDetailsByID(String.valueOf(userId)); // Tạo đối tượng User mới
+                boolean isBorrowed = TransactionDAO.borrowBook(user, currentBook, quantity, numberofdays);
 
                 if (isBorrowed) {
                     System.out.println("Đã mượn sách: " + currentBook.getTitle());

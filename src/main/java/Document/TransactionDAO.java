@@ -156,19 +156,19 @@ public class TransactionDAO {
         return result;
     }
 
-    public static List<Book> getBorrowedBooks(String username) {
+    public static List<Book> getBorrowedBooks(String mssv) {
         List<Book> result = new ArrayList<>();
-        String sql = "SELECT * FROM transactions WHERE username =? AND return_date IS NULL";
+        String sql = "SELECT * FROM transactions WHERE mssv = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, username);
+            statement.setString(1, mssv);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Book book = new Book(resultSet.getString("title"),
                         resultSet.getString("author"),
                         resultSet.getString("category"),
                         resultSet.getInt("quantity"),
-                        resultSet.getInt("remaining_book"),
+                        resultSet.getInt("quantity"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
                         resultSet.getString("section"),

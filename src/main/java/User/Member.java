@@ -223,6 +223,37 @@
 
 
 
+        public List<Book> viewBooksPaginated(int offset, int limit) throws SQLException {
+            List<Book> books = new ArrayList<>();
+
+            // Kết nối đến cơ sở dữ liệu và thực hiện câu lệnh SQL
+            String query = "SELECT * FROM books LIMIT ? OFFSET ?";
+            try (Connection connection = DatabaseConnection.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query)) {
+
+                statement.setInt(1, limit); // Số lượng sách trên mỗi trang
+                statement.setInt(2, offset); // Số lượng sách đã được tải (tính từ đâu)
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Book book = new Book(resultSet.getString("title"),
+                                resultSet.getString("author"),
+                                resultSet.getString("category"),
+                                resultSet.getInt("quantity"),
+                                resultSet.getInt("remaining_book"),
+                                resultSet.getString("description"),
+                                resultSet.getString("publisher"),
+                                resultSet.getString("section"),
+                                resultSet.getString("imagePath"),
+                                resultSet.getString("ISBN"));
+                        // Cập nhật các thuộc tính khác nếu cần
+
+                        books.add(book);
+                    }
+                }
+            }
+            return books;
+        }
 
 
         // lấy sách có rating.
