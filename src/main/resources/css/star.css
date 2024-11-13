@@ -1,0 +1,11 @@
+.star {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 35px; /* Adjust the star size */
+    -fx-text-fill: #C0C0C0; /* Gray color for unselected stars */
+}
+
+.star.selected {
+   -fx-fill: #FFD700; /* Golden color for selected stars */
+   -fx-text-weight: bold;
+}

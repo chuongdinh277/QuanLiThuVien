@@ -161,6 +161,7 @@ public class loginController implements Initializable {
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root, 1300, 800));
                     stage.show();
+                    stage.centerOnScreen();
                 } else {
                     // Thông báo lỗi nếu không phải Admin hoặc Member
                     showAlert("Error", "Đăng nhập thất bại: " + role);

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,18 +13,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="835.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserSeeBookDetails">
+   <stylesheets>
+      <URL value="file:/D:/QuanLiThuVien/src/main/resources/css/star.css" />
+   </stylesheets>
+
    <children>
       <Button fx:id="bookInfoButton" alignment="TOP_LEFT" layoutX="69.0" layoutY="29.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="300.0" style="-fx-background-color: #F4F4F4;" text="Thông tin sách" textFill="#336600">
          <font>
             <Font size="33.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="53.0" layoutY="112.0" prefHeight="419.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 40;">
+      <AnchorPane layoutX="61.0" layoutY="113.0" prefHeight="419.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 40;">
          <children>
-            <StackPane layoutX="70.0" layoutY="37.0" prefHeight="226.0" prefWidth="162.0" style="-fx-background-color: #33FFFF;">
+            <StackPane layoutX="70.0" layoutY="37.0" prefHeight="220.0" prefWidth="160.0" style="-fx-background-color: #33FFFF;">
                <children>
                   <ImageView fx:id="bookImage" fitHeight="241.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,7 +38,51 @@
                   </ImageView>
                </children>
             </StackPane>
-            <Button fx:id="buttonBorrowBook" layoutX="102.0" layoutY="312.0" mnemonicParsing="false" onAction="#onBorrowBook" prefHeight="35.0" prefWidth="112.0" text="Mượn sách" />
+            <Button fx:id="buttonBorrowBook" layoutX="102.0" layoutY="328.0" mnemonicParsing="false" onAction="#onBorrowBook" prefHeight="35.0" prefWidth="112.0" text="Mượn sách" />
+            <HBox layoutX="80.0" layoutY="273.0" prefHeight="36.0" prefWidth="149.0" spacing="5">
+               <children>
+                  <ImageView fx:id="starbook1" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/starv.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="starbook2" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/starv.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="starbook3" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/starv.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="starbook4" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/starv.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="starbook5" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/starv.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="412.0" layoutY="63.0" prefHeight="731.0" prefWidth="571.0" style="-fx-background-color: white; -fx-background-radius: 40;">
@@ -63,32 +116,94 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ISBNLabel" layoutX="123.0" layoutY="54.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label fx:id="ISBNLabel" layoutX="134.0" layoutY="54.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
                         <Label alignment="CENTER_RIGHT" layoutX="29.0" layoutY="224.0" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Section :">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="bookTitleLabel" layoutX="124.0" layoutY="112.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label fx:id="bookAuthorLabel" layoutX="123.0" layoutY="167.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label fx:id="bookSectionLabel" layoutX="123.0" layoutY="220.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label fx:id="bookDescriptionLabel" layoutX="124.0" layoutY="284.0" prefHeight="175.0" prefWidth="344.0" style="-fx-background-color: white;" wrapText="true" />
-                        <Pane fx:id="commentPane" prefHeight="580.0" prefWidth="520.0">
+                        <Label fx:id="bookTitleLabel" layoutX="134.0" layoutY="112.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label fx:id="bookAuthorLabel" layoutX="134.0" layoutY="167.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label fx:id="bookSectionLabel" layoutX="134.0" layoutY="220.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label alignment="CENTER_RIGHT" layoutY="530.0" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Number Of Days :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="493.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Quantity :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="numberOfday" layoutX="168.0" layoutY="531.0" />
+                        <TextField fx:id="quantityLabel" layoutX="168.0" layoutY="494.0" />
+                        <ScrollPane layoutX="134.0" layoutY="280.0" prefHeight="200.0" prefWidth="344.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="344.0">
+                                 <children>
+                                    <Label fx:id="bookDescriptionLabel" layoutX="-14.0" layoutY="-7.0" prefHeight="300.0" prefWidth="344.0" style="-fx-background-color: white;" wrapText="true" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="commentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0db8a8; -fx-background-radius: 10;">
+                     <children>
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="543.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                            <children>
-                              <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="526.0" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Number Of Days :">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER_RIGHT" layoutX="46.0" layoutY="480.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Quantity :">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="quantityLabel" layoutX="174.0" layoutY="481.0" />
-                              <TextField fx:id="numberOfday" layoutX="174.0" layoutY="527.0" />
+                              <ScrollPane layoutX="12.0" layoutY="10.0" prefHeight="364.0" prefWidth="478.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                 <content>
+                                    <VBox fx:id="commentVbox" prefHeight="600.0" prefWidth="480.0" />
+                                 </content>
+                              </ScrollPane>
+                              <HBox layoutX="115.0" layoutY="451.0" prefHeight="30.0" prefWidth="182.0" spacing="5">
+                                 <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets top="10.0" />
+                                    </HBox.margin>
+                                 </ImageView>
+                                 <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets top="10.0" />
+                                    </HBox.margin>
+                                 </ImageView>
+                                 <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets top="10.0" />
+                                    </HBox.margin>
+                                 </ImageView>
+                                 <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets top="10.0" />
+                                    </HBox.margin>
+                                 </ImageView>
+                                 <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets top="10.0" />
+                                    </HBox.margin>
+                                 </ImageView>
+                              </HBox>
+                              <Label layoutX="14.0" layoutY="407.0" prefHeight="30.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Evaluate :" />
+                              <Button fx:id="commentButton" layoutX="321.0" layoutY="459.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Comment" />
+                              <TextArea fx:id="commentTextArea" layoutX="115.0" layoutY="397.0" prefHeight="54.0" prefWidth="362.0" />
                            </children>
-                        </Pane>
+                        </AnchorPane>
                      </children>
                   </Pane>
                </children>
