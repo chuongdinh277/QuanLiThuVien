@@ -89,6 +89,8 @@ public class bookDetailCotroller {
     private TextField sectionTextField;
     private int selectedRating = 0;
     @FXML
+    private Button commentButton;
+    @FXML
     private void showViewBook(ActionEvent event) {
         viewBookPane.setVisible(true);
         commentPane.setVisible(false);
@@ -101,6 +103,10 @@ public class bookDetailCotroller {
         loadReview();
         System.out.println("hello");
 
+    }
+    @FXML
+    private void initialize() {
+        commentButton.setOnAction(even -> saveReview());
     }
     @FXML
     private void handleClick(MouseEvent event) {
