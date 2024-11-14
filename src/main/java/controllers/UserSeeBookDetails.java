@@ -239,7 +239,8 @@ public class UserSeeBookDetails {
             i++;
         }
         int j = roundedRating + 1;
-        if (j <= 5) {
+
+        if (j <= 5 && (double )(roundedRating) < averageRating) {
             if (i == 1) starbook1.setImage(unselectedStar1);
             if (i == 2) starbook2.setImage(unselectedStar1);
             if (i == 3) starbook3.setImage(unselectedStar1);
