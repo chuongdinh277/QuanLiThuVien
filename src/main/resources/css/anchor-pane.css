@@ -1,0 +1,12 @@
+.anchor-pane {
+    -fx-background-color: linear-gradient(to right, #35a6b8, #056f80); /* Chuyển màu từ xanh nước biển sang xanh dương */
+}
+.anchor-pane1 {
+ -fx-background-color: linear-gradient(to right, #e6f2ec, #89f0ae);
+}
+.anchor-pane2 {
+ -fx-background-color: linear-gradient(to right, #f5f7e1, #e7f27c);
+}
+.anchor-pane3 {
+ -fx-background-color: linear-gradient(to right, #eddcf7, #d493fa);
+}

@@ -9,10 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -96,11 +93,26 @@ public class borrowBook {
                 //bookList.addAll(bookLists);
                 bookLibraryList.setItems(bookList); // Gán danh sách sách vào bảng
             } else {
-                System.out.println("Không tìm thấy sách nào");
+                showAlbertDialog("Không tìm thấy sách nào");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Lỗi không tìm thấy sách");
+            showErrorDialog("Lỗi không tìm thấy sách");
         }
     }
+
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

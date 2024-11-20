@@ -1,6 +1,7 @@
 package controllers;
 
-import Document.Book; // Import lớp Book
+import Document.BookDAO;
+import Document.Book;
 import User.Admin;
 import User.currentUser;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,8 +24,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
-
+import java.util.Map;
+import javafx.scene.chart.BarChart;
 //import static controllers.MenuController_Admin.borderPane_admin;
 
 
@@ -54,7 +59,8 @@ public class homeController_Admin {
     private TableColumn<Book, String> ISBNbook;
     @FXML
     private Button addBook_Admin;
-
+    @FXML
+    private BarChart<String, Number> categoryBarChart;
     private static MenuController_Admin menuController;
     public void setMenuController(MenuController_Admin menuController) {
         this.menuController = menuController;
@@ -85,6 +91,7 @@ public class homeController_Admin {
                 }
             }
         });
+
     }
     public void loadBooks() {
         ObservableList<Book> booksList = FXCollections.observableArrayList();
@@ -96,18 +103,17 @@ public class homeController_Admin {
                 booksList.addAll(bookList);
             }
             else {
-                System.out.println("không có sách trong cơ sở dữ liệu");
+                showAlbertDialog("không có sách trong cơ sở dữ liệu");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi tải sách: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải sách: " + e.getMessage());
         }
         bookTable.setItems(booksList); // Đặt dữ liệu cho TableView
     }
 
     @FXML
     private void addBook(){
-    // Xử lý hành đ��ng khi nhấn nút thêm sách
+        // Xử lý hành đ��ng khi nhấn nút thêm sách
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/timsach.fxml"));
             Parent root = fxmlLoader.load();
@@ -121,7 +127,7 @@ public class homeController_Admin {
             stage.initModality(Modality.APPLICATION_MODAL); // Để cửa sổ này là modal (khóa cửa sổ chính)
             stage.showAndWait(); // Đợi cho đến khi cửa sổ được đóng
         } catch (IOException e) {
-            e.printStackTrace();
+            showErrorDialog("Lỗi khi thêm sách " + e.getMessage());
         }
     }
 
@@ -129,18 +135,32 @@ public class homeController_Admin {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/bookDetails.fxml"));
             Parent bookDetailsRoot = fxmlLoader.load();
-           bookDetailCotroller controller = fxmlLoader.getController();
-           controller.setMenuController(menuController);
-           controller.setBook(book);
-            //bookDetailCotroller controller = fxmlLoader.getController();
-            //controller.setBook(book);
-            //BorderPane borderPane = menuController.getBorderPane();
-            //borderPane.setCenter(bookDetailsRoot);
-            borderPane_book.setCenter(bookDetailsRoot);
+
+            bookDetailCotroller controller = fxmlLoader.getController(); // Chú ý chữ hoa
+            controller.setMenuController(menuController); // Đảm bảo phương thức này tồn tại
+            controller.setBook(book); // Đảm bảo phương thức này tồn tại
+
+            borderPane_book.setCenter(bookDetailsRoot); // Kiểm tra null trước khi sử dụng
         } catch (IOException e) {
-
+            e.printStackTrace(); // In ra lỗi chi tiết để kiểm tra
+            showErrorDialog("Lỗi khi hiển thị sách: " + e.getMessage());
         }
+    }
 
+
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

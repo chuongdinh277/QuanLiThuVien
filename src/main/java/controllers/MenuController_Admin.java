@@ -38,7 +38,7 @@ public class MenuController_Admin {
         // Hiển thị tên người dùng và vai trò
        // name.setText(currentUser.getUsername());
        // role.setText(currentUser.getRole());
-
+        loadDashboard();
 
     }
 
@@ -123,6 +123,18 @@ public class MenuController_Admin {
     private void loadReturnBook() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/returnBook.fxml"));
+            Parent root = loader.load();
+            borderPane_admin.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void loadDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/dashboard.fxml"));
             Parent root = loader.load();
             borderPane_admin.setCenter(root);
         } catch (IOException e) {

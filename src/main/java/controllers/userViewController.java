@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -140,10 +141,10 @@ public class userViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/viewBookInLibrary.fxml"));
             Parent root = loader.load();
             borderPane_User.setCenter(root);
-            System.out.println("Tải thành công");
+            showAlbertDialog("Tải thành công");
         } catch (Exception e) {
-            System.err.println("Lỗi khi tải FXML: " + e.getMessage());
-            e.printStackTrace(); // In chi tiết lỗi ra console
+            showErrorDialog("Lỗi khi tải FXML: " + e.getMessage());
+             // In chi tiết lỗi ra console
         }
     }
 
@@ -153,10 +154,10 @@ public class userViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/viewBookBorrowed.fxml"));
             Parent root = loader.load();
             borderPane_User.setCenter(root);
-            System.out.println("Tải thành công");
+            showAlbertDialog("Tải thành công");
         } catch (Exception e) {
-            System.err.println("Lỗi khi tải FXML: " + e.getMessage());
-            e.printStackTrace(); // In chi tiết lỗi ra console
+            showErrorDialog("Lỗi khi tải FXML: " + e.getMessage());
+             // In chi tiết lỗi ra console
         }
 
     }
@@ -168,8 +169,7 @@ public class userViewController {
             borderPane_User.setCenter(root);
             System.out.println("Tải thành công");
         } catch (Exception e) {
-            System.err.println("Lỗi khi tải FXML: " + e.getMessage());
-            e.printStackTrace(); // In chi tiết l��i ra console
+            showErrorDialog("Lỗi khi tải FXML: " + e.getMessage());
         }
     }
 
@@ -200,11 +200,25 @@ public class userViewController {
 
             // Cập nhật BorderPane với giao diện tìm kiếm
             borderPane_User.setCenter(root);
-            System.out.println("Tải thành công");
+            showAlbertDialog("Tải thành công");
         } catch (Exception e) {
-            System.err.println("Lỗi khi tải FXML: " + e.getMessage());
-            e.printStackTrace(); // In chi tiết lỗi ra console
+            showErrorDialog("Lỗi khi tải FXML: " + e.getMessage());
         }
+    }
+
+    private void showErrorDialog( String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

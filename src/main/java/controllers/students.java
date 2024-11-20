@@ -72,11 +72,10 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
             if (studentList != null) {
                 studentsList.addAll(studentList);
             } else {
-                System.out.println("Không có sinh viên trong cơ sở dữ liệu");
+                showAlbertDialog("Không có sinh viên trong cơ sở dữ liệu");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi tải sinh viên: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải sinh viên: " + e.getMessage());
         }
         studentTable.setItems(studentsList); // Đặt dữ liệu cho TableView
     }
@@ -133,17 +132,15 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
             try {
                 Admin admin = new Admin(currentUser.getUsername(), currentUser.getPassword());
                 boolean success = admin.updateUser(selectedStudent);  // Cập nhật thông tin người dùng
-                System.out.println("cập nhật thành co");
                 if (success) {
                     // Cập nhật lại dữ liệu trong TableView
                     studentTable.refresh();
-                    System.out.println("Cập nhật thành công");
+                    showAlbertDialog("Cập nhật thành công");
                 } else {
-                    System.out.println("Cập nhật thất bại");
+                    showAlbertDialog("Cập nhật thất bại");
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi cập nhật thông tin");
+                showErrorDialog("Lỗi khi cập nhật thông tin : " + e.getMessage());
             }
         }
     }
@@ -157,9 +154,23 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
                     User student = admin.getUserById(studentId);
                     showStudentDetails(student);
                 } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("Lỗi khi tìm kiếm sinh viên");
+                    showErrorDialog("Lỗi khi tìm kiếm sinh viên : " + e.getMessage());
                 }
             }
+    }
+
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

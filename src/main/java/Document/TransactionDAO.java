@@ -226,5 +226,36 @@ public class TransactionDAO {
         }
     }
 
+    public static List<Transaction> getTransactionsByISBN(String isbn) throws SQLException {
+        List<Transaction> result = new ArrayList<>();
 
+        String sql = "SELECT * FROM transactions WHERE isbn = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, isbn);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(new Transaction(
+                        resultSet.getInt("transaction_id"),
+                        resultSet.getString("isbn"),
+                        resultSet.getString("username"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("imagePath"),
+                        resultSet.getDate("borrow_date"),
+                        resultSet.getDate("return_date"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getString("mssv")
+                ));
+            }
+        } catch (SQLException e) {
+            throw e;  // Quản lý ngoại lệ
+        }
+
+        return result;  // Trả về danh sách giao dịch của sinh viên
+    }
 }

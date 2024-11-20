@@ -5,6 +5,7 @@ import Document.BookDAO;
 import Document.TransactionDAO;
 import User.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -60,11 +61,10 @@ public class issueBookController {
                     if (book.getRemainingBook() > 0) AvailableTextField.setText("Available");
                     else AvailableTextField.setText("Not Available");
                 } else {
-                    System.out.println("Không tìm thấy sách với ISBN này.");
+                    showAlbertDialog("Không tìm thấy sách với ISBN này.");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi tìm kiếm sách: " + e.getMessage());
+                showErrorDialog("Error", "Lỗi khi tìm kiếm sách: " + e.getMessage());
             }
         }
     }
@@ -80,7 +80,7 @@ public class issueBookController {
                    studentNumberTextfield.setText(student.getNumber());
                    studentEmailTextfield.setText(student.getEmail());
                } else {
-                   System.out.println("Không tìm thấy sinh viên với ID này.");
+                   showAlbertDialog("Không tìm thấy sinh viên với ID này.");
                }
            } catch (SQLException e) {
                throw new RuntimeException(e);
@@ -104,23 +104,36 @@ public class issueBookController {
                         // Gọi phương thức borrowBook để mượn sách
                         boolean success = TransactionDAO.borrowBook(user, book, quantity,numberofdays);
                         if (success) {
-                            System.out.println("Sách đã được mượn thành công.");
+                            showAlbertDialog("Sách đã được mượn thành công.");
                         } else {
-                            System.out.println("Không thể mượn sách, sách có thể đã được mượn trước đó.");
+                            showAlbertDialog("Không thể mượn sách, sách có thể đã được mượn trước đó.");
                         }
                     } else {
-                        System.out.println("Không tìm thấy sinh viên với ID này.");
+                        showAlbertDialog("Không tìm thấy sinh viên với ID này.");
                     }
                 } else {
-                    System.out.println("Sách không có sẵn để mượn.");
+                    showAlbertDialog("Sách không có sẵn để mượn.");
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi thực hiện mượn sách: " + e.getMessage());
+                showErrorDialog("Error","Lỗi khi thực hiện mượn sách: " + e.getMessage());
             }
         } else {
-            System.out.println("Thông tin sách hoặc sinh viên chưa đầy đủ.");
+            showAlbertDialog("Thông tin sách hoặc sinh viên chưa đầy đủ.");
         }
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

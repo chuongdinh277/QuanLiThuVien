@@ -108,7 +108,6 @@ public class returnBookController {
         try {
             Book book = BookDAO.getBookByISBN(transaction.getIsbn());
             int quantity = transaction.getQuantity();
-            System.out.println(quantity);
             boolean success = TransactionDAO.deleteTransaction(transaction.getId());
             boolean check = BookDAO.updateRemainingByISBN(book.getISBN(), quantity);
 
@@ -132,7 +131,7 @@ public class returnBookController {
                     studentNumberTextfield.setText(student.getNumber());
                     loadTransactions(studentID);
                 } else {
-                    System.out.println("Student not found.");
+                    showAlbertDialog("Student not found.");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -145,7 +144,22 @@ public class returnBookController {
             List<Transaction> transactions = TransactionDAO.getTransactionsByStudentId(studentID);
             transactionList.setAll(transactions);  // Load transactions into the table view
         } catch (SQLException e) {
-            e.printStackTrace();
+            showErrorDialog("Error", e.getMessage());
         }
+    }
+
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

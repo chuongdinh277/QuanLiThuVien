@@ -19,7 +19,7 @@ public class ReviewDAO {
             statement.executeUpdate();
         }
     }
-    // Thêm phương thức để lấy số sao trung bình từ cơ sở dữ liệu
+
     public static double getAverageRating(String isbn) throws SQLException {
         double averageRating = -1; // Trả về -1 nếu không có đánh giá nào
         String query = "SELECT SUM(rating) AS total_rating, COUNT(*) AS total_reviews FROM book_reviews WHERE isbn = ?";
@@ -39,8 +39,8 @@ public class ReviewDAO {
             }
         } catch (SQLException e) {
             System.err.println("Lỗi khi lấy đánh giá cho ISBN: " + isbn);
-            e.printStackTrace(); // In chi tiết lỗi để giúp debug
-            throw e; // Ném lại ngoại lệ để xử lý ngoài phương thức
+            e.printStackTrace();
+            throw e;
         }
 
         return averageRating; // Trả về số sao trung bình, hoặc -1 nếu không có đánh giá

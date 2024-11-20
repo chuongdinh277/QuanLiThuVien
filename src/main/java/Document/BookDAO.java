@@ -3,8 +3,10 @@ package Document;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
- // Thay <package_name> bằng tên gói thực tế
+import java.util.Map;
+// Thay <package_name> bằng tên gói thực tế
 
 import static Database.DatabaseConnection.getConnection;
 
@@ -404,6 +406,25 @@ public class BookDAO {
             System.out.println("Error updating remaining books: " + e.getMessage());
         }
         return false;
+    }
+    public static Map<String, Integer> getCategoryStatistics() throws SQLException {
+        String query = "SELECT category, COUNT(*) AS book_count FROM books GROUP BY category";
+        Map<String, Integer> categoryStats = new HashMap<>();
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                String category = resultSet.getString("category");
+                int count = resultSet.getInt("book_count");
+                categoryStats.put(category, count);
+            }
+        } catch (SQLException e) {
+            throw e; // Xử lý lỗi nếu có
+        }
+
+        return categoryStats; // Trả về thống kê
     }
 
 

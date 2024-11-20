@@ -1,5 +1,6 @@
 package Document;
 
+
 public class Review {
     private String username;
     private int rating;
@@ -23,3 +24,4 @@ public class Review {
         return comment;
     }
 }
+

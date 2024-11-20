@@ -8,6 +8,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
@@ -60,8 +61,7 @@ public class ViewBookInLibrary {
 
             return card;
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi tải card");
+            showErrorDialog("Error", "Lỗi tải card" + e.getMessage());
             return null;
         }
     }
@@ -81,8 +81,7 @@ public class ViewBookInLibrary {
             stage.setTitle("Chi tiết sách");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi mở trang chi tiết sách");
+            showErrorDialog("Error", "Lỗi khi mở trang chi tiết sách" + e.getMessage());
         }
     }
     private void loadBooks() {
@@ -114,11 +113,10 @@ public class ViewBookInLibrary {
                     }
                     booksLoaded += bookList.size();
                 } else {
-                    System.out.println("Không có sách mới để tải");
+                    showAlbertDialog("Không có sách mới để tải");
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi tải sách");
+                showErrorDialog("Title", "Lỗi khi tải sách" + e.getMessage());
             } finally {
                 isLoading = false;
             }
@@ -127,5 +125,19 @@ public class ViewBookInLibrary {
 
     public void shutdown() {
         executorService.shutdown();
+    }
+    private void showErrorDialog(String title, String message) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

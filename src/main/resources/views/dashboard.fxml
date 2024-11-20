@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboardController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1487.0" prefWidth="1518.0" styleClass="background" stylesheets="@../css/background.css">
+         <children>
+            <AnchorPane layoutX="87.0" layoutY="94.0" prefHeight="384.0" prefWidth="674.0" style="-fx-background-color: white; -fx-border-radius: 130; -fx-background-radius: 30;">
+               <children>
+                  <ImageView fitHeight="348.0" fitWidth="632.0" layoutX="28.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/3.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="37.0" layoutY="273.0" style="-fx-text-fill: #f7d0f5; -fx-font-size: 20; -fx-font-weight: bold;" text="Welcome, " />
+                  <Label fx:id="usernameLabel" layoutX="136.0" layoutY="273.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Label" />
+                  <Label layoutX="87.0" layoutY="313.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="to my library ...." />
+                  <Label fx:id="timeLabel" layoutX="72.0" layoutY="89.0" style="-fx-text-fill: #f7d0f5; -fx-font-size: 50; -fx-font-weight: bold;" text="00:00" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="118.0" layoutY="500.0" prefHeight="122.0" prefWidth="280.0" style="-fx-background-color: linear-gradient(to right, #f2e6d0, #ebc886); -fx-background-radius: 30;">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/book.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="101.0" layoutY="16.0" prefHeight="30.0" prefWidth="98.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="books: " />
+                  <Label layoutX="101.0" layoutY="48.0" prefHeight="22.0" prefWidth="63.0" style="-fx-font-size: 45; -fx-font-weight: bold;" text="0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="439.0" layoutY="500.0" prefHeight="121.0" prefWidth="280.0" style="-fx-background-radius: 30;" styleClass="anchor-pane1" stylesheets="@../css/anchor-pane.css">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/group.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="119.0" layoutY="16.0" prefHeight="30.0" prefWidth="98.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Member:" />
+                  <Label layoutX="125.0" layoutY="45.0" prefHeight="22.0" prefWidth="63.0" style="-fx-font-size: 45; -fx-font-weight: bold;" text="0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="118.0" layoutY="652.0" prefHeight="122.0" prefWidth="280.0" style="-fx-background-radius: 30;" styleClass="anchor-pane2" stylesheets="@../css/anchor-pane.css">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/book1.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="101.0" layoutY="16.0" prefHeight="30.0" prefWidth="98.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="all books: " />
+                  <Label layoutX="101.0" layoutY="48.0" prefHeight="22.0" prefWidth="63.0" style="-fx-font-size: 45; -fx-font-weight: bold;" text="0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="439.0" layoutY="652.0" prefHeight="121.0" prefWidth="280.0" style="-fx-background-radius: 30;" styleClass="anchor-pane3" stylesheets="@../css/anchor-pane.css">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/categories.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="119.0" layoutY="16.0" prefHeight="30.0" prefWidth="132.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Categories:" />
+                  <Label layoutX="125.0" layoutY="45.0" prefHeight="22.0" prefWidth="63.0" style="-fx-font-size: 45; -fx-font-weight: bold;" text="0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="87.0" layoutY="862.0" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+               <children>
+                  <AreaChart layoutX="23.0" layoutY="19.0" prefHeight="362.0" prefWidth="654.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </AreaChart>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="847.0" layoutY="94.0" prefHeight="530.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

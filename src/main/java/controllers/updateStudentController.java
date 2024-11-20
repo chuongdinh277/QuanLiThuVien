@@ -68,13 +68,19 @@ public class updateStudentController
                 showAlert("Lỗi", "Cập nhật không thành công. Vui lòng thử lại.");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            showAlert("Lỗi", "Có lỗi xảy ra: " + e.getMessage());
+            showError("Có lỗi xảy ra " + e.getMessage());
         }
     }
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }

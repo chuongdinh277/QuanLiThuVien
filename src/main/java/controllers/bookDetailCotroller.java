@@ -1,18 +1,16 @@
 package controllers;
 
-import Document.Book;
-import Document.BookDAO;
-import Document.Review;
-import Document.ReviewDAO;
+import Document.*;
 import User.currentUser;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,10 +20,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 public class bookDetailCotroller {
+
+
+    @FXML
+    private Label ISBNLabel;
 
     @FXML
     private ImageView ImageView_book;
@@ -34,25 +37,85 @@ public class bookDetailCotroller {
     private TextField authorTextField;
 
     @FXML
-    private TextField bookIDtextField;
+    private Label availableLabel;
 
     @FXML
-    private TextField categoryTextField;
+    private TableColumn<Transaction, Date> borrowDate;
+
+    @FXML
+    private Label categoryLabel;
 
     @FXML
     private Button commentBook;
 
     @FXML
+    private Button commentButton;
+
+    @FXML
     private Pane commentPane;
 
     @FXML
-    private TextField publisherTextField;
+    private TextArea commentTextArea;
+
+    @FXML
+    private VBox commentVbox;
+
+    @FXML
+    private TextArea descriptionTextField;
+
+    @FXML
+    private Label publisherLabel;
 
     @FXML
     private TextField quantityTextField;
 
     @FXML
+    private TableColumn<Transaction, Date> returnDate;
+
+    @FXML
     private ImageView returnHome;
+
+    @FXML
+    private ImageView star1;
+
+    @FXML
+    private ImageView star2;
+
+    @FXML
+    private ImageView star3;
+
+    @FXML
+    private ImageView star4;
+
+    @FXML
+    private ImageView star5;
+
+    @FXML
+    private ImageView starbook1;
+
+    @FXML
+    private ImageView starbook2;
+
+    @FXML
+    private ImageView starbook3;
+
+    @FXML
+    private ImageView starbook4;
+
+    @FXML
+    private ImageView starbook5;
+
+    @FXML
+    private TableColumn<Transaction, String> studentID;
+
+    @FXML
+    private TableColumn<Transaction, String> studentName;
+
+    @FXML
+    private TableView<Transaction> studentTableview;
+
+    @FXML
+    private TextField titleTextField;
 
     @FXML
     private Button viewBook;
@@ -60,36 +123,15 @@ public class bookDetailCotroller {
     @FXML
     private Pane viewBookPane;
     @FXML
-    private VBox commentVbox;
+    private TextField bookIDtextField;
     private Book currentBook;
-    @FXML
-    private ImageView star1;
-    @FXML
-    private ImageView star2;
-    @FXML
-    private ImageView star3;
-    @FXML
-    private ImageView star4;
-    @FXML
-    private ImageView star5;
-    @FXML
-    private TextArea commentTextArea;
-    @FXML
-    private ImageView starbook1;
-    @FXML
-    private ImageView starbook2;
-    @FXML
-    private ImageView starbook3;
-    @FXML
-    private ImageView starbook4;
-    @FXML
-    private ImageView starbook5;
+
     private MenuController_Admin menuControllerAdmin;
     @FXML
     private TextField sectionTextField;
     private int selectedRating = 0;
-    @FXML
-    private Button commentButton;
+
+
     @FXML
     private void showViewBook(ActionEvent event) {
         viewBookPane.setVisible(true);
@@ -107,7 +149,13 @@ public class bookDetailCotroller {
     @FXML
     private void initialize() {
         commentButton.setOnAction(even -> saveReview());
+        studentID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMssv()));
+        studentName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        borrowDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getBorrow_Date()));
+        returnDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReturn_Date()));
+        //loadallStudent();
     }
+
     @FXML
     private void handleClick(MouseEvent event) {
         if (menuControllerAdmin != null) {
@@ -154,25 +202,32 @@ public class bookDetailCotroller {
     public void setBook (Book book) {
         if (book != null) {
             this.currentBook = book;
-            bookIDtextField.setText(book.getISBN());
+            ISBNLabel.setText(book.getISBN());
+            titleTextField.setText(book.getTitle());
             authorTextField.setText(book.getAuthor());
-            categoryTextField.setText(book.getCategory());
-            publisherTextField.setText(book.getPublisher());
+            categoryLabel.setText(book.getCategory());
+            publisherLabel.setText(book.getPublisher());
             quantityTextField.setText(String.valueOf(book.getQuantity()));
-            sectionTextField.setText(book.getSection());
+            descriptionTextField.setText(book.getDescription());
+            if (book.getRemainingBook() <=0) {
+                availableLabel.setText("Available");
+            }
+            else {
+                availableLabel.setText("Not available");
+            }
             try {
                 // Lấy số sao trung bình từ cơ sở dữ liệu
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
                 System.out.println(averageRating);
                 displayRating(averageRating);
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
+                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
             }
         }
         if (book.getImagePath() != null) {
             ImageView_book.setImage(new Image(book.getImagePath()));
         }
+        loadallStudent();
     }
     @FXML
     private void updateBook(ActionEvent event) {
@@ -184,9 +239,9 @@ public class bookDetailCotroller {
             System.out.println(additionalQuantity);
             // Update other fields
             currentBook.setAuthor(authorTextField.getText());
-            currentBook.setISBN(bookIDtextField.getText());
-            currentBook.setCategory(categoryTextField.getText());
-            currentBook.setPublisher(publisherTextField.getText());
+            currentBook.setISBN(ISBNLabel.getText());
+            currentBook.setCategory(categoryLabel.getText());
+            currentBook.setPublisher(publisherLabel.getText());
             currentBook.setSection(sectionTextField.getText());
 
             // Update book in the database
@@ -196,13 +251,12 @@ public class bookDetailCotroller {
             boolean updateQuantity = BookDAO.updateQuantity(currentBook, additionalQuantity);
 
             if (isUpdate && updateQuantity) {
-                System.out.println("Cập nhật sách thành công");
+                showAlbertDialog("Cập nhật sách thành công");
             } else {
-                System.out.println("Cập nhật thất bại");
+                showAlbertDialog("Cập nhật thất bại");
             }
         } catch (SQLException | NumberFormatException e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi cập nhật sách: " + e.getMessage());
+            showErrorDialog("Lỗi khi cập nhật sách: " + e.getMessage());
         }
     }
 
@@ -212,14 +266,13 @@ public class bookDetailCotroller {
         try {
             boolean isDelete = BookDAO.deleteBook(currentBook);
             if (isDelete) {
-                System.out.println("Xóa sách thành công");
+                showAlbertDialog("Xóa sách thành công");
                 //menuControllerAdmin.loadBookList();
             } else {
-                System.out.println("Xóa thất bại");
+                showAlbertDialog("Xóa thất bại");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("L��i khi xóa sách: " + e.getMessage());
+            showErrorDialog("Lỗi khi xóa sách: " + e.getMessage());
         }
     }
     private void saveReview() {
@@ -230,13 +283,12 @@ public class bookDetailCotroller {
 
             try {
                 ReviewDAO.saveReview(username, isbn, selectedRating, comment);
-                System.out.println("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
+                showAlbertDialog("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
+                showErrorDialog("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
             }
         } else {
-            System.out.println("Chưa chọn đánh giá hoặc sách để lưu.");
+            showAlbertDialog("Chưa chọn đánh giá hoặc sách để lưu.");
         }
     }
 
@@ -282,8 +334,7 @@ public class bookDetailCotroller {
                 List<Review> reviews = ReviewDAO.getReviewsByISBN(isbn);
                 displayReviews(reviews);
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("L��i khi lấy đánh giá của sách: " + currentBook.getTitle());
+                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + currentBook.getTitle());
             }
         }
         else System.out.println("null");
@@ -326,6 +377,38 @@ public class bookDetailCotroller {
             // Thêm commentBox vào commentVbox (bảng chứa tất cả bình luận)
             commentVbox.getChildren().add(commentBox);
         }
+    }
+
+    private void loadallStudent() {
+        String isbn = currentBook.getISBN();
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        try {
+            // Lấy tất cả giao dịch từ cơ sở dữ liệu
+            List<Transaction> issueBook = TransactionDAO.getTransactionsByISBN(isbn);
+
+            if (issueBook != null) {
+                transactions.addAll(issueBook); // Thêm tất cả giao dịch vào ObservableList
+            } else {
+                showAlbertDialog("Không có giao dịch trong cơ sở dữ liệu.");
+            }
+        } catch (Exception e) {
+            showErrorDialog("Lỗi khi tải giao dịch: " + e.getMessage());
+        }
+        studentTableview.setItems(transactions);
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

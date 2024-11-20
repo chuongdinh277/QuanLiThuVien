@@ -18,11 +18,6 @@ public final class DatabaseConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "chuong@085920";
 
-    private static DatabaseConnection handler = null;
-    private static Connection conn = null;
-    private static Statement statement = null;
-
-
 
     public static Connection getConnection() throws SQLException {
         //String PASSWORD = properties.getProperty("db.password");

@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -65,14 +66,28 @@ public class allIssueBookController {
             if (transactions != null) {
                 transactionList.addAll(transactions); // Thêm tất cả giao dịch vào ObservableList
             } else {
-                System.out.println("Không có giao dịch trong cơ sở dữ liệu.");
+                showAlbertDialog("Không có giao dịch trong cơ sở dữ liệu.");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi tải giao dịch: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải giao dịch: " + e.getMessage());
         }
 
         // Đặt danh sách giao dịch vào TableView
         transactionTable.setItems(transactionList);
+    }
+
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -5,6 +5,7 @@ import User.currentUser;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
@@ -50,8 +51,7 @@ public class ViewBookBorrowed {
             cardController.setBook(book);
             return card;
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Lỗi khi tải card");
+            showErrorDialog("Lỗi khi tải card" + e.getMessage());
             return null;
         }
     }
@@ -84,12 +84,11 @@ public class ViewBookBorrowed {
                             }
                         }
                     } else {
-                        System.out.println("Không tìm thấy sách nào đã mượn.");
+                        showAlbertDialog("Không tìm thấy sách nào đã mượn.");
                         isAllBooksLoaded = true; // Đánh dấu rằng đã tải hết sách
                     }
                 } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("L��i khi lấy danh sách sách đã mượn");
+                    showErrorDialog("Lỗi khi lấy danh sách sách đã mượn" + e.getMessage());
                 }
 
             }
@@ -102,4 +101,20 @@ public class ViewBookBorrowed {
     public void shutdown() {
         executorService.shutdown();
     }
+
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

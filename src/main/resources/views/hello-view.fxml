@@ -16,26 +16,20 @@
          <children>
             <BorderPane fx:id="borderPane_admin" prefHeight="800.0" prefWidth="1300.0">
                <left>
-                  <AnchorPane prefHeight="800.0" prefWidth="205.0" style="-fx-background-color: #0db8a8;">
+                  <AnchorPane prefHeight="700.0" prefWidth="120.0" styleClass="anchor-paneLeft" stylesheets="@../css/anchor-paneLeft.css">
                      <children>
-                        <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="200.0" spacing="10" style="-fx-background-color: #0db8a8;">
-                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                              <children>
-                                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/logoUET.png" />
-                                    </image>
-                                 </ImageView>
-                              </children>
-                           </AnchorPane>
+                        <VBox fx:id="menuVBox" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="102.0" spacing="10">
+                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                            <HBox fx:id="homeMenu2">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/home.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button fx:id="systemButton" mnemonicParsing="false" onAction="#bookStoreLoad" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Home" />
+                                 <Button fx:id="systemButton" mnemonicParsing="false" onAction="#loadDashboard" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/home.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -44,15 +38,17 @@
 
                            <!-- Menu items with both icon and text -->
                            <HBox fx:id="homeMenu1">
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/book-open-cover.png" />
-                                 </image>
-                              </ImageView>
-                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#loadHomeview" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Books">
+                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#loadHomeview" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/book-open-cover.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -60,12 +56,14 @@
                            </HBox>
                            <HBox fx:id="homeMenu3">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/books.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button fx:id="issueBook" mnemonicParsing="false" onAction="#loadIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Issue book" />
+                                 <Button fx:id="issueBook" mnemonicParsing="false" onAction="#loadIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/books.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -73,12 +71,14 @@
                            </HBox>
                            <HBox fx:id="homeMenu4">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/address-book.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button mnemonicParsing="false" onAction="#userButton" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Students" />
+                                 <Button mnemonicParsing="false" onAction="#userButton" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/address-book.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -86,12 +86,14 @@
                            </HBox>
                            <HBox fx:id="homeMenu31">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/list.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button fx:id="issueBook1" mnemonicParsing="false" onAction="#loadAllIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="All Issue Book" />
+                                 <Button fx:id="issueBook1" mnemonicParsing="false" onAction="#loadAllIssueBook" prefHeight="35.0" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/list.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -99,12 +101,14 @@
                            </HBox>
                            <HBox fx:id="homeMenu5">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/exchange-alt.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button fx:id="returnButton" mnemonicParsing="false" onAction="#loadReturnBook" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Return book" />
+                                 <Button fx:id="returnButton" mnemonicParsing="false" onAction="#loadReturnBook" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/exchange-alt.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets bottom="20.0" left="30.0" />
@@ -112,12 +116,14 @@
                            </HBox>
                            <HBox fx:id="homeMenu21">
                               <children>
-                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@../image/settings.png" />
-                                    </image>
-                                 </ImageView>
-                                 <Button fx:id="systemButton1" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;" text="Settings" />
+                                 <Button fx:id="systemButton1" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: black;">
+                                    <graphic>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@../image/settings.png" />
+                                          </image>
+                                       </ImageView>
+                                    </graphic></Button>
                               </children>
                               <VBox.margin>
                                  <Insets left="30.0" />
