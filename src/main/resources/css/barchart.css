@@ -17,3 +17,7 @@
 .chart .axis-tick-mark-label {
     -fx-text-fill: black; /* Màu trắng cho chữ */
 }
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

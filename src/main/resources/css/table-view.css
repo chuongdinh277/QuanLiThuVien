@@ -11,3 +11,7 @@
 .table-view .cell {
     -fx-padding: 5px;
 }
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

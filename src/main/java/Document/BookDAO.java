@@ -261,24 +261,6 @@ public class BookDAO {
         return books;
     }
 
-    public static double getBookRating(String title, String author) throws SQLException {
-        String query = "SELECT average_rating FROM books WHERE title =? AND author =?";
-        double rating = 0;
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, author);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                rating = resultSet.getDouble("average_rating");
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-        return rating;
-    }
     public static List<Book> getBooksByCategory(String category) throws SQLException {
         String query = "SELECT * FROM books WHERE category =?";
         List<Book> books = new ArrayList<>();
@@ -425,6 +407,34 @@ public class BookDAO {
         }
 
         return categoryStats; // Trả về thống kê
+    }
+    public static List<Book> getAllBooks() throws SQLException {
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT * FROM books";  // Lấy tất cả sách
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                // Tạo đối tượng Book từ dữ liệu trong ResultSet
+                Book book = new Book(
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("category"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getInt("remaining_book"),
+                        resultSet.getString("description"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("section"),
+                        resultSet.getString("imagePath"),
+                        resultSet.getString("ISBN")
+                );
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return books;
     }
 
 
