@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="835.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserSeeBookDetails">
+<AnchorPane prefHeight="835.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserSeeBookDetails">
    <stylesheets>
       <URL value="file:/D:/QuanLiThuVien/src/main/resources/css/star.css" />
    </stylesheets>
@@ -27,7 +27,7 @@
             <Font size="33.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="61.0" layoutY="113.0" prefHeight="419.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 40;">
+      <AnchorPane layoutX="61.0" layoutY="113.0" prefHeight="462.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 40;">
          <children>
             <StackPane layoutX="70.0" layoutY="37.0" prefHeight="220.0" prefWidth="160.0" style="-fx-background-color: #33FFFF;">
                <children>
@@ -38,7 +38,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <Button fx:id="buttonBorrowBook" layoutX="102.0" layoutY="328.0" mnemonicParsing="false" onAction="#onBorrowBook" prefHeight="35.0" prefWidth="112.0" text="Mượn sách" />
+            <Button fx:id="buttonBorrowBook" layoutX="99.0" layoutY="404.0" mnemonicParsing="false" onAction="#onBorrowBook" prefHeight="35.0" prefWidth="112.0" text="Mượn sách" />
             <HBox layoutX="80.0" layoutY="273.0" prefHeight="36.0" prefWidth="149.0" spacing="5">
                <children>
                   <ImageView fx:id="starbook1" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
@@ -83,71 +83,19 @@
                   </ImageView>
                </children>
             </HBox>
+            <TextField fx:id="numberOfday" layoutX="80.0" layoutY="329.0" promptText="Number of Days" />
+            <TextField fx:id="quantityLabel" layoutX="80.0" layoutY="365.0" promptText="Quantity" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="412.0" layoutY="63.0" prefHeight="731.0" prefWidth="571.0" style="-fx-background-color: white; -fx-background-radius: 40;">
          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" opacity="0.3" prefHeight="54.0" prefWidth="310.0" style="-fx-background-color: #FFFF99; -fx-background-radius: 20; -fx-font-size: 30; -fx-font-weight: bold;" text="Book" textFill="#7e0599">
+            <Label alignment="CENTER" layoutX="112.0" layoutY="14.0" opacity="0.3" prefHeight="54.0" prefWidth="310.0" style="-fx-background-color: #FFFF99; -fx-background-radius: 20; -fx-font-size: 30; -fx-font-weight: bold;" text="Book" textFill="#7e0599">
                <font>
                   <Font name="Symbol" size="28.0" />
                </font>
             </Label>
             <StackPane layoutX="26.0" layoutY="146.0" prefHeight="580.0" prefWidth="520.0">
                <children>
-                  <Pane fx:id="viewBookPane" prefHeight="580.0" prefWidth="520.0" style="-fx-background-color: #0db8a8; -fx-background-radius: 10;">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="116.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Title :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="29.0" layoutY="171.0" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Author :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="288.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Description :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="32.0" layoutY="58.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="ID :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ISBNLabel" layoutX="134.0" layoutY="54.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label alignment="CENTER_RIGHT" layoutX="29.0" layoutY="224.0" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Section :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="bookTitleLabel" layoutX="134.0" layoutY="112.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label fx:id="bookAuthorLabel" layoutX="134.0" layoutY="167.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label fx:id="bookSectionLabel" layoutX="134.0" layoutY="220.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
-                        <Label alignment="CENTER_RIGHT" layoutY="530.0" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Number Of Days :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="493.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Quantity :">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="numberOfday" layoutX="168.0" layoutY="531.0" />
-                        <TextField fx:id="quantityLabel" layoutX="168.0" layoutY="494.0" />
-                        <ScrollPane layoutX="134.0" layoutY="280.0" prefHeight="200.0" prefWidth="344.0">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="344.0">
-                                 <children>
-                                    <Label fx:id="bookDescriptionLabel" layoutX="-14.0" layoutY="-7.0" prefHeight="300.0" prefWidth="344.0" style="-fx-background-color: white;" wrapText="true" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </Pane>
                   <Pane fx:id="commentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0db8a8; -fx-background-radius: 10;">
                      <children>
                         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="543.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20;">
@@ -204,6 +152,48 @@
                               <TextArea fx:id="commentTextArea" layoutX="115.0" layoutY="397.0" prefHeight="54.0" prefWidth="362.0" />
                            </children>
                         </AnchorPane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="viewBookPane" prefHeight="580.0" prefWidth="520.0" style="-fx-background-color: #0db8a8; -fx-background-radius: 10;">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="116.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Title :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="29.0" layoutY="171.0" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Author :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="288.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Description :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="32.0" layoutY="58.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="ID :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ISBNLabel" layoutX="134.0" layoutY="54.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label alignment="CENTER_RIGHT" layoutX="29.0" layoutY="224.0" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #0db8a8; -fx-font-size: 17; -fx-font-weight: bold;" text="Section :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="bookTitleLabel" layoutX="134.0" layoutY="112.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label fx:id="bookAuthorLabel" layoutX="134.0" layoutY="167.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <Label fx:id="bookSectionLabel" layoutX="134.0" layoutY="220.0" prefHeight="34.0" prefWidth="344.0" style="-fx-background-color: white;" />
+                        <ScrollPane layoutX="134.0" layoutY="280.0" prefHeight="281.0" prefWidth="344.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="344.0">
+                                 <children>
+                                    <Label fx:id="bookDescriptionLabel" layoutX="-14.0" layoutY="-7.0" prefHeight="304.0" prefWidth="344.0" style="-fx-background-color: white;" wrapText="true" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
                      </children>
                   </Pane>
                </children>

@@ -1,5 +1,9 @@
 package controllers;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,16 +14,24 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 import User.Admin;
 import User.User;
 import User.currentUser;
 import User.Member;
+import javafx.util.Duration;
+
 public class loginController implements Initializable {
     @FXML
     private TextField usernameField;
@@ -34,6 +46,8 @@ public class loginController implements Initializable {
     private PasswordField passwordHidden;
 
     @FXML
+    private Label welcomeLabel;
+    @FXML
     private Button signUpButton;
 
     @FXML
@@ -42,7 +56,8 @@ public class loginController implements Initializable {
     private Button registerButton;
     @FXML
     private ChoiceBox<String> myChoiceBox;
-
+    @FXML
+    private AnchorPane starPane;
     @FXML
     private Button loginReturn;
     @FXML
@@ -53,10 +68,57 @@ public class loginController implements Initializable {
     private TextField emailField;
     @FXML
     private TextField MSSVTextfield;
+    @FXML
+    private ImageView showImage;
+    @FXML
+    private TextField passwordTextField;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().add("admin");
         myChoiceBox.getItems().add("user");
+
+        if (starPane != null) {
+            Timeline snowflakeGenerator = new Timeline(
+                    new KeyFrame(Duration.millis(100), e -> createBlinkingStar())
+            );
+            snowflakeGenerator.setCycleCount(Timeline.INDEFINITE);
+            snowflakeGenerator.play();
+        }
+
+        HBox hbox = new HBox(16); // Hộp chứa các chữ cái, khoảng cách giữa các chữ cái
+        String text = "Welcome to Library";
+        // Tạo Label cho mỗi ký tự và thêm vào HBox
+        for (char c : text.toCharArray()) {
+            Label letter = new Label(String.valueOf(c));
+            letter.setFont(Font.font(30)); // Thiết lập kích thước chữ
+            hbox.getChildren().add(letter);
+
+            // Tạo hiệu ứng di chuyển cho mỗi chữ cái
+            TranslateTransition transition = new TranslateTransition();
+            transition.setNode(letter);
+            transition.setFromY(500); // Vị trí ban đầu (dưới)
+            transition.setToY(-50);   // Vị trí kết thúc (trên)
+            transition.setCycleCount(1); // Chạy một lần
+            transition.setInterpolator(javafx.animation.Interpolator.LINEAR);
+            transition.setDuration(Duration.seconds(1)); // Thời gian chạy của chữ
+
+            // Bắt đầu hiệu ứng di chuyển
+            transition.play();
+        }
+    }
+    @FXML
+    public void handleShowPassword(MouseEvent event) {
+        // Kiểm tra xem hiện tại mật khẩu có đang được ẩn không
+        if (passwordHiddenlogin.isVisible()) {
+            passwordTextField.setText(passwordHiddenlogin.getText());
+            passwordTextField.setVisible(true);
+            passwordHiddenlogin.setVisible(false);
+        } else {
+            passwordHiddenlogin.setText(passwordTextField.getText());
+            passwordHiddenlogin.setVisible(true);
+            passwordTextField.setVisible(false);
+        }
     }
 
     // Xử lí đăng kí tài khoản
@@ -176,7 +238,39 @@ public class loginController implements Initializable {
         }
     }
 
+    private void createBlinkingStar() {
+        Random random = new Random();
 
+        // Tạo một bông tuyết (Circle) với kích thước ngẫu nhiên
+        Circle star = new Circle(random.nextInt(5) + 1, Color.WHITE); // Kích thước bông tuyết ngẫu nhiên từ 5-10px
+
+        // Đặt vị trí ngẫu nhiên cho bông tuyết ở trên đầu màn hình
+        double startX = random.nextDouble() * starPane.getWidth(); // Vị trí ngẫu nhiên trên trục X
+        double startY = random.nextDouble() * 400; // Vị trí ngẫu nhiên trên trục Y (ở ngoài màn hình trên cùng)
+
+        star.setLayoutX(startX);
+        star.setLayoutY(startY);
+
+        // Thêm bông tuyết vào AnchorPane
+        starPane.getChildren().add(star);
+
+        // Tạo Timeline để di chuyển bông tuyết từ trên xuống dưới
+        Timeline fallTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, e -> {
+                    // Di chuyển bông tuyết theo trục Y, tạo hiệu ứng rơi
+                    star.setLayoutY(star.getLayoutY() + 1); // Di chuyển xuống mỗi frame
+
+                    // Kiểm tra nếu bông tuyết rơi khỏi màn hình thì xóa nó
+                    if (star.getLayoutY() > starPane.getHeight()) {
+                        starPane.getChildren().remove(star); // Xóa bông tuyết khi rơi ra ngoài
+                    }
+                }),
+                new KeyFrame(Duration.millis(10)) // Cập nhật mỗi 10ms
+        );
+
+        fallTimeline.setCycleCount(Timeline.INDEFINITE); // Lặp vô hạn
+        fallTimeline.play();
+    }
 
 
     private void showAlert(String title, String message) {

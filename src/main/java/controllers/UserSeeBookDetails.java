@@ -7,7 +7,10 @@ import User.User;
 import User.currentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -107,6 +110,7 @@ public class UserSeeBookDetails {
         commentPane.setVisible(true);
         if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
+        System.out.println("hello");
 
     }
 
@@ -156,7 +160,9 @@ public class UserSeeBookDetails {
             ISBNLabel.setText(book.getISBN());
             bookSectionLabel.setText(book.getSection());
 
+            System.out.println("duong1");
             if (book.getDescription() != null) {
+                System.out.println("duong2");
                 System.out.println(book.getDescription());
             }
             bookDescriptionLabel.setText(book.getDescription());
@@ -168,7 +174,8 @@ public class UserSeeBookDetails {
                 System.out.println(averageRating);
                 displayRating(averageRating);
             } catch (SQLException e) {
-                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
+                e.printStackTrace();
+                System.out.println("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
             }
         }
     }
@@ -185,15 +192,16 @@ public class UserSeeBookDetails {
                 boolean isBorrowed = TransactionDAO.borrowBook(user, currentBook, quantity, numberofdays);
 
                 if (isBorrowed) {
-                    showAlbertDialog("Đã mượn sách: " + currentBook.getTitle());
+                    System.out.println("Đã mượn sách: " + currentBook.getTitle());
                 } else {
-                    showAlbertDialog("Không thể mượn sách: " + currentBook.getTitle() + " (có thể đang được mượn hoặc số lượng không đủ)");
+                    System.out.println("Không thể mượn sách: " + currentBook.getTitle() + " (có thể đang được mượn hoặc số lượng không đủ)");
                 }
             } catch (SQLException e) {
-                showErrorDialog("Lỗi khi mượn sách: " + currentBook.getTitle());
+                e.printStackTrace();
+                System.out.println("Lỗi khi mượn sách: " + currentBook.getTitle());
             }
         } else {
-            showAlbertDialog("Chưa chọn sách nào để mượn.");
+            System.out.println("Chưa chọn sách nào để mượn.");
         }
     }
 
@@ -206,12 +214,13 @@ public class UserSeeBookDetails {
 
             try {
                 ReviewDAO.saveReview(username, isbn, selectedRating, comment);
-                showAlbertDialog("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
+                System.out.println("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
             } catch (SQLException e) {
-                showErrorDialog("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
+                e.printStackTrace();
+                System.out.println("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
             }
         } else {
-            showAlbertDialog("Chưa chọn đánh giá hoặc sách để lưu.");
+            System.out.println("Chưa chọn đánh giá hoặc sách để lưu.");
         }
     }
 
@@ -230,8 +239,7 @@ public class UserSeeBookDetails {
             i++;
         }
         int j = roundedRating + 1;
-
-        if (j <= 5 && (double )(roundedRating) < averageRating) {
+        if (j <= 5) {
             if (i == 1) starbook1.setImage(unselectedStar1);
             if (i == 2) starbook2.setImage(unselectedStar1);
             if (i == 3) starbook3.setImage(unselectedStar1);
@@ -257,7 +265,8 @@ public class UserSeeBookDetails {
                 List<Review> reviews = ReviewDAO.getReviewsByISBN(isbn);
                 displayReviews(reviews);
             } catch (SQLException e) {
-                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + currentBook.getTitle());
+                e.printStackTrace();
+                System.out.println("L��i khi lấy đánh giá của sách: " + currentBook.getTitle());
             }
         }
         else System.out.println("null");
@@ -302,18 +311,4 @@ public class UserSeeBookDetails {
         }
     }
 
-    private void showAlbertDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thông báo");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-    private void showErrorDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

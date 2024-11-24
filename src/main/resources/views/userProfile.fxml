@@ -6,82 +6,94 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserProfileController">
    <children>
-      <AnchorPane layoutX="427.0" layoutY="45.0" prefHeight="589.0" prefWidth="571.0" style="-fx-background-color: #CCCCCC;">
+      <AnchorPane layoutX="114.0" layoutY="24.0" prefHeight="632.0" prefWidth="973.0" style="-fx-background-color: #CCCCCC; -fx-background-radius: 20;">
          <children>
-            <Button layoutX="227.0" layoutY="490.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="133.0" text="Lưu thông tin">
-               <font>
-                  <Font size="17.0" />
-               </font></Button>
-            <Label layoutX="111.0" layoutY="14.0" prefHeight="59.0" prefWidth="347.0" text="Thông tin cá nhân" textFill="#286b3e">
+            <AnchorPane fx:id="informationPane" layoutX="353.0" layoutY="118.0" prefHeight="395.0" prefWidth="555.0" style="-fx-background-color: transparent; -fx-background-radius: 10;">
+               <children>
+                  <Button fx:id="editButton" layoutX="406.0" layoutY="169.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/edit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="emailTextField" layoutX="224.0" layoutY="217.0" prefHeight="32.0" prefWidth="228.0" />
+                  <TextField fx:id="passwordTextField" layoutX="224.0" layoutY="264.0" prefHeight="32.0" prefWidth="228.0" />
+                  <Label fx:id="usernameLabel" layoutX="224.0" layoutY="124.0" prefHeight="35.0" prefWidth="192.0" text="duongbeo">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="54.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="118.359375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="54.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID :" wrappingWidth="118.359375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="54.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="54.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="54.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="118.359375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="fullNameLabel1" layoutX="224.0" layoutY="33.0" prefHeight="35.0" prefWidth="192.0" text="Họ và tên">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="idLabel1" layoutX="224.0" layoutY="79.0" prefHeight="35.0" prefWidth="192.0" text="Mã sinh viên">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="cancelButton" layoutX="197.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="32.0" prefWidth="68.0" text="Cancel" />
+                  <Button fx:id="updateButton" layoutX="278.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="32.0" prefWidth="68.0" text="Update" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="83.0" layoutY="139.0" prefHeight="353.0" prefWidth="270.0">
+               <children>
+                  <Label fx:id="idLabel" layoutX="42.0" layoutY="293.0" prefHeight="35.0" prefWidth="192.0" text="Mã sinh viên" textFill="#484848">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="fullNameLabel" layoutX="42.0" layoutY="258.0" prefHeight="35.0" prefWidth="192.0" text="Họ và tên">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="228.0" fitWidth="234.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/rabbit.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label layoutX="37.0" layoutY="14.0" prefHeight="59.0" prefWidth="505.0" text="PERSONAL INFORMATION" textFill="#286b3e">
                <font>
                   <Font size="41.0" />
                </font>
             </Label>
-            <Line endX="300.0" endY="-1.52587890625E-5" layoutX="185.0" layoutY="89.0" startX="-100.0" />
-            <Line endX="300.0" endY="-1.52587890625E-5" layoutX="185.0" layoutY="312.0" startX="-100.0" />
-            <Line endX="300.0" endY="-1.52587890625E-5" layoutX="185.0" layoutY="450.0" startX="-100.0" />
-            <AnchorPane layoutX="33.0" layoutY="99.0" prefHeight="195.0" prefWidth="505.0">
-               <children>
-                  <Label layoutX="23.0" layoutY="29.0" prefHeight="30.0" prefWidth="115.0" text="Họ và tên :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="23.0" layoutY="77.0" prefHeight="30.0" prefWidth="115.0" text="Mã sinh viên :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="23.0" layoutY="131.0" prefHeight="30.0" prefWidth="115.0" text="Email :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="fullName" layoutX="160.0" layoutY="29.0" prefHeight="30.0" prefWidth="321.0" />
-                  <TextField fx:id="id" layoutX="160.0" layoutY="77.0" prefHeight="30.0" prefWidth="321.0" />
-                  <TextField fx:id="email" layoutX="160.0" layoutY="131.0" prefHeight="30.0" prefWidth="321.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="41.0" layoutY="324.0" prefHeight="115.0" prefWidth="505.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="133.0" text="Tên đăng nhập :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="65.0" prefHeight="30.0" prefWidth="115.0" text="Mật khẩu :">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="username" layoutX="160.0" layoutY="14.0" prefHeight="30.0" prefWidth="321.0" />
-                  <TextField fx:id="password" layoutX="160.0" layoutY="65.0" prefHeight="30.0" prefWidth="321.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="36.0" layoutY="45.0" prefHeight="385.0" prefWidth="355.0">
-         <children>
-            <Label fx:id="idLabel" alignment="CENTER" layoutX="82.0" layoutY="318.0" prefHeight="35.0" prefWidth="192.0" text="Mã sinh viên">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="fullNameLabel" alignment="CENTER" layoutX="83.0" layoutY="275.0" prefHeight="35.0" prefWidth="192.0" text="Họ và tên">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="195.0" fitWidth="200.0" layoutX="81.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/8664925_circle_user_person_icon.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </children>

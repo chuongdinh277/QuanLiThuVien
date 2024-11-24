@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,71 +11,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.returnBookController">
     <top>
-        <VBox prefHeight="109.0" prefWidth="1100.0">
+        <AnchorPane prefHeight="86.0" prefWidth="1180.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
             <children>
-                <BorderPane maxHeight="67.0" prefHeight="67.0" prefWidth="1000.0" style="-fx-background-color: #0db8a8;">
-                    <right>
-                        <HBox alignment="TOP_RIGHT" prefHeight="37.0" prefWidth="127.0" style="-fx-background-color: #0db8a8;">
-                            <children>
-                                <Label contentDisplay="GRAPHIC_ONLY" />
-                                <Label contentDisplay="GRAPHIC_ONLY" />
-                                <Label contentDisplay="GRAPHIC_ONLY" />
-                                <Label contentDisplay="GRAPHIC_ONLY" />
-                            </children>
-                        </HBox>
-                    </right>
-                    <center>
-                        <Label style="-fx-text-fill: black;" text="Library Management System" textFill="#a1a1a1">
-                            <font>
-                                <Font name="Segoe UI Semilight" size="23.0" />
-                            </font>
-                        </Label>
-                    </center>
-                </BorderPane>
-                <VBox prefHeight="117.0" prefWidth="900.0" style="-fx-background-color: white;">
-                    <children>
-                        <HBox prefHeight="117.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: #0db8a8;">
-                            <children>
-                                <Label prefHeight="82.0" prefWidth="264.0" style="-fx-text-fill: #2b579a;" text="Issue Books">
-                                    <font>
-                                        <Font name="Segoe UI Semilight" size="46.0" />
-                                    </font>
-                                    <padding>
-                                        <Insets left="10.0" />
-                                    </padding>
-                                </Label>
-                                <HBox alignment="CENTER_RIGHT" prefHeight="85.0" prefWidth="789.0" spacing="10.0" HBox.hgrow="NEVER">
-                                    <children>
-                                        <VBox prefHeight="80.0" prefWidth="789.0" HBox.hgrow="NEVER">
-                                            <children>
-                                                <HBox prefHeight="26.0" prefWidth="564.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                                                    <VBox.margin>
-                                                        <Insets bottom="6.0" />
-                                                    </VBox.margin>
-                                                </HBox>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </HBox>
-                        <HBox maxWidth="3000.0" prefHeight="45.0" prefWidth="1000.0" style="-fx-background-color: white;">
-                            <children>
-                                <ProgressBar maxWidth="10000.0" prefWidth="1000.0" progress="1.0" scaleY="0.4" HBox.hgrow="ALWAYS">
-                                    <HBox.margin>
-                                        <Insets left="3.0" right="5.0" />
-                                    </HBox.margin>
-                                </ProgressBar>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
+                <Label layoutX="400.0" layoutY="28.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
             </children>
-        </VBox>
+        </AnchorPane>
     </top>
     <bottom>
         <AnchorPane prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
@@ -91,16 +33,16 @@
                             </HBox.margin>
                             <children>
                                 <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="230.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Enter ID Student to search :" />
-                                <TextField fx:id="IDsearchStudent" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray;" />
+                                <TextField fx:id="IDsearchStudent" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray; -fx-font-size: 20; -fx-font-weight: bold;" />
                             </children>
                         </VBox>
                         <VBox prefHeight="198.0" prefWidth="629.0">
                             <children>
                                 <AnchorPane prefHeight="199.0" prefWidth="667.0">
                                     <children>
-                                        <TextField fx:id="nameStudentTextfield" layoutX="151.0" layoutY="21.0" prefHeight="38.0" prefWidth="327.0" style="-fx-background-color: transparent; -fx-font-size: 13; -fx-font-weight: bold;" />
-                                        <TextField fx:id="studentEmailTextfield" layoutX="149.0" layoutY="121.0" prefHeight="39.0" prefWidth="358.0" style="-fx-background-color: transparent; -fx-font-size: 13; -fx-font-weight: bold;" />
-                                        <TextField fx:id="studentNumberTextfield" layoutX="149.0" layoutY="71.0" prefHeight="38.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-font-size: 13; -fx-font-weight: bold;" />
+                                        <TextField fx:id="nameStudentTextfield" layoutX="151.0" layoutY="21.0" prefHeight="38.0" prefWidth="327.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
+                                        <TextField fx:id="studentEmailTextfield" layoutX="149.0" layoutY="121.0" prefHeight="39.0" prefWidth="358.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
+                                        <TextField fx:id="studentNumberTextfield" layoutX="149.0" layoutY="71.0" prefHeight="38.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
                                         <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="144.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Name Of Student :" />
                                         <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student number :" />
                                         <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student email :" />
@@ -127,7 +69,7 @@
                           </Label>
                       </children>
                   </HBox>
-            <TableView fx:id="transactionTable" layoutY="274.0" prefHeight="340.0" prefWidth="1100.0">
+            <TableView fx:id="transactionTable" layoutY="274.0" prefHeight="340.0" prefWidth="1100.0" stylesheets="@../css/table-view.css">
               <columns>
                 <TableColumn fx:id="STTcolumn" prefWidth="75.0" text="STT" />
                 <TableColumn fx:id="ISBNColumn" prefWidth="144.79998779296875" text="ISBN" />

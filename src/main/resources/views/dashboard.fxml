@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboardController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboardController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1501.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css">
          <children>
@@ -93,7 +93,7 @@
                      </image>
                   </ImageView>
                   <Label layoutX="65.0" layoutY="23.0" prefHeight="27.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Members" />
-                  <Label layoutX="273.0" layoutY="23.0" prefHeight="27.0" prefWidth="86.0" style="-fx-font-size: 18;" styleClass="see-all-label" stylesheets="@../css/seeall.css" text="See All" />
+                  <Label layoutX="273.0" layoutY="23.0" onMouseClicked="#seeallstudentsLabel" prefHeight="27.0" prefWidth="86.0" style="-fx-font-size: 18;" styleClass="see-all-label" stylesheets="@../css/seeall.css" text="See All" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="791.0" layoutY="1052.0" prefHeight="419.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;">
@@ -105,18 +105,18 @@
                      </image>
                   </ImageView>
                   <Label layoutX="71.0" layoutY="17.0" prefHeight="27.0" prefWidth="98.0" style="-fx-font-weight: bold; -fx-font-size: 18;" text="Books" />
-                  <Label layoutX="269.0" layoutY="18.0" prefHeight="27.0" prefWidth="86.0" style="-fx-font-size: 18;" styleClass="see-all-label" stylesheets="@../css/seeall.css" text="See All" />
+                  <Label layoutX="269.0" layoutY="18.0" onMouseClicked="#seeallbooksLabel" prefHeight="27.0" prefWidth="86.0" style="-fx-font-size: 18;" styleClass="see-all-label" stylesheets="@../css/seeall.css" text="See All" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="circlePane" layoutX="805.0" layoutY="135.0" prefHeight="434.0" prefWidth="330.0" style="-fx-background-radius: 30;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
                <children>
                   <Circle fx:id="outerCircle" fill="DODGERBLUE" layoutX="165.0" layoutY="190.0" radius="140.0" stroke="BLACK" strokeType="INSIDE" />
                   <Label layoutX="151.0" layoutY="154.0" text="Label" />
-                  <AnchorPane layoutX="15.0" layoutY="365.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #02d7f7; -fx-background-radius: 20;" />
-                  <Label layoutX="48.0" layoutY="363.0" prefHeight="23.0" prefWidth="85.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Book borrow :" />
+                  <AnchorPane fx:id="pane1" layoutX="15.0" layoutY="365.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #02d7f7; -fx-background-radius: 20;" />
+                  <Label fx:id="label1" layoutX="48.0" layoutY="363.0" prefHeight="23.0" prefWidth="85.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Book borrow :" />
                   <Label fx:id="percentageBorrowLabel" layoutX="136.0" layoutY="366.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="pe" />
-                  <AnchorPane layoutX="15.0" layoutY="400.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
-                  <Label layoutX="48.0" layoutY="398.0" prefHeight="23.0" prefWidth="93.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Book quantity :" />
+                  <AnchorPane fx:id="pane2" layoutX="15.0" layoutY="400.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
+                  <Label fx:id="label2" layoutX="48.0" layoutY="398.0" prefHeight="23.0" prefWidth="93.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Book quantity :" />
                   <Label fx:id="percentageQuantityLabel" layoutX="142.0" layoutY="401.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Label" />
                </children>
             </AnchorPane>

@@ -5,11 +5,12 @@ import User.currentUser;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import Document.TransactionDAO;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,10 +50,32 @@ public class ViewBookBorrowed {
             AnchorPane card = loader.load();
             CardController cardController = loader.getController();
             cardController.setBook(book);
+            card.setOnMouseClicked(event -> openBookDetailsPage(book));
             return card;
         } catch (IOException e) {
-            showErrorDialog("Lỗi khi tải card" + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Lỗi khi tải card");
             return null;
+        }
+    }
+
+    private void openBookDetailsPage(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
+            AnchorPane bookDetailsPage = loader.load();
+
+            // Đưa thông tin sách vào controller của trang chi tiết
+            UserSeeBookDetails bookDetailsController = loader.getController();
+            bookDetailsController.setBook(book);
+
+            // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
+            Stage stage = new Stage();
+            stage.setScene(new Scene(bookDetailsPage));
+            stage.setTitle("Chi tiết sách");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
 
@@ -67,8 +90,8 @@ public class ViewBookBorrowed {
                     List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));
 
                     if (!borrowedBooks.isEmpty()) {
-                        int row = borrowedBookGrid.getChildren().size() / 6;
-                        int col = borrowedBookGrid.getChildren().size() % 6;
+                        int row = borrowedBookGrid.getChildren().size() / 7;
+                        int col = borrowedBookGrid.getChildren().size() % 7;
 
                         for (Book book : borrowedBooks) {
                             AnchorPane card = createCard(book);
@@ -78,17 +101,18 @@ public class ViewBookBorrowed {
                                 javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
                             }
                             col++;
-                            if (col >= 6) {
+                            if (col >= 7) {
                                 col = 0;
                                 row++;
                             }
                         }
                     } else {
-                        showAlbertDialog("Không tìm thấy sách nào đã mượn.");
+                        System.out.println("Không tìm thấy sách nào đã mượn.");
                         isAllBooksLoaded = true; // Đánh dấu rằng đã tải hết sách
                     }
                 } catch (SQLException e) {
-                    showErrorDialog("Lỗi khi lấy danh sách sách đã mượn" + e.getMessage());
+                    e.printStackTrace();
+                    System.out.println("L��i khi lấy danh sách sách đã mượn");
                 }
 
             }
@@ -101,20 +125,4 @@ public class ViewBookBorrowed {
     public void shutdown() {
         executorService.shutdown();
     }
-
-    private void showErrorDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-    private void showAlbertDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thông báo");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 }

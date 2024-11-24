@@ -7,8 +7,9 @@ import User.currentUser;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,8 @@ import java.util.concurrent.Executors;
 public class ViewBookInLibrary {
 
     @FXML
+    private AnchorPane pane;
+    @FXML
     private ScrollPane scrollPane;
     @FXML
     private GridPane bookGrid;
@@ -35,6 +38,7 @@ public class ViewBookInLibrary {
 
     @FXML
     private void initialize() {
+        removeFocusFromAllNodes(pane);
         // Cài đặt ScrollPane
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -61,14 +65,15 @@ public class ViewBookInLibrary {
 
             return card;
         } catch (IOException e) {
-            showErrorDialog("Error", "Lỗi tải card" + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Lỗi khi tải card");
             return null;
         }
     }
 
     private void openBookDetailsPage(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/test.fxml"));
             AnchorPane bookDetailsPage = loader.load();
 
             // Đưa thông tin sách vào controller của trang chi tiết
@@ -81,7 +86,8 @@ public class ViewBookInLibrary {
             stage.setTitle("Chi tiết sách");
             stage.show();
         } catch (IOException e) {
-            showErrorDialog("Error", "Lỗi khi mở trang chi tiết sách" + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
     private void loadBooks() {
@@ -94,8 +100,8 @@ public class ViewBookInLibrary {
                 Member member = new Member(studentID,currentUser.getUsername(), currentUser.getRole());
                 List<Book> bookList = member.viewBooksPaginated(booksLoaded, PAGE_SIZE);
                 if (bookList != null && !bookList.isEmpty()) {
-                    int row = booksLoaded / 6;
-                    int col = booksLoaded % 6;
+                    int row = booksLoaded / 7;
+                    int col = booksLoaded % 7;
 
                     for (Book book : bookList) {
                         AnchorPane card = createCard(book);
@@ -106,17 +112,18 @@ public class ViewBookInLibrary {
                         }
 
                         col++;
-                        if (col >= 6) {
+                        if (col >= 7) {
                             col = 0;
                             row++;
                         }
                     }
                     booksLoaded += bookList.size();
                 } else {
-                    showAlbertDialog("Không có sách mới để tải");
+                    System.out.println("Không có sách mới để tải");
                 }
             } catch (SQLException e) {
-                showErrorDialog("Title", "Lỗi khi tải sách" + e.getMessage());
+                e.printStackTrace();
+                System.out.println("Lỗi khi tải sách");
             } finally {
                 isLoading = false;
             }
@@ -126,18 +133,13 @@ public class ViewBookInLibrary {
     public void shutdown() {
         executorService.shutdown();
     }
-    private void showErrorDialog(String title, String message) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-    }
-    private void showAlbertDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thông báo");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+
+    private void removeFocusFromAllNodes(Parent parent) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            node.setFocusTraversable(false); // Không cho phép đối tượng nhận focus
+            if (node instanceof Parent) {
+                removeFocusFromAllNodes((Parent) node); // Đệ quy cho các node con
+            }
+        }
     }
 }

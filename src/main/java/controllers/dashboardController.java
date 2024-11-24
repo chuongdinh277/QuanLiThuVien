@@ -8,23 +8,32 @@ import User.User;
 import User.Admin;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,10 +43,19 @@ import java.util.Map;
 import static APIGoogle.GoogleBooksAPI.showErrorDialog;
 
 public class dashboardController {
+    private BorderPane mainBorderPane;
     @FXML
     private Label percentageQuantityLabel;
     @FXML
     private Label percentageBorrowLabel;
+    @FXML
+    private AnchorPane pane1;
+    @FXML
+    private AnchorPane pane2;
+    @FXML
+    private Label label1;
+    @FXML
+    private Label label2;
     @FXML
     private StackedBarChart categoriesBarchart;
     @FXML
@@ -65,6 +83,11 @@ public class dashboardController {
     private int bookQuantity = 0;
     private int bookQuantityBorrowed = 0;
     private int categories = 0;
+
+    public void setMainBorderPane(BorderPane mainBorderPane) {
+        this.mainBorderPane = mainBorderPane;
+    }
+
     public void initialize() {
         // Hiển thị thời gian hiện tại
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -91,9 +114,10 @@ public class dashboardController {
         System.out.println(bookQuantityBorrowed);
         double result = (double)(bookQuantityBorrowed+1000) / bookQuantity * 100;
         System.out.println(result);
-        percentageBorrowLabel.setText(String.valueOf(bookQuantityBorrowed));
-        percentageQuantityLabel.setText(String.valueOf(bookQuantity));
         drawProgressCircle(result);
+
+
+
 
     }
 
@@ -247,7 +271,8 @@ public class dashboardController {
 
         Label percentageLabel = new Label(String.format("%.0f%%", percentage)); // Chuyển đổi phần trăm thành string
         percentageLabel.setStyle("-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: #f2aaf1;");
-
+        percentageBorrowLabel.setText(String.valueOf(bookQuantityBorrowed));
+        percentageQuantityLabel.setText(String.valueOf(bookQuantity));
         // Xóa các phần tử cũ trong `circlePane`
         circlePane.getChildren().clear();
 
@@ -266,7 +291,30 @@ public class dashboardController {
         percentageLabel.setLayoutX(paneCenterX - percentageLabel.getWidth() / 2 - 35);
         percentageLabel.setLayoutY(paneCenterY - percentageLabel.getHeight() / 2 - 30);
         // Thêm các phần tử vào `circlePane`
-        circlePane.getChildren().addAll(outerCircle, progressArc, innerCircle, percentageLabel);
+        circlePane.getChildren().addAll(outerCircle, progressArc, innerCircle, percentageLabel,pane2,pane1,label1,label2,percentageBorrowLabel,percentageQuantityLabel);
+    }
+
+    @FXML
+    private void seeallstudentsLabel(MouseEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/students.fxml"));
+            Pane homeRoot = loader.load();
+            mainBorderPane.setCenter(homeRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("Lỗi khi tải giao diện home.fxml: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void seeallbooksLabel(MouseEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
+            ScrollPane homeRoot = loader.load();
+            mainBorderPane.setCenter(homeRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("Lỗi khi tải giao diện home.fxml: " + e.getMessage());
+        }
     }
 
 }

@@ -136,6 +136,9 @@ public class MenuController_Admin {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/dashboard.fxml"));
             Parent root = loader.load();
+
+            dashboardController dashboardController = loader.getController();
+            dashboardController.setMainBorderPane(borderPane_admin);
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();

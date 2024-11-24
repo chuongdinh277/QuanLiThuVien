@@ -58,5 +58,11 @@
     -fx-background-color: transparent; /* Thiết lập màu nền trong suốt */
 }
 
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+
 
 

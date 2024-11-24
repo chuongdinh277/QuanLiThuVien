@@ -75,8 +75,8 @@ public class ViewBooksSearchResult {
 
 
                     if (searchResults != null && !searchResults.isEmpty()) {
-                        int row = searchResultGrid.getChildren().size() / 5; // Giả sử có 5 cột
-                        int col = searchResultGrid.getChildren().size() % 5;
+                        int row = searchResultGrid.getChildren().size() / 7; // Giả sử có 5 cột
+                        int col = searchResultGrid.getChildren().size() % 7;
 
                         for (Book book : searchResults) {
                             AnchorPane card = createCard(book);
@@ -87,7 +87,7 @@ public class ViewBooksSearchResult {
                             }
 
                             col++;
-                            if (col >= 5) { // Set the number of columns you want (5 in this case)
+                            if (col >= 7) { // Set the number of columns you want (5 in this case)
                                 col = 0;
                                 row++;
                             }

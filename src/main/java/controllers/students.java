@@ -56,11 +56,6 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
                 }
             });
         loadStudents();
-                searchIDstudent.setOnAction(event -> searchStudentByID());
-        // Thêm sự kiện click vào ImageView để tìm kiếm sinh viên
-        //imageView.setOnM(event -> searchStudentByID());
-        imageView.setOnMouseClicked(event -> searchStudentByID());
-
     }
 
     private void loadStudents() { // Đổi tên phương thức cho thống nhất
@@ -143,20 +138,6 @@ public class students { // Thay đổi tên lớp để tuân thủ quy tắc đ
                 showErrorDialog("Lỗi khi cập nhật thông tin : " + e.getMessage());
             }
         }
-    }
-
-    private void searchStudentByID() {
-            String studentIdText = searchIDstudent.getText().trim();
-            if (!studentIdText.isEmpty()) {
-                try {
-                    int studentId = Integer.parseInt(studentIdText);
-                    Admin admin = new Admin(currentUser.getUsername(), currentUser.getPassword());
-                    User student = admin.getUserById(studentId);
-                    showStudentDetails(student);
-                } catch (SQLException e) {
-                    showErrorDialog("Lỗi khi tìm kiếm sinh viên : " + e.getMessage());
-                }
-            }
     }
 
     private void showErrorDialog(String message) {
