@@ -214,9 +214,14 @@ public class loginController implements Initializable {
                     stage.centerOnScreen();
                 } else if ("user".equals(role)) {
                     int mssv = User.getStudentIdByusername(username);
+                    User newuser = User.loadStudentDetailsByID(String.valueOf(mssv));
+
                     currentUser.setUsername(username);
                     currentUser.setRole(role);
                     currentUser.setId(mssv);
+                    currentUser.setEmail(newuser.getEmail());
+                    currentUser.setPassword(newuser.getPassword());
+                    currentUser.setFullName(newuser.getFullName());
                     // Chuyển đến trang Member
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();

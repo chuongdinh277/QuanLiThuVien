@@ -6,30 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UserProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBookBorrowed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBooksSearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/dashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/dashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/students.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/students.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/userViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/userViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/star.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/star.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/allIssueBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/allIssueBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/students.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/students.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

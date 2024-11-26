@@ -73,7 +73,7 @@ public class ViewBookInLibrary {
 
     private void openBookDetailsPage(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/test.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookDetails.fxml"));
             AnchorPane bookDetailsPage = loader.load();
 
             // Đưa thông tin sách vào controller của trang chi tiết

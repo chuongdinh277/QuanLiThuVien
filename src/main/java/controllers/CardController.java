@@ -9,7 +9,6 @@ import cache.ImageCache;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -63,13 +62,13 @@ public class CardController {
     }
     public void setBook(Book book) {
         if (book == null) {
-            showAlbertDialog("Sách không hợp lệ!");
+            System.out.println("Sách không hợp lệ!");
             return;
         }
         this.currentBook = book;
 
         // Kiem tra thong tin sach
-        showAlbertDialog("Đang thiết lập thông tin cho sách: " + book.getTitle());
+        System.out.println("Đang thiết lập thông tin cho sách: " + book.getTitle());
 
         // Caching Book
         if (!BookCache.isCached(book.getId())) {
@@ -89,7 +88,7 @@ public class CardController {
             Image image = new Image(getClass().getResourceAsStream(path));
 
             if (image.isError()) {
-                showErrorDialog("Không thể tải hình ảnh từ: " + path);
+                System.out.println("Không thể tải hình ảnh từ: " + path);
             } else {
                 imageView_User.setImage(image);
             }
@@ -99,21 +98,6 @@ public class CardController {
     @FXML
     private void onSeeBook() {
         // Logic để xem chi tiết sách
-    }
-
-    private void showErrorDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-    private void showAlbertDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thông báo");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 

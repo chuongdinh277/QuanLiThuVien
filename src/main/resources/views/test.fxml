@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane prefHeight="1100.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.testController">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="1180.0">
+            <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="1180.0" styleClass="background" stylesheets="@../css/background.css">
+                    <children>
+                        <AnchorPane layoutX="36.0" layoutY="9.0" prefHeight="1070.0" prefWidth="1047.0" style="-fx-background-radius: 40;" styleClass="background" stylesheets="@../css/background.css">
+                            <children>
+                                <StackPane layoutX="283.0" layoutY="137.0" prefHeight="450.0" prefWidth="738.0">
+                                    <children>
+                                        <Pane fx:id="commentPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 10;">
+                                            <children>
+                                                <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="439.0" prefWidth="580.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                    <children>
+                                                        <ScrollPane layoutX="12.0" layoutY="10.0" prefHeight="304.0" prefWidth="554.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                            <content>
+                                                                <VBox fx:id="commentVbox" prefHeight="30.0" prefWidth="480.0" />
+                                                            </content>
+                                                        </ScrollPane>
+                                                        <HBox layoutX="122.0" layoutY="381.0" prefHeight="30.0" prefWidth="182.0" spacing="5">
+                                                            <children>
+                                                                <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../image/starv.png" />
+                                                                    </image>
+                                                                    <HBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </HBox.margin>
+                                                                </ImageView>
+                                                                <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../image/starv.png" />
+                                                                    </image>
+                                                                    <HBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </HBox.margin>
+                                                                </ImageView>
+                                                                <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../image/starv.png" />
+                                                                    </image>
+                                                                    <HBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </HBox.margin>
+                                                                </ImageView>
+                                                                <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../image/starv.png" />
+                                                                    </image>
+                                                                    <HBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </HBox.margin>
+                                                                </ImageView>
+                                                                <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../image/starv.png" />
+                                                                    </image>
+                                                                    <HBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </HBox.margin>
+                                                                </ImageView>
+                                                            </children>
+                                                        </HBox>
+                                                        <Label layoutX="12.0" layoutY="319.0" prefHeight="30.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Evaluate :" />
+                                                        <Button fx:id="commentButton" layoutX="315.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Comment" />
+                                                        <TextArea fx:id="commentTextArea" layoutX="124.0" layoutY="319.0" prefHeight="54.0" prefWidth="362.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </Pane>
+                                        <Pane fx:id="viewBookPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-background-color: #a2e9eb;">
+                                            <children>
+                                                <TextField fx:id="authorTextField" layoutX="46.0" layoutY="74.0" prefHeight="30.0" prefWidth="323.0" style="-fx-background-color: #a2e9eb; -fx-font-size: 16;" />
+                                                <TextField fx:id="titleTextField" layoutX="37.0" layoutY="8.0" prefHeight="43.0" prefWidth="362.0" style="-fx-background-color: #a2e9eb; -fx-font-size: 30; -fx-font-weight: bold;" />
+                                                <TextArea fx:id="descriptionTextField" layoutX="37.0" layoutY="125.0" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #a2e9eb; -fx-font-size: 15; -fx-font-weight: bold;" wrapText="true" />
+                                                <AnchorPane layoutX="14.0" layoutY="352.0" prefHeight="85.0" prefWidth="338.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                                    <children>
+                                                        <ImageView fitHeight="42.0" fitWidth="45.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../image/category.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                        <Label layoutX="70.0" layoutY="2.0" prefHeight="35.0" prefWidth="142.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="ISBN" />
+                                                        <Label fx:id="ISBNLabel" layoutX="70.0" layoutY="32.0" prefHeight="48.0" prefWidth="243.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="Label" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="379.0" layoutY="353.0" prefHeight="84.0" prefWidth="314.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                                    <children>
+                                                        <ImageView fitHeight="42.0" fitWidth="45.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../image/publishing.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                        <Label layoutX="70.0" layoutY="2.0" prefHeight="35.0" prefWidth="142.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="publisher" />
+                                                        <Label fx:id="publisherLabel" layoutX="70.0" layoutY="32.0" prefHeight="44.0" prefWidth="233.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="Label" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </StackPane>
+                                <HBox layoutX="298.0" layoutY="82.0" prefHeight="43.0" prefWidth="570.0" style="-fx-background-radius: 20;">
+                                    <children>
+                                        <Button fx:id="viewBook" mnemonicParsing="false" onAction="#showViewBook" prefHeight="43.0" prefWidth="285.0" style="-fx-font-size: 20;" stylesheets="@../css/buttonStyle.css" text="View book" />
+                                        <Button fx:id="commentBook" mnemonicParsing="false" onAction="#showCommentBook" prefHeight="43.0" prefWidth="285.0" style="-fx-font-size: 20;" stylesheets="@../css/buttonStyle.css" text="Comment" />
+                                    </children>
+                                </HBox>
+                                <Label layoutX="324.0" layoutY="24.0" style="-fx-text-fill: #076a75; -fx-font-size: 40; -fx-font-weight: bold;" text="Book detail" />
+                                <AnchorPane layoutX="723.0" layoutY="875.0" prefHeight="77.0" prefWidth="258.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                    <children>
+                                        <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/user.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="70.0" layoutY="10.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="total student" />
+                                        <Label layoutX="70.0" layoutY="33.0" prefHeight="18.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="718.0" layoutY="774.0" prefHeight="76.0" prefWidth="269.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                    <children>
+                                        <ImageView fitHeight="42.0" fitWidth="45.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/book.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="78.0" layoutY="5.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Books total" />
+                                        <TextField fx:id="quantityTextField" layoutX="70.0" layoutY="27.0" prefHeight="40.0" prefWidth="169.0" style="-fx-background-color: #41dee0; -fx-font-size: 18; -fx-font-weight: bold;" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="721.0" layoutY="666.0" prefHeight="86.0" prefWidth="262.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                    <children>
+                                        <ImageView fitHeight="42.0" fitWidth="45.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/book1.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="74.0" layoutY="15.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Category" />
+                                        <Label fx:id="categoryLabel" layoutX="74.0" layoutY="43.0" prefHeight="30.0" prefWidth="178.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
+                                    </children>
+                                </AnchorPane>
+                                <TableView fx:id="studentTableview" layoutX="37.0" layoutY="638.0" prefHeight="423.0" prefWidth="640.0" stylesheets="@../css/table-view.css">
+                                    <columns>
+                                        <TableColumn fx:id="studentID" prefWidth="112.79998016357422" text="ID" />
+                                        <TableColumn fx:id="studentName" prefWidth="160.7999725341797" text="Name" />
+                                        <TableColumn fx:id="borrowDate" prefWidth="157.60003662109375" text="Borrow date" />
+                                        <TableColumn fx:id="returnDate" prefWidth="199.99996948242188" text="Return date" />
+                                    </columns>
+                                </TableView>
+                                <AnchorPane layoutX="723.0" layoutY="972.0" prefHeight="77.0" prefWidth="258.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
+                                    <children>
+                                        <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/available.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="70.0" layoutY="10.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Available" />
+                                        <Label fx:id="availableLabel" layoutX="70.0" layoutY="33.0" prefHeight="30.0" prefWidth="182.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                        <HBox layoutX="23.0" layoutY="14.0" prefHeight="53.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fx:id="returnHome" fitHeight="50.0" fitWidth="40.0" onMouseClicked="#handleClick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/back-button.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="5.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label prefHeight="48.0" prefWidth="158.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-background-color: transpent;" text="Home">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Button layoutX="68.0" layoutY="395.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Update" />
+                        <StackPane layoutX="80.0" layoutY="108.0" prefHeight="226.0" prefWidth="162.0" style="-fx-background-color: #33FFFF;">
+                            <children>
+                                <ImageView fx:id="ImageView_book" fitHeight="241.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </StackPane>
+                        <Button layoutX="68.0" layoutY="439.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Delete" />
+                        <HBox layoutX="93.0" layoutY="350.0" prefHeight="36.0" prefWidth="149.0" spacing="5">
+                            <children>
+                                <ImageView fx:id="starbook1" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <ImageView fx:id="starbook2" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <ImageView fx:id="starbook3" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <ImageView fx:id="starbook4" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <ImageView fx:id="starbook5" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#handleStarclick" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/starv.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>
