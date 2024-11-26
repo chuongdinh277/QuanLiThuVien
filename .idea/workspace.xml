@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBookBorrowed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBooksSearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/userViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/userViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Python Script" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2mXyFn4NaoBS1jqeZSf8DbZF7jS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DatabaseConnection.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Application.haubeo.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/New folder/QuanLiThuVien&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15039062&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33011582&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\QuanLiThuVien\src\main\java\APIGoogle" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\QuanLiThuVien\src\main\resources" />
+      <recent name="D:\QuanLiThuVien\src\main\java" />
+      <recent name="D:\QuanLiThuVien\src" />
+      <recent name="D:\QuanLiThuVien\src\main" />
+      <recent name="D:\QuanLiThuVien\src\main\java\controllers" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="org.example.quanlithuvien" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="DatabaseConnection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Database.DatabaseConnection" />
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controllers.App" />
+      <module name="QuanLiThuVien" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DatabaseConnection" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="" />
+      <created>1727237113954</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727237113954</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

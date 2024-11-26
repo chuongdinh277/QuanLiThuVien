@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.returnBookController">
+    <top>
+        <AnchorPane prefHeight="86.0" prefWidth="1180.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="400.0" layoutY="28.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutY="14.0" prefHeight="46.0" prefWidth="1100.0" />
+                <Label alignment="CENTER" layoutY="278.0" prefHeight="40.0" prefWidth="1100.0" />
+                <HBox layoutY="60.0" prefHeight="180.0" prefWidth="1100.0" style="-fx-background-color: #DDDDDD;">
+                    <children>
+                        <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="306.0">
+                            <HBox.margin>
+                                <Insets left="80.0" top="25.0" />
+                            </HBox.margin>
+                            <children>
+                                <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="230.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Enter ID Student to search :" />
+                                <TextField fx:id="IDsearchStudent" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray; -fx-font-size: 20; -fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="198.0" prefWidth="629.0">
+                            <children>
+                                <AnchorPane prefHeight="199.0" prefWidth="667.0">
+                                    <children>
+                                        <TextField fx:id="nameStudentTextfield" layoutX="151.0" layoutY="21.0" prefHeight="38.0" prefWidth="327.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
+                                        <TextField fx:id="studentEmailTextfield" layoutX="149.0" layoutY="121.0" prefHeight="39.0" prefWidth="358.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
+                                        <TextField fx:id="studentNumberTextfield" layoutX="149.0" layoutY="71.0" prefHeight="38.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-font-size: 15; -fx-font-weight: bold;" />
+                                        <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="144.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Name Of Student :" />
+                                        <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student number :" />
+                                        <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student email :" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                  <HBox layoutY="7.0" prefHeight="43.0" prefWidth="1100.0" style="-fx-background-color: #DDDDDD;">
+                      <children>
+                          <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                  <Image url="@../image/user.png" />
+                              </image>
+                              <HBox.margin>
+                                  <Insets left="410.0" top="5.0" />
+                              </HBox.margin>
+                          </ImageView>
+                          <Label style="-fx-text-fill: black; -fx-font-size: 20; -fx-font-weight: bold;" text="Student Infomation">
+                              <HBox.margin>
+                                  <Insets left="6.0" top="5.0" />
+                              </HBox.margin>
+                          </Label>
+                      </children>
+                  </HBox>
+            <TableView fx:id="transactionTable" layoutY="274.0" prefHeight="340.0" prefWidth="1100.0" stylesheets="@../css/table-view.css">
+              <columns>
+                <TableColumn fx:id="STTcolumn" prefWidth="75.0" text="STT" />
+                <TableColumn fx:id="ISBNColumn" prefWidth="144.79998779296875" text="ISBN" />
+                  <TableColumn fx:id="bookTitleColumn" prefWidth="167.20004272460938" text="Book Title" />
+                  <TableColumn fx:id="bookAuthorColumn" prefWidth="178.40005493164062" text="Book Author" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="borrowDateColumn" prefWidth="176.800048828125" text="Borrow Date" />
+                  <TableColumn fx:id="returnDateColumn" prefWidth="189.5999755859375" text="Return Date" />
+                  <TableColumn fx:id="actionColumn" prefWidth="166.39990234375" />
+              </columns>
+            </TableView>
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

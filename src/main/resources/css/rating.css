@@ -1,0 +1,9 @@
+.star-filled {
+    -fx-text-fill: gold;
+    -fx-font-size: 24px;
+}
+
+.star-empty {
+    -fx-text-fill: lightgray;
+    -fx-font-size: 24px;
+}

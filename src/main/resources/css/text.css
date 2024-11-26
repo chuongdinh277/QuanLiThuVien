@@ -1,0 +1,14 @@
+/* Button không gạch chân mặc định */
+.button-underline {
+    -fx-background-color: transparent; /* Loại bỏ nền */
+    -fx-border-color: transparent; /* Loại bỏ viền */
+    -fx-text-fill: white; /* Màu chữ */
+    -fx-font-size: 14px; /* Kích thước chữ */
+    -fx-cursor: hand; /* Hiệu ứng con trỏ khi hover */
+    -fx-padding: 5px 10px; /* Tăng padding để dễ click hơn */
+}
+
+/* Gạch chân khi hover */
+.button-underline:hover {
+    -fx-underline: true; /* Gạch chân */
+}

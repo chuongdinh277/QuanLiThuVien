@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+    <children>
+        <AnchorPane fx:id="starPane" prefHeight="600.0" prefWidth="1000.0" styleClass="star" stylesheets="@../css/star.css">
+            <children>
+              <AnchorPane layoutX="422.0" layoutY="54.0" prefHeight="522.0" prefWidth="538.0" style="-fx-background-radius: 20;" styleClass="background" stylesheets="@../css/background.css">
+                  <children>
+                      <TextField fx:id="passwordText" layoutX="68.0" layoutY="210.0" prefHeight="40.0" prefWidth="320.0" style="-fx-background-radius: 10; -fx-background-color: #ecf8ea;" visible="false" />
+                      <ChoiceBox fx:id="myChoiceBox" layoutX="292.0" layoutY="319.0" prefHeight="25.0" prefWidth="120.0" />
+                      <Label layoutX="145.0" layoutY="319.0" prefHeight="25.0" prefWidth="140.0" style="-fx-font-size: 16; -fx-text-fill: #076469;" text="What is your role?" />
+                      <TextField fx:id="usernameFieldlogin" layoutX="112.0" layoutY="181.0" prefHeight="40.0" prefWidth="320.0" promptText="Tên đăng nhập" style="-fx-background-radius: 10; -fx-background-color: #ecf8ea;" />
+                  <TextField fx:id="passwordTextField" layoutX="112.0" layoutY="259.0" prefHeight="40.0" prefWidth="320.0" style="-fx-background-color: #ecf8ea; -fx-background-radius: 10;" />
+                      <PasswordField fx:id="passwordHiddenlogin" layoutX="112.0" layoutY="259.0" prefHeight="40.0" prefWidth="320.0" promptText="Mật khẩu" style="-fx-background-radius: 10; -fx-background-color: #ecf8ea;" styleClass="passwordHidder" />
+                      <Button fx:id="loginButton" layoutX="202.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="45.0" prefWidth="140.0" style="-fx-background-radius: 30; -fx-font-weight: bold;" stylesheets="@../css/buttonStyle2.css" text="Login" textFill="WHITE">
+                          <font>
+                              <Font size="20.0" />
+                          </font>
+                      </Button>
+                  <Label layoutX="66.0" layoutY="98.0" prefHeight="54.0" prefWidth="271.0" style="-fx-font-size: 20; -fx-text-fill: #076469;" text="Sign in to your account" />
+                  <Label layoutX="70.0" layoutY="153.0" style="-fx-font-size: 18; -fx-text-fill: #076469; -fx-font-weight: bold;" text="Username" />
+                  <Label layoutX="72.0" layoutY="230.0" style="-fx-font-size: 18; -fx-text-fill: #076469; -fx-font-weight: bold;" text="Password" />
+                  <ImageView fx:id="showImage" fitHeight="27.0" fitWidth="27.0" layoutX="388.0" layoutY="265.0" onMouseClicked="#handleShowPassword" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/eye.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="showImage1" fitHeight="27.0" fitWidth="27.0" layoutX="388.0" layoutY="265.0" onMouseClicked="#handleShowPassword" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/eye.png" />
+                     </image>
+                  </ImageView>
+                  </children>
+              </AnchorPane>
+            <ImageView fitHeight="434.0" fitWidth="538.0" layoutX="-58.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/logo.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="welcomeLabel" layoutX="33.0" layoutY="92.0" style="-fx-font-size: 37; -fx-font-weight: bold; -fx-text-fill: #a4f1f5;" styleClass="blinking" stylesheets="@../css/label.css" text="Welcome to library !" />
+                  <Text fill="WHITE" layoutX="94.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-origin: #076469;" text="Already have an account ?">
+                      <font>
+                          <Font size="14.0" />
+                      </font>
+                  </Text>
+                
+                      <Button fx:id="signUpButton" layoutX="255.0" layoutY="448.0" mnemonicParsing="false" onAction="#signUp" prefHeight="34.0" prefWidth="69.0" style="-fx-font-size: 15; -fx-background-color: transpent;" styleClass="button-underline" stylesheets="@../css/text.css" text="Sign In" textFill="WHITE">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

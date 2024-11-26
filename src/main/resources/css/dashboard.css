@@ -1,0 +1,11 @@
+.anchor-pane {
+    -fx-background-image: url("file:/D:/QuanLiThuVien/src/main/resources/image/2.jpg");
+     -fx-background-repeat: no-repeat; /* Không lặp lại ảnh */
+        -fx-background-size: cover; /* Kéo dãn ảnh để phủ toàn bộ */
+        -fx-background-position: center; /* Đặt ảnh ở giữa */
+        -fx-background-radius: 15; /* Bo góc nền ảnh */
+        -fx-background-clip: padding-box; /* Áp dụng bo góc cho nền */
+
+        -fx-border-width: 2; /* Độ dày viền */
+        -fx-border-radius: 15; /* Bo góc viền */
+}

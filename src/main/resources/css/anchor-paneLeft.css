@@ -1,0 +1,4 @@
+/* File: anchor-pane.css */
+.anchor-paneLeft {
+    -fx-background-color: linear-gradient(to bottom, #35a6b8, #056f80); /* Chuyển màu từ xanh nước biển (trên) sang xanh dương (dưới) */
+}

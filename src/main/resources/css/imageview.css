@@ -1,0 +1,6 @@
+.image-with-border {
+    -fx-border-color: black;     /* Màu viền */
+    -fx-border-width: 5;         /* Độ dày viền */
+    -fx-border-radius: 15;       /* Bo góc viền */
+    -fx-background-radius: 15;   /* Bo góc ảnh (đảm bảo góc ảnh cũng bo giống viền) */
+}

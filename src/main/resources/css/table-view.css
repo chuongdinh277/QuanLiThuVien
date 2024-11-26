@@ -1,0 +1,17 @@
+.table-view {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #d0d0d0;
+}
+
+.table-view .column-header {
+    -fx-background-color: #e0e0e0;
+    -fx-font-weight: bold;
+}
+
+.table-view .cell {
+    -fx-padding: 5px;
+}
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

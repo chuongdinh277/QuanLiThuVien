@@ -1,0 +1,23 @@
+/* Màu viền bên ngoài của biểu đồ */
+.chart {
+    -fx-border-color: #08827e; /* Màu xanh ngọc cho viền */
+    -fx-border-width: 2px; /* Độ dày của viền */
+    -fx-background-color: #a5d2d9; /* Màu nền của biểu đồ */
+}
+
+/* Màu của các cột trong biểu đồ */
+.chart-bar .chart-bar {
+    -fx-bar-fill: #8ee5ed !important; /* Màu xanh nhạt cho cột */
+}
+
+/* Màu chữ trong biểu đồ */
+.chart .chart-title,
+.chart .chart-legend-item,
+.chart .axis-label,
+.chart .axis-tick-mark-label {
+    -fx-text-fill: black; /* Màu trắng cho chữ */
+}
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

@@ -1,0 +1,10 @@
+.see-all-label {
+    -fx-text-fill: #7e57c2; /* Màu tím */
+    -fx-font-weight: bold; /* Đậm */
+    -fx-font-size: 14px;
+    -fx-cursor: hand; /* Con trỏ chuột dạng tay */
+}
+
+.see-all-label:hover {
+    -fx-underline: true; /* Gạch chân khi di chuột */
+}

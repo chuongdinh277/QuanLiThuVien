@@ -1,0 +1,7 @@
+.background {
+ -fx-background-color: linear-gradient(to right, #e6f3f5, #cbedf2);
+}
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
