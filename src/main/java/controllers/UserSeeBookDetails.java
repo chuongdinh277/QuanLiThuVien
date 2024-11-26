@@ -152,6 +152,7 @@ public class UserSeeBookDetails {
             String mssv = String.valueOf(currentUser.getId());
             User newUser = User.loadStudentDetailsByID(mssv);
             boolean isReturn = TransactionDAO.returnBook(newUser, currentBook);
+            System.out.println(currentBook.toString());
             if (isReturn) {
                 showAlbertDialog("Trả sách thành công");
                 //menuControllerAdmin.loadBookList();
