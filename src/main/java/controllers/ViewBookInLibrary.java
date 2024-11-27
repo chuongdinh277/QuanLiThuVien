@@ -29,7 +29,6 @@ public class ViewBookInLibrary {
     private ScrollPane scrollPane;
     @FXML
     private GridPane bookGrid;
-
     private int booksLoaded = 0;
     private static final int PAGE_SIZE = 21;
 
@@ -77,8 +76,12 @@ public class ViewBookInLibrary {
             ScrollPane bookDetailsPage = loader.load();
 
             // Đưa thông tin sách vào controller của trang chi tiết
-            UserSeeBookDetails bookDetailsController = loader.getController();
-            bookDetailsController.setBook(book);
+            UserSeeBookDetails controller = loader.getController();
+            if (book == null) {
+                System.out.println("null");
+            }
+            controller.setBook(book);
+
 
             // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
             Stage stage = new Stage();

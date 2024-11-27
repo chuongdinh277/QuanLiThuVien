@@ -182,6 +182,26 @@ public class TransactionDAO {
         }
         return result;
     }
+    public static boolean getBorrowedBooksbymssv(String mssv, Book currentBook) {
+        String sql = "SELECT * FROM transactions WHERE mssv = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, mssv);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                if (currentBook != null && resultSet.getString("ISBN").equals(currentBook.getISBN())) {
+                    return true;
+                } else {
+                    System.out.println("Không tìm thấy sách trùng khớp");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     public static List<Transaction> getTransactionsByStudentId(String studentId) throws SQLException {
         List<Transaction> result = new ArrayList<>();
 

@@ -181,7 +181,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="returnBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Return" visible="false" />
+                  <Button fx:id="returnBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Return" />
                   <StackPane layoutX="80.0" layoutY="108.0" prefHeight="226.0" prefWidth="162.0" style="-fx-background-color: #33FFFF;">
                      <children>
                         <ImageView fx:id="ImageView_book" fitHeight="241.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" />
@@ -231,7 +231,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <Button fx:id="borrowBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Borrow" visible="false" />
+                  <Button fx:id="borrowBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Borrow" />
                </children>
             </AnchorPane>
          </children>

@@ -110,16 +110,7 @@ public class UserSeeBookDetails {
     private Button borrowBook;
     @FXML
     private Button returnBook;
-
-    @FXML
-    private TableColumn<Transaction, String> studentID;
-
-    @FXML
-    private TableColumn<Transaction, String> studentName;
-
-    @FXML
-    private TableView<Transaction> studentTableview;
-
+    
     @FXML
     private TextField titleTextField;
 
@@ -130,7 +121,7 @@ public class UserSeeBookDetails {
     private Pane viewBookPane;
     @FXML
     private TextField bookIDtextField;
-    private Book currentBook;
+    public Book currentBook;
 
     private MenuController_Admin menuControllerAdmin;
     @FXML
@@ -144,6 +135,7 @@ public class UserSeeBookDetails {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
 
 
     @FXML
@@ -171,6 +163,8 @@ public class UserSeeBookDetails {
             User newUser = User.loadStudentDetailsByID(mssv);
             boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1,10);
             if (isBorrow) {
+                borrowBook.setVisible(false);
+                returnBook.setVisible(true);
                 showAlbertDialog("Mượn sách thành công");
                 //menuControllerAdmin.loadBookList();
             } else {
@@ -193,25 +187,7 @@ public class UserSeeBookDetails {
         loadReview();
         System.out.println("hello");
     }
-    @FXML
-    private void initialize() throws SQLException {
-        String id = String.valueOf(currentUser.getId());
-        List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(id);
-        if(borrowedBooks.isEmpty()) {
-            System.out.println("list rong");
-        } else {
-            System.out.println("khong rong");
-        }
-        if (borrowedBooks.contains(currentBook)) {
-            System.out.println("borrowed");
-            borrowBook.setVisible(true);
-            returnBook.setVisible(false);
-        } else {
-            System.out.println("not borrowed");
-            borrowBook.setVisible(false);
-            returnBook.setVisible(true);
-        }
-    }
+
 
     @FXML
     private void handleClick(MouseEvent event) {
@@ -257,8 +233,10 @@ public class UserSeeBookDetails {
     }
 
     public void setBook (Book book) {
+        this.currentBook = book;
         if (book != null) {
-            this.currentBook = book;
+            System.out.println(currentBook.getISBN());
+            //System.out.println(currentBook.getISBN());
             ISBNLabel.setText(book.getISBN());
             titleTextField.setText(book.getTitle());
             authorTextField.setText(book.getAuthor());
@@ -272,6 +250,19 @@ public class UserSeeBookDetails {
             else {
                 availableLabel.setText("Not available");
             }
+
+            String mssv = String.valueOf(currentUser.getId());
+            // User newUser = User.loadStudentDetailsByID(mssv);
+            boolean isBorrowed = TransactionDAO.getBorrowedBooksbymssv(mssv, currentBook);
+            // Nếu đã mượn sách, hiển thị nút "Return Book", ngược lại là "Borrow Book"
+            if (isBorrowed) {
+                borrowBook.setVisible(false);
+                returnBook.setVisible(true);
+            } else {
+                borrowBook.setVisible(true);
+                returnBook.setVisible(false);
+            }
+
             try {
                 // Lấy số sao trung bình từ cơ sở dữ liệu
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
@@ -285,7 +276,6 @@ public class UserSeeBookDetails {
             ImageView_book.setImage(new Image(book.getImagePath()));
         }
     }
-
     private void saveReview() {
         if (selectedRating > 0 && currentBook != null) {
             String isbn = currentBook.getISBN();

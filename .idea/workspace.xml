@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +72,8 @@
     "last_opened_file_path": "D:/New folder/QuanLiThuVien",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15039062",
-    "project.structure.side.proportion": "0.33011582"
+    "project.structure.side.proportion": "0.33011582",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
