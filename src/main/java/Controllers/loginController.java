@@ -1,6 +1,6 @@
-package controllers;
+package Controllers;
 
-import javafx.animation.FadeTransition;
+import Cache.ImageCache;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -26,10 +26,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
-import User.Admin;
+
 import User.User;
 import User.currentUser;
-import User.Member;
 import javafx.util.Duration;
 
 public class loginController implements Initializable {
@@ -105,6 +104,7 @@ public class loginController implements Initializable {
 
             // Bắt đầu hiệu ứng di chuyển
             transition.play();
+
         }
     }
     @FXML

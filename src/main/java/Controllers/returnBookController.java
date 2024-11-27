@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import Document.Book;
 import Document.BookDAO;
@@ -13,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -103,7 +101,8 @@ public class returnBookController {
         transactionTable.setItems(transactionList);
     }
 
-    private void handleReturnBook(Transaction transaction) {
+
+        private void handleReturnBook(Transaction transaction) {
         // Xử lý sự kiện
         try {
             Book book = BookDAO.getBookByISBN(transaction.getIsbn());

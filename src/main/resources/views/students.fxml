@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.students">
+<BorderPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.students">
     <center>
         <AnchorPane styleClass="background" stylesheets="@../css/background.css">
             <TableView fx:id="studentTable" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="459.0" prefWidth="706.0" stylesheets="@../css/table-view.css" tableMenuButtonVisible="true">

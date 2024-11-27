@@ -1,7 +1,6 @@
-package controllers;
+package Controllers;
 
 import Document.*;
-import User.User;
 import User.currentUser;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,8 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,13 +17,12 @@ import javafx.scene.layout.Pane;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserSeeBookDetails {
+public class bookDetailCotroller {
 
 
     @FXML
@@ -106,11 +102,16 @@ public class UserSeeBookDetails {
 
     @FXML
     private ImageView starbook5;
+
     @FXML
-    private Button borrowBook;
+    private TableColumn<Transaction, String> studentID;
+
     @FXML
-    private Button returnBook;
-    
+    private TableColumn<Transaction, String> studentName;
+
+    @FXML
+    private TableView<Transaction> studentTableview;
+
     @FXML
     private TextField titleTextField;
 
@@ -121,59 +122,14 @@ public class UserSeeBookDetails {
     private Pane viewBookPane;
     @FXML
     private TextField bookIDtextField;
-    public Book currentBook;
+    private Book currentBook;
 
     private MenuController_Admin menuControllerAdmin;
     @FXML
     private TextField sectionTextField;
     private int selectedRating = 0;
-    @FXML
-    private Button exit;
-
-    @FXML
-    private void exit(ActionEvent event) {
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
 
 
-
-    @FXML
-    private void returnBook(ActionEvent event) {
-        try {
-            String mssv = String.valueOf(currentUser.getId());
-            User newUser = User.loadStudentDetailsByID(mssv);
-            boolean isReturn = TransactionDAO.returnBook(newUser, currentBook);
-            System.out.println(currentBook.toString());
-            if (isReturn) {
-                showAlbertDialog("Trả sách thành công");
-                //menuControllerAdmin.loadBookList();
-            } else {
-                showAlbertDialog("Trả thất bại");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void borrowBook(ActionEvent event) {
-        try {
-            String mssv = String.valueOf(currentUser.getId());
-            System.out.println(mssv);
-            User newUser = User.loadStudentDetailsByID(mssv);
-            boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1,10);
-            if (isBorrow) {
-                borrowBook.setVisible(false);
-                returnBook.setVisible(true);
-                showAlbertDialog("Mượn sách thành công");
-                //menuControllerAdmin.loadBookList();
-            } else {
-                showAlbertDialog("Mượn thất bại");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     @FXML
     private void showViewBook(ActionEvent event) {
         viewBookPane.setVisible(true);
@@ -186,8 +142,17 @@ public class UserSeeBookDetails {
         if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
         System.out.println("hello");
-    }
 
+    }
+    @FXML
+    private void initialize() {
+        commentButton.setOnAction(even -> saveReview());
+        studentID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMssv()));
+        studentName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        borrowDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getBorrow_Date()));
+        returnDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReturn_Date()));
+        //loadallStudent();
+    }
 
     @FXML
     private void handleClick(MouseEvent event) {
@@ -233,10 +198,8 @@ public class UserSeeBookDetails {
     }
 
     public void setBook (Book book) {
-        this.currentBook = book;
         if (book != null) {
-            System.out.println(currentBook.getISBN());
-            //System.out.println(currentBook.getISBN());
+            this.currentBook = book;
             ISBNLabel.setText(book.getISBN());
             titleTextField.setText(book.getTitle());
             authorTextField.setText(book.getAuthor());
@@ -250,19 +213,6 @@ public class UserSeeBookDetails {
             else {
                 availableLabel.setText("Not available");
             }
-
-            String mssv = String.valueOf(currentUser.getId());
-            // User newUser = User.loadStudentDetailsByID(mssv);
-            boolean isBorrowed = TransactionDAO.getBorrowedBooksbymssv(mssv, currentBook);
-            // Nếu đã mượn sách, hiển thị nút "Return Book", ngược lại là "Borrow Book"
-            if (isBorrowed) {
-                borrowBook.setVisible(false);
-                returnBook.setVisible(true);
-            } else {
-                borrowBook.setVisible(true);
-                returnBook.setVisible(false);
-            }
-
             try {
                 // Lấy số sao trung bình từ cơ sở dữ liệu
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
@@ -274,6 +224,53 @@ public class UserSeeBookDetails {
         }
         if (book.getImagePath() != null) {
             ImageView_book.setImage(new Image(book.getImagePath()));
+        }
+        loadallStudent();
+    }
+    @FXML
+    private void updateBook(ActionEvent event) {
+        try {
+            // Get the updated quantity from the input
+            int newQuantity = Integer.parseInt(quantityTextField.getText());
+            //System.out.println(newQuantity);
+            int additionalQuantity = currentBook.getQuantity() + newQuantity;
+            System.out.println(additionalQuantity);
+            // Update other fields
+            currentBook.setAuthor(authorTextField.getText());
+            currentBook.setISBN(ISBNLabel.getText());
+            currentBook.setCategory(categoryLabel.getText());
+            currentBook.setPublisher(publisherLabel.getText());
+            currentBook.setSection(sectionTextField.getText());
+
+            // Update book in the database
+            boolean isUpdate = BookDAO.updateBook(currentBook);
+
+            // Update quantity separately
+            boolean updateQuantity = BookDAO.updateQuantity(currentBook, additionalQuantity);
+
+            if (isUpdate && updateQuantity) {
+                showAlbertDialog("Cập nhật sách thành công");
+            } else {
+                showAlbertDialog("Cập nhật thất bại");
+            }
+        } catch (SQLException | NumberFormatException e) {
+            showErrorDialog("Lỗi khi cập nhật sách: " + e.getMessage());
+        }
+    }
+
+
+    @FXML
+    private void deleteBook(ActionEvent event) {
+        try {
+            boolean isDelete = BookDAO.deleteBook(currentBook);
+            if (isDelete) {
+                showAlbertDialog("Xóa sách thành công");
+                //menuControllerAdmin.loadBookList();
+            } else {
+                showAlbertDialog("Xóa thất bại");
+            }
+        } catch (SQLException e) {
+            showErrorDialog("Lỗi khi xóa sách: " + e.getMessage());
         }
     }
     private void saveReview() {
@@ -380,6 +377,23 @@ public class UserSeeBookDetails {
         }
     }
 
+    private void loadallStudent() {
+        String isbn = currentBook.getISBN();
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        try {
+            // Lấy tất cả giao dịch từ cơ sở dữ liệu
+            List<Transaction> issueBook = TransactionDAO.getTransactionsByISBN(isbn);
+
+            if (issueBook != null) {
+                transactions.addAll(issueBook); // Thêm tất cả giao dịch vào ObservableList
+            } else {
+                showAlbertDialog("Không có giao dịch trong cơ sở dữ liệu.");
+            }
+        } catch (Exception e) {
+            showErrorDialog("Lỗi khi tải giao dịch: " + e.getMessage());
+        }
+        studentTableview.setItems(transactions);
+    }
     private void showAlbertDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");

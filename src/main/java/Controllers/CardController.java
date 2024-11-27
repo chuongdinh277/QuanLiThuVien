@@ -1,13 +1,9 @@
-package controllers;
+package Controllers;
 
 import Document.Book;
-import Document.TransactionDAO;
-import User.User;
-import User.currentUser;
-import cache.BookCache;
-import cache.ImageCache;
+import Cache.BookCache;
+import Cache.ImageCache;
 import javafx.animation.ScaleTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,8 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-
-import java.sql.SQLException;
 
 public class CardController {
     @FXML
@@ -71,7 +65,7 @@ public class CardController {
         System.out.println("Đang thiết lập thông tin cho sách: " + book.getTitle());
 
         // Caching Book
-        if (!BookCache.isCached(book.getId())) {
+        if (!BookCache.isCached(book.getISBN())) {
             BookCache.putBook(book);
         }
 

@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,13 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.sql.Connection;
-import java.sql.Connection;
+
 public class adminMenuController implements Initializable {
 
     @FXML

@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import java.sql.SQLException;
 import javafx.application.Platform;

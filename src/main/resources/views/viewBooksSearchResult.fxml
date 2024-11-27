@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewBooksSearchResult">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ViewBooksSearchResult">
    <children>
       <ScrollPane fx:id="scrollPane" prefHeight="680.0" prefWidth="1180.0">
          <content>

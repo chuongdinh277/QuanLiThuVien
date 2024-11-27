@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import User.*;
 import javafx.animation.KeyFrame;
@@ -44,13 +44,12 @@ public class userViewController {
 
 
     // Button
-
+    @FXML
+    private Button personInformation;
     @FXML
     private Button bookLibrary;
     @FXML
     private Button bookBorrowed;
-    @FXML
-    private Button personInformation;
     @FXML
     private Button homeButton;
     @FXML
@@ -110,12 +109,10 @@ public class userViewController {
         addHoverEffect(avatar);
         addHoverEffect(bookLibrary);
         addHoverEffect(bookBorrowed);
-        addHoverEffect(personInformation);
         addHoverEffect(logoutAndEditProfile);
         addHoverEffect(homeButton);
         setButtonTextColor(bookLibrary, defaultColor);
         setButtonTextColor(bookBorrowed, defaultColor);
-        setButtonTextColor(personInformation, defaultColor);
     }
 
     private void updateTime() {
@@ -153,7 +150,7 @@ public class userViewController {
 
     @FXML
     void handlePersonClick() {
-        handleButtonClickWithFXML(profileImageView, "/image/userColor.png", personInformation, "/views/userProfile.fxml");
+        handleButtonClickWithFXML(profileImageView, "/image/rabbit.png", personInformation, "/views/userProfile.fxml");
     }
 
     @FXML
@@ -189,13 +186,13 @@ public class userViewController {
     private void resetButtonStyles() {
         setButtonTextColor(bookLibrary, defaultColor);
         setButtonTextColor(bookBorrowed, defaultColor);
-        setButtonTextColor(personInformation, defaultColor);
+//        setButtonTextColor(personInformation, defaultColor);
         setButtonTextColor(homeButton, defaultColor);
 
         // Đặt lại hình ảnh cho tất cả ImageView
         changeImage(libraryImageView, "/image/libraryNoColor.png");
         changeImage(borrowedBookImageView, "/image/bookNoColor.png");
-        changeImage(profileImageView, "/image/userNoColor.png");
+//        changeImage(profileImageView, "/image/userNoColor.png");
         changeImage(homeImageView, "/image/homeNoColor.png");
     }
 

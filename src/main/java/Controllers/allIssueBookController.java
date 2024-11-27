@@ -1,8 +1,7 @@
-package controllers;
+package Controllers;
 
 import Document.Transaction;
 import Document.TransactionDAO;
-import User.currentUser;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

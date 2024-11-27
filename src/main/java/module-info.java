@@ -6,15 +6,15 @@ module org.example.src {
     requires java.sql;
     requires java.net.http;
 
-    opens controllers to javafx.fxml;
-    exports controllers;
+    opens Controllers to javafx.fxml;
+    exports Controllers;
 
     opens APIGoogle;
     exports APIGoogle;
 
     opens Document;
     exports Document;
-    exports cache;
-    opens cache;
+    exports Cache;
+    opens Cache;
 
 }

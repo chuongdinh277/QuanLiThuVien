@@ -1,6 +1,5 @@
-package controllers;
+package Controllers;
 
-import Document.Book; // Import lớp Book
 import User.Admin;
 import User.User;
 import User.currentUser;
