@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" prefHeight="232.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CardController">
+<AnchorPane fx:id="cardPane" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" prefHeight="282.0" prefWidth="205.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CardController">
    <children>
-      <AnchorPane layoutX="9.0" layoutY="9.0" prefHeight="183.0" prefWidth="140.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
+      <AnchorPane layoutX="23.0" layoutY="14.0" prefHeight="223.0" prefWidth="160.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
          <children>
-            <ImageView fx:id="imageView_User" fitHeight="151.0" fitWidth="115.0" layoutX="13.0" layoutY="16.0" />
+            <ImageView fx:id="imageView_User" fitHeight="199.0" fitWidth="143.0" layoutX="9.0" layoutY="12.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="titleLabel" layoutX="22.0" layoutY="192.0" prefHeight="30.0" prefWidth="115.0" styleClass="transparent-label" stylesheets="@../css/style.css" text="Title">
+      <Label fx:id="titleLabel" layoutX="33.0" layoutY="238.0" prefHeight="30.0" prefWidth="115.0" styleClass="transparent-label" stylesheets="@../css/style.css" text="Title">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="authorLabel" layoutX="22.0" layoutY="217.0" prefHeight="11.0" prefWidth="115.0" styleClass="transparent-label" stylesheets="@../css/style.css" text="Title" textFill="#605d5d" />
+      <Label fx:id="authorLabel" layoutX="33.0" layoutY="259.0" prefHeight="11.0" prefWidth="115.0" styleClass="transparent-label" stylesheets="@../css/style.css" text="Title" textFill="#605d5d" />
    </children>
 </AnchorPane>

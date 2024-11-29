@@ -2,6 +2,7 @@ package Document;
 
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -439,5 +440,41 @@ public class BookDAO {
         return books;
     }
 
+    public static List<Book> getBooksByAverageRating() throws SQLException {
+        List<Book> books = getAllBooks();
+        List<Book> filteredBooks = new ArrayList<>();
+        Map<String, Double> ratingsMap = new HashMap<>();
 
+        // Lấy đánh giá trung bình cho từng sách
+        for (Book book : books) {
+            double averageRating = ReviewDAO.getAverageRating(book.getISBN());
+            if (averageRating > 0) {
+                filteredBooks.add(book);
+                ratingsMap.put(book.getISBN(), averageRating);
+                System.out.println(book.getTitle() + " " + averageRating);
+            }
+        }
+
+        // Sắp xếp filteredBooks theo đánh giá trung bình
+        filteredBooks.sort((book1, book2) -> {
+            double rating1 = ratingsMap.get(book1.getISBN());
+            double rating2 = ratingsMap.get(book2.getISBN());
+            return Double.compare(rating2, rating1); // Sắp xếp giảm dần
+        });
+
+        return filteredBooks;
+    }
+
+
+    public static List<Book> getRecentlyAddedBooks() throws SQLException {
+        List<Book> books = getAllBooks();
+        List<Book> recentlyAddedBooks = new ArrayList<>();
+
+        // Iterate through the list in reverse order
+        for (int i = books.size() - 1; i >= 0 && recentlyAddedBooks.size() < 10; i--) {
+            System.out.println(books.get(i).getTitle());
+            recentlyAddedBooks.add(books.get(i));
+        }
+        return recentlyAddedBooks;
+    }
 }

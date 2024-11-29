@@ -79,7 +79,7 @@
                                              </children>
                                           </HBox>
                                           <Label layoutX="12.0" layoutY="319.0" prefHeight="30.0" prefWidth="112.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Evaluate :" />
-                                          <Button fx:id="commentButton" layoutX="315.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Comment" />
+                                          <Button fx:id="commentButton" layoutX="315.0" layoutY="391.0" mnemonicParsing="false" onAction="#saveReview" prefHeight="26.0" prefWidth="112.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Comment" />
                                           <TextArea fx:id="commentTextArea" layoutX="124.0" layoutY="319.0" prefHeight="54.0" prefWidth="362.0" />
                                        </children>
                                     </AnchorPane>

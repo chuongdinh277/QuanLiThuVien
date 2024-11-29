@@ -29,7 +29,7 @@ public class ViewBookInLibrary {
     @FXML
     private GridPane bookGrid;
     private int booksLoaded = 0;
-    private static final int PAGE_SIZE = 21;
+    private static final int PAGE_SIZE = 28;
 
     private boolean isLoading = false;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();

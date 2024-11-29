@@ -1,4 +1,5 @@
 package Controllers;
+
 import User.User;
 import Document.Book;
 import User.currentUser;
@@ -25,7 +26,7 @@ public class ViewBookBorrowed {
     private GridPane borrowedBookGrid;
 
     private boolean isLoading = false;
-    private boolean isAllBooksLoaded = false; // Cờ để kiểm tra nếu đã tải hết sách
+    private boolean isAllBooksLoaded = false; // Cờ kiểm tra nếu đã tải hết sách
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @FXML
@@ -45,7 +46,7 @@ public class ViewBookBorrowed {
 
     private AnchorPane createCard(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card.fxml"));
             AnchorPane card = loader.load();
             CardController cardController = loader.getController();
             cardController.setBook(book);
@@ -67,7 +68,7 @@ public class ViewBookBorrowed {
             UserSeeBookDetails bookDetailsController = loader.getController();
             bookDetailsController.setBook(book);
 
-            // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
+            // Hiển thị trang chi tiết (trong một cửa sổ mới)
             Stage stage = new Stage();
             stage.setScene(new Scene(bookDetailsPage));
             stage.setTitle("Chi tiết sách");
@@ -79,44 +80,42 @@ public class ViewBookBorrowed {
     }
 
     private void loadBorrowedBooks() {
-        if (isLoading || isAllBooksLoaded) return;
+        if (isLoading || isAllBooksLoaded) return; // Nếu đang tải hoặc đã tải hết sách thì không làm gì
 
         isLoading = true;
         executorService.submit(() -> {
             try {
-                try {
-                    int id = User.getStudentIdByusername(currentUser.getUsername());
-                    List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));
+                int id = User.getStudentIdByusername(currentUser.getUsername());
+                List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));
 
-                    if (!borrowedBooks.isEmpty()) {
-                        int row = borrowedBookGrid.getChildren().size() / 7;
-                        int col = borrowedBookGrid.getChildren().size() % 7;
+                if (borrowedBooks != null && !borrowedBooks.isEmpty()) {
+                    int row = borrowedBookGrid.getChildren().size() / 7;
+                    int col = borrowedBookGrid.getChildren().size() % 7;
 
-                        for (Book book : borrowedBooks) {
-                            AnchorPane card = createCard(book);
-                            if (card != null) {
-                                int finalRow = row;
-                                int finalCol = col;
-                                javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
-                            }
-                            col++;
-                            if (col >= 7) {
-                                col = 0;
-                                row++;
-                            }
+                    for (Book book : borrowedBooks) {
+                        AnchorPane card = createCard(book);
+                        if (card != null) {
+                            int finalCol = col;
+                            int finalRow = row;
+                            javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
                         }
-                    } else {
-                        System.out.println("Không tìm thấy sách nào đã mượn.");
-                        isAllBooksLoaded = true; // Đánh dấu rằng đã tải hết sách
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("L��i khi lấy danh sách sách đã mượn");
-                }
 
-            }
-            finally {
-                isLoading = false;
+                        col++;
+                        if (col >= 7) {
+                            col = 0;
+                            row++;
+                        }
+                    }
+                } else {
+                    System.out.println("Không tìm thấy sách nào đã mượn.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Lỗi khi lấy danh sách sách đã mượn");
+            } finally {
+                isLoading = false; // Kết thúc quá trình tải
+                isAllBooksLoaded = true; // Đánh dấu là không còn sách nào để tải nữa
+
             }
         });
     }

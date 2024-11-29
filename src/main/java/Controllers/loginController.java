@@ -226,7 +226,7 @@ public class loginController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root, 1300, 800));
+                    stage.setScene(new Scene(root, 1310, 800));
                     stage.show();
                 } else {
                     // Thông báo lỗi nếu không phải Admin hoặc Member

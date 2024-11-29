@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class userViewController {
+public class UserViewController {
 
     // Label
 
@@ -95,6 +95,7 @@ public class userViewController {
     @FXML
     private void initialize() {
         removeFocusFromAllNodes(scrollPane);
+        loadFXML("/views/userHome.fxml");
         updateTime();
         updateDate(); // Cập nhật ngày tháng khi khởi tạo
         // Tạo Timeline để cập nhật thời gian mỗi giây
@@ -155,7 +156,7 @@ public class userViewController {
 
     @FXML
     void handleHomeClick() {
-        handleButtonClickWithFXML(homeImageView, "/image/homeColor.png", homeButton, "/views/viewBookInLibrary.fxml");
+        handleButtonClickWithFXML(homeImageView, "/image/homeColor.png", homeButton, "/views/userHome.fxml");
     }
 
 
@@ -180,13 +181,21 @@ public class userViewController {
 
     private void changeButtonStyle(Button button) {
         button.setTextFill(activeColor);
-        button.setStyle("-fx-background-color: #AAAAAA;");
+
+        String backgroundColor;
+        if (button.equals(personInformation)) {
+            backgroundColor = "rgba(0, 0, 0, 0)"; // Màu nền trong suốt
+        } else {
+            backgroundColor = "#AAAAAA"; // Màu nền xám
+        }
+
+        button.setStyle("-fx-background-color: " + backgroundColor + ";");
     }
 
     private void resetButtonStyles() {
         setButtonTextColor(bookLibrary, defaultColor);
         setButtonTextColor(bookBorrowed, defaultColor);
-//        setButtonTextColor(personInformation, defaultColor);
+        setButtonTextColor(personInformation, defaultColor);
         setButtonTextColor(homeButton, defaultColor);
 
         // Đặt lại hình ảnh cho tất cả ImageView

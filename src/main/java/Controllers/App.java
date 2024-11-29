@@ -11,7 +11,13 @@ import Cache.BookCache;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        BookCache.getInstance().loadBooksFromDatabase();
+        // Tải cache từ tệp trước khi load từ cơ sở dữ liệu
+        BookCache.getInstance().loadCacheFromFile();
+        // Nếu cache trống, tải từ cơ sở dữ liệu
+        if (BookCache.getInstance().isCached("someISBN")) { // Kiểm tra ví dụ (có thể thay đổi)
+            BookCache.getInstance().loadBooksFromDatabase();
+        }
+
         ImageCache.getInstance().loadImagesFromDatabase();
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/views/login.fxml"));
@@ -19,6 +25,11 @@ public class App extends Application {
         stage.setTitle("VERSION 1.0");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        BookCache.getInstance().saveCacheToFile(); // Lưu cache vào tệp khi thoát
     }
 
     public static void main(String[] args) {

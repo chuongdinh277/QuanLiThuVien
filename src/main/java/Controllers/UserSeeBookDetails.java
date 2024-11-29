@@ -273,6 +273,7 @@ public class UserSeeBookDetails {
             ImageView_book.setImage(new Image(book.getImagePath()));
         }
     }
+    @FXML
     private void saveReview() {
         if (selectedRating > 0 && currentBook != null) {
             String isbn = currentBook.getISBN();
