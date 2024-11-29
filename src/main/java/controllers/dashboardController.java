@@ -6,21 +6,21 @@ import Document.Transaction;
 import Document.TransactionDAO;
 import User.User;
 import User.Admin;
+import User.currentUser;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +43,17 @@ import java.util.Map;
 import static APIGoogle.GoogleBooksAPI.showErrorDialog;
 
 public class dashboardController {
+    @FXML
+    private Label username;
+    @FXML
+    private Label role;
+    @FXML
+    private MenuButton logoutAndEditProfile;
+    @FXML
+    private MenuItem editProfileButton;
+    @FXML
+    private MenuItem logoutButton;
+
     private BorderPane mainBorderPane;
     @FXML
     private Label percentageQuantityLabel;
@@ -90,6 +101,9 @@ public class dashboardController {
 
     public void initialize() {
         // Hiển thị thời gian hiện tại
+        usernameLabel.setText(currentUser.getUsername());
+        username.setText(currentUser.getUsername());
+        role.setText(currentUser.getRole());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e -> {
@@ -105,7 +119,7 @@ public class dashboardController {
         loadAllStudents();
         loadAllBooks();
         System.out.println(membersCount);
-         membersCountLabel.setText(String.valueOf(membersCount));
+        membersCountLabel.setText(String.valueOf(membersCount));
         booksCountLabel.setText(String.valueOf(booksCount));
         bookQuantityLabel.setText(String.valueOf(bookQuantity));
         loadCategoryStatistics();
@@ -314,6 +328,34 @@ public class dashboardController {
         } catch (IOException e) {
             e.printStackTrace();
             showErrorDialog("Lỗi khi tải giao diện home.fxml: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handlePersonClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/profile.fxml"));
+            AnchorPane personRoot = loader.load();
+            mainBorderPane.setCenter(personRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("L��i khi tải giao diện person.fxml: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void logout_Button(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Parent root = loader.load();
+
+            // Lấy Stage hiện tại từ bất kỳ Node nào
+            Stage stage = (Stage) timeLabel.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            System.err.println("Error loading FXML: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -15,7 +15,7 @@ public class BookRatingDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             // Thêm dấu '%' vào từ khóa tìm kiếm
-            String searchKeyword = "%" + keyword + "%"; // Tìm kiếm chứa keyword
+            String searchKeyword = "%" + keyword + "%"; // Tìm kiếm chứa keyword00
             preparedStatement.setString(1, searchKeyword);
             preparedStatement.setString(2, searchKeyword);
 

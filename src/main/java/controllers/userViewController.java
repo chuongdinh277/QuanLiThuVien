@@ -44,13 +44,12 @@ public class userViewController {
 
 
     // Button
-
+    @FXML
+    private Button personInformation;
     @FXML
     private Button bookLibrary;
     @FXML
     private Button bookBorrowed;
-    @FXML
-    private Button personInformation;
     @FXML
     private Button homeButton;
     @FXML
@@ -110,12 +109,10 @@ public class userViewController {
         addHoverEffect(avatar);
         addHoverEffect(bookLibrary);
         addHoverEffect(bookBorrowed);
-        addHoverEffect(personInformation);
         addHoverEffect(logoutAndEditProfile);
         addHoverEffect(homeButton);
         setButtonTextColor(bookLibrary, defaultColor);
         setButtonTextColor(bookBorrowed, defaultColor);
-        setButtonTextColor(personInformation, defaultColor);
     }
 
     private void updateTime() {
@@ -153,7 +150,7 @@ public class userViewController {
 
     @FXML
     void handlePersonClick() {
-        handleButtonClickWithFXML(profileImageView, "/image/userColor.png", personInformation, "/views/userProfile.fxml");
+        handleButtonClickWithFXML(profileImageView, "/image/rabbit.png", personInformation, "/views/userProfile.fxml");
     }
 
     @FXML
@@ -183,7 +180,15 @@ public class userViewController {
 
     private void changeButtonStyle(Button button) {
         button.setTextFill(activeColor);
-        button.setStyle("-fx-background-color: #AAAAAA;");
+
+        String backgroundColor;
+        if (button.equals(personInformation)) {
+            backgroundColor = "rgba(0, 0, 0, 0)"; // Màu nền trong suốt
+        } else {
+            backgroundColor = "#AAAAAA"; // Màu nền xám
+        }
+
+        button.setStyle("-fx-background-color: " + backgroundColor + ";");
     }
 
     private void resetButtonStyles() {
@@ -195,7 +200,7 @@ public class userViewController {
         // Đặt lại hình ảnh cho tất cả ImageView
         changeImage(libraryImageView, "/image/libraryNoColor.png");
         changeImage(borrowedBookImageView, "/image/bookNoColor.png");
-        changeImage(profileImageView, "/image/userNoColor.png");
+//        changeImage(profileImageView, "/image/userNoColor.png");
         changeImage(homeImageView, "/image/homeNoColor.png");
     }
 
@@ -218,21 +223,6 @@ public class userViewController {
             });
         }
     }
-
-//    @FXML
-//    private void bookLibrary_Button() {
-//        loadFXML("/views/viewBookInLibrary.fxml");
-//    }
-
-//    @FXML
-//    private void bookBorrowed_Button() {
-//        loadFXML("/views/viewBookBorrowed.fxml");
-//    }
-//
-//    @FXML
-//    private void personInformation_Button(ActionEvent event) {
-//        loadFXML("/views/userProfile.fxml");
-//    }
 
 
     @FXML

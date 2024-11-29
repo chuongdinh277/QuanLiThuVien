@@ -146,29 +146,6 @@ public class User {
         }
     }
 
-    private boolean updatePassword(User user,String newPassword) throws SQLException {
-        System.out.println(user.getPassword() + " " + newPassword);
-        if(user.getPassword().equals(newPassword)) {
-            return false;
-        }
-        String sql = "UPDATE users SET userName = ?,password = ? WHERE userName = ?";
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1,user.getUserName());
-            statement.setString(2, newPassword);
-            statement.setString(3, user.getUserName());
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0)  {
-                user.setPassword(newPassword);
-                System.out.println(user.getPassword());
-            }
-            return rowsUpdated > 0;
-        } catch (Exception e) {
-            this.showErrorDialog("Error", e.getMessage());
-        }
-        return false;
-    }
-
     public void deleteReview(String title, String author, String comment) throws SQLException {
         try {
             boolean check = ReviewDAO.removeReview(this.getUserName(), title, author, comment);
@@ -338,5 +315,67 @@ public class User {
         }
         return user;
     }
+
+    public static void updateDatabase(String fullName, String phoneNumber, String password, String username) {
+        String sql = "UPDATE users SET fullName = ?, number = ?, password = ? WHERE username = ?";
+
+        // Sử dụng try-with-resources để tự động đóng kết nối
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Gán giá trị vào các tham số của câu lệnh SQL
+            stmt.setString(1, fullName);
+            stmt.setString(2, phoneNumber);
+            stmt.setString(3, password);
+            stmt.setString(4, username);
+
+            // Thực thi câu lệnh cập nhật
+            int rowsUpdated = stmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Cập nhật thông tin thành công!");
+            } else {
+                System.out.println("Không tìm thấy người dùng với tên đăng nhập này.");
+            }
+
+        } catch (SQLException e) {
+            // Xử lý lỗi và in ra thông báo nếu có lỗi
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    public static User loadUserDetailsByUsername(String username) throws SQLException {
+            String sql = "SELECT * FROM users WHERE username = ?";
+            User user = null;
+
+            try (Connection connection = getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                // Bind the username parameter
+                statement.setString(1, username);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("username"),
+                            resultSet.getString("password"),
+                            resultSet.getString("role"),
+                            resultSet.getString("fullName"),
+                            resultSet.getString("email"),
+                            resultSet.getString("number")
+                    );
+                }
+            } catch (SQLException e) {
+                // Log the error or rethrow it for the caller to handle
+                throw e;
+            }
+
+            return user;
+        }
 
 }

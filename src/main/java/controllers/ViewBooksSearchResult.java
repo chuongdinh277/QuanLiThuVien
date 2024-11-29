@@ -2,16 +2,17 @@ package controllers;
 
 import Document.Book;
 import Document.BookDAO;
-import User.currentUser;
+import controllers.CardController;
+import controllers.UserSeeBookDetails;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
-import Document.TransactionDAO;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,12 +55,38 @@ public class ViewBooksSearchResult {
 
             CardController cardController = loader.getController();
             cardController.setBook(book); // Giả sử bạn đã có phương thức này trong CardController
+            cardController.setBook(book);
+            card.setOnMouseClicked(event -> openBookDetailsPage(book));
 
             return card;
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Lỗi khi tải card");
             return null;
+        }
+    }
+
+    private void openBookDetailsPage(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
+            ScrollPane bookDetailsPage = loader.load();
+
+            // Đưa thông tin sách vào controller của trang chi tiết
+            UserSeeBookDetails controller = loader.getController();
+            if (book == null) {
+                System.out.println("null");
+            }
+            controller.setBook(book);
+
+
+            // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
+            Stage stage = new Stage();
+            stage.setScene(new Scene(bookDetailsPage));
+            stage.setTitle("Chi tiết sách");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
 
@@ -73,6 +100,9 @@ public class ViewBooksSearchResult {
                 try {
                     List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Fetch search results
 
+                    for (Book book : searchResults) {
+                        System.out.println(book.getTitle());
+                    }
 
                     if (searchResults != null && !searchResults.isEmpty()) {
                         int row = searchResultGrid.getChildren().size() / 7; // Giả sử có 5 cột

@@ -61,7 +61,7 @@ public class TransactionDAO {
                 insertTransactionStatement.setString(2, book.getTitle());
                 insertTransactionStatement.setString(3, book.getAuthor());
                 insertTransactionStatement.setString(4, book.getISBN());
-                insertTransactionStatement.setDate(5, Date.valueOf(returnDate));  // Ngày trả
+                insertTransactionStatement.setDate(5, Date.valueOf(returnDate));
                 insertTransactionStatement.setString(6, book.getImagePath());
                 insertTransactionStatement.setInt(7, quantity);
                 insertTransactionStatement.setString(8, String.valueOf(user.getId()));
@@ -102,6 +102,36 @@ public class TransactionDAO {
         }
         return false;
     }
+
+    public static Transaction getTransactionByISBNAndMssv(String ISBN, String mssv) {
+        String sql = "SELECT * FROM transactions WHERE ISBN='" + ISBN + "' AND mssv='" + mssv + "'";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            // Nếu tìm thấy giao dịch, trả về một đối tượng Transaction
+            if (resultSet.next()) {
+                return new Transaction(
+                        resultSet.getInt("transaction_id"),
+                        resultSet.getString("isbn"),
+                        resultSet.getString("username"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("imagePath"),
+                        resultSet.getDate("borrow_date"),
+                        resultSet.getDate("return_date"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getString("mssv")
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching transaction: " + e.getMessage(), e);
+        }
+
+        // Nếu không tìm thấy giao dịch, trả về null
+        return null;
+    }
+
 
     public static List<Transaction> getTransactionByUserName(User user) throws SQLException {
         List<Transaction> result = new ArrayList<>();
@@ -182,6 +212,26 @@ public class TransactionDAO {
         }
         return result;
     }
+    public static boolean getBorrowedBooksbymssv(String mssv, Book currentBook) {
+        String sql = "SELECT * FROM transactions WHERE mssv = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, mssv);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                if (currentBook != null && resultSet.getString("ISBN").equals(currentBook.getISBN())) {
+                    return true;
+                } else {
+                    System.out.println("Không tìm thấy sách trùng khớp");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     public static List<Transaction> getTransactionsByStudentId(String studentId) throws SQLException {
         List<Transaction> result = new ArrayList<>();
 

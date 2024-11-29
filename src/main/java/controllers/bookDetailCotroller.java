@@ -242,7 +242,7 @@ public class bookDetailCotroller {
             currentBook.setISBN(ISBNLabel.getText());
             currentBook.setCategory(categoryLabel.getText());
             currentBook.setPublisher(publisherLabel.getText());
-            currentBook.setSection(sectionTextField.getText());
+            //currentBook.setSection(sectionTextField.getText());
 
             // Update book in the database
             boolean isUpdate = BookDAO.updateBook(currentBook);

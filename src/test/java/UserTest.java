@@ -2,7 +2,6 @@
 
 import Document.Book;
 import Review.Reviews;
-import controllers.App2;
 import javafx.application.Application;
 import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,13 +19,6 @@ class UserTest {
 
     private User user;
 
-
-    @BeforeAll
-    static void setUpJavaFX() {
-        if (!Platform.isFxApplicationThread()) {
-            Application.launch(App2.class);
-        }
-    }
 
 
     @BeforeEach
@@ -51,12 +43,6 @@ class UserTest {
             });
     }
 
-    @Test
-    void testUpdatePassword() throws SQLException {
-        boolean result = user.updatePassword(user, "newPassword");
-        assertTrue(result);
-        assertEquals("newPassword", user.getPassword());
-    }
 
     @Test
     void testDeleteReview() throws SQLException {

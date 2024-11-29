@@ -1,6 +1,6 @@
 package controllers;
 
-import javafx.animation.FadeTransition;
+import cache.ImageCache;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -26,10 +26,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
-import User.Admin;
+
 import User.User;
 import User.currentUser;
-import User.Member;
 import javafx.util.Duration;
 
 public class loginController implements Initializable {
@@ -105,6 +104,7 @@ public class loginController implements Initializable {
 
             // Bắt đầu hiệu ứng di chuyển
             transition.play();
+
         }
     }
     @FXML
@@ -174,11 +174,11 @@ public class loginController implements Initializable {
                 alert.showAndWait();
             } else {
                 newUser.register();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,7 +226,7 @@ public class loginController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root, 1300, 800));
+                    stage.setScene(new Scene(root, 1310, 800));
                     stage.show();
                 } else {
                     // Thông báo lỗi nếu không phải Admin hoặc Member

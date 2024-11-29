@@ -4,7 +4,8 @@ import Document.Book;
 import User.Member;
 import User.User;
 import User.currentUser;
-import javafx.concurrent.Task;
+import controllers.CardController;
+import controllers.UserSeeBookDetails;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,7 +30,6 @@ public class ViewBookInLibrary {
     private ScrollPane scrollPane;
     @FXML
     private GridPane bookGrid;
-
     private int booksLoaded = 0;
     private static final int PAGE_SIZE = 21;
 
@@ -45,12 +45,12 @@ public class ViewBookInLibrary {
 
         loadBooks();
 
-        // Lazy loading khi cuộn đến cuối
         scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
             if (!isLoading && newVal.doubleValue() == 1.0) {
                 loadBooks();
             }
         });
+
     }
 
     private AnchorPane createCard(Book book) {
@@ -63,6 +63,7 @@ public class ViewBookInLibrary {
             cardController.setBook(book);
             card.setOnMouseClicked(event -> openBookDetailsPage(book));
 
+
             return card;
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,12 +74,16 @@ public class ViewBookInLibrary {
 
     private void openBookDetailsPage(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/bookDetails.fxml"));
-            AnchorPane bookDetailsPage = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
+            ScrollPane bookDetailsPage = loader.load();
 
             // Đưa thông tin sách vào controller của trang chi tiết
-            UserSeeBookDetails bookDetailsController = loader.getController();
-            bookDetailsController.setBook(book);
+            UserSeeBookDetails controller = loader.getController();
+            if (book == null) {
+                System.out.println("null");
+            }
+            controller.setBook(book);
+
 
             // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
             Stage stage = new Stage();
@@ -99,6 +104,9 @@ public class ViewBookInLibrary {
                 int studentID = User.getStudentIdByusername(currentUser.getUsername());
                 Member member = new Member(studentID,currentUser.getUsername(), currentUser.getRole());
                 List<Book> bookList = member.viewBooksPaginated(booksLoaded, PAGE_SIZE);
+                for (Book book : bookList) {
+                    System.out.println(book.getTitle() + " " + book.getAuthor());
+                }
                 if (bookList != null && !bookList.isEmpty()) {
                     int row = booksLoaded / 7;
                     int col = booksLoaded % 7;

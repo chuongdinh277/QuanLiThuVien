@@ -1,104 +1,184 @@
 package controllers;
 
-import Document.Book;
-import Document.ReviewDAO;
-import Document.TransactionDAO;
+import Document.*;
 import User.User;
 import User.currentUser;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import Document.Review;
-import javax.security.auth.callback.LanguageCallback;
+
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserSeeBookDetails {
 
-    @FXML
-    private Button backButton;
 
-    @FXML
-    private Label bookAuthorLabel;
-
-    @FXML
-    private ImageView bookImage;
-
-    @FXML
-    private Button bookInfoButton;
-
-    @FXML
-    private Label bookTitleLabel;
-
-    @FXML
-    private Button buttonBorrowBook;
-
-    @FXML
-    private AnchorPane infoPane;
-
-    @FXML
-    private Button viewCommentsButton;
-
-
-    @FXML
-    private Label bookDescriptionLabel;
-
-    @FXML
-    private Book currentBook;
-    @FXML
-    private Label bookSectionLabel;
     @FXML
     private Label ISBNLabel;
+
     @FXML
-    private Button viewBook;
+    private ImageView ImageView_book;
+
+    @FXML
+    private TextField authorTextField;
+
+    @FXML
+    private Label availableLabel;
+
+    @FXML
+    private TableColumn<Transaction, Date> borrowDate;
+
+    @FXML
+    private Label categoryLabel;
+
     @FXML
     private Button commentBook;
+
     @FXML
-    private Pane viewBookPane;
+    private Button commentButton;
+
     @FXML
     private Pane commentPane;
+
     @FXML
-    private TextField quantityLabel;
+    private TextArea commentTextArea;
+
     @FXML
-    private TextField numberOfday;
+    private VBox commentVbox;
+
+    @FXML
+    private TextArea descriptionTextField;
+
+    @FXML
+    private Label publisherLabel;
+
+    @FXML
+    private TextField quantityTextField;
+
+    @FXML
+    private TableColumn<Transaction, Date> returnDate;
+
+    @FXML
+    private ImageView returnHome;
+
     @FXML
     private ImageView star1;
+
     @FXML
     private ImageView star2;
+
     @FXML
     private ImageView star3;
+
     @FXML
     private ImageView star4;
+
     @FXML
     private ImageView star5;
+
     @FXML
     private ImageView starbook1;
+
     @FXML
     private ImageView starbook2;
+
     @FXML
     private ImageView starbook3;
+
     @FXML
     private ImageView starbook4;
+
     @FXML
     private ImageView starbook5;
     @FXML
-    private VBox commentVbox;
+    private Button borrowBook;
     @FXML
-    private Button commentButton;
+    private Button returnBook;
+
+    @FXML
+    private TextField titleTextField;
+
+    @FXML
+    private Button viewBook;
+
+    @FXML
+    private Pane viewBookPane;
+    @FXML
+    private TextField bookIDtextField;
+    public Book currentBook;
+
+    private MenuController_Admin menuControllerAdmin;
+    @FXML
+    private TextField sectionTextField;
     private int selectedRating = 0;
     @FXML
-    private TextArea commentTextArea;
+    private Button exit;
+
+    @FXML
+    private void initialize() {
+        commentButton.setOnAction(even -> saveReview());
+    }
+
+    @FXML
+    private void exit(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+
+
+    @FXML
+    private void returnBook(ActionEvent event) {
+        try {
+            String mssv = String.valueOf(currentUser.getId());
+            Transaction transaction = TransactionDAO.getTransactionByISBNAndMssv(currentBook.getISBN(), mssv);
+            boolean success = TransactionDAO.deleteTransaction(transaction.getId());
+            int quantity = currentBook.getQuantity();
+            boolean check = BookDAO.updateRemainingByISBN(currentBook.getISBN(), quantity);
+            if (success && check) {
+                showAlbertDialog("Trả sách thành công");
+                borrowBook.setVisible(true);
+                returnBook.setVisible(false);
+                //menuControllerAdmin.loadBookList();
+            } else {
+                showAlbertDialog("Trả thất bại");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void borrowBook(ActionEvent event) {
+        try {
+            String mssv = String.valueOf(currentUser.getId());
+            System.out.println(mssv);
+            User newUser = User.loadStudentDetailsByID(mssv);
+            boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1,10);
+            System.out.println(isBorrow);
+            if (isBorrow) {
+                borrowBook.setVisible(false);
+                returnBook.setVisible(true);
+                showAlbertDialog("Mượn sách thành công");
+                //menuControllerAdmin.loadBookList();
+            } else {
+                showAlbertDialog("Mượn thất bại");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void showViewBook(ActionEvent event) {
         viewBookPane.setVisible(true);
@@ -111,12 +191,17 @@ public class UserSeeBookDetails {
         if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
         System.out.println("hello");
-
     }
 
+
     @FXML
-    private void initialize() {
-        commentButton.setOnAction(even -> saveReview());
+    private void handleClick(MouseEvent event) {
+        if (menuControllerAdmin != null) {
+            menuControllerAdmin.showHome();
+        }
+        else {
+            System.out.println("null");
+        }
     }
     @FXML
     private void handleStarclick(MouseEvent event) {
@@ -128,8 +213,6 @@ public class UserSeeBookDetails {
         else if (source == star5) selectedRating = 5;
         updateStarColors(selectedRating);
     }
-
-
     private void updateStarColors(int rating) {
         // Tạo danh sách các ngôi sao theo thứ tự
         Image selectedStar = new Image(getClass().getResourceAsStream("/image/star.png"));
@@ -151,76 +234,71 @@ public class UserSeeBookDetails {
         else star5.setImage(unselectedStar);
     }
 
+    public void setMenuController(MenuController_Admin menuController) {
+        this.menuControllerAdmin = menuController;
+    }
 
-    public void setBook(Book book) {
+    public void setBook (Book book) {
         this.currentBook = book;
         if (book != null) {
-            bookTitleLabel.setText(book.getTitle());
-            bookAuthorLabel.setText(book.getAuthor());
+            System.out.println(currentBook.getISBN());
             ISBNLabel.setText(book.getISBN());
-            bookSectionLabel.setText(book.getSection());
-
-            System.out.println("duong1");
-            if (book.getDescription() != null) {
-                System.out.println("duong2");
-                System.out.println(book.getDescription());
+            titleTextField.setText(book.getTitle());
+            authorTextField.setText(book.getAuthor());
+            categoryLabel.setText(book.getCategory());
+            publisherLabel.setText(book.getPublisher());
+            quantityTextField.setText(String.valueOf(book.getQuantity()));
+            descriptionTextField.setText(book.getDescription());
+            if (book.getRemainingBook() <=0) {
+                availableLabel.setText("Available");
             }
-            bookDescriptionLabel.setText(book.getDescription());
-            Image image = new Image(book.getImagePath()); // Đảm bảo đường dẫn hợp lệ
-            bookImage.setImage(image);
+            else {
+                availableLabel.setText("Not available");
+            }
+
+            String mssv = String.valueOf(currentUser.getId());
+            // User newUser = User.loadStudentDetailsByID(mssv);
+            boolean isBorrowed = TransactionDAO.getBorrowedBooksbymssv(mssv, currentBook);
+            // Nếu đã mượn sách, hiển thị nút "Return Book", ngược lại là "Borrow Book"
+            if (isBorrowed) {
+                borrowBook.setVisible(false);
+                returnBook.setVisible(true);
+            } else {
+                borrowBook.setVisible(true);
+                returnBook.setVisible(false);
+            }
+
             try {
                 // Lấy số sao trung bình từ cơ sở dữ liệu
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
                 System.out.println(averageRating);
                 displayRating(averageRating);
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
+                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
             }
         }
-    }
-
-    @FXML
-    private void onBorrowBook(ActionEvent event) {
-        if (currentBook != null) {
-            int userId = currentUser.getId(); // Giả sử bạn có phương thức lấy userId từ currentUser
-            String userName = currentUser.getUsername(); // Lấy tên người dùng từ currentUser
-            int quantity = Integer.parseInt(quantityLabel.getText());
-            int numberofdays = Integer.parseInt(numberOfday.getText());
-            try {
-                User user = User.loadStudentDetailsByID(String.valueOf(userId)); // Tạo đối tượng User mới
-                boolean isBorrowed = TransactionDAO.borrowBook(user, currentBook, quantity, numberofdays);
-
-                if (isBorrowed) {
-                    System.out.println("Đã mượn sách: " + currentBook.getTitle());
-                } else {
-                    System.out.println("Không thể mượn sách: " + currentBook.getTitle() + " (có thể đang được mượn hoặc số lượng không đủ)");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi mượn sách: " + currentBook.getTitle());
-            }
-        } else {
-            System.out.println("Chưa chọn sách nào để mượn.");
+        if (book.getImagePath() != null) {
+            ImageView_book.setImage(new Image(book.getImagePath()));
         }
     }
-
-
     private void saveReview() {
         if (selectedRating > 0 && currentBook != null) {
             String isbn = currentBook.getISBN();
             String username = currentUser.getUsername();
-            String comment = commentTextArea.getText().trim(); // Optionally fetch from a comment field if available
+            String comment = commentTextArea.getText().trim(); // Lấy bình luận từ TextArea
 
             try {
+                // Debugging: kiểm tra thông tin trước khi lưu
+                System.out.println("Saving review for book: " + isbn + ", User: " + username + ", Rating: " + selectedRating);
                 ReviewDAO.saveReview(username, isbn, selectedRating, comment);
-                System.out.println("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
+                showAlbertDialog("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
+                loadReview();
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
+                showErrorDialog("Lỗi khi lưu đánh giá cho sách: " + currentBook.getTitle());
+                e.printStackTrace(); // In ra lỗi chi tiết
             }
         } else {
-            System.out.println("Chưa chọn đánh giá hoặc sách để lưu.");
+            showAlbertDialog("Chưa chọn đánh giá hoặc sách để lưu.");
         }
     }
 
@@ -239,7 +317,8 @@ public class UserSeeBookDetails {
             i++;
         }
         int j = roundedRating + 1;
-        if (j <= 5) {
+
+        if (j <= 5 && (double )(roundedRating) < averageRating) {
             if (i == 1) starbook1.setImage(unselectedStar1);
             if (i == 2) starbook2.setImage(unselectedStar1);
             if (i == 3) starbook3.setImage(unselectedStar1);
@@ -265,8 +344,7 @@ public class UserSeeBookDetails {
                 List<Review> reviews = ReviewDAO.getReviewsByISBN(isbn);
                 displayReviews(reviews);
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("L��i khi lấy đánh giá của sách: " + currentBook.getTitle());
+                showErrorDialog("Lỗi khi lấy đánh giá của sách: " + currentBook.getTitle());
             }
         }
         else System.out.println("null");
@@ -309,6 +387,21 @@ public class UserSeeBookDetails {
             // Thêm commentBox vào commentVbox (bảng chứa tất cả bình luận)
             commentVbox.getChildren().add(commentBox);
         }
+    }
+
+    private void showAlbertDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

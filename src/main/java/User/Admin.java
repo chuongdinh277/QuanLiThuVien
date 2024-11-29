@@ -136,66 +136,99 @@ public class Admin extends User {
         }
     }
 
+        private boolean deleteCommentsByUsername(String username) throws SQLException {
+            // Kiểm tra tham số đầu vào
+            if (username == null || username.trim().isEmpty()) {
+                throw new IllegalArgumentException("Username không được để trống hoặc null.");
+            }
 
-    public void removeUser(User user) throws SQLException {
-        try {
-            List<Transaction> transactions = TransactionDAO.getTransactionsByStudentId(String.valueOf(user.getId()));  // Lấy các giao dịch của sinh viên theo mã số sinh viên
-            if (!transactions.isEmpty()) {
-                StringBuilder borrowedBooksList = new StringBuilder("Sinh viên này còn đang mượn các sách sau:\n");
-                for (Transaction transaction : transactions) {
-                    borrowedBooksList.append("Sách: ").append(transaction.getTitle())
-                            .append(", Số lượng: ").append(transaction.getQuantity())
-                            .append("\n");
-                    Book book = BookDAO.getBookByISBN(transaction.getIsbn());
+            // Câu truy vấn SQL để xóa các bình luận của người dùng
+            String sql = "DELETE FROM book_reviews WHERE username = ?";
+            try (Connection connection = getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql)) {
 
-                    // Cập nhật lại số lượng sách sau khi trả lại
-                    boolean updated = BookDAO.updateQuantity(book, book.getQuantity() + transaction.getQuantity());
-                    if (!updated) {
-                        this.showAlberDialog("Cập nhật sách không thành công: " + book.getTitle());
-                        return;
+                // Gán tham số `username` vào câu truy vấn
+                statement.setString(1, username);
+
+                // Thực thi câu truy vấn
+                int rowsDeleted = statement.executeUpdate();
+
+                // In log kết quả (tuỳ chọn)
+                System.out.println("Số bình luận đã xóa của username " + username + ": " + rowsDeleted);
+
+                // Trả về true nếu có ít nhất một dòng bị xóa
+                return rowsDeleted > 0;
+            } catch (SQLException e) {
+                System.err.println("Lỗi khi xóa bình luận của username: " + username);
+                e.printStackTrace();
+                throw e; // Ném lại lỗi để xử lý ở cấp cao hơn nếu cần
+            }
+        }
+
+
+
+        public void removeUser(User user) throws SQLException {
+            try {
+                List<Transaction> transactions = TransactionDAO.getTransactionsByStudentId(String.valueOf(user.getId()));  // Lấy các giao dịch của sinh viên theo mã số sinh viên
+                if (!transactions.isEmpty()) {
+                    StringBuilder borrowedBooksList = new StringBuilder("Sinh viên này còn đang mượn các sách sau:\n");
+                    for (Transaction transaction : transactions) {
+                        borrowedBooksList.append("Sách: ").append(transaction.getTitle())
+                                .append(", Số lượng: ").append(transaction.getQuantity())
+                                .append("\n");
+                        Book book = BookDAO.getBookByISBN(transaction.getIsbn());
+                        if(book != null) {
+                            // Cập nhật lại số lượng sách sau khi trả lại
+                            boolean updated = BookDAO.updateQuantity(book, book.getQuantity() + transaction.getQuantity());
+                            if (!updated) {
+                                this.showAlberDialog("Cập nhật sách không thành công: " + book.getTitle());
+                                return;
+                            }
+                        }
+                        else System.out.println("null");
+                        boolean transactionDeleted = TransactionDAO.deleteTransaction(transaction.getId());
                     }
-                    boolean transactionDeleted = TransactionDAO.deleteTransaction(transaction.getId());
+                    // Hiển thị danh sách sách mượn trước khi xóa
+                    this.showAlberDialog("Danh sách sách mượn:\n" + borrowedBooksList.toString());
                 }
-                // Hiển thị danh sách sách mượn trước khi xóa
-                this.showAlberDialog("Danh sách sách mượn:\n" + borrowedBooksList.toString());
+                boolean check = removeUserById(user.getId());
+                boolean checkcomment = deleteCommentsByUsername(user.getUserName());
+                if (check && checkcomment) {
+                    this.showAlberDialog("Xóa thành công");
+                } else {
+                    this.showAlberDialog("Xóa thất bại");
+                }
+            } catch (SQLException e) {
+                this.showErrorDialog("Error", e.getMessage());
             }
-            boolean check = removeUserById(user.getId());
-            if (check) {
-                this.showAlberDialog("Xóa thành công");
-            } else {
-                this.showAlberDialog("Xóa thất bại");
-            }
-        } catch (SQLException e) {
-            this.showErrorDialog("Error", e.getMessage());
         }
-    }
 
-    public List<User> viewAllMembers() {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM users WHERE role = 'User'";
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                String role = resultSet.getString("role");
-                String fullName = resultSet.getString("fullName");
-                String email = resultSet.getString("email");
-                String number = resultSet.getString("number");
+        public List<User> viewAllMembers() {
+            List<User> users = new ArrayList<>();
+            String sql = "SELECT * FROM users WHERE role = 'User'";
+            try (Connection connection = getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql);
+                 ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String username = resultSet.getString("username");
+                    String password = resultSet.getString("password");
+                    String role = resultSet.getString("role");
+                    String fullName = resultSet.getString("fullName");
+                    String email = resultSet.getString("email");
+                    String number = resultSet.getString("number");
 
-                User user = new User(id,username, password, role, fullName, email, number);
-                if(user.getNumber() != null && user.getEmail()!=null && user.getFullName() !=null) users.add(user);
-                // In ra thông tin người dùng đã thêm vào danh sách
-                System.out.println("Added user: " + fullName + ", " + email + ", " + number);
+                    User user = new User(id,username, password, role, fullName, email, number);
+                    if(user.getNumber() != null && user.getEmail()!=null && user.getFullName() !=null) users.add(user);
+                    // In ra thông tin người dùng đã thêm vào danh sách
+                    System.out.println("Added user: " + fullName + ", " + email + ", " + number);
+                }
+                return users;
+            } catch (SQLException e) {
+                this.showErrorDialog("Error", e.getMessage());
             }
-            return users;
-        } catch (SQLException e) {
-            this.showErrorDialog("Error", e.getMessage());
+            return null;
         }
-        return null;
-    }
 
 
 
