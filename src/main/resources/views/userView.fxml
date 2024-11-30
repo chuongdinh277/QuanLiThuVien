@@ -19,7 +19,7 @@
          <children>
             <BorderPane fx:id="borderPane_User" prefHeight="800.0" prefWidth="1300.0">
                <top>
-                  <AnchorPane prefHeight="81.0" prefWidth="1300.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
+                  <AnchorPane prefHeight="80.0" prefWidth="1300.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
                      <children>
                         <Label layoutX="105.0" layoutY="31.0" prefHeight="17.0" prefWidth="26.0" style="-fx-text-fill: black; -fx-font-weight: bold;" text="UET" />
                         <Label layoutX="105.0" layoutY="51.0" style="-fx-font-weight: bold; -fx-text-fill: black;" text="DIGITAL LIBRARY" />
@@ -45,7 +45,7 @@
                            <children>
                               <Label fx:id="username" layoutX="12.0" layoutY="19.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 16;" text="name" />
                               <Label fx:id="role" layoutX="12.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: black; -fx-font-size: 16;" text="role" />
-                              <MenuButton fx:id="logoutAndEditProfile" layoutX="99.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+                              <MenuButton fx:id="logoutAndEditProfile" layoutX="99.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" stylesheets="@../css/style.css">
                                  <items>
                                     <MenuItem fx:id="editProfileButton" mnemonicParsing="false" onAction="#handlePersonClick" text="Profile" />
                                     <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#logout_Button" text="Logout" />

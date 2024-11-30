@@ -250,7 +250,7 @@ public class UserSeeBookDetails {
 
             String mssv = String.valueOf(currentUser.getId());
             // User newUser = User.loadStudentDetailsByID(mssv);
-            boolean isBorrowed = TransactionDAO.getBorrowedBooksbymssv(mssv, currentBook);
+            boolean isBorrowed = TransactionDAO.getBorrowedBooksByMssv(mssv, currentBook);
             // Nếu đã mượn sách, hiển thị nút "Return Book", ngược lại là "Borrow Book"
             if (isBorrowed) {
                 borrowBook.setVisible(false);

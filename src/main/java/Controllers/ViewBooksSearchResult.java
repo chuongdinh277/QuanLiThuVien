@@ -5,6 +5,7 @@ import Document.BookDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
@@ -48,7 +49,7 @@ public class ViewBooksSearchResult {
     private AnchorPane createCard(Book book) {
         try {
             // Tạo một FXMLLoader mới mỗi lần
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card.fxml"));
             AnchorPane card = loader.load(); // Tải một card mới
 
             CardController cardController = loader.getController();
@@ -98,9 +99,6 @@ public class ViewBooksSearchResult {
                 try {
                     List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Fetch search results
 
-                    for (Book book : searchResults) {
-                        System.out.println(book.getTitle());
-                    }
 
                     if (searchResults != null && !searchResults.isEmpty()) {
                         int row = searchResultGrid.getChildren().size() / 7; // Giả sử có 5 cột
@@ -122,6 +120,13 @@ public class ViewBooksSearchResult {
                         }
                     } else {
                         System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
+                        javafx.application.Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Cảnh báo");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Không tìm thấy sách nào khớp với từ khóa của bạn.");
+                            alert.showAndWait();
+                        });
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);

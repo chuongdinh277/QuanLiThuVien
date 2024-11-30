@@ -5,6 +5,8 @@
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,8 +14,8 @@
 <?import javafx.scene.shape.Circle?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.dashboardController">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1501.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1501.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css">
          <children>
             <AnchorPane layoutX="87.0" layoutY="94.0" prefHeight="384.0" prefWidth="674.0" style="-fx-background-color: white; -fx-border-radius: 130; -fx-background-radius: 30;">
                <children>
@@ -75,12 +77,12 @@
             <AnchorPane layoutX="48.0" layoutY="862.0" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white; -fx-background-radius: 30;" stylesheets="@../css/barchart.css">
                <children>
                   <StackedBarChart fx:id="categoriesBarchart" layoutX="79.0" layoutY="14.0" prefHeight="366.0" prefWidth="514.0" style="-fx-border-radius: 20;" stylesheets="@../css/barchart.css">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
                   </StackedBarChart>
                </children>
             </AnchorPane>
@@ -120,6 +122,29 @@
                   <Label fx:id="percentageQuantityLabel" layoutX="142.0" layoutY="401.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Label" />
                </children>
             </AnchorPane>
+            <AnchorPane layoutY="-12.0" prefHeight="90.0" prefWidth="1200.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
+               <children>
+                  <AnchorPane layoutX="923.0" layoutY="14.0" prefHeight="82.0" prefWidth="242.0">
+                     <children>
+                        <Label fx:id="username" layoutX="12.0" layoutY="19.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="name" />
+                        <Label fx:id="role" layoutX="12.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 16;" text="role" />
+                        <MenuButton fx:id="logoutAndEditProfile" layoutX="145.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+                           <items>
+                              <MenuItem fx:id="editProfileButton" mnemonicParsing="false" onAction="#handlePersonClick" text="Profile" />
+                              <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#logout_Button" text="Logout" />
+                           </items>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/rabbit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children></AnchorPane>
-  </content>
+   </content>
 </ScrollPane>

@@ -67,5 +67,8 @@ public class currentUser {
         currentUser.setUsername(null);
         currentUser.setRole(null);
         currentUser.setPassword(null);
+        currentUser.setNumber(null);
+        currentUser.setEmail(null);
+        currentUser.setFullName(null);
     }
 }

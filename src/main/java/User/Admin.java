@@ -136,6 +136,36 @@ public class Admin extends User {
         }
     }
 
+    private boolean deleteCommentsByUsername(String username) throws SQLException {
+        // Kiểm tra tham số đầu vào
+        if (username == null || username.trim().isEmpty()) {
+            throw new IllegalArgumentException("Username không được để trống hoặc null.");
+        }
+
+        // Câu truy vấn SQL để xóa các bình luận của người dùng
+        String sql = "DELETE FROM book_reviews WHERE username = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // Gán tham số `username` vào câu truy vấn
+            statement.setString(1, username);
+
+            // Thực thi câu truy vấn
+            int rowsDeleted = statement.executeUpdate();
+
+            // In log kết quả (tuỳ chọn)
+            System.out.println("Số bình luận đã xóa của username " + username + ": " + rowsDeleted);
+
+            // Trả về true nếu có ít nhất một dòng bị xóa
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi xóa bình luận của username: " + username);
+            e.printStackTrace();
+            throw e; // Ném lại lỗi để xử lý ở cấp cao hơn nếu cần
+        }
+    }
+
+
 
     public void removeUser(User user) throws SQLException {
         try {
@@ -147,20 +177,23 @@ public class Admin extends User {
                             .append(", Số lượng: ").append(transaction.getQuantity())
                             .append("\n");
                     Book book = BookDAO.getBookByISBN(transaction.getIsbn());
-
-                    // Cập nhật lại số lượng sách sau khi trả lại
-                    boolean updated = BookDAO.updateQuantity(book, book.getQuantity() + transaction.getQuantity());
-                    if (!updated) {
-                        this.showAlberDialog("Cập nhật sách không thành công: " + book.getTitle());
-                        return;
+                    if(book != null) {
+                        // Cập nhật lại số lượng sách sau khi trả lại
+                        boolean updated = BookDAO.updateQuantity(book, book.getQuantity() + transaction.getQuantity());
+                        if (!updated) {
+                            this.showAlberDialog("Cập nhật sách không thành công: " + book.getTitle());
+                            return;
+                        }
                     }
+                    else System.out.println("null");
                     boolean transactionDeleted = TransactionDAO.deleteTransaction(transaction.getId());
                 }
                 // Hiển thị danh sách sách mượn trước khi xóa
                 this.showAlberDialog("Danh sách sách mượn:\n" + borrowedBooksList.toString());
             }
             boolean check = removeUserById(user.getId());
-            if (check) {
+            boolean checkcomment = deleteCommentsByUsername(user.getUserName());
+            if (check && checkcomment) {
                 this.showAlberDialog("Xóa thành công");
             } else {
                 this.showAlberDialog("Xóa thất bại");

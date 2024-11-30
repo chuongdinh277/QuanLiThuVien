@@ -212,7 +212,7 @@ public class TransactionDAO {
         }
         return result;
     }
-    public static boolean getBorrowedBooksbymssv(String mssv, Book currentBook) {
+    public static boolean getBorrowedBooksByMssv(String mssv, Book currentBook) {
         String sql = "SELECT * FROM transactions WHERE mssv = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

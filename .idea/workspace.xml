@@ -5,24 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/userHome.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/profileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cache/BookCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cache/BookCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cache/ImageCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cache/ImageCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/loginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/userViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/dashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/dashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User/currentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/currentUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userHome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userHome.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +38,8 @@
       <list>
         <option value="package-info" />
         <option value="Python Script" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -64,12 +68,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AnchorPaneExample.executor": "Run",
     "Application.App.executor": "Run",
     "Application.BookSearchApp.executor": "Run",
     "Application.BookSearchApp2.executor": "Run",
     "Application.DatabaseConnection.executor": "Run",
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.MenuButtonCustomExample.executor": "Run",
+    "Application.MenuButtonExample.executor": "Run",
     "Application.Unnamed.executor": "Run",
     "Application.haubeo.executor": "Run",
     "Application.main.executor": "Run",
@@ -113,6 +120,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.App">
+    <configuration name="AnchorPaneExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controllers.AnchorPaneExample" />
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controllers.App" />
       <module name="QuanLiThuVien" />
@@ -133,8 +153,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MenuButtonCustomExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controllers.MenuButtonCustomExample" />
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MenuButtonExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controllers.MenuButtonExample" />
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AnchorPaneExample" />
+        <item itemvalue="Application.MenuButtonCustomExample" />
+        <item itemvalue="Application.MenuButtonExample" />
         <item itemvalue="Application.DatabaseConnection" />
       </list>
     </recent_temporary>

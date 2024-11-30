@@ -2,7 +2,6 @@
 
 import Document.Book;
 import Review.Reviews;
-import Controllers.App2;
 import javafx.application.Application;
 import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;

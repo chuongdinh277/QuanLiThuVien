@@ -68,7 +68,7 @@ public class UserHomeController {
                     for (Book book : finalPopularBooks) {
                         popularBookGrid.add(createCard1(book), col, 0); // Thêm vào hàng 0
                         col++;
-                        if (col >= 7) { // Giới hạn số cột là 7
+                        if (col >= 5) { // Giới hạn số cột là 7
                             break; // Dừng lại nếu đã đủ 7 cột
                         }
                     }
