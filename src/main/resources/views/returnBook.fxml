@@ -12,14 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReturnBookController">
-    <top>
-        <AnchorPane prefHeight="86.0" prefWidth="1180.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
-            <children>
-                <Label layoutX="400.0" layoutY="28.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
-            </children>
-        </AnchorPane>
-    </top>
+<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReturnBookController">
     <bottom>
         <AnchorPane prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
             <children>

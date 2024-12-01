@@ -22,7 +22,7 @@
                         <TableColumn fx:id="bookPublisher" prefWidth="181.59991455078125" text="Publisher" />
                         <TableColumn fx:id="bookQuantity" minWidth="0.0" prefWidth="100.00006103515625" text="Quantity" />
                         <TableColumn fx:id="remainingBook" minWidth="8.0" prefWidth="112.80010986328125" text="Remaining" />
-                        <TableColumn fx:id="bookSection" prefWidth="149.60003662109375" text="Book Section" />
+                        <TableColumn fx:id="bookCategory" prefWidth="149.60003662109375" text="Book category" />
                         <TableColumn fx:id="bookAvailability" prefWidth="147.99993896484375" text="Availability" />
                     </columns>
                     <contextMenu>
@@ -36,17 +36,10 @@
                     <columnResizePolicy>
                     </columnResizePolicy>
                 </TableView>
-                             <Button fx:id="addBook_Admin" layoutX="931.0" layoutY="11.0" mnemonicParsing="false" onAction="#addBook" prefHeight="51.0" prefWidth="174.0" style="-fx-text-fill: #b7f7d8; -fx-font-size: 20; -fx-background-color: #507694;" text="Add book" />
+                             <Button fx:id="addBook_Admin" layoutX="931.0" layoutY="11.0" mnemonicParsing="false" onAction="#addBook" prefHeight="51.0" prefWidth="174.0" style="-fx-font-size: 20; -fx-font-weight: bold;" stylesheets="@../css/buttonStyle.css" text="Add book" />
             <Label layoutX="14.0" layoutY="7.0" style="-fx-text-fill: black; -fx-font-size: 36; -fx-font-weight: bold;" text="My books" />
             </AnchorPane>
 
         </center>
-      <top>
-         <AnchorPane prefHeight="86.0" prefWidth="1180.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
-            <children>
-               <Label layoutX="400.0" layoutY="28.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
-            </children>
-         </AnchorPane>
-      </top>
     </BorderPane>
 </ScrollPane>

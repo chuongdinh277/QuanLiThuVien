@@ -79,11 +79,4 @@
          </children>
       </AnchorPane>
    </right>
-   <top>
-      <AnchorPane prefHeight="82.0" prefWidth="1100.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="407.0" layoutY="26.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
-         </children>
-      </AnchorPane>
-   </top>
 </BorderPane>

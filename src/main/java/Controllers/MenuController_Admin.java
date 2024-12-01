@@ -1,15 +1,22 @@
 package Controllers;
 
+import User.currentUser;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static APIGoogle.GoogleBooksAPI.showErrorDialog;
 
 public class MenuController_Admin {
     @FXML
@@ -17,8 +24,47 @@ public class MenuController_Admin {
     private Parent homeView;
     @FXML
     private Button issueBook;
+    @FXML
+    private Label username;
+    @FXML
+    private Label role;
+    @FXML
+    private MenuButton logoutAndEditProfile;
+    @FXML
+    private MenuItem editProfileButton;
+    @FXML
+    private MenuItem logoutButton;
     public void initialize() {
+        username.setText(currentUser.getUsername());
+        role.setText(currentUser.getRole());
         loadDashboard();
+    }
+    @FXML
+    private void handlePersonClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/profile.fxml"));
+            AnchorPane personRoot = loader.load();
+            borderPane_admin.setCenter(personRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("L��i khi tải giao diện person.fxml: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void logout_Button(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Parent root = loader.load();
+
+            // Lấy Stage hiện tại từ bất kỳ Node nào
+            Stage stage = (Stage) borderPane_admin.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            System.err.println("Error loading FXML: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML

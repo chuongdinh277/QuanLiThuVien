@@ -33,7 +33,7 @@ public class AddBookController {
     @FXML
     private TextField bookPublisher;
     @FXML
-    private TextField bookSection;
+    private TextArea descriptionTextArea;
     @FXML
     private TextField ISBNtextField;
 
@@ -68,11 +68,14 @@ public class AddBookController {
                                 titleSearch_1.setText(resultBook.getTitle());
                                 authorSearch_1.setText(resultBook.getAuthor());
                                 categorySearch_1.setText(resultBook.getCategory());
+                                bookPublisher.setText(resultBook.getPublisher());
                                 ISBNtextField.setText(resultBook.getISBN());
                                 description = resultBook.getDescription() != null ? resultBook.getDescription() : "No description available";
-
+                                descriptionTextArea.setText(description);
                                 if (resultBook.getImagePath() != null) {
-                                    showImage.setImage(new Image(resultBook.getImagePath()));
+                                    Image image = new Image(resultBook.getImagePath(), showImage.getFitWidth(), showImage.getFitHeight(),true,true);
+                                    showImage.setImage(image);
+                                    showImage.setSmooth(true);
                                 } else {
                                     showImage.setImage(null);
                                 }
@@ -105,7 +108,6 @@ public class AddBookController {
             String publisher = bookPublisher.getText().trim();
             String ISBN = ISBNtextField.getText().trim();
 
-            // Kiểm tra và chuyển đổi số lượng sách
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityStr);
@@ -137,7 +139,7 @@ public class AddBookController {
         categorySearch_1.clear();
         quantity_book.clear();
         bookPublisher.clear();
-        bookSection.clear();
+        descriptionTextArea.clear();
         ISBNtextField.clear();
         showImage.setImage(null);
     }

@@ -6,80 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookSearchApp2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BookRating/BookRating.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BookRating/BookRatingDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Recomend/Recommend.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cache/BookCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cache/BookCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cache/ImageCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cache/ImageCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/addBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/adminMenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/allIssueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllIssueBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/bookDetailCotroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailCotroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/borrowBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BorrowBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/dashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/homeController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/issueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/IssueBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/profileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/returnBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReturnBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/students.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/StudentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/updateStudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/updateStudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/userViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/IssueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/IssueBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/buttonStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/buttonStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/allBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/allBook.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/allIssueBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/allIssueBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/borrowBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/borrowBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuAdmin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/allBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/homeAdmin.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/profile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/profileAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/profileAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signUp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/students.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/students.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/test.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/timsach.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/timsach.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/updateStudents.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/updateStudents.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookInLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AdminTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BookDAOTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BookRatingDAOTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CurrentUserTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DatabaseConnectionTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/GoogleBooksAPITest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MemberTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ReviewDAOTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TransactionDAOTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,48 +62,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.BookSearchApp.executor": "Run",
-    "Application.BookSearchApp2.executor": "Run",
-    "Application.DatabaseConnection.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Application.haubeo.executor": "Run",
-    "Application.main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.AdminTest.executor": "Run",
-    "JUnit.BookCacheTest.testIsCached.executor": "Run",
-    "JUnit.BookRatingDAOTest.executor": "Run",
-    "JUnit.CurrentUserTest.executor": "Run",
-    "JUnit.DatabaseConnectionTest.executor": "Run",
-    "JUnit.GoogleBooksAPITest.executor": "Run",
-    "JUnit.ImageCacheTest.executor": "Run",
-    "JUnit.MemberTest.executor": "Run",
-    "JUnit.TransactionDAOTest.executor": "Run",
-    "JUnit.UserTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/New folder/QuanLiThuVien",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15039062",
-    "project.structure.side.proportion": "0.33011582"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DatabaseConnection.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Application.haubeo.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.AdminTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookCacheTest.testIsCached.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookRatingDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CurrentUserTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DatabaseConnectionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoogleBooksAPITest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImageCacheTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/New folder/QuanLiThuVien&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15039062&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33011582&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\QuanLiThuVien\src\main\java\APIGoogle" />

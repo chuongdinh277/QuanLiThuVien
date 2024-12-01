@@ -23,7 +23,7 @@ public class IssueBookController {
     private BorderPane borderPane_book;
 
     @FXML
-    private TextField sectionTextField;
+    private TextField categoryTextField;
 
     @FXML
     private TextField titleTextField;
@@ -53,7 +53,7 @@ public class IssueBookController {
                 if (book != null) {
                     titleTextField.setText(book.getTitle());
                     authorTextField.setText(book.getAuthor());
-                    System.out.println(book.getRemainingBook());
+                    categoryTextField.setText(book.getCategory());
                     if (book.getRemainingBook() > 0) AvailableTextField.setText("Available");
                     else AvailableTextField.setText("Not Available");
                 } else {
@@ -89,7 +89,6 @@ public class IssueBookController {
         String author = authorTextField.getText();
         String isbn = ISBNsearchBook.getText(); // Đảm bảo rằng ISBN là duy nhất để xác định sách
         String studentID = IDsearchStudent.getText();
-        int quantity = Integer.parseInt(quantityTextField.getText());
         int numberofdays = Integer.parseInt(borrowDay.getText());
         if (title != null && !title.isEmpty() && author != null && !author.isEmpty() && studentID != null && !studentID.isEmpty()) {
             try {
@@ -98,7 +97,7 @@ public class IssueBookController {
                     User user = User.loadStudentDetailsByID(studentID);
                     if (user != null) {
                         // Gọi phương thức borrowBook để mượn sách
-                        boolean success = TransactionDAO.borrowBook(user, book, quantity,numberofdays);
+                        boolean success = TransactionDAO.borrowBook(user, book, 1,numberofdays);
                         if (success) {
                             showAlbertDialog("Sách đã được mượn thành công.");
                         } else {

@@ -46,7 +46,7 @@ public class AllBookController {
     @FXML
     private TableColumn<Book, HBox> bookAction; //cột hành động
     @FXML
-    private TableColumn<Book, String> bookSection; // cột chủ đề;
+    private TableColumn<Book, String> bookCategory;
     @FXML
     private TableColumn<Book, Integer> remainingBook;
     @FXML
@@ -70,6 +70,7 @@ public class AllBookController {
         bookAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         bookPublisher.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPublisher()));
         bookQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+        bookCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
         remainingBook.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRemainingBook()).asObject());
         bookAvailability.setCellValueFactory(cellData -> {
             int remaining = cellData.getValue().getRemainingBook();
@@ -115,12 +116,7 @@ public class AllBookController {
 
             AddBookController controller = fxmlLoader.getController();
             controller.setHomeController(this);
-
-            Stage stage = new Stage();
-            stage.setTitle("Add Book");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL); // Để cửa sổ này là modal (khóa cửa sổ chính)
-            stage.showAndWait(); // Đợi cho đến khi cửa sổ được đóng
+            borderPane_book.setCenter(root);
         } catch (IOException e) {
             showErrorDialog("Lỗi khi thêm sách " + e.getMessage());
         }

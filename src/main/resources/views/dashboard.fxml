@@ -5,17 +5,15 @@
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1501.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1600.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css">
          <children>
             <AnchorPane layoutX="87.0" layoutY="94.0" prefHeight="384.0" prefWidth="674.0" style="-fx-background-color: white; -fx-border-radius: 130; -fx-background-radius: 30;">
                <children>
@@ -86,7 +84,7 @@
                   </StackedBarChart>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="783.0" layoutY="600.0" prefHeight="425.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+            <AnchorPane layoutX="783.0" layoutY="600.0" prefHeight="410.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                <children>
                   <ListView fx:id="listMember" layoutX="37.0" layoutY="63.0" prefHeight="328.0" prefWidth="299.0" style="-fx-background-color: white;" />
                   <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -98,7 +96,7 @@
                   <Label layoutX="273.0" layoutY="23.0" onMouseClicked="#seeallstudentsLabel" prefHeight="27.0" prefWidth="86.0" style="-fx-font-size: 18;" styleClass="see-all-label" stylesheets="@../css/seeall.css" text="See All" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="791.0" layoutY="1052.0" prefHeight="419.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+            <AnchorPane layoutX="793.0" layoutY="1028.0" prefHeight="419.0" prefWidth="374.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                <children>
                   <ListView fx:id="listViewBook" layoutX="22.0" layoutY="64.0" prefHeight="336.0" prefWidth="330.0" />
                   <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -120,29 +118,6 @@
                   <AnchorPane fx:id="pane2" layoutX="15.0" layoutY="400.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
                   <Label fx:id="label2" layoutX="48.0" layoutY="398.0" prefHeight="23.0" prefWidth="93.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Book quantity :" />
                   <Label fx:id="percentageQuantityLabel" layoutX="142.0" layoutY="401.0" style="-fx-font-weight: bold; -fx-text-fill: #f7d0f5;" text="Label" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutY="-12.0" prefHeight="90.0" prefWidth="1200.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
-               <children>
-                  <AnchorPane layoutX="923.0" layoutY="14.0" prefHeight="82.0" prefWidth="242.0">
-                     <children>
-                        <Label fx:id="username" layoutX="12.0" layoutY="19.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16;" text="name" />
-                        <Label fx:id="role" layoutX="12.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 16;" text="role" />
-                        <MenuButton fx:id="logoutAndEditProfile" layoutX="145.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
-                           <items>
-                              <MenuItem fx:id="editProfileButton" mnemonicParsing="false" onAction="#handlePersonClick" text="Profile" />
-                              <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#logout_Button" text="Logout" />
-                           </items>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/rabbit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuButton>
-                     </children>
-                  </AnchorPane>
                </children>
             </AnchorPane>
          </children></AnchorPane>

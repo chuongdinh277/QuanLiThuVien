@@ -65,7 +65,8 @@ public class ProfileController {
 
     @FXML
     private Label username;
-
+    @FXML
+    private Label fullNameLabelAdmin;
     @FXML
     private TextField fullnameTextfield;
     @FXML
@@ -97,9 +98,8 @@ public class ProfileController {
     public void initialize() {
         try {
             newUser = User.loadUserDetailsByUsername(currentUser.getUsername());
-            username.setText(newUser.getUserName());
-            role.setText(newUser.getRole());
             fullnameLabel.setText(newUser.getFullName());
+            fullNameLabelAdmin.setText(newUser.getFullName());
             phoneLabel.setText(newUser.getNumber());
             phoneLabel1.setText(newUser.getNumber());
             emailLabel.setText(newUser.getEmail());
@@ -116,32 +116,9 @@ public class ProfileController {
         }
     }
     @FXML
-    private void handlePersonClick(ActionEvent event) {
-
-    }
-
-    @FXML
     private void handleStarclick(MouseEvent event) {
 
     }
-
-    @FXML
-    private void logout_Button(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-            Parent root = loader.load();
-
-            // Lấy Stage hiện tại từ bất kỳ Node nào
-            Stage stage = (Stage) anchorPane.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            System.err.println("Error loading FXML: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-
     @FXML
     private void onEditFullNameClick() {
         isEditingFullName = true;

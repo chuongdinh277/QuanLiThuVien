@@ -11,20 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.IssueBookController">
-    <top>
-        <AnchorPane prefHeight="82.0" prefWidth="1100.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
-            <children>
-                <Label layoutX="407.0" layoutY="26.0" prefHeight="30.0" prefWidth="334.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #b7f7d8;" text="Library Management System" />
-            </children>
-        </AnchorPane>
-    </top>
+<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.IssueBookController">
     <bottom>
-      <AnchorPane prefHeight="700.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/background.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="757.0" prefWidth="1103.0" styleClass="background" stylesheets="@../css/background.css" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutY="14.0" prefHeight="46.0" prefWidth="1100.0">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="1187.0">
                <graphic>
-                  <HBox prefHeight="46.0" prefWidth="1109.0" style="-fx-background-color: #DDDDDD;">
+                  <HBox prefHeight="46.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -43,7 +36,7 @@
                   </HBox>
                </graphic>
             </Label>
-            <Label alignment="CENTER" layoutY="278.0" prefHeight="40.0" prefWidth="1100.0">
+            <Label alignment="CENTER" layoutY="278.0" prefHeight="40.0" prefWidth="1200.0">
                <graphic>
                   <HBox prefHeight="43.0" prefWidth="1108.0" style="-fx-background-color: #DDDDDD;">
                      <children>
@@ -64,7 +57,7 @@
                   </HBox>
                </graphic>
             </Label>
-            <HBox layoutY="70.0" prefHeight="198.0" prefWidth="1103.0" style="-fx-background-color: #DDDDDD;">
+            <HBox layoutY="70.0" prefHeight="198.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="306.0">
                      <HBox.margin>
@@ -75,27 +68,25 @@
                         <TextField fx:id="ISBNsearchBook" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray; -fx-font-size: 20; -fx-font-weight: bold;" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="198.0" prefWidth="703.0">
+                  <VBox prefHeight="198.0" prefWidth="814.0">
                      <children>
-                        <AnchorPane prefHeight="199.0" prefWidth="664.0">
+                        <AnchorPane prefHeight="199.0" prefWidth="748.0">
                            <children>
-                              <TextField fx:id="titleTextField" layoutX="145.0" layoutY="21.0" prefHeight="38.0" prefWidth="303.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <TextField fx:id="sectionTextField" layoutX="141.0" layoutY="113.0" prefHeight="39.0" prefWidth="295.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <TextField fx:id="authorTextField" layoutX="141.0" layoutY="71.0" prefHeight="38.0" prefWidth="310.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="108.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Title Of Book :" />
-                              <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Author Of Book :" />
-                              <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Section Of Book :" />
-                              <Label alignment="TOP_LEFT" layoutX="57.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Quantity :" />
-                              <TextField fx:id="quantityTextField" layoutX="144.0" layoutY="160.0" prefHeight="26.0" prefWidth="164.0" />
-                              <Label alignment="TOP_LEFT" layoutX="491.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Available :" />
-                              <TextField fx:id="AvailableTextField" layoutX="511.0" layoutY="39.0" prefHeight="38.0" prefWidth="192.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <TextField fx:id="titleTextField" layoutX="187.0" layoutY="32.0" prefHeight="38.0" prefWidth="303.0" promptText="title" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <TextField fx:id="categoryTextField" layoutX="184.0" layoutY="112.0" prefHeight="39.0" prefWidth="295.0" promptText="category" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <TextField fx:id="authorTextField" layoutX="184.0" layoutY="71.0" prefHeight="38.0" prefWidth="310.0" promptText="author" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <Label alignment="TOP_LEFT" layoutX="68.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="108.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Title Of Book :" />
+                              <Label alignment="TOP_LEFT" layoutX="57.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Author Of Book :" />
+                              <Label alignment="TOP_LEFT" layoutX="46.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="150.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Category Of Book :" />
+                              <Label alignment="TOP_LEFT" layoutX="499.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Available :" />
+                              <TextField fx:id="AvailableTextField" layoutX="581.0" layoutY="21.0" prefHeight="38.0" prefWidth="192.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
                            </children>
                         </AnchorPane>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox layoutX="-1.0" layoutY="337.0" prefHeight="198.0" prefWidth="1103.0" style="-fx-background-color: #DDDDDD;">
+            <HBox layoutX="-1.0" layoutY="337.0" prefHeight="237.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="306.0">
                      <HBox.margin>
@@ -106,26 +97,26 @@
                         <TextField fx:id="IDsearchStudent" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: gray; -fx-font-size: 20; -fx-font-weight: bold;" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="198.0" prefWidth="629.0">
+                  <VBox prefHeight="198.0" prefWidth="734.0">
                      <children>
-                        <AnchorPane prefHeight="199.0" prefWidth="667.0">
+                        <AnchorPane prefHeight="237.0" prefWidth="734.0">
                            <children>
-                              <TextField fx:id="nameStudentTextfield" layoutX="144.0" layoutY="21.0" prefHeight="38.0" prefWidth="327.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <TextField fx:id="studentEmailTextfield" layoutX="144.0" layoutY="113.0" prefHeight="39.0" prefWidth="358.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <TextField fx:id="studentNumberTextfield" layoutX="142.0" layoutY="71.0" prefHeight="38.0" prefWidth="332.0" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
-                              <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="144.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Name Of Student :" />
-                              <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student number :" />
-                              <Label alignment="TOP_LEFT" layoutX="31.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student email :" />
-                              <Label alignment="TOP_LEFT" layoutX="16.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="126.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text=" Number Of day:" />
-                              <TextField fx:id="borrowDay" layoutX="142.0" layoutY="159.0" prefHeight="26.0" prefWidth="169.0" />
+                              <TextField fx:id="nameStudentTextfield" layoutX="177.0" layoutY="21.0" prefHeight="38.0" prefWidth="327.0" promptText="name" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <TextField fx:id="studentEmailTextfield" layoutX="177.0" layoutY="122.0" prefHeight="39.0" prefWidth="358.0" promptText="email" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <TextField fx:id="studentNumberTextfield" layoutX="177.0" layoutY="71.0" prefHeight="38.0" prefWidth="328.0" promptText="student" style="-fx-background-color: transparent;" styleClass="lebel" stylesheets="@../css/studentLabel.css" />
+                              <Label alignment="TOP_LEFT" layoutX="31.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="144.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Name Of Student :" />
+                              <Label alignment="TOP_LEFT" layoutX="38.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="130.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student number :" textAlignment="RIGHT" />
+                              <Label alignment="TOP_LEFT" layoutX="48.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Student email :" textAlignment="RIGHT" />
+                              <Label alignment="TOP_LEFT" layoutX="40.0" layoutY="174.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="22.0" prefWidth="126.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text=" Number Of day:" />
+                              <TextField fx:id="borrowDay" layoutX="177.0" layoutY="172.0" prefHeight="26.0" prefWidth="169.0" />
                            </children>
                         </AnchorPane>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button layoutX="315.0" layoutY="557.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="182.0" style="-fx-font-weight: bold; -fx-font-size: 20;" stylesheets="@../css/buttonStyle2.css" text="Cancle" />
-            <Button layoutX="550.0" layoutY="557.0" mnemonicParsing="false" onAction="#IssueBookButton" prefHeight="46.0" prefWidth="182.0" style="-fx-font-size: 20; -fx-font-weight: bold;" stylesheets="@../css/buttonStyle2.css" text="Issue Book" />
+            <Button layoutX="319.0" layoutY="603.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="182.0" style="-fx-font-weight: bold; -fx-font-size: 20;" stylesheets="@../css/buttonStyle2.css" text="Cancle" />
+            <Button layoutX="565.0" layoutY="603.0" mnemonicParsing="false" onAction="#IssueBookButton" prefHeight="46.0" prefWidth="182.0" style="-fx-font-size: 20; -fx-font-weight: bold;" stylesheets="@../css/buttonStyle2.css" text="Issue Book" />
          </children>
       </AnchorPane>
    </bottom>

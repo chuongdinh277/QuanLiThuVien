@@ -208,7 +208,7 @@ public class LoginController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/menuAdmin.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root, 1300, 800));
+                    stage.setScene(new Scene(root, 1300, 750));
                     stage.show();
                     stage.centerOnScreen();
                 } else if ("user".equals(role)) {
