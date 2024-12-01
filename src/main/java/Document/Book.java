@@ -12,10 +12,9 @@ public class Book {
     private String imagePath;// miêu tả
     private double average_rating;
     private String publisher;
-    private String section;
     private int remainingBook;
     private String ISBN;
-    public Book(String title, String author, String category, int quantity, int remainingBook, String description, String publisher, String section, String imagePath, String ISBN) {
+    public Book(String title, String author, String category, int quantity, int remainingBook, String description, String publisher, String imagePath, String ISBN) {
         this.title = title;
         this.author = author;
         this.category = category;
@@ -24,7 +23,6 @@ public class Book {
         this.description = description;
         this.imagePath = imagePath;
         this.publisher = publisher;
-        this.section = section;
         this.ISBN = ISBN;
     }
     public String getISBN() {
@@ -48,10 +46,6 @@ public class Book {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-    public String getSection() {
-        return section;
-    }
-    public void setSection(String section) {this.section = section;}
     public String getAuthor() {
         return author;
     }

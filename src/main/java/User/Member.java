@@ -1,13 +1,10 @@
     package User;
 
-    import BookRating.BookRating;
-    import BookRating.BookRatingDAO;
     import Database.DatabaseConnection;
     import Document.Book;
     import Document.BookDAO;
     import Document.Transaction;
     import Document.TransactionDAO;
-    import Recomend.Recommend;
     import Review.ReviewDAO;
     import Review.Reviews;
 
@@ -135,16 +132,6 @@
             return null;
         }
 
-        public List<BookRating> getRecommendBook() {
-            try {
-                List<BookRating> books = new ArrayList<BookRating>();
-                books = Recommend.getRecommendBooks(this);
-                return books;
-            } catch (SQLException e) {
-                this.showErrorDialog("Error",e.getMessage());
-            }
-            return null;
-        }
 
         public void addReviewForBook(Book book, String comment, int rating) {
             Reviews review = new Reviews(this.getUserName(), book.getTitle(), book.getAuthor(), comment, rating);
@@ -243,7 +230,6 @@
                                 resultSet.getInt("remaining_book"),
                                 resultSet.getString("description"),
                                 resultSet.getString("publisher"),
-                                resultSet.getString("section"),
                                 resultSet.getString("imagePath"),
                                 resultSet.getString("ISBN"));
                         // Cập nhật các thuộc tính khác nếu cần
@@ -253,68 +239,6 @@
                 }
             }
             return books;
-        }
-
-
-        // lấy sách có rating.
-        public List<BookRating> getFullBooks() {
-            try {
-
-                List<BookRating> allBooks = BookRatingDAO.getAvailableBooks();
-                if (!allBooks.isEmpty()) {
-                    this.showAlberDialog("Tìm thấy sách");
-                    return allBooks;
-                }
-            } catch (Exception e) {
-                this.showErrorDialog("Error", e.getMessage());
-            }
-            return null;
-        }
-
-        public List<BookRating> findFullBookByCategory(String category) {
-            try {
-                List<BookRating> foundBooks = BookRatingDAO.getBooksByCategory(category);
-
-                if (!foundBooks.isEmpty()) {
-                    this.showAlberDialog("Tìm thấy sách");
-                    return foundBooks;
-                } else {
-                    this.showAlberDialog("Không tìm thấy sách nào");
-                }
-            } catch (Exception e) {
-                this.showErrorDialog("Error", e.getMessage());
-            }
-            return null;
-        }
-
-        public List<BookRating> findFullBookByAuthor(String author) {
-            try {
-                List<BookRating> foundBooks = new ArrayList<BookRating>();
-                foundBooks = BookRatingDAO.getBooksByAuthor(author);
-                if (!foundBooks.isEmpty()) {
-                    this.showAlberDialog("Tìm thấy sách");
-                    return foundBooks;
-                } else {
-                    this.showAlberDialog("Không tìm thấy sách nào");
-                }
-            } catch (Exception e) {
-                this.showErrorDialog("Error", e.getMessage());
-            }
-            return null;
-        }
-
-        public List<BookRating> findFullBookByTitle(String title) {
-            try {
-                List<BookRating> bookList = new ArrayList<BookRating>();
-                bookList = BookRatingDAO.getBooksByTitle(title);
-                if (!bookList.isEmpty()) {
-                    this.showAlberDialog("Tìm thấy sách");
-                    return bookList;
-                }
-            } catch (Exception e) {
-                this.showErrorDialog("Error", e.getMessage());
-            }
-            return null;
         }
 
         public List<Book> viewAllBooks() throws SQLException {

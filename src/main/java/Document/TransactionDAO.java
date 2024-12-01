@@ -12,7 +12,6 @@ import static Database.DatabaseConnection.getConnection;
 
 public class TransactionDAO {
 
-    //kiểm tra xem sách có đang được mượn ko 0
     private static boolean isBookBorrowed(Book book) throws SQLException {
         String sql = "SELECT remaining_book FROM books WHERE ISBN = ?";
         try (Connection connection = getConnection();
@@ -21,7 +20,7 @@ public class TransactionDAO {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int remaining = resultSet.getInt("remaining_book");
-                return remaining > 0;  // Sách có sẵn nếu remaining > 0
+                return remaining > 0;
             }
         } catch (SQLException e) {
             throw e;
@@ -30,15 +29,13 @@ public class TransactionDAO {
     }
 
     public static boolean borrowBook(User user, Book book, int quantity, int numberofdays) throws SQLException {
-        // Kiểm tra xem sách có đủ số lượng cần mượn hay không
+
         if (!isBookBorrowed(book)) {
-            return false;  // Sách không có sẵn hoặc không đủ số lượng
+            return false;
         }
 
-        // Câu lệnh SQL để cập nhật số lượng sách còn lại trong `books`
         String updateSql = "UPDATE books SET remaining_book = remaining_book - ? WHERE ISBN = ? AND remaining_book >= ?";
 
-        // Câu lệnh SQL để thêm giao dịch vào `transactions`
         String sql = "INSERT INTO transactions (username, title, author, ISBN, borrow_date, return_date, imagePath, quantity, mssv) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
 
         try (Connection connection = getConnection();
@@ -61,7 +58,7 @@ public class TransactionDAO {
                 insertTransactionStatement.setString(2, book.getTitle());
                 insertTransactionStatement.setString(3, book.getAuthor());
                 insertTransactionStatement.setString(4, book.getISBN());
-                insertTransactionStatement.setDate(5, Date.valueOf(returnDate));
+                insertTransactionStatement.setDate(5, Date.valueOf(returnDate));  // Ngày trả
                 insertTransactionStatement.setString(6, book.getImagePath());
                 insertTransactionStatement.setInt(7, quantity);
                 insertTransactionStatement.setString(8, String.valueOf(user.getId()));
@@ -201,7 +198,6 @@ public class TransactionDAO {
                         resultSet.getInt("quantity"),
                         resultSet.getString("description"),
                         resultSet.getString("publisher"),
-                        resultSet.getString("section"),
                         resultSet.getString("imagePath"),
                         resultSet.getString("ISBN")
                 );
@@ -212,7 +208,7 @@ public class TransactionDAO {
         }
         return result;
     }
-    public static boolean getBorrowedBooksbymssv(String mssv, Book currentBook) {
+    public static boolean getBorrowedBooksByMssv(String mssv, Book currentBook) {
         String sql = "SELECT * FROM transactions WHERE mssv = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

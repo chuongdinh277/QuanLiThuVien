@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="875.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserSeeBookDetails">
+<ScrollPane prefHeight="875.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserSeeBookDetails">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="875.0" prefWidth="1180.0">
          <children>
@@ -131,7 +131,7 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="70.0" layoutY="10.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="total student" />
-                              <Label layoutX="70.0" layoutY="33.0" prefHeight="18.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
+                              <Label fx:id="totalStudentLabel" layoutX="70.0" layoutY="33.0" prefHeight="18.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="318.0" layoutY="721.0" prefHeight="76.0" prefWidth="269.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">

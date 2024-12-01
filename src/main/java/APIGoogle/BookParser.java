@@ -50,8 +50,11 @@ public class BookParser {
                     }
                 }
             }
+            String publisher = volumeInfo.has("publisher") ?
+                    Normalizer.normalize(volumeInfo.get("publisher").getAsString(), Normalizer.Form.NFC) :
+                    "Unknown publisher";
             // Tạo đối tượng Book
-            Book book = new Book(title, author, category, 1,1, description," ", "",imagePath,isbn);
+            Book book = new Book(title, author, category, 1,1, description,publisher,imagePath,isbn);
             // Lưu vào cache
 
             cache.put(jsonResponse, book);

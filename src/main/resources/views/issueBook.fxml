@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.issueBookController">
+<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.IssueBookController">
     <top>
         <AnchorPane prefHeight="82.0" prefWidth="1100.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" BorderPane.alignment="CENTER">
             <children>

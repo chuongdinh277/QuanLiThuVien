@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.profileController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfileController">
    <children>
       <AnchorPane layoutY="-2.0" prefHeight="96.0" prefWidth="1200.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
          <children>

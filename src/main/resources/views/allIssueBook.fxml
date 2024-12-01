@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane_issueBook" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.allIssueBookController">
+<BorderPane fx:id="borderPane_issueBook" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllIssueBookController">
     <center>
         <AnchorPane>
             <TableView fx:id="transactionTable" layoutY="61.0" prefHeight="478.0" prefWidth="1050.0" stylesheets="@../css/table-view.css" tableMenuButtonVisible="true">

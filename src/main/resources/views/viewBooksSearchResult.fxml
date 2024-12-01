@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewBooksSearchResult">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ViewBooksSearchResult">
    <children>
-      <ScrollPane fx:id="scrollPane" prefHeight="680.0" prefWidth="1180.0">
+      <ScrollPane fx:id="scrollPane" layoutY="75.0" prefHeight="605.0" prefWidth="1180.0" style="-fx-background-color: transparent;">
          <content>
             <GridPane fx:id="searchResultGrid" hgap="10" layoutX="15.0" layoutY="15.0" vgap="10">
                <!-- Các ô card sẽ được thêm vào đây thông qua mã Java -->
             </GridPane>
          </content>
       </ScrollPane>
+      <Label layoutX="14.0" layoutY="16.0" text="Result :">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

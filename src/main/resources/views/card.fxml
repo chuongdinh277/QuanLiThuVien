@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" prefHeight="232.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardController">
+<AnchorPane fx:id="cardPane" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" prefHeight="232.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CardController">
     <children>
         <AnchorPane layoutX="9.0" layoutY="9.0" prefHeight="183.0" prefWidth="140.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
             <children>

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="1100.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.testController">
+<ScrollPane prefHeight="1100.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.testController">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="1180.0">
             <children>

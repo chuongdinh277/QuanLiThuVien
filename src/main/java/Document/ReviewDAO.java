@@ -16,9 +16,12 @@ public class ReviewDAO {
             statement.setString(2, isbn);
             statement.setInt(3, rating);
             statement.setString(4, comment);
+            // In ra câu lệnh SQL
+            System.out.println("Executing query: " + statement.toString());
             statement.executeUpdate();
         }
     }
+
 
     public static double getAverageRating(String isbn) throws SQLException {
         double averageRating = -1; // Trả về -1 nếu không có đánh giá nào

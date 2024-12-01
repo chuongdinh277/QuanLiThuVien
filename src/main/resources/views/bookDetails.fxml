@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="1100.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.bookDetailCotroller">
+<ScrollPane prefHeight="1100.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BookDetailCotroller">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="1180.0">
          <children>
@@ -99,7 +99,7 @@
                                              </image>
                                           </ImageView>
                                           <Label layoutX="70.0" layoutY="2.0" prefHeight="35.0" prefWidth="142.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="ISBN" />
-                                          <Label fx:id="ISBNLabel" layoutX="70.0" layoutY="32.0" prefHeight="48.0" prefWidth="243.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="Label" />
+                                          <TextField fx:id="ISBNTextField" layoutX="70.0" layoutY="37.0" prefHeight="38.0" prefWidth="225.0" style="-fx-background-color: #41dee0; -fx-font-weight: bold; size: 19;" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane layoutX="379.0" layoutY="353.0" prefHeight="84.0" prefWidth="314.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
@@ -131,8 +131,8 @@
                                     <Image url="@../image/user.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="70.0" layoutY="10.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="total student" />
-                              <Label layoutX="70.0" layoutY="33.0" prefHeight="18.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
+                              <Label layoutX="70.0" layoutY="10.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Total student" />
+                              <Label fx:id="totalStudentLabel" layoutX="70.0" layoutY="33.0" prefHeight="18.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Label" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="718.0" layoutY="774.0" prefHeight="76.0" prefWidth="269.0" style="-fx-background-radius: 20; -fx-background-color: #41dee0;">
@@ -142,7 +142,7 @@
                                     <Image url="@../image/book.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="78.0" layoutY="5.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Books total" />
+                              <Label layoutX="78.0" layoutY="5.0" prefHeight="21.0" prefWidth="113.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Books quantity" />
                               <TextField fx:id="quantityTextField" layoutX="70.0" layoutY="27.0" prefHeight="40.0" prefWidth="169.0" style="-fx-background-color: #41dee0; -fx-font-size: 18; -fx-font-weight: bold;" />
                            </children>
                         </AnchorPane>

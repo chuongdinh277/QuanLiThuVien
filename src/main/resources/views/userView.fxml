@@ -13,13 +13,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="scrollPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userViewController">
+<ScrollPane fx:id="scrollPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserViewController">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane fx:id="borderPane_User" prefHeight="800.0" prefWidth="1300.0">
                <top>
-                  <AnchorPane prefHeight="81.0" prefWidth="1300.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
+                  <AnchorPane prefHeight="80.0" prefWidth="1300.0" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css">
                      <children>
                         <Label layoutX="105.0" layoutY="31.0" prefHeight="17.0" prefWidth="26.0" style="-fx-text-fill: black; -fx-font-weight: bold;" text="UET" />
                         <Label layoutX="105.0" layoutY="51.0" style="-fx-font-weight: bold; -fx-text-fill: black;" text="DIGITAL LIBRARY" />
@@ -41,11 +41,11 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="962.0" layoutY="10.0" prefHeight="82.0" prefWidth="217.0">
+                        <AnchorPane layoutX="1087.0" layoutY="6.0" prefHeight="81.0" prefWidth="198.0">
                            <children>
                               <Label fx:id="username" layoutX="12.0" layoutY="19.0" style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 16;" text="name" />
                               <Label fx:id="role" layoutX="12.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: black; -fx-font-size: 16;" text="role" />
-                              <MenuButton fx:id="logoutAndEditProfile" layoutX="99.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+                              <MenuButton fx:id="logoutAndEditProfile" layoutX="99.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" stylesheets="@../css/style.css">
                                  <items>
                                     <MenuItem fx:id="editProfileButton" mnemonicParsing="false" onAction="#handlePersonClick" text="Profile" />
                                     <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#logout_Button" text="Logout" />
