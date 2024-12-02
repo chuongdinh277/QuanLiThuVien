@@ -142,7 +142,7 @@ public class BookDetailController {
     private void showCommentBook(ActionEvent event) {
         viewBookPane.setVisible(false);
         commentPane.setVisible(true);
-        if(currentBook != null ) System.out.println(currentBook.getISBN());
+        //if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
     }
 
@@ -346,6 +346,7 @@ public class BookDetailController {
         } else {
             showAlbertDialog("Chưa chọn đánh giá hoặc sách để lưu.");
         }
+        loadReview();
     }
 
     /**

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Document/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Document/BookDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,57 +46,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.BookSearchApp.executor": "Run",
-    "Application.BookSearchApp2.executor": "Run",
-    "Application.DatabaseConnection.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Application.haubeo.executor": "Run",
-    "Application.main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.AdminTest.executor": "Run",
-    "JUnit.BookCacheTest.executor": "Run",
-    "JUnit.BookCacheTest.testClearCache.executor": "Run",
-    "JUnit.BookCacheTest.testIsCached.executor": "Run",
-    "JUnit.BookDAOTest.executor": "Run",
-    "JUnit.BookDAOTest.testDeleteBook.executor": "Run",
-    "JUnit.BookDAOTest.testUpdateBook.executor": "Run",
-    "JUnit.BookDAOTest.testUpdateQuantity.executor": "Run",
-    "JUnit.BookRatingDAOTest.executor": "Run",
-    "JUnit.CurrentUserTest.executor": "Run",
-    "JUnit.DatabaseConnectionTest.executor": "Run",
-    "JUnit.GoogleBooksAPITest.executor": "Run",
-    "JUnit.ImageCacheTest.executor": "Run",
-    "JUnit.MemberTest.executor": "Run",
-    "JUnit.ReviewDAOTest.executor": "Run",
-    "JUnit.TransactionDAOTest.executor": "Run",
-    "JUnit.TransactionDAOTest.testGetAllTransaction.executor": "Run",
-    "JUnit.UserTest.executor": "Run",
-    "JUnit.UserTest.testDeleteReview.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/New folder/QuanLiThuVien",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15039062",
-    "project.structure.side.proportion": "0.33011582"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookSearchApp2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DatabaseConnection.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Application.haubeo.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.AdminTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookCacheTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookCacheTest.testClearCache.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookCacheTest.testIsCached.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookDAOTest.testDeleteBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookDAOTest.testUpdateBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookDAOTest.testUpdateQuantity.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookRatingDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CurrentUserTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DatabaseConnectionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoogleBooksAPITest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImageCacheTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ReviewDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionDAOTest.testGetAllTransaction.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.testDeleteReview.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/New folder/QuanLiThuVien&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15039062&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33011582&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\QuanLiThuVien\src\main\java\APIGoogle" />
@@ -113,7 +113,7 @@
       <recent name="org.example.quanlithuvien" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TransactionDAOTest">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controllers.App" />
       <module name="QuanLiThuVien" />
