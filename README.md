@@ -79,7 +79,7 @@ Còn nếu trong giao diện `home` bạn chọn nút ![logo](https://github.com
 
 Còn nếu trong giao diện `home` bạn chọn nút ![logo](https://github.com/dangdd2208/readmeIsReal/blob/main/Screenshot%202024-11-30%20222647.png) sẽ dẫn bạn đến trang tổng hợp sách đã mượn với thông tin đầy đủ: người mượn, ngày mượn, ngày trả. ![logo](https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/list%20issue%20book.JPG)
 
-Còn nếu trong giao diện `home` bạn chọn nút ![logo](https://github.com/dangdd2208/readmeIsReal/blob/main/Screenshot%202024-11-30%20222651.png) thì bạn sẽ chuyển đến trang hiển thị thông tin đầy đủ của *student* theo `StudentID`. Đây là giao diện trang ấy ![logo]([https://github.com/dangdd2208/readmeIsReal/blob/main/Screenshot%202024-12-01%20135029.png](https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/return%20book.JPG)) Nó giúp bạn quan sát kĩ các sinh viên trong thư viện của bạn và có thể kiểm soát được các bạn sinh viên đang mượn những quyển sách nào có trong thư viện.
+Còn nếu trong giao diện `home` bạn chọn nút ![logo](https://github.com/dangdd2208/readmeIsReal/blob/main/Screenshot%202024-11-30%20222651.png) thì bạn sẽ chuyển đến trang hiển thị thông tin đầy đủ của *student* theo `StudentID`. Đây là giao diện trang ấy ![logo] (https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/return%20book.JPG) Nó giúp bạn quan sát kĩ các sinh viên trong thư viện của bạn và có thể kiểm soát được các bạn sinh viên đang mượn những quyển sách nào có trong thư viện.
 
 #### 2.3 *Giao diện thư viện trong vai trò user*
 
@@ -98,7 +98,7 @@ Nếu trong giao diện `user` bạn chọn nút ![logo](https://github.com/dang
 Khi chọn một cuốn sách nó sẽ hiện ra thông tin sách chi tiết và nút bạn có thể điền số ngày bạn mượn và ấn nút borrow để mượn sách đó.
 ![logo](https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/borrow%20book.JPG) 
 Tương tự như bên admin thì User có thể comment đánh giá cho quyển sách sau khi đọc 
-![logo] (https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/user%20comment.JPG).
+![logo](https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/user%20comment.JPG).
 
 Nếu trong giao diện `user` bạn chọn nút ![logo](https://github.com/dangdd2208/readmeIsReal/blob/main/Screenshot%202024-11-30%20235737.png) bạn sẽ chuyển bạn sang trang mà chứa các sách mà bạn đang mượn của thư viện.![logo](https://github.com/chuongdinh277/QuanLiThuVien/blob/main/Image/user2.JPG)
 
