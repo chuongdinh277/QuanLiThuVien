@@ -62,7 +62,7 @@
                           </Label>
                       </children>
                   </HBox>
-            <TableView fx:id="transactionTable" layoutX="40.0" layoutY="278.0" prefHeight="340.0" prefWidth="1100.0" stylesheets="@../css/table-view.css">
+            <TableView fx:id="transactionTable" layoutX="2.0" layoutY="278.0" prefHeight="340.0" prefWidth="1194.0" stylesheets="@../css/table-view.css">
               <columns>
                 <TableColumn fx:id="STTcolumn" prefWidth="75.0" text="STT" />
                 <TableColumn fx:id="ISBNColumn" prefWidth="144.79998779296875" text="ISBN" />

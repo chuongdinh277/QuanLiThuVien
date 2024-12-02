@@ -86,7 +86,7 @@ public class ViewBookInLibrary {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi mở trang chi tiết sách");
+          //  System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
     private void loadBooks() {

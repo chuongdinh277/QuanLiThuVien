@@ -56,7 +56,7 @@ public class UserProfileController {
         idLabel.setText(String.valueOf(currentUser.getId())); // Thiết lập ID người dùng
         idLabel1.setText(String.valueOf(currentUser.getId())); // Thiết lập ID người dùng (phiên bản khác)
         numberLabel.setText(currentUser.getNumber()); // Thiết lập số điện thoại người dùng
-        System.out.println("number = " + currentUser.getNumber());
+       // System.out.println("number = " + currentUser.getNumber());
 
         // Cài đặt trường văn bản không thể chỉnh sửa và ẩn các nút cập nhật, hủy
         emailTextField.setEditable(false);
@@ -76,7 +76,7 @@ public class UserProfileController {
      */
     @FXML
     private void handleEditButton() {
-        System.out.println("clicked edit button");
+        //System.out.println("clicked edit button");
         updateButton.setVisible(true);
         cancelButton.setVisible(true);
         // Kích hoạt trường văn bản để chỉnh sửa
@@ -90,7 +90,7 @@ public class UserProfileController {
      */
     @FXML
     private void handleUpdateButton() {
-        System.out.println("clicked update button");
+        //System.out.println("clicked update button");
         String newEmail = emailTextField.getText();
         String newPassword = passwordTextField.getText();
 

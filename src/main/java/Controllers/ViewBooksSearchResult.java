@@ -66,7 +66,7 @@ public class ViewBooksSearchResult {
             return card;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi tải card");
+           // System.out.println("Lỗi khi tải card");
             return null;
         }
     }
@@ -82,9 +82,6 @@ public class ViewBooksSearchResult {
 
             // Đưa thông tin sách vào controller của trang chi tiết
             UserSeeBookDetails controller = loader.getController();
-            if (book == null) {
-                System.out.println("null");
-            }
             controller.setBook(book);
 
             // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
@@ -94,7 +91,7 @@ public class ViewBooksSearchResult {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi mở trang chi tiết sách");
+            //System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
 
@@ -113,7 +110,7 @@ public class ViewBooksSearchResult {
                     List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Lấy kết quả tìm kiếm
 
                     for (Book book : searchResults) {
-                        System.out.println(book.getTitle());
+                        //System.out.println(book.getTitle());
                     }
 
                     if (searchResults != null && !searchResults.isEmpty()) {
@@ -135,7 +132,7 @@ public class ViewBooksSearchResult {
                             }
                         }
                     } else {
-                        System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
+                       // System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);

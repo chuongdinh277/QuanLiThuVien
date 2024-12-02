@@ -144,7 +144,6 @@ public class BookDetailController {
         commentPane.setVisible(true);
         if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
-        System.out.println("hello");
     }
 
     /**
@@ -173,7 +172,6 @@ public class BookDetailController {
         if (menuControllerAdmin != null) {
             menuControllerAdmin.showHome();
         } else {
-            System.out.println("null");
         }
     }
 
@@ -254,7 +252,7 @@ public class BookDetailController {
             }
             try {
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
-                System.out.println(averageRating);
+                //System.out.println(averageRating);
                 displayRating(averageRating);
             } catch (SQLException e) {
                 showErrorDialog("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
@@ -279,7 +277,7 @@ public class BookDetailController {
             // Get the updated quantity from the input
             int newQuantity = Integer.parseInt(quantityTextField.getText());
             int additionalQuantity = currentBook.getQuantity() + newQuantity;
-            System.out.println(additionalQuantity);
+          //  System.out.println(additionalQuantity);
             // Update other fields
             currentBook.setAuthor(authorTextField.getText());
             currentBook.setISBN(ISBNTextField.getText());
@@ -399,7 +397,7 @@ public class BookDetailController {
     private void loadReview() {
         if (currentBook != null) {
             String isbn = currentBook.getISBN();
-            System.out.println(isbn);
+            //System.out.println(isbn);
             try {
                 List<Review> reviews = ReviewDAO.getReviewsByISBN(isbn);
                 displayReviews(reviews);

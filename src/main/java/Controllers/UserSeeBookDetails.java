@@ -171,7 +171,7 @@ public class UserSeeBookDetails {
     private void borrowBook(ActionEvent event) {
         try {
             String mssv = String.valueOf(currentUser.getId());
-            System.out.println(mssv);
+           // System.out.println(mssv);
             User newUser = User.loadStudentDetailsByID(mssv);
 
             // Kiểm tra giá trị nhập vào
@@ -196,7 +196,7 @@ public class UserSeeBookDetails {
             }
 
             boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1, number);
-            System.out.println(isBorrow);
+           // System.out.println(isBorrow);
             if (isBorrow) {
                 borrowBook.setVisible(false);
                 returnBook.setVisible(true);
@@ -228,9 +228,9 @@ public class UserSeeBookDetails {
     private void showCommentBook(ActionEvent event) {
         viewBookPane.setVisible(false);
         commentPane.setVisible(true);
-        if(currentBook != null ) System.out.println(currentBook.getISBN());
+
         loadReview();
-        System.out.println("hello");
+        //System.out.println("hello");
     }
 
 
@@ -240,7 +240,7 @@ public class UserSeeBookDetails {
             menuControllerAdmin.showHome();
         }
         else {
-            System.out.println("null");
+            //System.out.println("null");
         }
     }
     @FXML
@@ -281,14 +281,14 @@ public class UserSeeBookDetails {
     public void setBook (Book book) {
         this.currentBook = book;
         if (book != null) {
-            System.out.println(currentBook.getISBN());
+           // System.out.println(currentBook.getISBN());
             ISBNLabel.setText(book.getISBN());
             titleTextField.setText(book.getTitle());
             authorTextField.setText(book.getAuthor());
             categoryLabel.setText(book.getCategory());
             publisherLabel.setText(book.getPublisher());
             descriptionTextField.setText(book.getDescription());
-            System.out.println(book.getDescription());
+          //  System.out.println(book.getDescription());
             quantityTextField.setText(String.valueOf(book.getQuantity()));
 
             if (book.getRemainingBook() > 0) {
@@ -315,7 +315,7 @@ public class UserSeeBookDetails {
             try {
                 // Lấy số sao trung bình từ cơ sở dữ liệu
                 double averageRating = ReviewDAO.getAverageRating(book.getISBN());
-                System.out.println(averageRating);
+                //System.out.println(averageRating);
                 displayRating(averageRating);
             } catch (SQLException e) {
                 showErrorDialog("Lỗi khi lấy đánh giá của sách: " + book.getTitle());
@@ -334,7 +334,7 @@ public class UserSeeBookDetails {
 
             try {
                 // Debugging: kiểm tra thông tin trước khi lưu
-                System.out.println("Saving review for book: " + isbn + ", User: " + username + ", Rating: " + selectedRating);
+              //  System.out.println("Saving review for book: " + isbn + ", User: " + username + ", Rating: " + selectedRating);
                 ReviewDAO.saveReview(username, isbn, selectedRating, comment);
                 showAlbertDialog("Đã lưu đánh giá " + selectedRating + " sao cho sách: " + currentBook.getTitle());
                 loadReview();
@@ -384,7 +384,7 @@ public class UserSeeBookDetails {
     private void loadReview() {
         if (currentBook != null) {
             String isbn = currentBook.getISBN();
-            System.out.println(isbn);
+            //System.out.println(isbn);
             try {
                 List<Review> reviews = ReviewDAO.getReviewsByISBN(isbn);
                 displayReviews(reviews);
@@ -392,7 +392,7 @@ public class UserSeeBookDetails {
                 showErrorDialog("Lỗi khi lấy đánh giá của sách: " + currentBook.getTitle());
             }
         }
-        else System.out.println("null");
+
     }
 
     private void displayReviews(List<Review> reviews) {

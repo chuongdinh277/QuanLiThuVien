@@ -301,6 +301,7 @@ public class UserViewController {
      * @param fxmlPath Đường dẫn đến file FXML cần tải.
      */
     private void handleButtonClickWithFXML(ImageView imageView, String imagePath, Button button, String fxmlPath) {
+        resetButtonStyles();
         changeImage(imageView, imagePath);
         setButtonTextColor(button, activeColor);
         loadFXML(fxmlPath);

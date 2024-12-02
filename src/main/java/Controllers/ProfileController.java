@@ -113,7 +113,15 @@ public class ProfileController {
             // Xử lý lỗi SQL khi tải thông tin người dùng.
         }
     }
-
+    /**
+     * Handles the click event on a star in the rating section. Based on the clicked star, it sets the selected rating.
+     * The method also updates the appearance of the stars according to the selected rating.
+     *
+     * @param event The mouse click event on the star.
+     */
+    @FXML
+    private void handleStarclick(MouseEvent event) {
+    }
     /**
      * Phương thức xử lý sự kiện click vào biểu tượng chỉnh sửa tên đầy đủ.
      * Hiển thị TextField để người dùng nhập tên mới.

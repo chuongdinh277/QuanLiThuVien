@@ -5,47 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/book_cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/book_cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AllIssueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllIssueBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailCotroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BorrowBookController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/IssueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/IssueBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/MenuController_Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/MenuAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BookDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ReturnBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReturnBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/StudentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/StudentsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserProfileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/updateStudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/updateStudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/star.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/star.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/bookNoColor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/bookNoColor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/homeColor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/homeColor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/homeNoColor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/homeNoColor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/libraryColor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/libraryColor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/image/libraryNoColor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/image/libraryNoColor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/bookDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/borrowBook.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/card1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/issueBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/profileAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/profileAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/returnBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userProfile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userSeeBookDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/User/MemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/User/MemberTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

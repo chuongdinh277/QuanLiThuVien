@@ -218,8 +218,6 @@ public class TransactionDAO {
             while (resultSet.next()) {
                 if (currentBook != null && resultSet.getString("ISBN").equals(currentBook.getISBN())) {
                     return true;
-                } else {
-                    System.out.println("Không tìm thấy sách trùng khớp");
                 }
             }
         } catch (SQLException e) {

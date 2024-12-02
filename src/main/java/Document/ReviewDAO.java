@@ -17,7 +17,7 @@ public class ReviewDAO {
             statement.setInt(3, rating);
             statement.setString(4, comment);
             // In ra câu lệnh SQL
-            System.out.println("Executing query: " + statement.toString());
+           // System.out.println("Executing query: " + statement.toString());
             statement.executeUpdate();
         }
     }
@@ -41,7 +41,7 @@ public class ReviewDAO {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy đánh giá cho ISBN: " + isbn);
+          //  System.err.println("Lỗi khi lấy đánh giá cho ISBN: " + isbn);
             e.printStackTrace();
             throw e;
         }

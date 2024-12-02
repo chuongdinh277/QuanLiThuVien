@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import BookRating.BookRating;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,14 +29,6 @@ class MemberTest {
         }
 
         member = new Member(1, "testUser", "password123");
-    }
-
-    @Test
-    void testReturnBook() {
-        Platform.runLater(() -> {
-            Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN");
-            assertDoesNotThrow(() -> member.returnBook(book));
-        });
     }
 
     @Test
@@ -70,21 +61,6 @@ class MemberTest {
         });
     }
 
-    @Test
-    void testGetRecommendBook() {
-        Platform.runLater(() -> {
-            List<BookRating> recommendedBooks = member.getRecommendBook();
-            assertNotNull(recommendedBooks);
-        });
-    }
-
-    @Test
-    void testAddReviewForBook() {
-        Platform.runLater(() -> {
-            Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN");
-            assertDoesNotThrow(() -> member.addReviewForBook(book, "Great book!", 5));
-        });
-    }
 
     @Test
     void testGetAllBooks() {

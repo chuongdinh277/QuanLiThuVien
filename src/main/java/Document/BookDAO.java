@@ -13,10 +13,19 @@ import static Database.DatabaseConnection.getConnection;
 
 
 public class BookDAO {
+    /**
+     * Thêm một cuốn sách vào cơ sở dữ liệu hoặc cập nhật thông tin của sách nếu sách đã tồn tại.
+     * Phương thức này sẽ kiểm tra xem cuốn sách đã tồn tại trong cơ sở dữ liệu hay chưa bằng cách so sánh các thuộc tính như tên sách, tác giả, thể loại, mô tả, và nhà xuất bản.
+     * Nếu sách đã có, số lượng sách sẽ được cập nhật và ISBN sẽ được thêm vào; nếu sách chưa có, cuốn sách mới sẽ được thêm vào cơ sở dữ liệu.
+     *
+     * @param book Đối tượng Book chứa thông tin của sách cần thêm hoặc cập nhật.
+     * @return true nếu việc thêm hoặc cập nhật sách thành công, false nếu thất bại.
+     * @throws SQLException Nếu có lỗi xảy ra khi tương tác với cơ sở dữ liệu.
+     */
     public static boolean addBook(Book book) throws SQLException {
         String checkSql = "SELECT 1 FROM books WHERE title = ? AND author = ? AND category = ? AND description = ? AND publisher = ?";
         String updateSql = "UPDATE books SET quantity = quantity + ?, isbn = ? WHERE title = ? AND author = ? AND category = ? AND description = ? AND imagePath = ? AND publisher = ?";
-        String insertSql = "INSERT INTO books (title, author, category, quantity, remaining_book, description, imagePath, publisher,isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertSql = "INSERT INTO books (title, author, category, quantity, remaining_book, description, imagePath, publisher, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
@@ -63,15 +72,23 @@ public class BookDAO {
                 }
             } catch (SQLException e) {
                 connection.rollback();
-                System.err.println("Error during database operation: " + e.getMessage());
+               // System.err.println("Error during database operation: " + e.getMessage());
                 throw e;
             }
         } catch (SQLException e) {
-            System.err.println("Connection error: " + e.getMessage());
+          //  System.err.println("Connection error: " + e.getMessage());
             throw e;
         }
     }
 
+    /**
+     * Xóa cuốn sách trong cơ sở dữ liệu theo tiêu đề.
+     * Phương thức này sử dụng tiêu đề của cuốn sách để tìm và xóa sách trong bảng `books`.
+     *
+     * @param title Tiêu đề của cuốn sách cần xóa.
+     * @return true nếu việc xóa sách thành công, false nếu thất bại.
+     * @throws SQLException Nếu có lỗi xảy ra khi tương tác với cơ sở dữ liệu.
+     */
     public static boolean deleteBookByTitle(String title) throws SQLException {
         String sql = "DELETE FROM books WHERE title =?";
         try (Connection connection = getConnection();
@@ -83,6 +100,15 @@ public class BookDAO {
             throw e;
         }
     }
+
+    /**
+     * Xóa cuốn sách trong cơ sở dữ liệu theo đối tượng Book.
+     * Phương thức này sử dụng ISBN của cuốn sách để tìm và xóa sách trong bảng `books`.
+     *
+     * @param book Đối tượng Book chứa thông tin của cuốn sách cần xóa.
+     * @return true nếu việc xóa sách thành công, false nếu thất bại.
+     * @throws SQLException Nếu có lỗi xảy ra khi tương tác với cơ sở dữ liệu.
+     */
     public static boolean deleteBook(Book book) throws SQLException {
         // Câu lệnh DELETE chỉ cần ISBN hoặc ID để xác định cuốn sách
         String sql = "DELETE FROM books WHERE isbn = ?"; // Hoặc sử dụng `id` nếu bạn có trường ID
@@ -96,8 +122,17 @@ public class BookDAO {
             throw e; // Ném lại SQLException nếu có lỗi
         }
     }
+
+    /**
+     * Cập nhật thông tin của cuốn sách trong cơ sở dữ liệu.
+     * Phương thức này sử dụng ISBN để xác định cuốn sách cần cập nhật và thay đổi các thông tin như tiêu đề, tác giả, thể loại, mô tả, nhà xuất bản, và đường dẫn hình ảnh.
+     *
+     * @param book Đối tượng Book chứa thông tin mới của cuốn sách.
+     * @return true nếu việc cập nhật sách thành công, false nếu thất bại.
+     * @throws SQLException Nếu có lỗi xảy ra khi tương tác với cơ sở dữ liệu.
+     */
     public static boolean updateBook(Book book) throws SQLException {
-        String sql = "UPDATE books SET title=?, author=?, category=?, description=?, publisher=?,imagePath=?, isbn=? WHERE isbn=?";
+        String sql = "UPDATE books SET title=?, author=?, category=?, description=?, publisher=?, imagePath=?, isbn=? WHERE isbn=?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, book.getTitle());
@@ -107,7 +142,7 @@ public class BookDAO {
             statement.setString(5, book.getPublisher());
             statement.setString(6, book.getImagePath());
             statement.setString(7, book.getISBN());
-            statement.setString(8,book.getISBN());
+            statement.setString(8, book.getISBN());
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -115,6 +150,7 @@ public class BookDAO {
             throw e;
         }
     }
+
     public static boolean updateQuantity(Book book, int additionalQuantity) throws SQLException {
         String sql = "UPDATE books SET quantity = ?, remaining_book =? WHERE isbn = ?";
         try (Connection connection = getConnection();
@@ -122,7 +158,7 @@ public class BookDAO {
             Book current = book;
             int newQuantity =  additionalQuantity - book.getQuantity();
             int newRemainingBook = Math.min(additionalQuantity, book.getRemainingBook() + newQuantity);
-            System.out.println(newRemainingBook);
+           // System.out.println(newRemainingBook);
             statement.setInt(1, additionalQuantity);
             statement.setInt(2, newRemainingBook);
             statement.setString(3, book.getISBN());
@@ -374,7 +410,7 @@ public class BookDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error updating remaining books: " + e.getMessage());
+           // System.out.println("Error updating remaining books: " + e.getMessage());
         }
         return false;
     }
@@ -436,7 +472,7 @@ public class BookDAO {
             if (averageRating > 0) {
                 filteredBooks.add(book);
                 ratingsMap.put(book.getISBN(), averageRating);
-                System.out.println(book.getTitle() + " " + averageRating);
+            //    System.out.println(book.getTitle() + " " + averageRating);
             }
         }
 
@@ -457,7 +493,7 @@ public class BookDAO {
 
         // Iterate through the list in reverse order
         for (int i = books.size() - 1; i >= 0 && recentlyAddedBooks.size() < 10; i--) {
-            System.out.println(books.get(i).getTitle());
+           // System.out.println(books.get(i).getTitle());
             recentlyAddedBooks.add(books.get(i));
         }
         return recentlyAddedBooks;

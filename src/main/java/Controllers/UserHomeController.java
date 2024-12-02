@@ -57,7 +57,7 @@ public class UserHomeController {
             try {
                 // Lấy danh sách sách phổ biến từ cơ sở dữ liệu
                 popularBooks = BookDAO.getBooksByAverageRating();
-                System.out.println("Số sách phổ biến: " + (popularBooks != null ? popularBooks.size() : 0));
+               // System.out.println("Số sách phổ biến: " + (popularBooks != null ? popularBooks.size() : 0));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -66,7 +66,7 @@ public class UserHomeController {
             Platform.runLater(() -> {
                 popularBookGrid.getChildren().clear();  // Xóa các thẻ sách cũ
                 if (finalPopularBooks != null && !finalPopularBooks.isEmpty()) {
-                    System.out.println("popular");
+                   // System.out.println("popular");
                     int col = 0;  // Bắt đầu từ cột 0
                     for (Book book : finalPopularBooks) {
                         popularBookGrid.add(createCard1(book), col, 0);  // Thêm thẻ sách vào hàng 0
@@ -82,7 +82,7 @@ public class UserHomeController {
             List<Book> recentlyBooks = null;
             try {
                 recentlyBooks = BookDAO.getRecentlyAddedBooks();
-                System.out.println("Số sách mới: " + (recentlyBooks != null ? recentlyBooks.size() : 0));
+                //System.out.println("Số sách mới: " + (recentlyBooks != null ? recentlyBooks.size() : 0));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -91,7 +91,7 @@ public class UserHomeController {
             Platform.runLater(() -> {
                 recentlyBookGrid.getChildren().clear();
                 if (finalRecentlyBooks != null && !finalRecentlyBooks.isEmpty()) {
-                    System.out.println("recent");
+                    //System.out.println("recent");
                     int col = 0;
                     for (Book book : finalRecentlyBooks) {
                         recentlyBookGrid.add(createCard(book), col, 0);
