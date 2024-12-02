@@ -21,11 +21,13 @@ class BookDAOTest {
     void testAddBook() throws SQLException {
         Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         boolean result = BookDAO.addBook(book);
+        BookDAO.deleteBook(book);
         assertTrue(result);
     }
 
     @Test
     void testDeleteBookByTitle() throws SQLException {
+        //Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         boolean result = BookDAO.deleteBookByTitle("Test Book");
         assertFalse(result);
     }
@@ -44,25 +46,28 @@ class BookDAOTest {
         BookDAO.addBook(book); // Thêm sách trước khi cập nhật
         book.setDescription("Updated Description");
         boolean result = BookDAO.updateBook(book);
+        boolean result1 = BookDAO.deleteBook(book);
         assertTrue(result);
     }
 
     @Test
     void testSearchBooksExact() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN1232");
         BookDAO.addBook(book); // Thêm sách trước khi tìm kiếm
         Book foundBook = BookDAO.searchBooksExact("Test Book", "Test Author");
+        boolean result = BookDAO.deleteBook(book);
         assertNotNull(foundBook);
         assertEquals("Test Book", foundBook.getTitle());
     }
 
     @Test
     void testGetBooksByKeyword() throws SQLException {
-        Book book = new Book("Keyword Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
+        Book book = new Book("Keyword Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN1231");
         BookDAO.addBook(book); // Thêm sách trước khi tìm kiếm
         List<Book> books = BookDAO.getBooksByKeyword("Keyword");
         assertFalse(books.isEmpty());
         assertEquals("Keyword Book", books.get(0).getTitle());
+        BookDAO.deleteBook(book);
     }
 
     @Test
@@ -78,5 +83,6 @@ class BookDAOTest {
         boolean result = BookDAO.updateQuantity(book, 15);
         assertTrue(result);
         assertEquals(15, book.getQuantity());
+        BookDAO.deleteBook(book);
     }
 }

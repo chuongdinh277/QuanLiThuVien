@@ -6,33 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6719009c-1fb9-4ac0-8980-1791471bedc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/book_cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/book_cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/BookParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/APIGoogle/GoogleBooksAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/APIGoogle/GoogleBooksAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AddBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AllIssueBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AllIssueBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ReturnBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReturnBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserHomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserSeeBookDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookBorrowed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBookInLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ViewBooksSearchResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/ReviewDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Document/TransactionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Review/ReviewDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Review/ReviewDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBookBorrowed.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/viewBooksSearchResult.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Cache/BookCacheTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Cache/BookCacheTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Document/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Document/BookDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Document/TransactionDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Document/TransactionDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/User/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/User/AdminTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/User/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/User/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +62,9 @@
     "JUnit.BookCacheTest.executor": "Run",
     "JUnit.BookCacheTest.testClearCache.executor": "Run",
     "JUnit.BookCacheTest.testIsCached.executor": "Run",
+    "JUnit.BookDAOTest.executor": "Run",
+    "JUnit.BookDAOTest.testDeleteBook.executor": "Run",
+    "JUnit.BookDAOTest.testUpdateBook.executor": "Run",
     "JUnit.BookDAOTest.testUpdateQuantity.executor": "Run",
     "JUnit.BookRatingDAOTest.executor": "Run",
     "JUnit.CurrentUserTest.executor": "Run",
@@ -95,6 +72,7 @@
     "JUnit.GoogleBooksAPITest.executor": "Run",
     "JUnit.ImageCacheTest.executor": "Run",
     "JUnit.MemberTest.executor": "Run",
+    "JUnit.ReviewDAOTest.executor": "Run",
     "JUnit.TransactionDAOTest.executor": "Run",
     "JUnit.TransactionDAOTest.testGetAllTransaction.executor": "Run",
     "JUnit.UserTest.executor": "Run",
@@ -135,7 +113,7 @@
       <recent name="org.example.quanlithuvien" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="JUnit.AdminTest">
     <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controllers.App" />
       <module name="QuanLiThuVien" />
@@ -143,39 +121,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookCacheTest.testClearCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="QuanLiThuVien" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Cache.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Cache" />
-      <option name="MAIN_CLASS_NAME" value="Cache.BookCacheTest" />
-      <option name="METHOD_NAME" value="testClearCache" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookDAOTest.testUpdateQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="QuanLiThuVien" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Document.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Document" />
-      <option name="MAIN_CLASS_NAME" value="Document.BookDAOTest" />
-      <option name="METHOD_NAME" value="testUpdateQuantity" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CurrentUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="QuanLiThuVien" />
       <extension name="coverage">
         <pattern>
@@ -184,13 +130,43 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="User" />
-      <option name="MAIN_CLASS_NAME" value="User.CurrentUserTest" />
+      <option name="MAIN_CLASS_NAME" value="User.AdminTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TransactionDAOTest.testGetAllTransaction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="User" />
+      <option name="MAIN_CLASS_NAME" value="User.MemberTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReviewDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="QuanLiThuVien" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Document.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Document" />
+      <option name="MAIN_CLASS_NAME" value="Document.ReviewDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TransactionDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="QuanLiThuVien" />
       <extension name="coverage">
         <pattern>
@@ -200,13 +176,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="Document" />
       <option name="MAIN_CLASS_NAME" value="Document.TransactionDAOTest" />
-      <option name="METHOD_NAME" value="testGetAllTransaction" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTest.testDeleteReview" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="QuanLiThuVien" />
       <extension name="coverage">
         <pattern>
@@ -216,27 +191,26 @@
       </extension>
       <option name="PACKAGE_NAME" value="User" />
       <option name="MAIN_CLASS_NAME" value="User.UserTest" />
-      <option name="METHOD_NAME" value="testDeleteReview" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.App" />
-      <item itemvalue="JUnit.BookCacheTest.testClearCache" />
-      <item itemvalue="JUnit.BookDAOTest.testUpdateQuantity" />
-      <item itemvalue="JUnit.CurrentUserTest" />
-      <item itemvalue="JUnit.TransactionDAOTest.testGetAllTransaction" />
-      <item itemvalue="JUnit.UserTest.testDeleteReview" />
+      <item itemvalue="JUnit.AdminTest" />
+      <item itemvalue="JUnit.MemberTest" />
+      <item itemvalue="JUnit.ReviewDAOTest" />
+      <item itemvalue="JUnit.TransactionDAOTest" />
+      <item itemvalue="JUnit.UserTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CurrentUserTest" />
-        <item itemvalue="JUnit.BookCacheTest.testClearCache" />
-        <item itemvalue="JUnit.UserTest.testDeleteReview" />
-        <item itemvalue="JUnit.TransactionDAOTest.testGetAllTransaction" />
-        <item itemvalue="JUnit.BookDAOTest.testUpdateQuantity" />
+        <item itemvalue="JUnit.AdminTest" />
+        <item itemvalue="JUnit.TransactionDAOTest" />
+        <item itemvalue="JUnit.ReviewDAOTest" />
+        <item itemvalue="JUnit.UserTest" />
+        <item itemvalue="JUnit.MemberTest" />
       </list>
     </recent_temporary>
   </component>
