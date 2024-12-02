@@ -1,0 +1,15 @@
+/* Màu mặc định của nút */
+.button {
+    -fx-background-color: #047387; /* Màu nền mặc định */
+    -fx-text-fill: white; /* Màu chữ */
+}
+
+/* Màu khi di chuột qua nút */
+.button:hover {
+    -fx-background-color: #069db8; /* Màu nền khi di chuột */
+}
+
+/* Màu khi nhấn vào nút */
+.button:pressed {
+    -fx-background-color: #06b5d4; /* Màu nền khi nhấn */
+}
