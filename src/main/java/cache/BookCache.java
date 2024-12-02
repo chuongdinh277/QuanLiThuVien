@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class BookCache {
-    private static BookCache instance; // Singleton instance
+    private static BookCache instance; // Singleton instance1
     private static final Map<String, Book> cache = new HashMap<>();
     private static final String CACHE_FILE = "book_cache.json"; // Đường dẫn tệp cache
     private final ExecutorService executorService = Executors.newFixedThreadPool(2); // 2 luồng
