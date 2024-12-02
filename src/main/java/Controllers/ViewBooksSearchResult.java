@@ -20,12 +20,15 @@ public class ViewBooksSearchResult {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private GridPane searchResultGrid; // The GridPane to hold search result book cards
+    private GridPane searchResultGrid; // GridPane chứa các card kết quả tìm kiếm sách
 
     private boolean isLoading = false;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
-    private String searchQuery; // Biến để lưu truy vấn tìm kiếm
+    private String searchQuery; // Biến lưu truy vấn tìm kiếm
 
+    /**
+     * Phương thức khởi tạo, cài đặt ScrollPane và tải kết quả tìm kiếm nếu có truy vấn.
+     */
     @FXML
     private void initialize() {
         // Cài đặt ScrollPane
@@ -45,6 +48,11 @@ public class ViewBooksSearchResult {
         });
     }
 
+    /**
+     * Tạo một card hiển thị thông tin sách.
+     * @param book Đối tượng Book cần hiển thị trên card
+     * @return AnchorPane chứa card của sách
+     */
     private AnchorPane createCard(Book book) {
         try {
             // Tạo một FXMLLoader mới mỗi lần
@@ -53,7 +61,6 @@ public class ViewBooksSearchResult {
 
             CardController cardController = loader.getController();
             cardController.setBook(book); // Giả sử bạn đã có phương thức này trong CardController
-            cardController.setBook(book);
             card.setOnMouseClicked(event -> openBookDetailsPage(book));
 
             return card;
@@ -64,6 +71,10 @@ public class ViewBooksSearchResult {
         }
     }
 
+    /**
+     * Mở trang chi tiết sách khi người dùng nhấp vào card sách.
+     * @param book Đối tượng Book cần hiển thị chi tiết
+     */
     private void openBookDetailsPage(Book book) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
@@ -76,7 +87,6 @@ public class ViewBooksSearchResult {
             }
             controller.setBook(book);
 
-
             // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
             Stage stage = new Stage();
             stage.setScene(new Scene(bookDetailsPage));
@@ -88,15 +98,19 @@ public class ViewBooksSearchResult {
         }
     }
 
+    /**
+     * Tải kết quả tìm kiếm từ cơ sở dữ liệu và hiển thị chúng lên giao diện.
+     * Thực hiện lazy loading khi cuộn đến cuối.
+     */
     private void loadSearchResults() {
         if (isLoading) return;
 
         isLoading = true;
         executorService.submit(() -> {
             try {
-                //List<Book>
+                // Lấy kết quả tìm kiếm từ cơ sở dữ liệu
                 try {
-                    List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Fetch search results
+                    List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Lấy kết quả tìm kiếm
 
                     for (Book book : searchResults) {
                         System.out.println(book.getTitle());
@@ -115,7 +129,7 @@ public class ViewBooksSearchResult {
                             }
 
                             col++;
-                            if (col >= 7) { // Set the number of columns you want (5 in this case)
+                            if (col >= 7) { // Đặt số cột bạn muốn (5 ở đây)
                                 col = 0;
                                 row++;
                             }
@@ -132,12 +146,13 @@ public class ViewBooksSearchResult {
         });
     }
 
+    /**
+     * Phương thức thiết lập truy vấn tìm kiếm.
+     * @param searchQuery Truy vấn tìm kiếm
+     */
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery; // Lưu truy vấn tìm kiếm
         loadSearchResults(); // Gọi phương thức để tải kết quả ngay khi truy vấn được thiết lập
     }
 
-    public void shutdown() {
-        executorService.shutdown();
-    }
 }

@@ -83,53 +83,62 @@ public class DashboardController {
     private int bookQuantityBorrowed = 0;
     private int categories = 0;
 
+    /**
+     * Sets the main BorderPane for the controller.
+     * This allows the controller to reference and manipulate the application's main layout.
+     *
+     * @param mainBorderPane the main BorderPane of the application
+     */
     public void setMainBorderPane(BorderPane mainBorderPane) {
         this.mainBorderPane = mainBorderPane;
     }
 
+    /**
+     * Initializes the controller.
+     * This method sets up the username display, a real-time clock, and loads various data including
+     * student, book, and category statistics. Additionally, it calculates and updates a progress circle
+     * to reflect the borrowing statistics.
+     */
     public void initialize() {
-        // Hiển thị thời gian hiện tại
         usernameLabel.setText(currentUser.getUsername());
+
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e -> {
                     String currentTime = sdf.format(new Date());
                     timeLabel.setText(currentTime);
                 }),
-                new KeyFrame(Duration.minutes(1)) // Cập nhật mỗi phút
+                new KeyFrame(Duration.minutes(1))
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        // Load danh sách người dùng
         loadAllStudents();
         loadAllBooks();
-        System.out.println(membersCount);
+
         membersCountLabel.setText(String.valueOf(membersCount));
         booksCountLabel.setText(String.valueOf(booksCount));
         bookQuantityLabel.setText(String.valueOf(bookQuantity));
+
         loadCategoryStatistics();
         categoryLabel.setText(String.valueOf(categories));
+
         loadBookborrowed();
-        System.out.println(bookQuantityBorrowed);
-        double result = (double)(bookQuantityBorrowed+1000) / bookQuantity * 100;
-        System.out.println(result);
+        double result = (double) (bookQuantityBorrowed) / bookQuantity * 100;
         drawProgressCircle(result);
-
-
-
-
     }
 
+    /**
+     * Tải danh sách tất cả học sinh và cập nhật số lượng thành viên.
+     * Lấy danh sách người dùng từ lớp Admin, lọc ra các mục không hợp lệ
+     * và hiển thị những người dùng hợp lệ trong ListView listMember.
+     */
     private void loadAllStudents() {
-        // Lấy danh sách từ Admin
         List<User> memberList = Admin.getAllUsers();
 
         if (memberList != null) {
             membersCount = memberList.size();
-            System.out.println("Danh sách không rỗng.");
 
-            // Lọc danh sách để chỉ lấy người dùng hợp lệ
             List<User> validUsers = memberList.stream()
                     .filter(user -> user != null && user.getId() != 0 && user.getFullName() != null)
                     .toList();
@@ -137,7 +146,6 @@ public class DashboardController {
             ObservableList<User> observableList = FXCollections.observableArrayList(validUsers);
             listMember.setItems(observableList);
 
-            // Sử dụng CellFactory để hiển thị dữ liệu
             listMember.setCellFactory(listView -> new ListCell<>() {
                 @Override
                 protected void updateItem(User user, boolean empty) {
@@ -146,36 +154,33 @@ public class DashboardController {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        // Hiển thị thông tin người dùng
                         setText(user.getId() + "    " + user.getFullName());
                         setStyle("-fx-padding: 10px;");
                     }
                 }
             });
-        } else {
-            System.out.println("Danh sách rỗng.");
         }
     }
 
+    /**
+     * Tải danh sách tất cả sách và cập nhật số lượng sách và tổng số lượng.
+     * Lấy danh sách sách từ lớp BookDAO, lọc ra các mục không hợp lệ,
+     * và hiển thị các sách hợp lệ trong ListView listViewBook với định dạng ô tùy chỉnh.
+     */
     private void loadAllBooks() {
         try {
-            // Lấy danh sách sách từ BookDAO
             List<Book> bookList = BookDAO.getAllBooks();
 
-            //System.out.println(bookList.size());
             if (bookList != null) {
                 booksCount = bookList.size();
-                System.out.println("Danh sách sách không rỗng.");
                 for (Book book : bookList) {bookQuantity += book.getQuantity();}
                 List<Book> validBooks = bookList.stream()
                         .filter(book -> book != null)
                         .toList();
                 ObservableList<Book> observableBooks = FXCollections.observableArrayList(validBooks);
 
-                // Hiển thị sách trong ListView
                 listViewBook.setItems(observableBooks);
 
-                // Sử dụng CellFactory để hiển thị thông tin sách
                 listViewBook.setCellFactory(listView -> new ListCell<Book>() {
                     @Override
                     protected void updateItem(Book book, boolean empty) {
@@ -184,103 +189,105 @@ public class DashboardController {
                             setText(null);
                             setGraphic(null);
                         } else {
-                            // Tạo một HBox để hiển thị các thông tin theo dạng hàng ngang
-                            HBox hBox = new HBox(10);  // Khoảng cách giữa các phần tử
+
+                            HBox hBox = new HBox(10);
                             hBox.setStyle("-fx-padding: 10px;");
 
-                            // Tạo các Label cho mỗi cột
                             Label isbnLabel = new Label(book.getISBN());
                             Label titleLabel = new Label(book.getAuthor());
 
-                            // Thêm các Label vào HBox
                             hBox.getChildren().addAll(isbnLabel, titleLabel);
 
-                            // Đặt HBox làm graphic của cell
                             setGraphic(hBox);
                         }
                     }
                 });
-            } else {
-                System.out.println("Danh sách sách rỗng.");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi lấy danh sách sách.");
         }
     }
 
-    private void loadCategoryStatistics(){
+
+    /**
+     * Tải thống kê danh mục sách và hiển thị dưới dạng biểu đồ cột.
+     * Phương thức này lấy dữ liệu thống kê từ cơ sở dữ liệu thông qua BookDAO,
+     * sau đó cập nhật biểu đồ cột với số lượng sách của từng danh mục.
+     */
+    private void loadCategoryStatistics() {
         try {
-                Map<String, Integer> categoryStats = BookDAO.getCategoryStatistics();
+            Map<String, Integer> categoryStats = BookDAO.getCategoryStatistics();
+            categoriesBarchart.getData().clear();
 
-                // Xóa tất cả dữ liệu cũ trong biểu đồ (nếu có)
-                categoriesBarchart.getData().clear();
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Số lượng sách");
 
-                // Tạo một Series mới cho biểu đồ
-                XYChart.Series<String, Number> series = new XYChart.Series<>();
-                series.setName("Số lượng sách");
-
-                // Thêm dữ liệu vào Series
-                for (Map.Entry<String, Integer> entry : categoryStats.entrySet()) {
-                    String category = entry.getKey();
-                    categories+=1;
-                    int count = entry.getValue();
-                    series.getData().add(new XYChart.Data<>(category, count));
-                }
-                categoriesBarchart.getData().add(series);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi tải thống kê thể loại sách.");
+            for (Map.Entry<String, Integer> entry : categoryStats.entrySet()) {
+                String category = entry.getKey();
+                categories += 1;
+                int count = entry.getValue();
+                series.getData().add(new XYChart.Data<>(category, count));
             }
+
+            categoriesBarchart.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * Tải danh sách giao dịch mượn sách và cập nhật số lượng sách đã mượn.
+     * Lấy dữ liệu giao dịch từ TransactionDAO và đếm số lượng sách đã được mượn.
+     */
     private void loadBookborrowed() {
         try {
             List<Transaction> transactions = TransactionDAO.getAllTransaction();
             bookQuantityBorrowed = transactions.size();
-
         } catch (Exception e) {
             showErrorDialog("Lỗi khi tải giao dịch: " + e.getMessage());
         }
     }
-    private void drawProgressCircle(double percentage) {
-        // Kích thước và màu sắc
-        double radius = 100.0; // Bán kính hình tròn
-        double strokeWidth = 30.0; // Độ dày viền
 
-        // Hình tròn ngoài
+    /**
+     * Vẽ biểu đồ tròn hiển thị tỷ lệ phần trăm sách đã được mượn.
+     * Tạo các thành phần vòng tròn, vòng cung hiển thị tiến độ, và nhãn phần trăm,
+     * sau đó thêm chúng vào giao diện trong CirclePane.
+     *
+     * @param percentage Tỷ lệ phần trăm sách đã mượn.
+     */
+    private void drawProgressCircle(double percentage) {
+
+        double radius = 100.0;
+        double strokeWidth = 30.0;
+
         Circle outerCircle = new Circle(radius);
         outerCircle.setStrokeWidth(strokeWidth);
-        outerCircle.setStroke(Color.GRAY); // Màu viền
-        outerCircle.setFill(Color.TRANSPARENT); // Trong suốt
+        outerCircle.setStroke(Color.GRAY);
+        outerCircle.setFill(Color.TRANSPARENT);
 
-        // Tạo Arc để hiển thị phần trăm
         Arc progressArc = new Arc();
         progressArc.setRadiusX(radius);
         progressArc.setRadiusY(radius);
-        progressArc.setStartAngle(90); // Bắt đầu từ vị trí 12 giờ
-        progressArc.setLength(-percentage * 360 / 100); // Chiều dài theo %
+        progressArc.setStartAngle(90);
+        progressArc.setLength(-percentage * 360 / 100);
         progressArc.setType(ArcType.OPEN);
         progressArc.setStroke(Color.web("#02d7f7"));
         progressArc.setStrokeWidth(strokeWidth);
         progressArc.setFill(Color.TRANSPARENT);
 
-        // Hình tròn trong
         Circle innerCircle = new Circle(radius - strokeWidth);
         innerCircle.setStrokeWidth(0);
         innerCircle.setFill(Color.TRANSPARENT);
 
-        Label percentageLabel = new Label(String.format("%.0f%%", percentage)); // Chuyển đổi phần trăm thành string
+        Label percentageLabel = new Label(String.format("%.0f%%", percentage));
         percentageLabel.setStyle("-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: #f2aaf1;");
         percentageBorrowLabel.setText(String.valueOf(bookQuantityBorrowed));
         percentageQuantityLabel.setText(String.valueOf(bookQuantity));
-        // Xóa các phần tử cũ trong `circlePane`
+
         circlePane.getChildren().clear();
 
-        // Căn chỉnh phần tử trong `circlePane`
-        double paneCenterX = circlePane.getWidth() + 165 ;
-        double paneCenterY = circlePane.getHeight() + 180 ;
-        System.out.println(paneCenterX);
-        System.out.println(paneCenterY);
+        double paneCenterX = circlePane.getWidth() + 165;
+        double paneCenterY = circlePane.getHeight() + 180;
         outerCircle.setCenterX(paneCenterX);
         outerCircle.setCenterY(paneCenterY);
         progressArc.setCenterX(paneCenterX);
@@ -290,24 +297,36 @@ public class DashboardController {
 
         percentageLabel.setLayoutX(paneCenterX - percentageLabel.getWidth() / 2 - 35);
         percentageLabel.setLayoutY(paneCenterY - percentageLabel.getHeight() / 2 - 30);
-        // Thêm các phần tử vào `circlePane`
-        circlePane.getChildren().addAll(outerCircle, progressArc, innerCircle, percentageLabel,pane2,pane1,label1,label2,percentageBorrowLabel,percentageQuantityLabel);
+        circlePane.getChildren().addAll(outerCircle, progressArc, innerCircle, percentageLabel, pane2, pane1, label1, label2, percentageBorrowLabel, percentageQuantityLabel);
     }
 
+    /**
+     * Xử lý sự kiện nhấp chuột vào nhãn xem tất cả sinh viên.
+     * Tải giao diện danh sách sinh viên từ tệp FXML và đặt nó vào trung tâm của BorderPane.
+     *
+     * @param event Sự kiện chuột.
+     */
     @FXML
     private void seeallstudentsLabel(MouseEvent event) {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/students.fxml"));
             Pane homeRoot = loader.load();
             mainBorderPane.setCenter(homeRoot);
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorDialog("Lỗi khi tải giao diện allBook.fxml: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải giao diện students.fxml: " + e.getMessage());
         }
     }
+
+    /**
+     * Xử lý sự kiện nhấp chuột vào nhãn xem tất cả sách.
+     * Tải giao diện danh sách sách từ tệp FXML và đặt nó vào trung tâm của BorderPane.
+     *
+     * @param event Sự kiện chuột.
+     */
     @FXML
     private void seeallbooksLabel(MouseEvent event) {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/allBook.fxml"));
             ScrollPane homeRoot = loader.load();
             mainBorderPane.setCenter(homeRoot);
@@ -316,5 +335,6 @@ public class DashboardController {
             showErrorDialog("Lỗi khi tải giao diện allBook.fxml: " + e.getMessage());
         }
     }
-    
+
+
 }

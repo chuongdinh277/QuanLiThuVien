@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-
 import javafx.scene.control.Button;
 
 import javax.swing.*;
@@ -19,6 +18,12 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Lớp điều khiển giao diện trả sách trong ứng dụng quản lý thư viện.
+ * Lớp này xử lý các sự kiện và thao tác liên quan đến việc trả sách của sinh viên,
+ * bao gồm việc tìm kiếm thông tin sinh viên, hiển thị thông tin giao dịch,
+ * và thực hiện thao tác trả sách.
+ */
 public class ReturnBookController {
 
     @FXML
@@ -50,10 +55,13 @@ public class ReturnBookController {
 
     @FXML
     private TableColumn<Transaction, Date> returnDateColumn;
+
     @FXML
     private TableColumn<Transaction, Void> actionColumn;
+
     @FXML
     private TableColumn<Transaction, Integer> quantityColumn;
+
     @FXML
     private TextField studentEmailTextfield;
 
@@ -62,11 +70,14 @@ public class ReturnBookController {
 
     private ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
 
+    /**
+     * Phương thức khởi tạo của lớp, cấu hình các cột trong bảng và gán sự kiện cho các ô tìm kiếm.
+     */
     @FXML
     private void initialize() {
         IDsearchStudent.setOnAction(event -> loadStudentInfo());
 
-        // Configure columns
+        // Cấu hình các cột trong bảng
         STTcolumn.setCellValueFactory(cellData -> {
             int index = transactionList.indexOf(cellData.getValue()) + 1;
             return new javafx.beans.property.SimpleIntegerProperty(index).asObject();
@@ -83,7 +94,7 @@ public class ReturnBookController {
             private final Button returnButton = new Button("Return Book");
 
             {
-                // Add an action to the button
+                // Thêm hành động cho nút trả sách
                 returnButton.setOnAction(event -> handleReturnBook(getTableRow().getItem()));
             }
 
@@ -97,12 +108,18 @@ public class ReturnBookController {
                 }
             }
         });
-        // Link the list to the tablen
+        // Liên kết danh sách với bảng
         transactionTable.setItems(transactionList);
     }
 
+    /**
+     * Xử lý sự kiện khi nhấn nút trả sách.
+     * Cập nhật lại thông tin giao dịch và số lượng sách trong cơ sở dữ liệu.
+     *
+     * @param transaction Giao dịch cần trả sách
+     */
     private void handleReturnBook(Transaction transaction) {
-        // Xử lý sự kiện
+        // Xử lý sự kiện trả sách
         try {
             Book book = BookDAO.getBookByISBN(transaction.getIsbn());
             int quantity = transaction.getQuantity();
@@ -113,10 +130,14 @@ public class ReturnBookController {
                 loadTransactions(IDsearchStudent.getText());
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occurred while returning the book: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi trả sách: " + e.getMessage());
         }
     }
 
+    /**
+     * Tải thông tin sinh viên dựa trên mã sinh viên.
+     * Nếu tìm thấy sinh viên, hiển thị thông tin của họ và các giao dịch của sinh viên.
+     */
     private void loadStudentInfo() {
         String studentID = IDsearchStudent.getText();
 
@@ -129,7 +150,7 @@ public class ReturnBookController {
                     studentNumberTextfield.setText(student.getNumber());
                     loadTransactions(studentID);
                 } else {
-                    showAlbertDialog("Student not found.");
+                    showAlbertDialog("Không tìm thấy sinh viên.");
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -137,15 +158,26 @@ public class ReturnBookController {
         }
     }
 
+    /**
+     * Tải danh sách giao dịch của sinh viên từ cơ sở dữ liệu và hiển thị trên bảng.
+     *
+     * @param studentID Mã sinh viên
+     */
     private void loadTransactions(String studentID) {
         try {
             List<Transaction> transactions = TransactionDAO.getTransactionsByStudentId(studentID);
-            transactionList.setAll(transactions);  // Load transactions into the table view
+            transactionList.setAll(transactions);  // Tải các giao dịch vào bảng
         } catch (SQLException e) {
-            showErrorDialog("Error", e.getMessage());
+            showErrorDialog("Lỗi", e.getMessage());
         }
     }
 
+    /**
+     * Hiển thị hộp thoại lỗi.
+     *
+     * @param title   Tiêu đề của hộp thoại
+     * @param message Thông báo lỗi cần hiển thị
+     */
     private void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -153,6 +185,12 @@ public class ReturnBookController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Hiển thị hộp thoại thông báo.
+     *
+     * @param message Thông báo cần hiển thị
+     */
     private void showAlbertDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");

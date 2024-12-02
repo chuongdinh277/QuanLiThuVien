@@ -15,9 +15,9 @@
     <bottom>
       <AnchorPane prefHeight="757.0" prefWidth="1103.0" styleClass="background" stylesheets="@../css/background.css" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="1187.0">
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="46.0" prefWidth="1202.0">
                <graphic>
-                  <HBox prefHeight="46.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
+                  <HBox prefHeight="46.0" prefWidth="1202.0" style="-fx-background-color: #DDDDDD;">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>

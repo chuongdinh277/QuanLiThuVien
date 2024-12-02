@@ -2,7 +2,6 @@ package Controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,67 +9,80 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
-
 import User.User;
 import User.currentUser;
 import javafx.util.Duration;
-
+/**
+ * Controller for handling login and registration functionality.
+ */
 public class LoginController implements Initializable {
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordHiddenlogin;
+
+    /** TextField for username input during login. */
     @FXML
     private TextField usernameFieldlogin;
 
+    /** PasswordField for hidden password input during login. */
     @FXML
-    private PasswordField PasswordHiddenRL;
+    private PasswordField passwordHiddenlogin;
+
+    /** TextField for username input during registration. */
+    @FXML
+    private TextField usernameField;
+
+    /** PasswordField for hidden password input during registration. */
     @FXML
     private PasswordField passwordHidden;
 
+    /** PasswordField for confirming the password during registration. */
     @FXML
-    private Label welcomeLabel;
-    @FXML
-    private Button signUpButton;
+    private PasswordField PasswordHiddenRL;
 
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Button registerButton;
-    @FXML
-    private ChoiceBox<String> myChoiceBox;
-    @FXML
-    private AnchorPane starPane;
-    @FXML
-    private Button loginReturn;
+    /** TextField for full name input during registration. */
     @FXML
     private TextField fullNameField;
+
+    /** TextField for phone number input during registration. */
     @FXML
     private TextField numberField;
+
+    /** TextField for email input during registration. */
     @FXML
     private TextField emailField;
+
+    /** TextField for student ID input during registration for 'user' role. */
     @FXML
     private TextField MSSVTextfield;
+
+    /** ChoiceBox for selecting the user role (admin/user). */
     @FXML
-    private ImageView showImage;
+    private ChoiceBox<String> myChoiceBox;
+
+    /** AnchorPane for rendering animated stars. */
+    @FXML
+    private AnchorPane starPane;
+
+    /** TextField for showing plain text password (visible password toggle). */
     @FXML
     private TextField passwordTextField;
 
+    /**
+     * Initializes the controller.
+     * Adds role options to the ChoiceBox and starts the star animation.
+     *
+     * @param location  the location used to resolve relative paths for the root object, or null if not known.
+     * @param resources the resources used to localize the root object, or null if not available.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().add("admin");
@@ -83,32 +95,15 @@ public class LoginController implements Initializable {
             snowflakeGenerator.setCycleCount(Timeline.INDEFINITE);
             snowflakeGenerator.play();
         }
-
-        HBox hbox = new HBox(16); // Hộp chứa các chữ cái, khoảng cách giữa các chữ cái
-        String text = "Welcome to Library";
-        // Tạo Label cho mỗi ký tự và thêm vào HBox
-        for (char c : text.toCharArray()) {
-            Label letter = new Label(String.valueOf(c));
-            letter.setFont(Font.font(30)); // Thiết lập kích thước chữ
-            hbox.getChildren().add(letter);
-
-            // Tạo hiệu ứng di chuyển cho mỗi chữ cái
-            TranslateTransition transition = new TranslateTransition();
-            transition.setNode(letter);
-            transition.setFromY(500); // Vị trí ban đầu (dưới)
-            transition.setToY(-50);   // Vị trí kết thúc (trên)
-            transition.setCycleCount(1); // Chạy một lần
-            transition.setInterpolator(javafx.animation.Interpolator.LINEAR);
-            transition.setDuration(Duration.seconds(1)); // Thời gian chạy của chữ
-
-            // Bắt đầu hiệu ứng di chuyển
-            transition.play();
-
-        }
     }
+
+    /**
+     * Toggles between showing and hiding the password in plain text.
+     *
+     * @param event the MouseEvent triggered by clicking the toggle icon.
+     */
     @FXML
     public void handleShowPassword(MouseEvent event) {
-        // Kiểm tra xem hiện tại mật khẩu có đang được ẩn không
         if (passwordHiddenlogin.isVisible()) {
             passwordTextField.setText(passwordHiddenlogin.getText());
             passwordTextField.setVisible(true);
@@ -120,7 +115,12 @@ public class LoginController implements Initializable {
         }
     }
 
-    // Xử lí đăng kí tài khoản
+    /**
+     * Handles the registration process.
+     * Validates input fields, checks for username availability, and registers the user.
+     *
+     * @param event the ActionEvent triggered by clicking the Register button.
+     */
     @FXML
     public void handleRegister(ActionEvent event) {
         String username = usernameField.getText();
@@ -130,33 +130,20 @@ public class LoginController implements Initializable {
         String email = emailField.getText();
         String fullName = fullNameField.getText();
         String role = myChoiceBox.getValue();
-        String mssv = MSSVTextfield.getText();  // Lấy giá trị MSSV từ TextField
-
-        // Kiểm tra xem các trường bắt buộc có được điền đầy đủ không
+        String mssv = MSSVTextfield.getText();
         if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty() || number.isEmpty()
                 || email.isEmpty() || fullName.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi đăng kí");
-            alert.setHeaderText("Vui lòng điền đầy đủ thông tin");
-            alert.showAndWait();
+            showErrorDialog("Vui lòng điền đầy đủ thông tin");
             return;
         }
 
-        // Kiểm tra mật khẩu nhập lại có khớp không
         if(!passwordConfirm.equals(password)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi đăng kí");
-            alert.setHeaderText("Mật khẩu nhập lại không đúng");
-            alert.showAndWait();
+            showErrorDialog("Mật khẩu nhập lại không đúng");
             return;
         }
 
-        // Kiểm tra nếu là user thì MSSV phải được điền đầy đủ
         if ("user".equals(role) && (mssv == null || mssv.isEmpty())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi đăng kí");
-            alert.setHeaderText("MSSV là bắt buộc đối với người dùng");
-            alert.showAndWait();
+            showErrorDialog("MSSV là bắt buộc đối với người dùng");
             return;
         }
         User newUser;
@@ -166,13 +153,10 @@ public class LoginController implements Initializable {
         try {
 
             if (newUser.isUsernameTaken(username)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Lỗi");
-                alert.setHeaderText("Tên tài khoản đã tồn tại");
-                alert.setContentText("Vui lòng chọn tên tài khoản khác");
-                alert.showAndWait();
+                showErrorDialog("Tên tài khoản đã tồn tại. Vui lòng chọn tên tài khoản khác");
             } else {
                 newUser.register();
+                showSuccessDialog("Đăng ký thành công! Chuyển đến trang đăng nhập.");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -180,115 +164,105 @@ public class LoginController implements Initializable {
                 stage.show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Lỗi");
-            alert.setHeaderText("Đăng ký thất bại");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showErrorDialog("Đăng ký thất bại: " + e.getMessage());
         }
     }
 
-    //xử lí đăng nhập tài khoản
-
+    /**
+     * Handles the login process.
+     * Verifies the credentials and navigates to the appropriate user interface based on the role.
+     *
+     * @param event the ActionEvent triggered by clicking the Login button.
+     */
     public void handleLogin(ActionEvent event) {
         String username = usernameFieldlogin.getText();
         String password = passwordHiddenlogin.getText();
 
         try {
-            // Gọi phương thức login từ lớp User
-            String role = User.getRoleUser(username, password); // Gọi phương thức login và nhận lại vai trò
+            String role = User.getRoleUser(username, password);
             String rolecheck = myChoiceBox.getValue();
-            // Kiểm tra vai trò
             if(rolecheck.equals(role)) {
                 if ("admin".equals(role)) {
                     currentUser.setUsername(username);
                     currentUser.setRole(role);
-                    // Chuyển đến trang Admin
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/menuAdmin.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root, 1300, 750));
                     stage.show();
                     stage.centerOnScreen();
-                } else if ("user".equals(role)) {
+                }
+                else if ("user".equals(role)) {
                     int mssv = User.getStudentIdByusername(username);
                     User newuser = User.loadStudentDetailsByID(String.valueOf(mssv));
-
                     currentUser.setUsername(username);
                     currentUser.setRole(role);
                     currentUser.setId(mssv);
                     currentUser.setEmail(newuser.getEmail());
                     currentUser.setPassword(newuser.getPassword());
                     currentUser.setFullName(newuser.getFullName());
-                    // Chuyển đến trang Member
+                    currentUser.setNumber(newuser.getNumber());
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userView.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root, 1300, 800));
                     stage.show();
                     stage.centerOnScreen();
-                } else {
-                    // Thông báo lỗi nếu không phải Admin hoặc Member
-                    showAlert("Error", "Đăng nhập thất bại: " + role);
+                }
+                else {
+                    showErrorDialog("Đăng nhập thất bại: " + role);
                 }
             }
             else {
-                showAlert("Error", "Đăng nhập thất bại: " + role);
+                showErrorDialog("Đăng nhập thất bại: " + role);
             }
         } catch (SQLException e) {
-            showAlert("Error", "Đăng nhập thất bại: " + e.getMessage());
+            showErrorDialog("Đăng nhập thất bại: " + e.getMessage());
         } catch (IOException e) {
-            showAlert("Error", "Lỗi" + e.getMessage());
+            showErrorDialog("Lỗi: " + e.getMessage());
         }
     }
 
+    /**
+     * Creates and animates a blinking star on the interface.
+     */
     private void createBlinkingStar() {
         Random random = new Random();
 
-        // Tạo một bông tuyết (Circle) với kích thước ngẫu nhiên
-        Circle star = new Circle(random.nextInt(5) + 1, Color.WHITE); // Kích thước bông tuyết ngẫu nhiên từ 5-10px
+        Circle star = new Circle(random.nextInt(5) + 1, Color.WHITE);
 
-        // Đặt vị trí ngẫu nhiên cho bông tuyết ở trên đầu màn hình
-        double startX = random.nextDouble() * starPane.getWidth(); // Vị trí ngẫu nhiên trên trục X
-        double startY = random.nextDouble() * 400; // Vị trí ngẫu nhiên trên trục Y (ở ngoài màn hình trên cùng)
+        double startX = random.nextDouble() * starPane.getWidth();
+        double startY = random.nextDouble() * 400;
 
         star.setLayoutX(startX);
         star.setLayoutY(startY);
 
-        // Thêm bông tuyết vào AnchorPane
         starPane.getChildren().add(star);
 
-        // Tạo Timeline để di chuyển bông tuyết từ trên xuống dưới
         Timeline fallTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, e -> {
-                    // Di chuyển bông tuyết theo trục Y, tạo hiệu ứng rơi
-                    star.setLayoutY(star.getLayoutY() + 1); // Di chuyển xuống mỗi frame
+                    star.setLayoutY(star.getLayoutY() + 1);
 
-                    // Kiểm tra nếu bông tuyết rơi khỏi màn hình thì xóa nó
                     if (star.getLayoutY() > starPane.getHeight()) {
-                        starPane.getChildren().remove(star); // Xóa bông tuyết khi rơi ra ngoài
+                        starPane.getChildren().remove(star);
                     }
                 }),
-                new KeyFrame(Duration.millis(10)) // Cập nhật mỗi 10ms
+                new KeyFrame(Duration.millis(10))
         );
 
-        fallTimeline.setCycleCount(Timeline.INDEFINITE); // Lặp vô hạn
+        fallTimeline.setCycleCount(Timeline.INDEFINITE);
         fallTimeline.play();
     }
-
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    /**
+     * Navigates the user to the sign-up page.
+     *
+     * This method loads the `signUp.fxml` file and updates the current stage
+     * to display the sign-up interface.
+     *
+     * @param event the ActionEvent triggered by clicking the sign-up button.
+     */
     @FXML
     public void signUp(ActionEvent event) {
-        // Logic cho việc chuyển sang trang đăng ký
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signUp.fxml"));
             Parent root = loader.load();
@@ -300,9 +274,16 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Navigates the user back to the login page.
+     *
+     * This method loads the `login.fxml` file and updates the current stage
+     * to display the login interface.
+     *
+     * @param event the ActionEvent triggered by clicking the return button.
+     */
     @FXML
     public void loginReturn(ActionEvent event) {
-        // Logic cho việc chuyển sang trang đăng nhập
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
             Parent root = loader.load();
@@ -314,7 +295,28 @@ public class LoginController implements Initializable {
         }
     }
 
-    private Object getclass() {
-        return getClass();
+    /**
+     * Displays an error dialog with the provided message.
+     *
+     * @param message the error message to display.
+     */
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    /**
+     * Displays a success dialog with the provided message.
+     *
+     * @param message the success message to display.
+     */
+    private void showSuccessDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

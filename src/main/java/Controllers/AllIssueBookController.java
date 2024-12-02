@@ -18,28 +18,31 @@ import java.util.List;
 public class AllIssueBookController {
 
     @FXML
-    private TableView<Transaction> transactionTable; // Khai báo TableView cho giao dịch
+    private TableView<Transaction> transactionTable;
     @FXML
-    private TableColumn<Transaction, Integer> transactionIdColumn; // Cột ID giao dịch
+    private TableColumn<Transaction, Integer> transactionIdColumn;
     @FXML
-    private TableColumn<Transaction, String> isbnColumn; // Cột ISBN sách
+    private TableColumn<Transaction, String> isbnColumn;
     @FXML
-    private TableColumn<Transaction, String> titleColumn; // Cột Tên sách
+    private TableColumn<Transaction, String> titleColumn;
     @FXML
-    private TableColumn<Transaction, String> authorColumn; // Cột Tác giả sách
+    private TableColumn<Transaction, String> authorColumn;
     @FXML
-    private TableColumn<Transaction, String> studentNameColumn; // Cột Tên sinh viên
+    private TableColumn<Transaction, String> studentNameColumn;
     @FXML
-    private TableColumn<Transaction, Integer> quantityColumn; // Cột Số lượng sách
+    private TableColumn<Transaction, Integer> quantityColumn;
     @FXML
-    private TableColumn<Transaction, Date> borrowDateColumn; // Cột Ngày mượn
+    private TableColumn<Transaction, Date> borrowDateColumn;
     @FXML
-    private TableColumn<Transaction, Date> returnDateColumn; // Cột Ngày trả
+    private TableColumn<Transaction, Date> returnDateColumn;
     @FXML
     private TableColumn<Transaction, String> StudentID;
+
+    /**
+     * Initializes the table columns and loads the transaction data into the table.
+     */
     @FXML
     private void initialize() {
-        // Cài đặt các giá trị hiển thị cho các cột trong TableView
         transactionIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         isbnColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
         titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -50,20 +53,20 @@ public class AllIssueBookController {
         borrowDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getBorrow_Date()));
         returnDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getReturn_Date()));
 
-        // Gọi phương thức để load giao dịch vào TableView
         loadAllTransactions();
     }
 
-    // Phương thức để load tất cả giao dịch từ cơ sở dữ liệu vào TableView
+    /**
+     * Loads all transactions from the database and displays them in the TableView.
+     */
     private void loadAllTransactions() {
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
 
         try {
-            // Lấy tất cả giao dịch từ cơ sở dữ liệu
             List<Transaction> transactions = TransactionDAO.getAllTransaction();
 
             if (transactions != null) {
-                transactionList.addAll(transactions); // Thêm tất cả giao dịch vào ObservableList
+                transactionList.addAll(transactions);
             } else {
                 showAlbertDialog("Không có giao dịch trong cơ sở dữ liệu.");
             }
@@ -71,10 +74,14 @@ public class AllIssueBookController {
             showErrorDialog("Lỗi khi tải giao dịch: " + e.getMessage());
         }
 
-        // Đặt danh sách giao dịch vào TableView
         transactionTable.setItems(transactionList);
     }
 
+    /**
+     * Shows an error dialog with the provided message.
+     *
+     * @param message The error message to display.
+     */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -82,6 +89,12 @@ public class AllIssueBookController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Shows an information dialog with the provided message.
+     *
+     * @param message The message to display.
+     */
     private void showAlbertDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");

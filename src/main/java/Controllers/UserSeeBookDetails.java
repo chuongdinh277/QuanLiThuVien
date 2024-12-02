@@ -115,6 +115,8 @@ public class UserSeeBookDetails {
 
     @FXML
     private Button viewBook;
+    @FXML
+    private TextField numberOfDays;
 
     @FXML
     private Pane viewBookPane;
@@ -122,7 +124,7 @@ public class UserSeeBookDetails {
     private TextField bookIDtextField;
     public Book currentBook;
 
-    private MenuController_Admin menuControllerAdmin;
+    private MenuAdminController menuControllerAdmin;
     @FXML
     private TextField sectionTextField;
     private int selectedRating = 0;
@@ -132,6 +134,8 @@ public class UserSeeBookDetails {
     @FXML
     private void initialize() {
         commentButton.setOnAction(even -> saveReview());
+        descriptionTextField.setEditable(false);
+
     }
 
     @FXML
@@ -154,6 +158,7 @@ public class UserSeeBookDetails {
                 showAlbertDialog("Trả sách thành công");
                 borrowBook.setVisible(true);
                 returnBook.setVisible(false);
+                numberOfDays.setVisible(true);
                 //menuControllerAdmin.loadBookList();
             } else {
                 showAlbertDialog("Trả thất bại");
@@ -168,19 +173,51 @@ public class UserSeeBookDetails {
             String mssv = String.valueOf(currentUser.getId());
             System.out.println(mssv);
             User newUser = User.loadStudentDetailsByID(mssv);
-            boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1,10);
+
+            // Kiểm tra giá trị nhập vào
+            String daysInput = numberOfDays.getText();
+            int number;
+
+            // Kiểm tra nếu giá trị nhập vào là hợp lệ
+            if (daysInput == null || daysInput.trim().isEmpty()) {
+                showAlert("Vui lòng nhập số ngày hợp lệ.");
+                return;
+            }
+
+            try {
+                number = Integer.parseInt(daysInput);
+                if (number <= 0) {
+                    showAlert("Số ngày phải lớn hơn 0.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Số ngày không hợp lệ. Vui lòng nhập một số nguyên.");
+                return;
+            }
+
+            boolean isBorrow = TransactionDAO.borrowBook(newUser, currentBook, 1, number);
             System.out.println(isBorrow);
             if (isBorrow) {
                 borrowBook.setVisible(false);
                 returnBook.setVisible(true);
-                showAlbertDialog("Mượn sách thành công");
-                //menuControllerAdmin.loadBookList();
+                numberOfDays.setVisible(false);
+                showAlert("Mượn sách thành công");
+                // menuControllerAdmin.loadBookList();
             } else {
-                showAlbertDialog("Mượn thất bại");
+                showAlert("Mượn thất bại");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    // Phương thức hiển thị thông báo cảnh báo
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Cảnh báo");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     @FXML
     private void showViewBook(ActionEvent event) {
@@ -237,7 +274,7 @@ public class UserSeeBookDetails {
         else star5.setImage(unselectedStar);
     }
 
-    public void setMenuController(MenuController_Admin menuController) {
+    public void setMenuController(MenuAdminController menuController) {
         this.menuControllerAdmin = menuController;
     }
 
@@ -250,9 +287,11 @@ public class UserSeeBookDetails {
             authorTextField.setText(book.getAuthor());
             categoryLabel.setText(book.getCategory());
             publisherLabel.setText(book.getPublisher());
-            quantityTextField.setText(String.valueOf(book.getQuantity()));
             descriptionTextField.setText(book.getDescription());
-            if (book.getRemainingBook() >0) {
+            System.out.println(book.getDescription());
+            quantityTextField.setText(String.valueOf(book.getQuantity()));
+
+            if (book.getRemainingBook() > 0) {
                 availableLabel.setText("Available");
             }
             else {
@@ -266,9 +305,11 @@ public class UserSeeBookDetails {
             if (isBorrowed) {
                 borrowBook.setVisible(false);
                 returnBook.setVisible(true);
+                numberOfDays.setVisible(false);
             } else {
                 borrowBook.setVisible(true);
                 returnBook.setVisible(false);
+                numberOfDays.setVisible(true);
             }
 
             try {

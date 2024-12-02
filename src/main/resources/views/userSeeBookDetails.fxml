@@ -179,6 +179,7 @@
                               <Font size="25.0" />
                            </font>
                         </Button>
+                        <Button fx:id="borrowBook" layoutX="32.0" layoutY="445.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Borrow" />
                      </children>
                   </AnchorPane>
                   <Button fx:id="returnBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Return" />
@@ -231,7 +232,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <Button fx:id="borrowBook" layoutX="68.0" layoutY="408.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="37.0" prefWidth="200.0" style="-fx-background-radius: 12; -fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="anchor-pane" stylesheets="@../css/anchor-pane.css" text="Borrow" />
+                  <TextField fx:id="numberOfDays" layoutX="68.0" layoutY="408.0" prefHeight="37.0" prefWidth="200.0" promptText="Number of days borrowed" style="-fx-background-radius: 12;" />
                </children>
             </AnchorPane>
          </children>

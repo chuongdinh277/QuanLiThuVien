@@ -21,14 +21,18 @@ import java.util.concurrent.Executors;
 public class ViewBookBorrowed {
 
     @FXML
-    private ScrollPane scrollPane;
+    private ScrollPane scrollPane;  // Pane cuộn để hiển thị danh sách sách đã mượn
     @FXML
-    private GridPane borrowedBookGrid;
+    private GridPane borrowedBookGrid;  // Lưới để chứa các thẻ sách đã mượn
 
-    private boolean isLoading = false;
-    private boolean isAllBooksLoaded = false; // Cờ kiểm tra nếu đã tải hết sách
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private boolean isLoading = false;  // Cờ kiểm tra nếu đang tải dữ liệu
+    private boolean isAllBooksLoaded = false;  // Cờ kiểm tra nếu đã tải hết sách
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();  // Executor để xử lý việc tải sách trong một luồng riêng
 
+    /**
+     * Phương thức khởi tạo để cấu hình giao diện ban đầu.
+     * Thiết lập các thuộc tính cho ScrollPane và bắt đầu tải sách đã mượn.
+     */
     @FXML
     private void initialize() {
         scrollPane.setFitToWidth(true);
@@ -44,21 +48,31 @@ public class ViewBookBorrowed {
         });
     }
 
+    /**
+     * Tạo một thẻ sách từ một đối tượng Book.
+     *
+     * @param book Đối tượng sách để tạo thẻ
+     * @return Thẻ sách dưới dạng AnchorPane
+     */
     private AnchorPane createCard(Book book) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card.fxml"));
             AnchorPane card = loader.load();
             CardController cardController = loader.getController();
             cardController.setBook(book);
-            card.setOnMouseClicked(event -> openBookDetailsPage(book));
+            card.setOnMouseClicked(event -> openBookDetailsPage(book));  // Mở trang chi tiết khi nhấn vào thẻ
             return card;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi tải card");
             return null;
         }
     }
 
+    /**
+     * Mở trang chi tiết của một cuốn sách khi nhấn vào thẻ sách.
+     *
+     * @param book Đối tượng sách cần hiển thị chi tiết
+     */
     private void openBookDetailsPage(Book book) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
@@ -74,18 +88,21 @@ public class ViewBookBorrowed {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi mở trang chi tiết sách");
         }
     }
 
+    /**
+     * Tải danh sách sách đã mượn của người dùng.
+     * Dữ liệu được tải trong một luồng riêng biệt để tránh làm treo giao diện người dùng.
+     */
     private void loadBorrowedBooks() {
         if (isLoading || isAllBooksLoaded) return;
 
         isLoading = true;
         executorService.submit(() -> {
             try {
-                int id = User.getStudentIdByusername(currentUser.getUsername());
-                List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));
+                int id = User.getStudentIdByusername(currentUser.getUsername());  // Lấy ID sinh viên từ tên đăng nhập hiện tại
+                List<Book> borrowedBooks = TransactionDAO.getBorrowedBooks(String.valueOf(id));  // Lấy danh sách sách đã mượn
 
                 if (borrowedBooks != null && !borrowedBooks.isEmpty()) {
                     int row = borrowedBookGrid.getChildren().size() / 7;
@@ -96,7 +113,7 @@ public class ViewBookBorrowed {
                         if (card != null) {
                             int finalCol = col;
                             int finalRow = row;
-                            javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));
+                            javafx.application.Platform.runLater(() -> borrowedBookGrid.add(card, finalCol, finalRow));  // Thêm thẻ vào lưới
                         }
 
                         col++;
@@ -106,20 +123,15 @@ public class ViewBookBorrowed {
                         }
                     }
                 } else {
-                    System.out.println("Không tìm thấy sách nào đã mượn.");
+                    // Nếu không có sách nào
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                System.out.println("Lỗi khi lấy danh sách sách đã mượn");
             } finally {
-                isLoading = false; // Kết thúc quá trình tải
-                isAllBooksLoaded = true; // Đánh dấu là không còn sách nào để tải nữa
-
+                isLoading = false;  // Kết thúc quá trình tải
+                isAllBooksLoaded = true;  // Đánh dấu là không còn sách nào để tải nữa
             }
         });
     }
 
-    public void shutdown() {
-        executorService.shutdown();
-    }
 }

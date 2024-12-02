@@ -36,7 +36,7 @@ public class TransactionDAO {
 
         String updateSql = "UPDATE books SET remaining_book = remaining_book - ? WHERE ISBN = ? AND remaining_book >= ?";
 
-        String sql = "INSERT INTO transactions (username, title, author, ISBN, borrow_date, return_date, imagePath, quantity, mssv) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
+        String sql = "INSERT INTO transactions (username, title, author, ISBN, borrow_date, return_date, imagePath, quantity, mssv, description) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
 
         try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(updateSql);
@@ -62,6 +62,7 @@ public class TransactionDAO {
                 insertTransactionStatement.setString(6, book.getImagePath());
                 insertTransactionStatement.setInt(7, quantity);
                 insertTransactionStatement.setString(8, String.valueOf(user.getId()));
+                insertTransactionStatement.setString(9, book.getDescription());
                 int transactionAdded = insertTransactionStatement.executeUpdate();
                 return transactionAdded > 0;
             }

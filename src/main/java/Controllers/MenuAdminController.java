@@ -7,18 +7,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import static APIGoogle.GoogleBooksAPI.showErrorDialog;
 
-public class MenuController_Admin {
+/**
+ * Controller quản lý menu dành cho Admin.
+ */
+public class MenuAdminController {
     @FXML
     private BorderPane borderPane_admin;
     private Parent homeView;
@@ -34,11 +34,21 @@ public class MenuController_Admin {
     private MenuItem editProfileButton;
     @FXML
     private MenuItem logoutButton;
+
+    /**
+     * Phương thức khởi tạo controller, hiển thị thông tin người dùng hiện tại
+     * và tải giao diện bảng điều khiển.
+     */
     public void initialize() {
         username.setText(currentUser.getUsername());
         role.setText(currentUser.getRole());
         loadDashboard();
     }
+
+    /**
+     * Xử lý sự kiện khi người dùng nhấn vào nút xem thông tin cá nhân.
+     * Tải giao diện profile của người dùng vào trung tâm của BorderPane.
+     */
     @FXML
     private void handlePersonClick() {
         try {
@@ -47,26 +57,30 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(personRoot);
         } catch (IOException e) {
             e.printStackTrace();
-            showErrorDialog("L��i khi tải giao diện person.fxml: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải giao diện person.fxml: " + e.getMessage());
         }
     }
 
+    /**
+     * Đăng xuất người dùng hiện tại và chuyển về giao diện đăng nhập.
+     */
     @FXML
     private void logout_Button(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
             Parent root = loader.load();
 
-            // Lấy Stage hiện tại từ bất kỳ Node nào
             Stage stage = (Stage) borderPane_admin.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
-            System.err.println("Error loading FXML: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /**
+     * Tải giao diện hiển thị danh sách sách vào trung tâm của BorderPane.
+     */
     @FXML
     private void loadHomeview() {
         try {
@@ -77,21 +91,12 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(homeView);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
 
-        }
-    }
-    @FXML
-    private void bookStoreLoad() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/timsach.fxml"));
-            Parent root = loader.load();
-            borderPane_admin.setCenter(root);
-            System.out.println("Loaded timsach.fxml into center of BorderPane.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading timsach.fxml: " + e.getMessage());
-        }
-    }
+    /**
+     * Tải giao diện danh sách sinh viên vào trung tâm của BorderPane.
+     */
     @FXML
     private void userButton() {
         try {
@@ -99,23 +104,26 @@ public class MenuController_Admin {
             Parent root = loader.load();
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
-            e.printStackTrace(); // In ra lỗi chi tiết
-            System.out.println("Error loading allBook.fxml: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Hiển thị giao diện danh sách sách vào trung tâm BorderPane.
+     */
     public void showHome() {
         try {
-            // Tải giao diện chính (ví dụ allBook.fxml) vào BorderPane
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/allBook.fxml"));
             Parent root = loader.load();
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page: " + e.getMessage());
         }
     }
 
+    /**
+     * Tải giao diện cho chức năng mượn sách.
+     */
     @FXML
     private void loadIssueBook() {
         try {
@@ -124,9 +132,12 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page: " + e.getMessage());
         }
     }
+
+    /**
+     * Tải giao diện danh sách sách đã mượn vào trung tâm BorderPane.
+     */
     @FXML
     private void loadAllIssueBook() {
         try {
@@ -135,9 +146,12 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page: " + e.getMessage());
         }
     }
+
+    /**
+     * Tải giao diện trả sách vào trung tâm BorderPane.
+     */
     @FXML
     private void loadReturnBook() {
         try {
@@ -146,10 +160,12 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page: " + e.getMessage());
         }
     }
 
+    /**
+     * Tải giao diện bảng điều khiển (dashboard) vào trung tâm BorderPane.
+     */
     @FXML
     private void loadDashboard() {
         try {
@@ -161,7 +177,6 @@ public class MenuController_Admin {
             borderPane_admin.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page: " + e.getMessage());
         }
     }
 }

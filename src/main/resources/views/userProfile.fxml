@@ -6,16 +6,17 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserProfileController">
+<AnchorPane prefHeight="720.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserProfileController">
    <children>
-      <AnchorPane layoutX="114.0" layoutY="24.0" prefHeight="632.0" prefWidth="973.0" style="-fx-background-color: #CCCCCC; -fx-background-radius: 20;">
+      <AnchorPane prefHeight="720.0" prefWidth="1180.0" style="-fx-background-radius: 20;" styleClass="background" stylesheets="@../css/background.css">
          <children>
-            <AnchorPane fx:id="informationPane" layoutX="353.0" layoutY="118.0" prefHeight="395.0" prefWidth="555.0" style="-fx-background-color: transparent; -fx-background-radius: 10;">
+            <AnchorPane fx:id="informationPane" layoutX="405.0" layoutY="164.0" prefHeight="392.0" prefWidth="718.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
-                  <Button fx:id="editButton" layoutX="406.0" layoutY="169.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="editButton" layoutX="633.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" styleClass="background" stylesheets="@../css/buttonStyle.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -24,76 +25,95 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="emailTextField" layoutX="224.0" layoutY="217.0" prefHeight="32.0" prefWidth="228.0" />
-                  <TextField fx:id="passwordTextField" layoutX="224.0" layoutY="264.0" prefHeight="32.0" prefWidth="228.0" />
-                  <Label fx:id="usernameLabel" layoutX="224.0" layoutY="124.0" prefHeight="35.0" prefWidth="192.0" text="duongbeo">
+                  <TextField fx:id="emailTextField" layoutX="35.0" layoutY="311.0" prefHeight="45.0" prefWidth="290.0" style="-fx-border-color: #899499; -fx-border-radius: 5;" text="trinhbinhduong200x@gmail.com" />
+                  <TextField fx:id="passwordTextField" layoutX="389.0" layoutY="311.0" prefHeight="45.0" prefWidth="290.0" style="-fx-border-radius: 5; -fx-border-color: #899499;" text="123456" />
+                  <Label fx:id="usernameLabel" layoutX="35.0" layoutY="169.0" prefHeight="45.0" prefWidth="290.0" style="-fx-border-color: #899499; -fx-border-radius: 5;" text="duongbeo">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Text layoutX="54.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="118.359375">
+                  <Text layoutX="35.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name :" wrappingWidth="133.69268798828125">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="54.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID :" wrappingWidth="118.359375">
+                  <Text layoutX="389.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID :" wrappingWidth="118.359375">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="54.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :">
+                  <Text layoutX="36.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="54.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
+                  <Text layoutX="391.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="54.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="118.359375">
+                  <Text layoutX="35.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="118.359375">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
-                  <Label fx:id="fullNameLabel1" layoutX="224.0" layoutY="33.0" prefHeight="35.0" prefWidth="192.0" text="Họ và tên">
+                  <Label fx:id="fullNameLabel1" layoutX="35.0" layoutY="53.0" prefHeight="45.0" prefWidth="290.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 4; -fx-border-color: #899499;" text="Họ và tên">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="idLabel1" layoutX="224.0" layoutY="79.0" prefHeight="35.0" prefWidth="192.0" text="Mã sinh viên">
+                  <Label fx:id="idLabel1" layoutX="389.0" layoutY="53.0" prefHeight="45.0" prefWidth="290.0" style="-fx-background-radius: 5; -fx-border-color: #899499; -fx-border-radius: 5;" text="Mã sinh viên">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="cancelButton" layoutX="197.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="32.0" prefWidth="68.0" text="Cancel" />
-                  <Button fx:id="updateButton" layoutX="278.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="32.0" prefWidth="68.0" text="Update" />
+                  <Text layoutX="391.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone :" wrappingWidth="133.69268798828125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="numberLabel" layoutX="389.0" layoutY="169.0" prefHeight="45.0" prefWidth="290.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 4; -fx-border-color: #899499;" text="Họ và tên">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Line endX="461.666748046875" endY="3.0517578125E-5" layoutX="148.0" layoutY="255.0" startX="-107.99996948242188" startY="3.0517578125E-5" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="83.0" layoutY="139.0" prefHeight="353.0" prefWidth="270.0">
+            <Label layoutX="703.0" layoutY="105.0" prefHeight="59.0" prefWidth="505.0" text="PERSONAL INFORMATION" textFill="#286b3e" visible="false">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="59.0" layoutY="195.0" prefHeight="330.0" prefWidth="290.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
-                  <Label fx:id="idLabel" layoutX="42.0" layoutY="293.0" prefHeight="35.0" prefWidth="192.0" text="Mã sinh viên" textFill="#484848">
+                  <Label fx:id="idLabel" layoutX="24.0" layoutY="280.0" prefHeight="35.0" prefWidth="238.0" text="Mã sinh viên" textFill="#484848">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fullNameLabel" layoutX="42.0" layoutY="258.0" prefHeight="35.0" prefWidth="192.0" text="Họ và tên">
+                  <Label fx:id="fullNameLabel" layoutX="24.0" layoutY="234.0" prefHeight="45.0" prefWidth="238.0" text="Họ và tên">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="228.0" fitWidth="234.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImageView" fitHeight="201.0" fitWidth="230.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/rabbit.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="59.0" prefWidth="505.0" text="PERSONAL INFORMATION" textFill="#286b3e">
+            <Button fx:id="cancelButton" layoutX="649.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="45.0" prefWidth="107.0" style="-fx-background-radius: 10; -fx-background-color: #9e464b;" styleClass="background" stylesheets="@../css/buttonStyle2.css" text="Cancel">
                <font>
-                  <Font size="41.0" />
+                  <Font size="20.0" />
                </font>
-            </Label>
+            </Button>
+            <Button fx:id="updateButton" layoutX="783.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="45.0" prefWidth="107.0" style="-fx-background-radius: 10; -fx-background-color: #58a384;" stylesheets="@../css/buttonStyle2.css" text="Update">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

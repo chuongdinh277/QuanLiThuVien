@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import Document.*;
 import APIGoogle.*;
 
+/**
+ * Controller for adding a new book to the system.
+ */
 public class AddBookController {
 
     @FXML
@@ -38,13 +41,21 @@ public class AddBookController {
     private TextField ISBNtextField;
 
     private String description;
-    private Book resultBook;  // Lưu kết quả tìm kiếm
+    private Book resultBook;
     private AllBookController homeController;
 
+    /**
+     * Sets the home controller for navigating book details.
+     *
+     * @param homeController The home controller instance.
+     */
     public void setHomeController(AllBookController homeController) {
         this.homeController = homeController;
     }
 
+    /**
+     * Searches for a book using an external API based on the title and author provided.
+     */
     @FXML
     private void apiSearch_Button() {
         apiSearch.setOnAction(e -> {
@@ -52,7 +63,6 @@ public class AddBookController {
             String author = authorSearch.getText().trim();
 
             if (!title.isEmpty() && !author.isEmpty()) {
-                // Tạo một Task để tìm kiếm sách qua API trong background thread
                 Task<Book> searchTask = new Task<>() {
                     @Override
                     protected Book call() {
@@ -73,7 +83,7 @@ public class AddBookController {
                                 description = resultBook.getDescription() != null ? resultBook.getDescription() : "No description available";
                                 descriptionTextArea.setText(description);
                                 if (resultBook.getImagePath() != null) {
-                                    Image image = new Image(resultBook.getImagePath(), showImage.getFitWidth(), showImage.getFitHeight(),true,true);
+                                    Image image = new Image(resultBook.getImagePath(), showImage.getFitWidth(), showImage.getFitHeight(), true, true);
                                     showImage.setImage(image);
                                     showImage.setSmooth(true);
                                 } else {
@@ -91,13 +101,16 @@ public class AddBookController {
                     }
                 };
 
-                new Thread(searchTask).start(); // Chạy task trên luồng nền
+                new Thread(searchTask).start();
             } else {
                 showErrorDialog("Please enter both title and author.");
             }
         });
     }
 
+    /**
+     * Adds a new book to the system after validating input.
+     */
     @FXML
     private void addBook_Button() {
         addBook_search.setOnAction(e -> {
@@ -116,23 +129,23 @@ public class AddBookController {
                 return;
             }
 
-            // Lấy đường dẫn hình ảnh
             String imagePath = showImage.getImage() != null ? showImage.getImage().getUrl() : null;
 
-            // Tạo đối tượng Book và thêm vào cơ sở dữ liệu
             Book book = new Book(title, author, category, quantity, quantity, description, publisher, imagePath, ISBN);
 
             try {
-                BookDAO.addBook(book); // Thêm sách vào cơ sở dữ liệu
+                BookDAO.addBook(book);
                 showSuccessDialog("Book added successfully!");
-                clearInputFields(); // Làm sạch các trường sau khi thêm
+                clearInputFields();
             } catch (SQLException ex) {
                 showErrorDialog("Failed to add book to the database: " + ex.getMessage());
             }
         });
     }
 
-    // Hàm để làm sạch các trường input
+    /**
+     * Clears all input fields on the form.
+     */
     private void clearInputFields() {
         titleSearch_1.clear();
         authorSearch_1.clear();
@@ -144,7 +157,11 @@ public class AddBookController {
         showImage.setImage(null);
     }
 
-    // Hiển thị hộp thoại lỗi
+    /**
+     * Displays an error dialog with a given message.
+     *
+     * @param message The message to be displayed in the error dialog.
+     */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -153,7 +170,11 @@ public class AddBookController {
         alert.showAndWait();
     }
 
-    // Hiển thị hộp thoại thành công
+    /**
+     * Displays a success dialog with a given message.
+     *
+     * @param message The message to be displayed in the success dialog.
+     */
     private void showSuccessDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");

@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1100.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReturnBookController">
+<BorderPane fx:id="borderPane_book" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReturnBookController">
     <bottom>
         <AnchorPane prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" layoutY="14.0" prefHeight="46.0" prefWidth="1100.0" />
                 <Label alignment="CENTER" layoutY="278.0" prefHeight="40.0" prefWidth="1100.0" />
-                <HBox layoutY="60.0" prefHeight="180.0" prefWidth="1100.0" style="-fx-background-color: #DDDDDD;">
+                <HBox layoutY="60.0" prefHeight="180.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
                     <children>
                         <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="306.0">
                             <HBox.margin>
@@ -45,7 +45,7 @@
                         </VBox>
                     </children>
                 </HBox>
-                  <HBox layoutY="7.0" prefHeight="43.0" prefWidth="1100.0" style="-fx-background-color: #DDDDDD;">
+                  <HBox layoutY="7.0" prefHeight="43.0" prefWidth="1200.0" style="-fx-background-color: #DDDDDD;">
                       <children>
                           <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -62,7 +62,7 @@
                           </Label>
                       </children>
                   </HBox>
-            <TableView fx:id="transactionTable" layoutY="274.0" prefHeight="340.0" prefWidth="1100.0" stylesheets="@../css/table-view.css">
+            <TableView fx:id="transactionTable" layoutX="40.0" layoutY="278.0" prefHeight="340.0" prefWidth="1100.0" stylesheets="@../css/table-view.css">
               <columns>
                 <TableColumn fx:id="STTcolumn" prefWidth="75.0" text="STT" />
                 <TableColumn fx:id="ISBNColumn" prefWidth="144.79998779296875" text="ISBN" />

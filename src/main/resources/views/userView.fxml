@@ -51,7 +51,7 @@
                                     <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#logout_Button" text="Logout" />
                                  </items>
                                  <graphic>
-                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="profileImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../image/rabbit.png" />
                                        </image>

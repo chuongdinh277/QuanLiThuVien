@@ -22,8 +22,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BookDetailCotroller {
-
+public class BookDetailController {
 
     @FXML
     private TextField ISBNTextField;
@@ -42,9 +41,6 @@ public class BookDetailCotroller {
 
     @FXML
     private Label categoryLabel;
-
-    @FXML
-    private Button commentBook;
 
     @FXML
     private Button commentButton;
@@ -69,9 +65,6 @@ public class BookDetailCotroller {
 
     @FXML
     private TableColumn<Transaction, Date> returnDate;
-
-    @FXML
-    private ImageView returnHome;
 
     @FXML
     private ImageView star1;
@@ -116,27 +109,35 @@ public class BookDetailCotroller {
     private TextField titleTextField;
 
     @FXML
-    private Button viewBook;
-
-    @FXML
     private Pane viewBookPane;
     @FXML
-    private TextField bookIDtextField;
+    private Label totalStudentLabel;
     private Book currentBook;
 
-    private MenuController_Admin menuControllerAdmin;
-    @FXML
-    private TextField sectionTextField;
+    private MenuAdminController menuControllerAdmin;
     private int selectedRating = 0;
-    @FXML
-    private Label totalStudentLabel;
+
     private int totalStudent = 0;
 
+    /**
+     * Displays the book view pane and hides the comment pane when triggered by an event.
+     * This method makes the book details pane visible and the comment pane invisible.
+     *
+     * @param event The action event that triggers the method.
+     */
     @FXML
     private void showViewBook(ActionEvent event) {
         viewBookPane.setVisible(true);
         commentPane.setVisible(false);
     }
+
+    /**
+     * Displays the comment section for the book and hides the book view pane when triggered by an event.
+     * This method makes the comment pane visible, hides the book details pane,
+     * and loads the reviews for the current book if available.
+     *
+     * @param event The action event that triggers the method.
+     */
     @FXML
     private void showCommentBook(ActionEvent event) {
         viewBookPane.setVisible(false);
@@ -144,8 +145,13 @@ public class BookDetailCotroller {
         if(currentBook != null ) System.out.println(currentBook.getISBN());
         loadReview();
         System.out.println("hello");
-
     }
+
+    /**
+     * Initializes the controller by setting up event handlers for UI components.
+     * This method sets the actions for the comment button and binds table columns to the corresponding properties
+     * of the student data. It also calls the method to load all student data (currently commented out).
+     */
     @FXML
     private void initialize() {
         commentButton.setOnAction(even -> saveReview());
@@ -156,15 +162,27 @@ public class BookDetailCotroller {
         //loadallStudent();
     }
 
+    /**
+     * Handles the click event on the menu. If the menuControllerAdmin is not null, it shows the home view.
+     * If the controller is null, a message is printed to the console.
+     *
+     * @param event The mouse click event.
+     */
     @FXML
     private void handleClick(MouseEvent event) {
         if (menuControllerAdmin != null) {
             menuControllerAdmin.showHome();
-        }
-        else {
+        } else {
             System.out.println("null");
         }
     }
+
+    /**
+     * Handles the click event on a star in the rating section. Based on the clicked star, it sets the selected rating.
+     * The method also updates the appearance of the stars according to the selected rating.
+     *
+     * @param event The mouse click event on the star.
+     */
     @FXML
     private void handleStarclick(MouseEvent event) {
         Object source = event.getSource();
@@ -175,11 +193,18 @@ public class BookDetailCotroller {
         else if (source == star5) selectedRating = 5;
         updateStarColors(selectedRating);
     }
+
+    /**
+     * Updates the appearance of the stars based on the given rating. Stars are displayed as selected or unselected
+     * based on the rating value.
+     *
+     * @param rating The rating value (1 to 5).
+     */
     private void updateStarColors(int rating) {
-        // Tạo danh sách các ngôi sao theo thứ tự
+        // Create list of selected and unselected star images
         Image selectedStar = new Image(getClass().getResourceAsStream("/image/star.png"));
         Image unselectedStar = new Image(getClass().getResourceAsStream("/image/starv.png"));
-        // Cập nhật ngôi sao dựa trên rating
+        // Update stars based on rating
         if (rating >= 1) star1.setImage(selectedStar);
         else star1.setImage(unselectedStar);
 
@@ -195,11 +220,24 @@ public class BookDetailCotroller {
         if (rating >= 5) star5.setImage(selectedStar);
         else star5.setImage(unselectedStar);
     }
-    public void setMenuController(MenuController_Admin menuController) {
+
+    /**
+     * Sets the MenuController_Admin instance for the controller, allowing interaction with the admin menu.
+     *
+     * @param menuController The MenuController_Admin instance to be set.
+     */
+    public void setMenuController(MenuAdminController menuController) {
         this.menuControllerAdmin = menuController;
     }
 
-    public void setBook (Book book) {
+    /**
+     * Sets the details of the provided book in the user interface elements, such as ISBN, title, author,
+     * category, publisher, quantity, and description. It also displays the availability status of the book
+     * and its average rating. If the book has an image path, it loads and displays the image as well.
+     *
+     * @param book The book object whose details will be displayed.
+     */
+    public void setBook(Book book) {
         if (book != null) {
             this.currentBook = book;
             ISBNTextField.setText(book.getISBN());
@@ -209,10 +247,9 @@ public class BookDetailCotroller {
             publisherLabel.setText(book.getPublisher());
             quantityTextField.setText(String.valueOf(book.getQuantity()));
             descriptionTextField.setText(book.getDescription());
-            if (book.getRemainingBook() >0) {
+            if (book.getRemainingBook() > 0) {
                 availableLabel.setText("Available");
-            }
-            else {
+            } else {
                 availableLabel.setText("Not available");
             }
             try {
@@ -228,12 +265,19 @@ public class BookDetailCotroller {
         }
         loadallStudent();
     }
+
+    /**
+     * Updates the current book's details in the database, including its author, ISBN, category, publisher,
+     * and quantity. The method updates the quantity by adding the newly entered value to the existing quantity.
+     * A success or failure message is displayed based on the outcome of the update operations.
+     *
+     * @param event The event that triggers the update action (typically a button click).
+     */
     @FXML
     private void updateBook(ActionEvent event) {
         try {
             // Get the updated quantity from the input
             int newQuantity = Integer.parseInt(quantityTextField.getText());
-            //System.out.println(newQuantity);
             int additionalQuantity = currentBook.getQuantity() + newQuantity;
             System.out.println(additionalQuantity);
             // Update other fields
@@ -257,6 +301,13 @@ public class BookDetailCotroller {
     }
 
 
+    /**
+     * Deletes the current book from the database if there are no students currently borrowing the book.
+     * If any students are still borrowing the book, a dialog will be shown to inform the user.
+     * A success or failure message is displayed based on the outcome of the delete operation.
+     *
+     * @param event The event that triggers the deletion action (typically a button click).
+     */
     @FXML
     private void deleteBook(ActionEvent event) {
         if (totalStudent != 0) {
@@ -274,6 +325,14 @@ public class BookDetailCotroller {
             showErrorDialog("Lỗi khi xóa sách: " + e.getMessage());
         }
     }
+
+    /**
+     * Saves the review for the current book, including the rating and comment, to the database.
+     * If the user has selected a rating and written a comment, the review will be saved.
+     * If no rating is selected or no book is set, a dialog will inform the user to complete the review.
+     *
+     * @throws SQLException If an error occurs while saving the review to the database.
+     */
     private void saveReview() {
         if (selectedRating > 0 && currentBook != null) {
             String isbn = currentBook.getISBN();
@@ -291,6 +350,13 @@ public class BookDetailCotroller {
         }
     }
 
+    /**
+     * Displays the rating of a book by updating the star images based on the average rating.
+     * The rating is rounded to the nearest integer, and the stars are visually updated to reflect the rating.
+     *
+     * @param averageRating The average rating of the book, represented as a double value.
+     *                      This value will be rounded to the nearest integer for display purposes.
+     */
     private void displayRating(double averageRating) {
         int roundedRating = (int) averageRating;
         Image selectedStar = new Image(getClass().getResourceAsStream("/image/star.png"));
@@ -325,6 +391,11 @@ public class BookDetailCotroller {
         }
     }
 
+    /**
+     * Loads and displays the reviews of the current book by fetching them from the database using its ISBN.
+     * If the book is valid and reviews are found, they will be displayed. If an error occurs during the process,
+     * an error dialog will be shown.
+     */
     private void loadReview() {
         if (currentBook != null) {
             String isbn = currentBook.getISBN();
@@ -336,22 +407,28 @@ public class BookDetailCotroller {
                 showErrorDialog("Lỗi khi lấy đánh giá của sách: " + currentBook.getTitle());
             }
         }
-        else System.out.println("null");
     }
 
+
+    /**
+     * Displays a list of reviews for the current book.
+     * Each review includes the username, star rating, and the comment.
+     * The reviews are displayed in a VBox, with the username in bold,
+     * stars representing the rating, and the comment below the stars.
+     *
+     * @param reviews The list of reviews to be displayed.
+     */
     private void displayReviews(List<Review> reviews) {
         commentVbox.getChildren().clear();
-        for (Review review : reviews) {
-            // Tạo một VBox để chứa username, sao và bình luận
-            VBox commentBox = new VBox(5); // 5 là khoảng cách giữa các phần tử
-            commentBox.setStyle("-fx-padding: 10;"); // Tạo khoảng cách padding nếu cần
 
-            // Label cho tên người dùng
+        for (Review review : reviews) {
+            VBox commentBox = new VBox(5);
+            commentBox.setStyle("-fx-padding: 10;");
+
             Label usernameLabel = new Label(review.getUsername());
             usernameLabel.setStyle("-fx-font-weight: bold;");
 
-            // HBox cho phần sao
-            HBox starsBox = new HBox(5); // Khoảng cách giữa các ngôi sao
+            HBox starsBox = new HBox(5);
             for (int i = 1; i <= 5; i++) {
                 ImageView star = new ImageView();
                 if (i <= review.getRating()) {
@@ -359,35 +436,37 @@ public class BookDetailCotroller {
                 } else {
                     star.setImage(new Image(getClass().getResourceAsStream("/image/starv.png")));
                 }
-                star.setFitWidth(15);  // Đặt chiều rộng ngôi sao là 15px
-                star.setFitHeight(15); // Đặt chiều cao ngôi sao là 15px
+                star.setFitWidth(15);
+                star.setFitHeight(15);
 
                 starsBox.getChildren().add(star);
             }
 
-            // Label cho bình luận (dòng mới dưới ngôi sao)
             Label commentLabel = new Label(review.getComment());
-            commentLabel.setWrapText(true); // Cho phép text wrap nếu bình luận dài
+            commentLabel.setWrapText(true);
             commentLabel.setStyle("-fx-padding: 5px;");
 
-            // Thêm các phần tử vào VBox
             commentBox.getChildren().addAll(usernameLabel, starsBox, commentLabel);
 
-            // Thêm commentBox vào commentVbox (bảng chứa tất cả bình luận)
             commentVbox.getChildren().add(commentBox);
         }
     }
-
+    /**
+     * Loads all students who have borrowed the current book and displays the transaction details in a table.
+     * The number of students is shown in the totalStudentLabel.
+     * If there are no transactions, a dialog is shown indicating no transactions are available.
+     *
+     * @throws Exception If an error occurs while fetching the transactions from the database.
+     */
     private void loadallStudent() {
         String isbn = currentBook.getISBN();
         ObservableList<Transaction> transactions = FXCollections.observableArrayList();
         try {
-            // Lấy tất cả giao dịch từ cơ sở dữ liệu
             List<Transaction> issueBook = TransactionDAO.getTransactionsByISBN(isbn);
             totalStudent = issueBook.size();
             totalStudentLabel.setText(String.valueOf(issueBook.size()));
             if (issueBook != null) {
-                transactions.addAll(issueBook); // Thêm tất cả giao dịch vào ObservableList
+                transactions.addAll(issueBook);
             } else {
                 showAlbertDialog("Không có giao dịch trong cơ sở dữ liệu.");
             }
@@ -396,6 +475,11 @@ public class BookDetailCotroller {
         }
         studentTableview.setItems(transactions);
     }
+    /**
+     * Displays an informational dialog with a given message.
+     *
+     * @param message The message to be displayed in the dialog.
+     */
     private void showAlbertDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
@@ -403,6 +487,12 @@ public class BookDetailCotroller {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Displays an error dialog with a given message.
+     *
+     * @param message The error message to be displayed in the dialog.
+     */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -410,5 +500,6 @@ public class BookDetailCotroller {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 
 }

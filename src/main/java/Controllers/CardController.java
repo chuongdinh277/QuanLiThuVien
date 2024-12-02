@@ -30,68 +30,74 @@ public class CardController {
     @FXML
     private Book currentBook;
 
+    /**
+     * Initializes the card pane with mouse event handlers for animations.
+     */
     @FXML
     private void initialize() {
-        // Thiết lập sự kiện chuột cho Card
+        // Set up mouse event handlers for the card pane
         cardPane.setOnMouseEntered(this::handleMouseEnter);
         cardPane.setOnMouseExited(this::handleMouseExit);
     }
 
+    /**
+     * Handles the mouse enter event on the card pane.
+     * Animates the card pane by scaling it up slightly.
+     *
+     * @param event the mouse event triggered when the mouse enters the card pane
+     */
     @FXML
     private void handleMouseEnter(MouseEvent event) {
         ScaleTransition st = new ScaleTransition(Duration.millis(200), cardPane);
-        st.setToX(1.1); // Tăng kích thước chiều rộng lên 10%
-        st.setToY(1.1); // Tăng kích thước chiều cao lên 10%
+        st.setToX(1.1);
+        st.setToY(1.1);
         st.play();
     }
 
+    /**
+     * Handles the mouse exit event on the card pane.
+     * Animates the card pane by scaling it back to its original size.
+     *
+     * @param event the mouse event triggered when the mouse exits the card pane
+     */
     @FXML
     private void handleMouseExit(MouseEvent event) {
         ScaleTransition st = new ScaleTransition(Duration.millis(200), cardPane);
-        st.setToX(1.0); // Trở về kích thước ban đầu
-        st.setToY(1.0); // Trở về kích thước ban đầu
+        st.setToX(1.0);
+        st.setToY(1.0);
         st.play();
     }
 
+    /**
+     * Sets the book details to be displayed in the card pane.
+     * If the book is not cached, it is added to the cache. The book's title, author,
+     * and image are displayed, with a default image used if none is provided.
+     *
+     * @param book the book whose details are to be displayed; if null, no action is taken
+     */
     public void setBook(Book book) {
         if (book == null) {
-            System.out.println("Sách không hợp lệ!");
             return;
         }
         this.currentBook = book;
 
-        // Kiem tra thong tin sach
-        System.out.println("Đang thiết lập thông tin cho sách: " + book.getTitle());
-
-        // Caching Book
         if (!Cache.BookCache.isCached(book.getISBN())) {
             Cache.BookCache.putBook(book);
         }
 
         titleLabel.setText(book.getTitle());
         authorLabel.setText(book.getAuthor());
-//        quantityLabel.setText(String.valueOf(book.getQuantity()));
 
-        String imagePath = book.getImagePath(); // Lấy đường dẫn hình ảnh
-        System.out.println("Đường dẫn hình ảnh: " + imagePath);
+        String imagePath = book.getImagePath();
         if (imagePath != null && !imagePath.isEmpty()) {
             imageView_User.setImage(Cache.ImageCache.getImage(imagePath));
         } else {
-            String path = "/image/biasachmacdinh.png"; // Hoặc đường dẫn tuyệt đối
+            String path = "/image/biasachmacdinh.png";
             Image image = new Image(getClass().getResourceAsStream(path));
-
-            if (image.isError()) {
-                System.out.println("Không thể tải hình ảnh từ: " + path);
-            } else {
+            if (!image.isError()) {
                 imageView_User.setImage(image);
             }
         }
     }
-
-    @FXML
-    private void onSeeBook() {
-        // Logic để xem chi tiết sách
-    }
-
 
 }

@@ -65,7 +65,6 @@ public class ViewBookInLibrary {
             return card;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi tải card");
             return null;
         }
     }
@@ -78,12 +77,9 @@ public class ViewBookInLibrary {
             // Đưa thông tin sách vào controller của trang chi tiết
             UserSeeBookDetails controller = loader.getController();
             if (book == null) {
-                System.out.println("null");
             }
             controller.setBook(book);
 
-
-            // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
             Stage stage = new Stage();
             stage.setScene(new Scene(bookDetailsPage));
             stage.setTitle("Chi tiết sách");
@@ -102,9 +98,6 @@ public class ViewBookInLibrary {
                 int studentID = User.getStudentIdByusername(currentUser.getUsername());
                 Member member = new Member(studentID,currentUser.getUsername(), currentUser.getRole());
                 List<Book> bookList = member.viewBooksPaginated(booksLoaded, PAGE_SIZE);
-                for (Book book : bookList) {
-                    System.out.println(book.getTitle() + " " + book.getAuthor());
-                }
                 if (bookList != null && !bookList.isEmpty()) {
                     int row = booksLoaded / 7;
                     int col = booksLoaded % 7;
@@ -124,21 +117,15 @@ public class ViewBookInLibrary {
                         }
                     }
                     booksLoaded += bookList.size();
-                } else {
-                    System.out.println("Không có sách mới để tải");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                System.out.println("Lỗi khi tải sách");
             } finally {
                 isLoading = false;
             }
         });
     }
 
-    public void shutdown() {
-        executorService.shutdown();
-    }
 
     private void removeFocusFromAllNodes(Parent parent) {
         for (Node node : parent.getChildrenUnmodifiable()) {

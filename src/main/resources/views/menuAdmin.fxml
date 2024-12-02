@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController_Admin">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuAdminController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1300.0">
          <children>
@@ -144,6 +144,7 @@
                               </MenuButton>
                            </children>
                         </AnchorPane>
+                        <Label layoutX="383.0" layoutY="20.0" style="-fx-text-fill: #cff7fc; -fx-font-weight: bold; -fx-font-size: 25;" text="LIBRARY MANAGEMENT SYSTEM" />
                      </children>
                   </AnchorPane>
                </top></BorderPane>

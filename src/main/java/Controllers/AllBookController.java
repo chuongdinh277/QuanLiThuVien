@@ -10,41 +10,36 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
 import javafx.scene.chart.BarChart;
-//import static controllers.MenuController_Admin.borderPane_admin;
-
 
 public class AllBookController {
 
     @FXML
     private BorderPane borderPane_book;
     @FXML
-    private TableView<Book> bookTable; // Khai báo TableView
+    private TableView<Book> bookTable;
     @FXML
-    private TableColumn<Book, Integer> bookID; // Cột ID
+    private TableColumn<Book, Integer> bookID;
     @FXML
-    private TableColumn<Book, String> bookTitle; // Cột tên sách
+    private TableColumn<Book, String> bookTitle;
     @FXML
-    private TableColumn<Book, String> bookAuthor; // cột tác giar
+    private TableColumn<Book, String> bookAuthor;
     @FXML
-    private TableColumn<Book, String> bookPublisher; // cột nhà xuất bản
+    private TableColumn<Book, String> bookPublisher;
     @FXML
-    private TableColumn<Book, Integer> bookQuantity; // cột số lượng
+    private TableColumn<Book, Integer> bookQuantity;
     @FXML
-    private TableColumn<Book, HBox> bookAction; //cột hành động
+    private TableColumn<Book, HBox> bookAction;
     @FXML
     private TableColumn<Book, String> bookCategory;
     @FXML
@@ -57,14 +52,21 @@ public class AllBookController {
     private Button addBook_Admin;
     @FXML
     private BarChart<String, Number> categoryBarChart;
-    private static MenuController_Admin menuController;
-    public void setMenuController(MenuController_Admin menuController) {
+    private static MenuAdminController menuController;
+
+    /**
+     * Sets the menu controller for this controller.
+     * @param menuController The MenuController_Admin to set.
+     */
+    public void setMenuController(MenuAdminController menuController) {
         this.menuController = menuController;
     }
+
+    /**
+     * Initializes the controller by setting up the TableView and loading books.
+     */
     @FXML
     private void initialize() {
-
-        //bookID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         ISBNbook.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getISBN()));
         bookTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         bookAuthor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
@@ -81,35 +83,39 @@ public class AllBookController {
 
         bookTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                Book selectBook = bookTable.getSelectionModel().getSelectedItem();
-                if(selectBook != null) {
-                    openBookDetails(selectBook);
+                Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+                if (selectedBook != null) {
+                    openBookDetails(selectedBook);
                 }
             }
         });
-
     }
+
+    /**
+     * Loads the list of books into the TableView.
+     */
     public void loadBooks() {
         ObservableList<Book> booksList = FXCollections.observableArrayList();
 
         try {
             Admin admin = new Admin(currentUser.getUsername(), currentUser.getRole());
             List<Book> bookList = admin.viewAllBooks();
-            if(bookList != null) {
+            if (bookList != null) {
                 booksList.addAll(bookList);
-            }
-            else {
-                showAlbertDialog("không có sách trong cơ sở dữ liệu");
+            } else {
+                showInfoDialog("No books found in the database.");
             }
         } catch (Exception e) {
-            showErrorDialog("Lỗi khi tải sách: " + e.getMessage());
+            showErrorDialog("Error loading books: " + e.getMessage());
         }
-        bookTable.setItems(booksList); // Đặt dữ liệu cho TableView
+        bookTable.setItems(booksList);
     }
 
+    /**
+     * Opens the AddBook view when the add book button is clicked.
+     */
     @FXML
-    private void addBook(){
-        // Xử lý hành đ��ng khi nhấn nút thêm sách
+    private void addBook() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/timsach.fxml"));
             Parent root = fxmlLoader.load();
@@ -118,27 +124,33 @@ public class AllBookController {
             controller.setHomeController(this);
             borderPane_book.setCenter(root);
         } catch (IOException e) {
-            showErrorDialog("Lỗi khi thêm sách " + e.getMessage());
+            showErrorDialog("Error opening Add Book view: " + e.getMessage());
         }
     }
 
+    /**
+     * Opens the Book Details view when a book is double-clicked in the table.
+     * @param book The selected book to view details.
+     */
     private void openBookDetails(Book book) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/bookDetails.fxml"));
             Parent bookDetailsRoot = fxmlLoader.load();
 
-            BookDetailCotroller controller = fxmlLoader.getController(); // Chú ý chữ hoa
-            controller.setMenuController(menuController); // Đảm bảo phương thức này tồn tại
-            controller.setBook(book); // Đảm bảo phương thức này tồn tại
+            BookDetailController controller = fxmlLoader.getController();
+            controller.setMenuController(menuController);
+            controller.setBook(book);
 
-            borderPane_book.setCenter(bookDetailsRoot); // Kiểm tra null trước khi sử dụng
+            borderPane_book.setCenter(bookDetailsRoot);
         } catch (IOException e) {
-            e.printStackTrace(); // In ra lỗi chi tiết để kiểm tra
-            showErrorDialog("Lỗi khi hiển thị sách: " + e.getMessage());
+            showErrorDialog("Error displaying book details: " + e.getMessage());
         }
     }
 
-
+    /**
+     * Displays an error dialog with the provided message.
+     * @param message The message to display in the error dialog.
+     */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -146,12 +158,16 @@ public class AllBookController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private void showAlbertDialog(String message) {
+
+    /**
+     * Displays an informational dialog with the provided message.
+     * @param message The message to display in the informational dialog.
+     */
+    private void showInfoDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Thông báo");
+        alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
