@@ -131,14 +131,25 @@ public class LoginController implements Initializable {
         String fullName = fullNameField.getText();
         String role = myChoiceBox.getValue();
         String mssv = MSSVTextfield.getText();
-        if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty() || number.isEmpty()
+
+        if (username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || role.isEmpty() || number.isEmpty()
                 || email.isEmpty() || fullName.isEmpty()) {
             showErrorDialog("Vui lòng điền đầy đủ thông tin");
             return;
         }
 
-        if(!passwordConfirm.equals(password)) {
+        if (!passwordConfirm.equals(password)) {
             showErrorDialog("Mật khẩu nhập lại không đúng");
+            return;
+        }
+
+        if (!number.matches("\\d+")) { // Kiểm tra số điện thoại
+            showErrorDialog("Số điện thoại không hợp lệ. Vui lòng chỉ nhập chữ số.");
+            return;
+        }
+
+        if (!email.endsWith("@gmail.com")) { // Kiểm tra email có đuôi @gmail.com
+            showErrorDialog("Email không hợp lệ. Vui lòng sử dụng địa chỉ email có đuôi @gmail.com.");
             return;
         }
 
@@ -146,12 +157,15 @@ public class LoginController implements Initializable {
             showErrorDialog("MSSV là bắt buộc đối với người dùng");
             return;
         }
+
         User newUser;
+        if ("user".equals(role)) {
+            newUser = new User(Integer.parseInt(mssv), username, password, role, fullName, email, number);
+        } else {
+            newUser = new User(0, username, password, role, fullName, email, number);
+        }
 
-        if("user".equals(role)) {newUser = new User(Integer.parseInt(mssv), username, password, role, fullName, email, number);}
-        else {newUser = new User(0,username,password,role,fullName,email,number);}
         try {
-
             if (newUser.isUsernameTaken(username)) {
                 showErrorDialog("Tên tài khoản đã tồn tại. Vui lòng chọn tên tài khoản khác");
             } else {
@@ -167,6 +181,7 @@ public class LoginController implements Initializable {
             showErrorDialog("Đăng ký thất bại: " + e.getMessage());
         }
     }
+
 
     /**
      * Handles the login process.

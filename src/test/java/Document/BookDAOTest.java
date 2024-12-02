@@ -19,7 +19,7 @@ class BookDAOTest {
 
     @Test
     void testAddBook() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         boolean result = BookDAO.addBook(book);
         assertTrue(result);
     }
@@ -32,7 +32,7 @@ class BookDAOTest {
 
     @Test
     void testDeleteBook() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         BookDAO.addBook(book); // Thêm sách trước khi xóa
         boolean result = BookDAO.deleteBook(book);
         assertTrue(result);
@@ -40,7 +40,7 @@ class BookDAOTest {
 
     @Test
     void testUpdateBook() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         BookDAO.addBook(book); // Thêm sách trước khi cập nhật
         book.setDescription("Updated Description");
         boolean result = BookDAO.updateBook(book);
@@ -49,7 +49,7 @@ class BookDAOTest {
 
     @Test
     void testSearchBooksExact() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         BookDAO.addBook(book); // Thêm sách trước khi tìm kiếm
         Book foundBook = BookDAO.searchBooksExact("Test Book", "Test Author");
         assertNotNull(foundBook);
@@ -58,7 +58,7 @@ class BookDAOTest {
 
     @Test
     void testGetBooksByKeyword() throws SQLException {
-        Book book = new Book("Keyword Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Keyword Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         BookDAO.addBook(book); // Thêm sách trước khi tìm kiếm
         List<Book> books = BookDAO.getBooksByKeyword("Keyword");
         assertFalse(books.isEmpty());
@@ -73,7 +73,7 @@ class BookDAOTest {
 
     @Test
     void testUpdateQuantity() throws SQLException {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 10, 10, "Description", "Publisher", "Section", "ISBN123");
         BookDAO.addBook(book); // Thêm sách trước khi cập nhật số lượng
         boolean result = BookDAO.updateQuantity(book, 15);
         assertTrue(result);

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static APIGoogle.BookSearchApp2.showErrorDialog;
+import static APIGoogle.GoogleBooksAPI.showErrorDialog;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
@@ -46,7 +46,7 @@ class UserTest {
                 // Thực hiện các thao tác đăng ký của bạn tại đây
                 assertDoesNotThrow(() -> user.register());
             } catch (Exception e) {
-                showErrorDialog("Error", e.getMessage());
+                showErrorDialog( e.getMessage());
             }
         });
     }
@@ -58,7 +58,7 @@ class UserTest {
             try {
                 assertDoesNotThrow(() -> user.deleteReview("Book Title", "Book Author", "Comment"));
             } catch (Exception e) {
-                showErrorDialog("Error", e.getMessage());
+                showErrorDialog( e.getMessage());
             }
         });
     }
@@ -79,7 +79,7 @@ class UserTest {
 
     @Test
     void testGetAllReviewsByBook() {
-        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "ISBN");
         Platform.runLater(() -> {
             List<Reviews> reviews = user.getAllReviewsByBook(book);
             assertNull(reviews);

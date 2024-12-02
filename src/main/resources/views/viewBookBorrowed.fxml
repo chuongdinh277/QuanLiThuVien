@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ViewBookBorrowed">
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ViewBookBorrowed">
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="60.0" prefHeight="663.0" prefWidth="1180.0" style="-fx-background-color: transparent;">
-         <GridPane fx:id="borrowedBookGrid" hgap="10" layoutY="60.0" prefHeight="641.0" prefWidth="1177.0" vgap="10">
+         <GridPane fx:id="bookGrid" hgap="10" layoutY="60.0" prefHeight="641.0" prefWidth="1177.0" vgap="10">
             <!-- Các ô card sẽ được thêm vào đây thông qua mã Java -->
          </GridPane>
       </ScrollPane>

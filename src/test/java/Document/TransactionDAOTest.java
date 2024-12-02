@@ -28,7 +28,7 @@ class TransactionDAOTest {
     @Test
     void testBorrowBook_Success() throws SQLException {
         User user = new User(1,"testUser", "Test User", "admin", "testUser", "email", "12345678");
-        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "ISBN123");
 
         boolean result = TransactionDAO.borrowBook(user, book, 1, 7);
         assertFalse(result);
@@ -37,7 +37,7 @@ class TransactionDAOTest {
     @Test
     void testBorrowBook_NotAvailable() throws SQLException {
         User user = new User(1,"testUser", "Test User", "admin", "testUser", "email", "12345678");
-        Book book = new Book("Test Book", "Test Author", "Fiction", 0, 0, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 0, 0, "Description", "Publisher", "Section", "ISBN123");
 
 
         boolean result = TransactionDAO.borrowBook(user, book, 1, 7);
@@ -47,7 +47,7 @@ class TransactionDAOTest {
     @Test
     void testReturnBook_Success() throws SQLException {
         User user = new User(1,"testUser", "Test User", "admin", "testUser", "email", "12345678");
-        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "ISBN123");
 
         boolean result = TransactionDAO.returnBook(user, book);
         assertFalse(result);
@@ -56,7 +56,7 @@ class TransactionDAOTest {
     @Test
     void testReturnBook_NotBorrowed() throws SQLException {
         User user = new User(1,"testUser", "Test User", "admin", "testUser", "email", "12345678");
-        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "ISBN123");
 
         boolean result = TransactionDAO.returnBook(user, book);
         assertFalse(result);
@@ -86,7 +86,7 @@ class TransactionDAOTest {
     @Test
     void testGetBorrowBookBymssv() throws SQLException {
         String studentId = "mssv";
-        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "imagePath", "ISBN123");
+        Book book = new Book("Test Book", "Test Author", "Fiction", 5, 5, "Description", "Publisher", "Section", "ISBN123");
         boolean success = TransactionDAO.getBorrowedBooksByMssv(studentId, book);
         assertFalse(success);
     }

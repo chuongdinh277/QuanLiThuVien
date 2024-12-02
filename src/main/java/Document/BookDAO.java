@@ -151,6 +151,14 @@ public class BookDAO {
         }
     }
 
+    /**
+     * Cập nhật số lượng sách và số lượng sách còn lại trong kho.
+     *
+     * @param book              Đối tượng sách cần cập nhật.
+     * @param additionalQuantity Số lượng sách mới để cập nhật.
+     * @return                  true nếu cập nhật thành công, ngược lại false.
+     * @throws SQLException     Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static boolean updateQuantity(Book book, int additionalQuantity) throws SQLException {
         String sql = "UPDATE books SET quantity = ?, remaining_book =? WHERE isbn = ?";
         try (Connection connection = getConnection();
@@ -158,7 +166,6 @@ public class BookDAO {
             Book current = book;
             int newQuantity =  additionalQuantity - book.getQuantity();
             int newRemainingBook = Math.min(additionalQuantity, book.getRemainingBook() + newQuantity);
-           // System.out.println(newRemainingBook);
             statement.setInt(1, additionalQuantity);
             statement.setInt(2, newRemainingBook);
             statement.setString(3, book.getISBN());
@@ -175,11 +182,17 @@ public class BookDAO {
         }
     }
 
-
-
+    /**
+     * Tìm kiếm sách với tiêu đề và tác giả khớp chính xác.
+     *
+     * @param title     Tiêu đề của sách cần tìm.
+     * @param author    Tác giả của sách cần tìm.
+     * @return          Đối tượng Book nếu tìm thấy, ngược lại null.
+     * @throws SQLException Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static Book searchBooksExact(String title, String author) throws SQLException {
         String query = "SELECT * FROM books WHERE title = ? AND author = ?";
-        Book books = null; ;
+        Book books = null;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -203,6 +216,14 @@ public class BookDAO {
         }
         return books;
     }
+
+    /**
+     * Tìm kiếm sách với từ khóa trong tiêu đề hoặc tác giả.
+     *
+     * @param keyword   Từ khóa tìm kiếm (không phân biệt chữ hoa/thường).
+     * @return          Danh sách các sách khớp với từ khóa tìm kiếm.
+     * @throws SQLException Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static List<Book> getBooksByKeyword(String keyword) throws SQLException {
         String query = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ?";
         List<Book> books = new ArrayList<>();
@@ -233,13 +254,21 @@ public class BookDAO {
         return books;
     }
 
+
+    /**
+     * Tìm kiếm sách theo tiêu đề.
+     *
+     * @param title     Tiêu đề sách (không phân biệt chữ hoa/thường).
+     * @return          Danh sách các sách có tiêu đề chứa từ khóa tìm kiếm.
+     * @throws SQLException Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static List<Book> getBooksByTitle(String title) throws SQLException {
         String query = "SELECT * FROM books WHERE LOWER(title) LIKE ?";
         List<Book> books = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            // Sử dụng '%' để tìm kiếm các tiêu đề chứa truy vấn
+            // Sử dụng '%' để tìm kiếm các tiêu đề chứa từ khóa
             preparedStatement.setString(1, "%" + title.toLowerCase() + "%");
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -261,7 +290,13 @@ public class BookDAO {
         return books;
     }
 
-
+    /**
+     * Tìm kiếm sách theo tác giả.
+     *
+     * @param author    Tên tác giả của sách.
+     * @return          Danh sách các sách của tác giả được chỉ định.
+     * @throws SQLException Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static List<Book> getBooksByAuthor(String author) throws SQLException {
         String query = "SELECT * FROM books WHERE author =?";
         List<Book> books = new ArrayList<>();
@@ -289,6 +324,13 @@ public class BookDAO {
         return books;
     }
 
+    /**
+     * Tìm kiếm sách theo thể loại.
+     *
+     * @param category  Thể loại của sách.
+     * @return          Danh sách các sách thuộc thể loại được chỉ định.
+     * @throws SQLException Nếu xảy ra lỗi trong quá trình thực thi câu lệnh SQL.
+     */
     public static List<Book> getBooksByCategory(String category) throws SQLException {
         String query = "SELECT * FROM books WHERE category =?";
         List<Book> books = new ArrayList<>();
@@ -315,6 +357,13 @@ public class BookDAO {
         }
         return books;
     }
+
+    /**
+     * Lấy danh sách tất cả các sách còn tồn tại (quantity > 0) từ cơ sở dữ liệu.
+     *
+     * @return Danh sách các sách có số lượng lớn hơn 0.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Book> getAvailableBooks() throws SQLException {
         List<Book> books = new ArrayList<Book>();
         String sql = "SELECT * FROM books WHERE quantity > 0";
@@ -338,18 +387,13 @@ public class BookDAO {
         }
         return books;
     }
-    public static boolean validateBookData(Book book) {
-        if (book.getTitle() == null || book.getTitle().isEmpty()) {
-            return false;
-        }
-        if (book.getAuthor() == null || book.getAuthor().isEmpty()) {
-            return false;
-        }
-        if (book.getQuantity() < 0) {
-            return false;
-        }
-        return true;
-    }
+    /**
+     * Lấy thông tin chi tiết của một cuốn sách dựa trên ISBN.
+     *
+     * @param isbn Mã ISBN của sách cần tìm.
+     * @return Đối tượng Book chứa thông tin sách hoặc null nếu không tìm thấy.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static Book getBookByISBN(String isbn) throws SQLException {
         String query = "SELECT * FROM books WHERE isbn = ?";
         Book book = null;
@@ -379,6 +423,13 @@ public class BookDAO {
         return book;
     }
 
+    /**
+     * Cập nhật số lượng sách còn lại (remaining_book) trong cơ sở dữ liệu theo ISBN.
+     *
+     * @param isbn Mã ISBN của sách cần cập nhật.
+     * @param additionalBooks Số lượng sách cần thêm (có thể là số âm để giảm).
+     * @return true nếu cập nhật thành công, ngược lại false.
+     */
     public static boolean updateRemainingByISBN(String isbn, int additionalBooks) {
         // Đầu tiên, lấy số lượng remaining_books hiện tại từ cơ sở dữ liệu theo ISBN
         String selectSql = "SELECT remaining_book FROM books WHERE isbn = ?";
@@ -414,6 +465,13 @@ public class BookDAO {
         }
         return false;
     }
+
+    /**
+     * Lấy thống kê số lượng sách theo từng thể loại.
+     *
+     * @return Bản đồ (Map) chứa thể loại sách và số lượng sách tương ứng.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static Map<String, Integer> getCategoryStatistics() throws SQLException {
         String query = "SELECT category, COUNT(*) AS book_count FROM books GROUP BY category";
         Map<String, Integer> categoryStats = new HashMap<>();
@@ -433,6 +491,13 @@ public class BookDAO {
 
         return categoryStats; // Trả về thống kê
     }
+
+    /**
+     * Lấy danh sách tất cả các sách trong cơ sở dữ liệu.
+     *
+     * @return Danh sách tất cả các đối tượng Book.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Book> getAllBooks() throws SQLException {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM books";  // Lấy tất cả sách
@@ -461,6 +526,13 @@ public class BookDAO {
         return books;
     }
 
+    /**
+     * Lấy danh sách các sách có đánh giá trung bình cao nhất.
+     * Sách không có đánh giá sẽ bị loại bỏ.
+     *
+     * @return Danh sách các sách được sắp xếp theo đánh giá trung bình giảm dần.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Book> getBooksByAverageRating() throws SQLException {
         List<Book> books = getAllBooks();
         List<Book> filteredBooks = new ArrayList<>();
@@ -486,7 +558,12 @@ public class BookDAO {
         return filteredBooks;
     }
 
-
+    /**
+     * Lấy danh sách 10 sách được thêm gần đây nhất trong cơ sở dữ liệu.
+     *
+     * @return Danh sách 10 sách mới nhất.
+     * @throws SQLException Nếu xảy ra lỗi khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Book> getRecentlyAddedBooks() throws SQLException {
         List<Book> books = getAllBooks();
         List<Book> recentlyAddedBooks = new ArrayList<>();

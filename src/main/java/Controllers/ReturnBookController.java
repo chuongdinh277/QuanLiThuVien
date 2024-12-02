@@ -127,6 +127,7 @@ public class ReturnBookController {
             boolean check = BookDAO.updateRemainingByISBN(book.getISBN(), quantity);
 
             if(success && check) {
+                showAlbertDialog("Xoá thành công");
                 loadTransactions(IDsearchStudent.getText());
             }
         } catch (SQLException e) {

@@ -25,7 +25,10 @@ public class BookCache {
     private static final String CACHE_FILE = "book_cache.json"; // Đường dẫn tệp cache
     private final ExecutorService executorService = Executors.newFixedThreadPool(2); // 2 luồng
 
-
+    /**
+     * constructor of the book cache.
+     * It is private. It uses the design pattern : singleton instance.
+     */
     private BookCache() {
         loadCacheFromFile(); // Tải dữ liệu từ tệp nếu tồn tại
         if (cache.isEmpty()) { // Nếu cache trống, tải từ cơ sở dữ liệu
@@ -33,6 +36,10 @@ public class BookCache {
         }
     }
 
+    /**
+     * get the instance. The instance is unique.
+     * @return the instance.
+     */
     public static BookCache getInstance() {
         if (instance == null) {
             instance = new BookCache();
@@ -54,7 +61,6 @@ public class BookCache {
 
     public void loadBooksFromDatabase() {
         executorService.submit(() -> {
-            System.out.println("Bắt đầu load sách từ cơ sở dữ liệu");
             cache.clear();
             String sql = "SELECT * FROM books";
 
@@ -76,7 +82,6 @@ public class BookCache {
                     );
                     putBook(book);
                 }
-                System.out.println("Load sách thành công");
             } catch (SQLException e) {
                 throw new RuntimeException("Lỗi khi load sách từ cơ sở dữ liệu: " + e.getMessage(), e);
             }
@@ -88,14 +93,15 @@ public class BookCache {
             try (FileWriter writer = new FileWriter(CACHE_FILE)) {
                 Gson gson = new Gson();
                 gson.toJson(cache.values(), writer);
-                System.out.println("Lưu cache vào tệp thành công");
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Lỗi khi lưu cache vào tệp: " + e.getMessage());
             }
         });
     }
 
+    /**
+     * write cache to the file in the Computer.
+     */
     public void loadCacheFromFile() {
         executorService.submit(() -> {
             try (FileReader reader = new FileReader(CACHE_FILE)) {
@@ -105,10 +111,9 @@ public class BookCache {
                 for (Book book : books) {
                     putBook(book);
                 }
-                System.out.println("Tải cache từ tệp thành công");
+
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Lỗi khi tải cache từ tệp: " + e.getMessage());
             }
         });
     }

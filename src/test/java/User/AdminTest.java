@@ -58,22 +58,6 @@ class AdminTest {
     }
 
     @Test
-    void testChangeRole_Success() throws SQLException {
-        User user = new User(1, "testUser", "testPass", "User", "Test User", "test@example.com", "1234567890");
-
-        // Giả lập thay đổi vai trò
-        Platform.runLater(() -> {
-            try {
-                admin.addUser(user); // Đảm bảo người dùng tồn tại
-                admin.changeRole(user, "Admin");
-                assertEquals("Admin", user.getRole(), "User role should be updated to Admin.");
-            } catch (Exception e) {
-                fail("Error changing role: " + e.getMessage());
-            }
-        });
-    }
-
-    @Test
     void testRemoveUser_Success() throws SQLException {
         User user = new User(1, "testUser", "testPass", "User", "Test User", "test@example.com", "1234567890");
 

@@ -31,6 +31,13 @@ public class GoogleBooksAPI {
     public static HttpClient getHttpClient() {
         return httpClient;
     }
+
+    /**
+     * translate the title to the String jsonResponse.
+     * It used to find the book in the googles book API.
+     * @param title the title to translate.
+     * @return the String jsonResponse with the book translated.
+     */
     public static String searchBooksByTitle(String title) {
         // Kiểm tra trong cache trước
         if (cache.containsKey(title)) {
@@ -89,6 +96,11 @@ public class GoogleBooksAPI {
     }
 
     // Xử lý lỗi từ HTTP status code
+
+    /**
+     * get the HanderError to translate the error message.
+     * @param responseCode the HTTP status code.
+     */
     private static void handleError(int responseCode) {
         switch (responseCode) {
             case 403:
@@ -103,6 +115,13 @@ public class GoogleBooksAPI {
         }
     }
 
+    /**
+     * translate the title and the author to the JsonResponse.
+     * JsonResponse will find the googles book API.
+     * @param title the title to translate.
+     * @param author the author to translate.
+     * @return the JsonResponse String.
+     */
     public static String searchBookByTitleAndAuthor(String title, String author) {
 
         try {

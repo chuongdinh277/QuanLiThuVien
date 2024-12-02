@@ -62,14 +62,10 @@ public class ImageCache {
 
                     if (imagePath != null && !imagePath.isEmpty()) {
                         executorService.submit(() -> loadImageToCache(imagePath, isbn));
-                    } else {
-                        System.out.println("Không có đường dẫn hình ảnh cho sách với ISBN: " + isbn);
                     }
                 }
-                System.out.println("Tất cả hình ảnh đã được tải vào cache.");
 
             } catch (SQLException e) {
-                System.out.println("Lỗi khi tải hình ảnh từ cơ sở dữ liệu:");
                 e.printStackTrace();
             } finally {
                 executorService.shutdown();  // Đóng ExecutorService sau khi hoàn thành

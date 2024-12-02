@@ -55,15 +55,15 @@ public class AllBookController {
     private static MenuAdminController menuController;
 
     /**
-     * Sets the menu controller for this controller.
-     * @param menuController The MenuController_Admin to set.
+     * Thiết lập MenuController cho controller này.
+     * @param menuController MenuController_Admin cần thiết lập.
      */
     public void setMenuController(MenuAdminController menuController) {
         this.menuController = menuController;
     }
 
     /**
-     * Initializes the controller by setting up the TableView and loading books.
+     * Khởi tạo controller bằng cách thiết lập TableView và tải danh sách sách.
      */
     @FXML
     private void initialize() {
@@ -76,7 +76,7 @@ public class AllBookController {
         remainingBook.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRemainingBook()).asObject());
         bookAvailability.setCellValueFactory(cellData -> {
             int remaining = cellData.getValue().getRemainingBook();
-            String availability = (remaining == 0) ? "Not available" : "Available";
+            String availability = (remaining == 0) ? "Not Available" : "Available";
             return new SimpleStringProperty(availability);
         });
         loadBooks();
@@ -92,7 +92,7 @@ public class AllBookController {
     }
 
     /**
-     * Loads the list of books into the TableView.
+     * Tải danh sách sách vào TableView.
      */
     public void loadBooks() {
         ObservableList<Book> booksList = FXCollections.observableArrayList();
@@ -103,16 +103,16 @@ public class AllBookController {
             if (bookList != null) {
                 booksList.addAll(bookList);
             } else {
-                showInfoDialog("No books found in the database.");
+                showInfoDialog("Không tìm thấy sách nào trong cơ sở dữ liệu.");
             }
         } catch (Exception e) {
-            showErrorDialog("Error loading books: " + e.getMessage());
+            showErrorDialog("Lỗi khi tải sách: " + e.getMessage());
         }
         bookTable.setItems(booksList);
     }
 
     /**
-     * Opens the AddBook view when the add book button is clicked.
+     * Mở giao diện thêm sách khi nhấn nút "Thêm sách".
      */
     @FXML
     private void addBook() {
@@ -124,13 +124,13 @@ public class AllBookController {
             controller.setHomeController(this);
             borderPane_book.setCenter(root);
         } catch (IOException e) {
-            showErrorDialog("Error opening Add Book view: " + e.getMessage());
+            showErrorDialog("Lỗi khi mở giao diện thêm sách: " + e.getMessage());
         }
     }
 
     /**
-     * Opens the Book Details view when a book is double-clicked in the table.
-     * @param book The selected book to view details.
+     * Mở giao diện chi tiết sách khi nhấn đúp vào một cuốn sách trong bảng.
+     * @param book Sách được chọn để xem chi tiết.
      */
     private void openBookDetails(Book book) {
         try {
@@ -143,29 +143,29 @@ public class AllBookController {
 
             borderPane_book.setCenter(bookDetailsRoot);
         } catch (IOException e) {
-            showErrorDialog("Error displaying book details: " + e.getMessage());
+            showErrorDialog("Lỗi khi hiển thị chi tiết sách: " + e.getMessage());
         }
     }
 
     /**
-     * Displays an error dialog with the provided message.
-     * @param message The message to display in the error dialog.
+     * Hiển thị hộp thoại lỗi với thông báo được cung cấp.
+     * @param message Thông báo lỗi cần hiển thị.
      */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Lỗi");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     /**
-     * Displays an informational dialog with the provided message.
-     * @param message The message to display in the informational dialog.
+     * Hiển thị hộp thoại thông tin với thông báo được cung cấp.
+     * @param message Thông báo thông tin cần hiển thị.
      */
     private void showInfoDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
+        alert.setTitle("Thông tin");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

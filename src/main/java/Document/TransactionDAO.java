@@ -12,6 +12,13 @@ import static Database.DatabaseConnection.getConnection;
 
 public class TransactionDAO {
 
+    /**
+     * Kiểm tra xem sách có thể được mượn hay không dựa trên số lượng còn lại.
+     *
+     * @param book Đối tượng sách cần kiểm tra.
+     * @return true nếu sách có thể mượn (số lượng còn lại lớn hơn 0), false nếu không.
+     * @throws SQLException Nếu có lỗi trong quá trình truy vấn cơ sở dữ liệu.
+     */
     private static boolean isBookBorrowed(Book book) throws SQLException {
         String sql = "SELECT remaining_book FROM books WHERE ISBN = ?";
         try (Connection connection = getConnection();
@@ -28,6 +35,16 @@ public class TransactionDAO {
         return false;
     }
 
+    /**
+     * Mượn sách từ thư viện.
+     *
+     * @param user        Người mượn sách.
+     * @param book        Sách muốn mượn.
+     * @param quantity    Số lượng sách mượn.
+     * @param numberofdays Số ngày mượn sách.
+     * @return true nếu mượn sách thành công, false nếu không.
+     * @throws SQLException Nếu có lỗi trong quá trình xử lý cơ sở dữ liệu.
+     */
     public static boolean borrowBook(User user, Book book, int quantity, int numberofdays) throws SQLException {
 
         if (!isBookBorrowed(book)) {
@@ -72,6 +89,14 @@ public class TransactionDAO {
         return false;
     }
 
+    /**
+     * Trả sách đã mượn.
+     *
+     * @param user Người trả sách.
+     * @param book Sách cần trả.
+     * @return true nếu trả sách thành công, false nếu không.
+     * @throws SQLException Nếu có lỗi trong quá trình xử lý cơ sở dữ liệu.
+     */
     public static boolean returnBook(User user, Book book) throws SQLException {
         // Câu lệnh SQL để cập nhật ngày trả sách trong bảng transactions
         if (isBookBorrowed(book)) {
@@ -101,6 +126,13 @@ public class TransactionDAO {
         return false;
     }
 
+    /**
+     * Lấy thông tin giao dịch của một sách dựa trên ISBN và mã sinh viên.
+     *
+     * @param ISBN  Mã ISBN của sách.
+     * @param mssv  Mã sinh viên.
+     * @return Giao dịch sách nếu tìm thấy, null nếu không tìm thấy.
+     */
     public static Transaction getTransactionByISBNAndMssv(String ISBN, String mssv) {
         String sql = "SELECT * FROM transactions WHERE ISBN='" + ISBN + "' AND mssv='" + mssv + "'";
         try (Connection connection = getConnection();
@@ -130,7 +162,13 @@ public class TransactionDAO {
         return null;
     }
 
-
+    /**
+     * Lấy tất cả giao dịch của một người dùng.
+     *
+     * @param user Người dùng cần lấy giao dịch.
+     * @return Danh sách các giao dịch của người dùng.
+     * @throws SQLException Nếu có lỗi trong quá trình truy vấn cơ sở dữ liệu.
+     */
     public static List<Transaction> getTransactionByUserName(User user) throws SQLException {
         List<Transaction> result = new ArrayList<>();
         String sql = "SELECT * FROM transactions WHERE username = ?";
@@ -158,6 +196,12 @@ public class TransactionDAO {
         return result;
     }
 
+    /**
+     * Lấy tất cả giao dịch trong hệ thống.
+     *
+     * @return Danh sách tất cả giao dịch.
+     * @throws SQLException Nếu có lỗi trong quá trình truy vấn cơ sở dữ liệu.
+     */
     public static List<Transaction> getAllTransaction() throws SQLException {
         List<Transaction> result = new ArrayList<>();
         String sql = "SELECT * FROM transactions";
@@ -184,6 +228,12 @@ public class TransactionDAO {
         return result;
     }
 
+    /**
+     * Lấy danh sách các sách đã được mượn bởi một sinh viên dựa trên mã sinh viên.
+     *
+     * @param mssv Mã sinh viên.
+     * @return Danh sách các sách đã được mượn.
+     */
     public static List<Book> getBorrowedBooks(String mssv) {
         List<Book> result = new ArrayList<>();
         String sql = "SELECT * FROM transactions WHERE mssv = ?";
@@ -209,6 +259,16 @@ public class TransactionDAO {
         }
         return result;
     }
+    /**
+     * Kiểm tra xem sách có được mượn bởi sinh viên với MSSV cụ thể hay không.
+     *
+     * Phương thức này thực hiện truy vấn cơ sở dữ liệu để kiểm tra xem có giao dịch mượn sách nào
+     * đối với sinh viên có MSSV được cung cấp và sách hiện tại (theo ISBN) hay không.
+     *
+     * @param mssv MSSV của sinh viên cần kiểm tra.
+     * @param currentBook Sách cần kiểm tra, nếu không phải sách hiện tại, phương thức sẽ trả về false.
+     * @return true nếu sinh viên với MSSV đã mượn sách hiện tại, false nếu không.
+     */
     public static boolean getBorrowedBooksByMssv(String mssv, Book currentBook) {
         String sql = "SELECT * FROM transactions WHERE mssv = ?";
         try (Connection connection = getConnection();
@@ -227,6 +287,17 @@ public class TransactionDAO {
     }
 
 
+
+    /**
+     * Lấy danh sách giao dịch của sinh viên từ cơ sở dữ liệu dựa trên MSSV của sinh viên.
+     *
+     * Phương thức này truy vấn cơ sở dữ liệu để lấy tất cả các giao dịch mà sinh viên có MSSV
+     * tương ứng đã thực hiện. Dữ liệu giao dịch được lưu vào một danh sách và trả về cho người gọi.
+     *
+     * @param studentId MSSV của sinh viên cần lấy danh sách giao dịch.
+     * @return Danh sách các giao dịch của sinh viên tương ứng.
+     * @throws SQLException Nếu có lỗi xảy ra khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Transaction> getTransactionsByStudentId(String studentId) throws SQLException {
         List<Transaction> result = new ArrayList<>();
 
@@ -259,6 +330,17 @@ public class TransactionDAO {
 
         return result;  // Trả về danh sách giao dịch của sinh viên
     }
+
+    /**
+     * Xóa một giao dịch khỏi cơ sở dữ liệu dựa trên ID giao dịch.
+     *
+     * Phương thức này xóa giao dịch có `transaction_id` tương ứng từ cơ sở dữ liệu. Nếu giao dịch
+     * được xóa thành công, phương thức trả về giá trị `true`; ngược lại trả về `false`.
+     *
+     * @param transactionId ID của giao dịch cần xóa.
+     * @return true nếu giao dịch đã được xóa thành công, false nếu không.
+     * @throws SQLException Nếu có lỗi xảy ra khi thực hiện xóa giao dịch từ cơ sở dữ liệu.
+     */
     public static boolean deleteTransaction(int transactionId) throws SQLException {
         String sql = "DELETE FROM transactions WHERE transaction_id = ?";
         try (Connection connection = getConnection();
@@ -271,6 +353,16 @@ public class TransactionDAO {
         }
     }
 
+    /**
+     * Lấy danh sách giao dịch của sách từ cơ sở dữ liệu dựa trên ISBN của sách.
+     *
+     * Phương thức này truy vấn cơ sở dữ liệu để lấy tất cả các giao dịch mà sách có ISBN
+     * tương ứng đã thực hiện. Dữ liệu giao dịch được lưu vào một danh sách và trả về cho người gọi.
+     *
+     * @param isbn ISBN của sách cần lấy danh sách giao dịch.
+     * @return Danh sách các giao dịch liên quan đến sách có ISBN tương ứng.
+     * @throws SQLException Nếu có lỗi xảy ra khi truy vấn cơ sở dữ liệu.
+     */
     public static List<Transaction> getTransactionsByISBN(String isbn) throws SQLException {
         List<Transaction> result = new ArrayList<>();
 
@@ -301,6 +393,7 @@ public class TransactionDAO {
             throw e;  // Quản lý ngoại lệ
         }
 
-        return result;  // Trả về danh sách giao dịch của sinh viên
+        return result;  // Trả về danh sách giao dịch của sách
     }
+
 }

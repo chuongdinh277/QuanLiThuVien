@@ -11,6 +11,11 @@ public class BookParser {
 
     private static final Map<String, Book> cache = new HashMap<>();
 
+    /**
+     * get the book in the googles book API based on the String jsonResponse.
+     * @param jsonResponse the JSON response from the googles book API.
+     * @return the book is searched in the googles book API.
+     */
     public static Book parseBookInfo(String jsonResponse) {
         System.out.println(jsonResponse);
         // Kiểm tra cache

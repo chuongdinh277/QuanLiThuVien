@@ -2,141 +2,56 @@ package Controllers;
 
 import Document.Book;
 import Document.BookDAO;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class ViewBooksSearchResult {
+public class ViewBooksSearchResult extends ViewBook {
 
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private GridPane searchResultGrid; // GridPane chứa các card kết quả tìm kiếm sách
-
-    private boolean isLoading = false;
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private String searchQuery; // Biến lưu truy vấn tìm kiếm
-
-    /**
-     * Phương thức khởi tạo, cài đặt ScrollPane và tải kết quả tìm kiếm nếu có truy vấn.
-     */
-    @FXML
-    private void initialize() {
-        // Cài đặt ScrollPane
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-
-        // Tải kết quả tìm kiếm khi khởi động nếu có truy vấn
-        if (searchQuery != null && !searchQuery.isEmpty()) {
-            loadSearchResults();
-        }
-
-        // Lazy loading khi cuộn đến cuối
-        scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
-            if (!isLoading && newVal.doubleValue() == 1.0) {
-                loadSearchResults(); // Tải thêm kết quả tìm kiếm khi cuộn đến cuối
-            }
-        });
-    }
-
-    /**
-     * Tạo một card hiển thị thông tin sách.
-     * @param book Đối tượng Book cần hiển thị trên card
-     * @return AnchorPane chứa card của sách
-     */
-    private AnchorPane createCard(Book book) {
-        try {
-            // Tạo một FXMLLoader mới mỗi lần
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card1.fxml"));
-            AnchorPane card = loader.load(); // Tải một card mới
-
-            CardController cardController = loader.getController();
-            cardController.setBook(book); // Giả sử bạn đã có phương thức này trong CardController
-            card.setOnMouseClicked(event -> openBookDetailsPage(book));
-
-            return card;
-        } catch (IOException e) {
-            e.printStackTrace();
-           // System.out.println("Lỗi khi tải card");
-            return null;
-        }
-    }
-
-    /**
-     * Mở trang chi tiết sách khi người dùng nhấp vào card sách.
-     * @param book Đối tượng Book cần hiển thị chi tiết
-     */
-    private void openBookDetailsPage(Book book) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/userSeeBookDetails.fxml"));
-            ScrollPane bookDetailsPage = loader.load();
-
-            // Đưa thông tin sách vào controller của trang chi tiết
-            UserSeeBookDetails controller = loader.getController();
-            controller.setBook(book);
-
-            // Hiển thị trang chi tiết (ví dụ, trong một cửa sổ mới)
-            Stage stage = new Stage();
-            stage.setScene(new Scene(bookDetailsPage));
-            stage.setTitle("Chi tiết sách");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            //System.out.println("Lỗi khi mở trang chi tiết sách");
-        }
-    }
 
     /**
      * Tải kết quả tìm kiếm từ cơ sở dữ liệu và hiển thị chúng lên giao diện.
      * Thực hiện lazy loading khi cuộn đến cuối.
      */
-    private void loadSearchResults() {
+    @Override
+    public void loadBooks() {
         if (isLoading) return;
 
         isLoading = true;
         executorService.submit(() -> {
             try {
                 // Lấy kết quả tìm kiếm từ cơ sở dữ liệu
-                try {
-                    List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Lấy kết quả tìm kiếm
+                List<Book> searchResults = BookDAO.getBooksByTitle(searchQuery); // Lấy kết quả tìm kiếm
+
+                if (searchResults != null && !searchResults.isEmpty()) {
+                    int row = bookGrid.getChildren().size() / 7; // Giả sử có 7 cột
+                    int col = bookGrid.getChildren().size() % 7;
 
                     for (Book book : searchResults) {
-                        //System.out.println(book.getTitle());
-                    }
-
-                    if (searchResults != null && !searchResults.isEmpty()) {
-                        int row = searchResultGrid.getChildren().size() / 7; // Giả sử có 5 cột
-                        int col = searchResultGrid.getChildren().size() % 7;
-
-                        for (Book book : searchResults) {
-                            AnchorPane card = createCard(book);
-                            if (card != null) {
-                                int finalRow = row;
-                                int finalCol = col;
-                                javafx.application.Platform.runLater(() -> searchResultGrid.add(card, finalCol, finalRow));
-                            }
-
-                            col++;
-                            if (col >= 7) { // Đặt số cột bạn muốn (5 ở đây)
-                                col = 0;
-                                row++;
-                            }
+                        System.out.println(book.getTitle());
+                        AnchorPane card = createCard(book);
+                        if (card != null) {
+                            int finalRow = row;
+                            int finalCol = col;
+                            Platform.runLater(() -> bookGrid.add(card, finalCol, finalRow));
                         }
-                    } else {
-                       // System.out.println("Không tìm thấy sách nào khớp với truy vấn.");
+
+                        col++;
+                        if (col >= 7) { // Đặt số cột bạn muốn (7 ở đây)
+                            col = 0;
+                            row++;
+                        }
                     }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                } else {
+                    // Hiển thị thông báo nếu không có sách nào khớp với truy vấn
+                    Platform.runLater(this::showNoResultsAlert);
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             } finally {
                 isLoading = false;
             }
@@ -149,7 +64,18 @@ public class ViewBooksSearchResult {
      */
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery; // Lưu truy vấn tìm kiếm
-        loadSearchResults(); // Gọi phương thức để tải kết quả ngay khi truy vấn được thiết lập
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            loadBooks(); // Gọi phương thức để tải kết quả ngay khi truy vấn được thiết lập
+        }
     }
 
+    /**
+     * Hiển thị thông báo nếu không có sách nào khớp với truy vấn.
+     */
+    private void showNoResultsAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Không tìm thấy sách nào khớp với truy vấn.", ButtonType.OK);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
 }

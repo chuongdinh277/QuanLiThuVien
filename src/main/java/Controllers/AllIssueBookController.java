@@ -39,7 +39,7 @@ public class AllIssueBookController {
     private TableColumn<Transaction, String> StudentID;
 
     /**
-     * Initializes the table columns and loads the transaction data into the table.
+     * Khởi tạo các cột trong bảng và tải dữ liệu giao dịch vào bảng.
      */
     @FXML
     private void initialize() {
@@ -57,7 +57,7 @@ public class AllIssueBookController {
     }
 
     /**
-     * Loads all transactions from the database and displays them in the TableView.
+     * Tải tất cả các giao dịch từ cơ sở dữ liệu và hiển thị trong TableView.
      */
     private void loadAllTransactions() {
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
@@ -78,9 +78,9 @@ public class AllIssueBookController {
     }
 
     /**
-     * Shows an error dialog with the provided message.
+     * Hiển thị hộp thoại lỗi với thông báo được cung cấp.
      *
-     * @param message The error message to display.
+     * @param message Thông báo lỗi cần hiển thị.
      */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -91,9 +91,9 @@ public class AllIssueBookController {
     }
 
     /**
-     * Shows an information dialog with the provided message.
+     * Hiển thị hộp thoại thông tin với thông báo được cung cấp.
      *
-     * @param message The message to display.
+     * @param message Thông báo cần hiển thị.
      */
     private void showAlbertDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

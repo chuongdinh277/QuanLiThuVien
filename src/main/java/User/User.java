@@ -2,8 +2,6 @@ package User;
 
 import Database.DatabaseConnection;
 import Document.Book;
-import Document.Transaction;
-import Document.TransactionDAO;
 import Review.ReviewDAO;
 import Review.Reviews;
 import javafx.scene.control.Alert;
@@ -13,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static Database.DatabaseConnection.getConnection;
@@ -27,6 +24,16 @@ public class User {
     private String email;
     private String number;
 
+    /**
+     * create a new user based on the constructor parameters.
+     * @param id the id of the new user.
+     * @param userName the name of the new user.
+     * @param password the password of the new user.
+     * @param role the role of the new user.
+     * @param fullName the full name of the new user.
+     * @param email the email of the new user.
+     * @param number the number of the new user.
+     */
     public User(int id, String userName, String password, String role, String fullName, String email, String number) {
         this.id = id;
         this.userName = userName;
@@ -81,10 +88,12 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
+    /**
+     * check duplicate username from the library.
+     * @param username the username to check duplicate.
+     * @return true if duplicate username exists, false otherwise.
+     * @throws SQLException thrown if an error occurs.
+     */
     public boolean isUsernameTaken(String username) throws SQLException {
         String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
         try (Connection connection = getConnection();
@@ -98,6 +107,18 @@ public class User {
         return false;
     }
 
+    /**
+     * reigister the new user in the library.
+     * @param id the id of the new user.
+     * @param userName the name of the new user.
+     * @param password the password of the new user.
+     * @param role the role of the new user.
+     * @param fullName the full name of the new user.
+     * @param email the email of the new user.
+     * @param number the number of the new user.
+     * @return true if the user registered successfully, false otherwise.
+     * @throws SQLException thrown if an error occurs.
+     */
     private boolean registerUser(int id, String userName, String password, String role, String fullName, String email, String number) throws SQLException {
         String sql = "INSERT INTO users (id,username, password, role, fullName, email, number) VALUES (?,?,?,?,?,?,?)";
         try (Connection connection = getConnection();
@@ -116,6 +137,12 @@ public class User {
         }
     }
 
+    /**
+     * check duplicate the id of student from the library.
+     * @param id the id want check.
+     * @return true if duplicate , false otherwise.
+     * @throws SQLException thrown if an error occurs.
+     */
     public boolean isStudentNumberTaken(int id) throws SQLException {
         String sql = "SELECT COUNT(*) FROM users WHERE id = ?";
         try (Connection connection = getConnection();
@@ -129,6 +156,10 @@ public class User {
         return false;
     }
 
+    /**
+     * register the user in the library.
+     * @throws SQLException thrown if an error occurs.
+     */
     public void register() throws SQLException {
         try {
             if(isStudentNumberTaken(this.getId())) {
@@ -146,6 +177,13 @@ public class User {
         }
     }
 
+    /**
+     * remove my review to the book in the library.
+     * @param title the title of the book to be removed the review.
+     * @param author the author of the book to be removed the review.
+     * @param comment the comment of the book to be removed the review.
+     * @throws SQLException thrown if an error occurs.
+     */
     public void deleteReview(String title, String author, String comment) throws SQLException {
         try {
             boolean check = ReviewDAO.removeReview(this.getUserName(), title, author, comment);
@@ -158,6 +196,11 @@ public class User {
             this.showErrorDialog("Error",e.getMessage());
         }
     }
+
+    /**
+     * get all users in the library.
+     * @return the list of users.
+     */
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
@@ -186,6 +229,13 @@ public class User {
         return users;
     }
 
+    /**
+     * get role of the user.
+     * @param username the username of the user.
+     * @param password the password of the user.
+     * @return the role of the user.
+     * @throws SQLException thrown if an error occurs.
+     */
     public static String getRoleUser(String username, String password) throws SQLException {
         String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
         try (Connection connection = getConnection();
@@ -204,7 +254,11 @@ public class User {
         }
     }
 
-
+    /**
+     * show error message.
+     * @param title the title of the error message.
+     * @param message the error message.
+     */
     public void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -212,6 +266,11 @@ public class User {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * show information dialog.
+     * @param message the message to display.
+     */
     public void showAlberDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thông báo");
@@ -220,6 +279,12 @@ public class User {
         alert.showAndWait();
 
     }
+    /**
+     * Lấy tất cả các đánh giá của sách từ cơ sở dữ liệu.
+     *
+     * @param book Đối tượng sách cần lấy đánh giá
+     * @return Danh sách các đánh giá của sách, nếu có; nếu không có đánh giá, trả về null
+     */
     public List<Reviews> getAllReviewsByBook(Book book) {
         try {
             List<Reviews> reviews = ReviewDAO.getAllReviewsByBook(book);
@@ -235,9 +300,11 @@ public class User {
         return null;
     }
 
-    // khu vuc sua doi dung Book co link anh
-
-
+    /**
+     * Chuyển đổi đối tượng User thành chuỗi.
+     *
+     * @return Chuỗi mô tả đối tượng User, bao gồm id, userName, password và role
+     */
     @Override
     public String toString() {
         return "User{" +
@@ -247,6 +314,15 @@ public class User {
                 ", role='" + role + '\'' +
                 '}';
     }
+
+    /**
+     * Cập nhật mã số sinh viên của người dùng dựa trên tên đăng nhập.
+     *
+     * @param username Tên đăng nhập của người dùng cần cập nhật mã số sinh viên
+     * @param MSSV Mã số sinh viên mới
+     * @return true nếu cập nhật thành công, false nếu mã số sinh viên đã tồn tại
+     * @throws SQLException Nếu có lỗi xảy ra trong quá trình cập nhật
+     */
     public boolean updateStudentMSVN(String username, int MSSV) throws SQLException {
         // Kiểm tra xem mã sinh viên mới đã tồn tại chưa
         if (isStudentNumberTaken(MSSV)) {
@@ -273,6 +349,14 @@ public class User {
         }
         return false;
     }
+
+    /**
+     * Lấy mã số sinh viên của người dùng dựa trên tên đăng nhập.
+     *
+     * @param username Tên đăng nhập của người dùng
+     * @return Mã số sinh viên của người dùng
+     * @throws SQLException Nếu không tìm thấy người dùng hoặc có lỗi xảy ra trong quá trình truy vấn
+     */
     public static int getStudentIdByusername(String username) throws SQLException {
         String sql = "SELECT id FROM users WHERE username = ?";
         try (Connection connection = getConnection();
@@ -289,6 +373,14 @@ public class User {
             throw new SQLException("Lỗi khi lấy mã sinh viên: " + e.getMessage(), e);
         }
     }
+
+    /**
+     * Tải chi tiết người dùng từ cơ sở dữ liệu theo mã sinh viên.
+     *
+     * @param studentID Mã sinh viên của người dùng
+     * @return Đối tượng User chứa thông tin người dùng
+     * @throws SQLException Nếu có lỗi xảy ra khi truy vấn cơ sở dữ liệu
+     */
     public static User loadStudentDetailsByID(String studentID) throws SQLException {
         String sql = "SELECT * FROM users WHERE id = ?";
         User user = null;
@@ -300,15 +392,15 @@ public class User {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                // Assuming your table has columns: id, fullName, email, numberus
+                // Giả sử bảng của bạn có các cột: id, fullName, email, number
                 user = new User(
-                resultSet.getInt("id"),
-                resultSet.getString("username"),
-                resultSet.getString("password"),
-                resultSet.getString("role"),
-                resultSet.getString("fullName"),
-                resultSet.getString("email"),
-                resultSet.getString("number"));
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("role"),
+                        resultSet.getString("fullName"),
+                        resultSet.getString("email"),
+                        resultSet.getString("number"));
             }
         } catch (SQLException e) {
             throw e;
@@ -316,6 +408,14 @@ public class User {
         return user;
     }
 
+    /**
+     * Cập nhật thông tin người dùng trong cơ sở dữ liệu.
+     *
+     * @param fullName Tên đầy đủ của người dùng
+     * @param phoneNumber Số điện thoại của người dùng
+     * @param password Mật khẩu của người dùng
+     * @param username Tên đăng nhập của người dùng cần cập nhật
+     */
     public static void updateDatabase(String fullName, String phoneNumber, String password, String username) {
         String sql = "UPDATE users SET fullName = ?, number = ?, password = ? WHERE username = ?";
 
@@ -344,38 +444,42 @@ public class User {
         }
     }
 
-
-
-
+    /**
+     * Lấy chi tiết người dùng từ cơ sở dữ liệu theo tên đăng nhập.
+     *
+     * @param username Tên đăng nhập của người dùng
+     * @return Đối tượng User chứa thông tin người dùng
+     * @throws SQLException Nếu có lỗi xảy ra trong quá trình truy vấn
+     */
     public static User loadUserDetailsByUsername(String username) throws SQLException {
-            String sql = "SELECT * FROM users WHERE username = ?";
-            User user = null;
+        String sql = "SELECT * FROM users WHERE username = ?";
+        User user = null;
 
-            try (Connection connection = getConnection();
-                 PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-                // Bind the username parameter
-                statement.setString(1, username);
+            // Gán tham số tên đăng nhập vào câu lệnh SQL
+            statement.setString(1, username);
 
-                ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
-                if (resultSet.next()) {
-                    user = new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("username"),
-                            resultSet.getString("password"),
-                            resultSet.getString("role"),
-                            resultSet.getString("fullName"),
-                            resultSet.getString("email"),
-                            resultSet.getString("number")
-                    );
-                }
-            } catch (SQLException e) {
-                // Log the error or rethrow it for the caller to handle
-                throw e;
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("role"),
+                        resultSet.getString("fullName"),
+                        resultSet.getString("email"),
+                        resultSet.getString("number")
+                );
             }
-
-            return user;
+        } catch (SQLException e) {
+            // Ghi lại lỗi hoặc ném lại để caller xử lý
+            throw e;
         }
+
+        return user;
+    }
 
 }

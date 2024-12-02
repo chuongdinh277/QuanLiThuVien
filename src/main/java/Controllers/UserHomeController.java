@@ -21,6 +21,8 @@ import java.util.concurrent.Executors;
 
 public class UserHomeController {
 
+    private int MAX_COLUMNS = 10;
+
     @FXML
     private GridPane popularBookGrid;
 
@@ -44,8 +46,9 @@ public class UserHomeController {
     @FXML
     private void initialize() {
         removeFocusFromAllNodes(pane);
-
         loadBooks();
+        setupScrollPaneScroll(popularBookPane);
+        setupScrollPaneScroll(recentlyBookPane);
     }
 
     /**
@@ -55,9 +58,8 @@ public class UserHomeController {
         executorService.submit(() -> {
             List<Book> popularBooks = null;
             try {
-                // Lấy danh sách sách phổ biến từ cơ sở dữ liệu
                 popularBooks = BookDAO.getBooksByAverageRating();
-               // System.out.println("Số sách phổ biến: " + (popularBooks != null ? popularBooks.size() : 0));
+                System.out.println("Số sách phổ biến: " + (popularBooks != null ? popularBooks.size() : 0));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -66,12 +68,11 @@ public class UserHomeController {
             Platform.runLater(() -> {
                 popularBookGrid.getChildren().clear();  // Xóa các thẻ sách cũ
                 if (finalPopularBooks != null && !finalPopularBooks.isEmpty()) {
-                   // System.out.println("popular");
                     int col = 0;  // Bắt đầu từ cột 0
                     for (Book book : finalPopularBooks) {
                         popularBookGrid.add(createCard1(book), col, 0);  // Thêm thẻ sách vào hàng 0
                         col++;
-                        if (col >= 5) {  // Giới hạn số cột là 5
+                        if (col >= MAX_COLUMNS) {  // Giới hạn số cột
                             break;  // Dừng lại nếu đã đủ số cột
                         }
                     }
@@ -82,7 +83,7 @@ public class UserHomeController {
             List<Book> recentlyBooks = null;
             try {
                 recentlyBooks = BookDAO.getRecentlyAddedBooks();
-                //System.out.println("Số sách mới: " + (recentlyBooks != null ? recentlyBooks.size() : 0));
+                System.out.println("Số sách mới: " + (recentlyBooks != null ? recentlyBooks.size() : 0));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -91,12 +92,11 @@ public class UserHomeController {
             Platform.runLater(() -> {
                 recentlyBookGrid.getChildren().clear();
                 if (finalRecentlyBooks != null && !finalRecentlyBooks.isEmpty()) {
-                    //System.out.println("recent");
                     int col = 0;
                     for (Book book : finalRecentlyBooks) {
                         recentlyBookGrid.add(createCard(book), col, 0);
                         col++;
-                        if (col >= 7) {
+                        if (col >= MAX_COLUMNS) {
                             break;
                         }
                     }
@@ -108,13 +108,9 @@ public class UserHomeController {
 
     /**
      * Tạo thẻ sách với thông tin từ đối tượng sách sử dụng card1.fxml.
-     *
-     * @param book Đối tượng sách
-     * @return Thẻ sách được tạo
      */
     private AnchorPane createCard1(Book book) {
         try {
-            // Tạo một FXMLLoader mới mỗi lần
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card1.fxml"));
             AnchorPane card = loader.load();  // Tải thẻ sách mới
 
@@ -131,13 +127,9 @@ public class UserHomeController {
 
     /**
      * Tạo thẻ sách với thông tin từ đối tượng sách sử dụng card.fxml.
-     *
-     * @param book Đối tượng sách
-     * @return Thẻ sách được tạo
      */
     private AnchorPane createCard(Book book) {
         try {
-            // Tạo một FXMLLoader mới mỗi lần
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/card.fxml"));
             AnchorPane card = loader.load();
 
@@ -154,8 +146,6 @@ public class UserHomeController {
 
     /**
      * Mở trang chi tiết sách khi người dùng click vào thẻ sách.
-     *
-     * @param book Đối tượng sách cần xem chi tiết
      */
     private void openBookDetailsPage(Book book) {
         try {
@@ -176,8 +166,6 @@ public class UserHomeController {
 
     /**
      * Loại bỏ focus của tất cả các node trong parent.
-     *
-     * @param parent Parent chứa các node cần loại bỏ focus
      */
     private void removeFocusFromAllNodes(Parent parent) {
         for (Node node : parent.getChildrenUnmodifiable()) {
@@ -186,5 +174,13 @@ public class UserHomeController {
                 removeFocusFromAllNodes((Parent) node);
             }
         }
+    }
+    private void setupScrollPaneScroll(ScrollPane scrollPane) {
+        double scrollSpeedFactor = 2; // Tăng tốc độ cuộn
+
+        scrollPane.setOnScroll(event -> {
+            scrollPane.setHvalue(scrollPane.getHvalue() - event.getDeltaY() * scrollSpeedFactor / scrollPane.getContent().getBoundsInLocal().getWidth());
+            event.consume(); // Ngăn chặn sự kiện cuộn mặc định
+        });
     }
 }

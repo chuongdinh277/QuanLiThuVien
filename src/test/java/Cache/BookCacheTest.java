@@ -35,7 +35,7 @@ public class BookCacheTest {
     @Test
     void testGetBook() {
         String isbn = "978-3-16-148410-0";
-        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", "imagePath", isbn);
+        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", isbn);
         BookCache.putBook(book);
 
         // Kiểm tra rằng cuốn sách có thể được lấy từ cache
@@ -47,7 +47,7 @@ public class BookCacheTest {
     @Test
     void testPutBook() {
         String isbn = "978-1-234-56789-0";
-        Book book = new Book("Another Test Title", "Another Author", "Non-Fiction", 20, 15, "Another Description", "Another Publisher", "Section2", "imagePath", isbn);
+        Book book = new Book("Another Test Title", "Another Author", "Non-Fiction", 20, 15, "Another Description", "Another Publisher", "Section2",  isbn);
 
         // Thêm sách vào cache
         BookCache.putBook(book);
@@ -59,7 +59,7 @@ public class BookCacheTest {
     @Test
     void testIsCached() {
         String isbn = "978-3-16-148410-0";
-        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", "imagePath", isbn);
+        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", isbn);
 
         // Thêm sách vào cache
         BookCache.putBook(book);
@@ -74,7 +74,7 @@ public class BookCacheTest {
     @Test
     void testSaveCacheToFile() {
         String isbn = "978-3-16-148410-0";
-        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", "imagePath", isbn);
+        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", isbn);
         BookCache.putBook(book);
 
         // Lưu cache vào file
@@ -97,7 +97,7 @@ public class BookCacheTest {
     @Test
     void testClearCache() {
         String isbn = "978-3-16-148410-0";
-        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", "imagePath", isbn);
+        Book book = new Book("Test Title", "Test Author", "Fiction", 10, 5, "Description", "Publisher", "Section", isbn);
         BookCache.putBook(book);
 
         // Kiểm tra rằng sách đã được thêm vào cache

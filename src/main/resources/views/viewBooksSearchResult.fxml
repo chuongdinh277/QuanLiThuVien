@@ -10,7 +10,7 @@
    <children>
       <ScrollPane fx:id="scrollPane" layoutY="75.0" prefHeight="605.0" prefWidth="1180.0" style="-fx-background-color: transparent;">
          <content>
-            <GridPane fx:id="searchResultGrid" hgap="10" layoutX="15.0" layoutY="15.0" vgap="10">
+            <GridPane fx:id="bookGrid" hgap="10" layoutX="15.0" layoutY="15.0" vgap="10">
                <!-- Các ô card sẽ được thêm vào đây thông qua mã Java -->
             </GridPane>
          </content>

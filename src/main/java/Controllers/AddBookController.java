@@ -11,7 +11,7 @@ import Document.*;
 import APIGoogle.*;
 
 /**
- * Controller for adding a new book to the system.
+ * Controller để thêm sách mới vào hệ thống.
  */
 public class AddBookController {
 
@@ -45,16 +45,16 @@ public class AddBookController {
     private AllBookController homeController;
 
     /**
-     * Sets the home controller for navigating book details.
+     * Thiết lập controller chính để điều hướng chi tiết sách.
      *
-     * @param homeController The home controller instance.
+     * @param homeController Đối tượng controller chính.
      */
     public void setHomeController(AllBookController homeController) {
         this.homeController = homeController;
     }
 
     /**
-     * Searches for a book using an external API based on the title and author provided.
+     * Tìm kiếm sách bằng API dựa trên tiêu đề và tác giả được cung cấp.
      */
     @FXML
     private void apiSearch_Button() {
@@ -80,7 +80,7 @@ public class AddBookController {
                                 categorySearch_1.setText(resultBook.getCategory());
                                 bookPublisher.setText(resultBook.getPublisher());
                                 ISBNtextField.setText(resultBook.getISBN());
-                                description = resultBook.getDescription() != null ? resultBook.getDescription() : "No description available";
+                                description = resultBook.getDescription() != null ? resultBook.getDescription() : "Không có mô tả";
                                 descriptionTextArea.setText(description);
                                 if (resultBook.getImagePath() != null) {
                                     Image image = new Image(resultBook.getImagePath(), showImage.getFitWidth(), showImage.getFitHeight(), true, true);
@@ -91,25 +91,25 @@ public class AddBookController {
                                 }
                             });
                         } else {
-                            showErrorDialog("No book found for the given title and author.");
+                            showErrorDialog("Không tìm thấy sách với tiêu đề và tác giả đã cung cấp.");
                         }
                     }
 
                     @Override
                     protected void failed() {
-                        showErrorDialog("Error occurred while searching for the book.");
+                        showErrorDialog("Đã xảy ra lỗi khi tìm kiếm sách.");
                     }
                 };
 
                 new Thread(searchTask).start();
             } else {
-                showErrorDialog("Please enter both title and author.");
+                showErrorDialog("Vui lòng nhập cả tiêu đề và tác giả.");
             }
         });
     }
 
     /**
-     * Adds a new book to the system after validating input.
+     * Thêm sách mới vào hệ thống sau khi kiểm tra dữ liệu nhập vào.
      */
     @FXML
     private void addBook_Button() {
@@ -125,7 +125,7 @@ public class AddBookController {
             try {
                 quantity = Integer.parseInt(quantityStr);
             } catch (NumberFormatException ex) {
-                showErrorDialog("Invalid quantity input. Please enter a valid number.");
+                showErrorDialog("Số lượng không hợp lệ. Vui lòng nhập số hợp lệ.");
                 return;
             }
 
@@ -135,16 +135,16 @@ public class AddBookController {
 
             try {
                 BookDAO.addBook(book);
-                showSuccessDialog("Book added successfully!");
+                showSuccessDialog("Thêm sách thành công!");
                 clearInputFields();
             } catch (SQLException ex) {
-                showErrorDialog("Failed to add book to the database: " + ex.getMessage());
+                showErrorDialog("Không thể thêm sách vào cơ sở dữ liệu: " + ex.getMessage());
             }
         });
     }
 
     /**
-     * Clears all input fields on the form.
+     * Xóa tất cả dữ liệu nhập trên form.
      */
     private void clearInputFields() {
         titleSearch_1.clear();
@@ -158,26 +158,26 @@ public class AddBookController {
     }
 
     /**
-     * Displays an error dialog with a given message.
+     * Hiển thị hộp thoại lỗi với thông báo đã cho.
      *
-     * @param message The message to be displayed in the error dialog.
+     * @param message Thông báo hiển thị trong hộp thoại lỗi.
      */
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Lỗi");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     /**
-     * Displays a success dialog with a given message.
+     * Hiển thị hộp thoại thành công với thông báo đã cho.
      *
-     * @param message The message to be displayed in the success dialog.
+     * @param message Thông báo hiển thị trong hộp thoại thành công.
      */
     private void showSuccessDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
+        alert.setTitle("Thành công");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

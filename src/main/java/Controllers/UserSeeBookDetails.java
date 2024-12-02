@@ -152,8 +152,7 @@ public class UserSeeBookDetails {
             String mssv = String.valueOf(currentUser.getId());
             Transaction transaction = TransactionDAO.getTransactionByISBNAndMssv(currentBook.getISBN(), mssv);
             boolean success = TransactionDAO.deleteTransaction(transaction.getId());
-            int quantity = currentBook.getQuantity();
-            boolean check = BookDAO.updateRemainingByISBN(currentBook.getISBN(), quantity);
+            boolean check = BookDAO.updateRemainingByISBN(currentBook.getISBN(), 1);
             if (success && check) {
                 showAlbertDialog("Trả sách thành công");
                 borrowBook.setVisible(true);
